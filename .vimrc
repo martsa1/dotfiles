@@ -1,8 +1,37 @@
-set term=pcansi
-set t_co=256
-let &t_AB="\e[48;5;%dm"
-let &t_AF="\e[38;5;%dm"
+set nocompatible
+filetype off
 
-execute pathogen#infect()
-syntax on
+" Set Vundle into the runtime path of Vim...
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Let Vundle manage itself
+Plugin 'gmarik/Vundle.vim'
+
+" Plugins
+Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-sensible'
+Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'Yggdroot/indentLine'
+
+" Colour Schemes
+Plugin 'tomasr/molokai'
+Plugin 'flazz/vim-colorschemes'
+
+call vundle#end()
+
+" Colourscheme Settings
+colorscheme molokai
+let g:rehash256 = 1
+
+"Markdown Settings
+let g:vim_markdown_frontmatter=1
+
+" Additional Settings
 filetype plugin indent on
+syntax on
+set number
