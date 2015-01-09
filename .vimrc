@@ -1,8 +1,21 @@
 set nocompatible
 filetype off
 
+" Determine Operating system, and add the appropriate Vim Directory {{{
+if has("win32") || has("win16") "Windows specific vim directory
+    set rtp+=~/_vim/bundle/Vundle.vim
+    let path='~/_vim/bundle'
+else 		"Linux Vim Directory to be added to runtime...
+    set rtp+=~/.vim/bundle/Vundle.vim
+
+endif
+" }}}
+
+" Ensure that any gvim isntances use a nice font...
+set guifont=monaco:h9:cANSI
+
 " Set Vundle into the runtime path of Vim...
-set rtp+=~/.vim/bundle/Vundle.vim
+"set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Let Vundle manage itself
