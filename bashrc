@@ -8,6 +8,10 @@ case $- in
       *) return;;
 esac
 
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=2000
+HISTFILESIZE=3000
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -15,9 +19,7 @@ HISTCONTROL=ignoreboth
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+# PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -25,7 +27,7 @@ shopt -s checkwinsize
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
-#shopt -s globstar
+shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -116,4 +118,38 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+#Safer RM handling than standard.  Provides recovery options from terminal rm
+alias rm=trash
+
+#Git related Aliases
+alias gs='git status'
+alias gb='git branch -vv'
+alias wip='git commit -a -m WIP'
+alias squish='git status && git commit -a --amend -C HEAD'
+#alias get='git '
+
+#Autojump Autostart..
+. /usr/share/autojump/autojump.sh
+
+
+#Add a shortcut for Docker-Compose
+alias dc='docker-compose'
+alias df='docker logs --follow'
+
+#Set the Go Path to ~/Coding/go
+export GOPATH=$HOME/Coding/go
+export PATH=$PATH:$GOPATH/bin
+
+
+#Python VirtualEnv notes
+export WORKON_HOME=~/.Envs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
+
+# Work definitions.
+# If this machine is a work machine, there will be a set of bash extensions
+# located on it, which should be sourced, but not kept under public VCS
+
+if [ -f ~/.config/bash_work.sh ]; then
+    . ~/.config/bash_work.sh
+fi

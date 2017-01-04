@@ -11,7 +11,7 @@ else 		"Linux Vim Directory to be added to runtime...
 endif
 " }}}
 
-" Ensure that any gvim isntances use a nice font...
+" Ensure that any gvim instances use a nice font...
 set guifont=monaco:h9:cANSI
 
 " Set Vundle into the runtime path of Vim...
@@ -32,6 +32,9 @@ Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'Yggdroot/indentLine'
 Plugin 'bling/vim-bufferline'
 Plugin 'tpope/vim-fugitive.git'
+Plugin 'fatih/vim-go'
+Plugin 'stephpy/vim-yaml'
+Plugin 'Valloric/YouCompleteMe'
 
 " Colour Schemes
 Plugin 'tomasr/molokai'
@@ -57,3 +60,14 @@ filetype plugin indent on
 syntax on
 set number
 set colorcolumn=80
+
+" Settings for Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers = ['pylint', 'flake8', 'python']
