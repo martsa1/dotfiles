@@ -78,8 +78,6 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -88,30 +86,6 @@ fi
 
 # colored GCC warnings and errors
 # export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
-# Ensure all the programs I use on a regular basis are installed
-if [ -f ~/.config/bash_installs.sh ]; then
-    . ~/.config/bash_installs.sh
-fi
-
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -124,33 +98,27 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#Safer RM handling than standard.  Provides recovery options from terminal rm
-alias rm=trash
+# Ensure all the programs I use on a regular basis are installed
+if [ -f ~/.config/bash_installs.sh ]; then
+    . ~/.config/bash_installs.sh
+fi
 
-#Git related Aliases
-alias gs='git status'
-alias gb='git branch -vv'
-alias wip='git commit -a -m WIP'
-alias squish='git status && git commit -a --amend -C HEAD'
-#alias get='git '
+# Alias definitions.
+if [ -f ~/.config/bash_aliases.sh ]; then
+    . ~/.config/bash_aliases.sh
+fi
 
-#Autojump Autostart..
-. /usr/share/autojump/autojump.sh
-
-
-#Add a shortcut for Docker-Compose
-alias dc='docker-compose'
-alias df='docker logs --follow'
 
 #Set the Go Path to ~/Coding/go
 export GOPATH=$HOME/Coding/go
 export PATH=$PATH:$GOPATH/bin
 
 
-#Python VirtualEnv notes
+#Python VirtualEnv Settings
 export WORKON_HOME=~/.Envs
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
+. /usr/local/bin/virtualenvwrapper.sh
+
 
 # Work definitions.
 # If this machine is a work machine, there will be a set of bash extensions
