@@ -87,7 +87,13 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+# export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# Ensure all the programs I use on a regular basis are installed
+if [ -f ~/.config/bash_installs.sh ]; then
+    . ~/.config/bash_installs.sh
+fi
+
 
 # some more ls aliases
 alias ll='ls -alF'
