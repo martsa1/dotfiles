@@ -209,3 +209,6 @@ exec google-chrome
 exec spotify
 exec atom
 exec i3-sensible-terminal
+
+#Setup SSH-Agent
+exec eval $$(ssh-agent) && ssh-add ~/.ssh/id_rsa.github && ssh-add ~/.ssh/id_rsa.trac
