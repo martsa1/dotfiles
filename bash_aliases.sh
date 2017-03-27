@@ -24,4 +24,5 @@ alias squish='git status && git commit -a --amend -C HEAD'
 
 # Add a shortcut for Docker-Compose
 alias dc='docker-compose'
-alias df='docker logs --follow'
+alias dlf='docker logs --follow'
+alias dm='docker-machine'
