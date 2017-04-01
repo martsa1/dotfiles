@@ -144,7 +144,7 @@ workspace $workspace8 output VGA1  #
 workspace $workspace9 output VGA1  # Chat
 workspace $workspace10 output VGA1 # Music
 
-# Move workspace to other screen
+# Move workspace to other screen (Uses < and >)
 bindsym $mod+Shift+period move workspace to output right
 bindsym $mod+Shift+comma move workspace to output left
 
@@ -197,13 +197,13 @@ assign [class="Spotify"] $workspace10
 assign [class="Atom"] $workspace2
 assign [class="Google-chrome"] $workspace3
 assign [class="Gnome-terminal"] $workspace1
+assign [class="Pantheon-terminal"] $workspace1
 assign [class="skypeforlinux"] $workspace9
 
 # Attempt at a screenshot utility
 bindsym --release Print exec --no-startup-id gnome-screenshot -c -f ~/Pictures/screenshots/`date +%Y-%m-%d_%H.%M.%S`.png
 bindsym --release $mod+Print exec --no-startup-id gnome-screenshot -w -c -f ~/Pictures/screenshots/`date +%Y-%m-%d_%H.%M.%S`.png
 bindsym --release $mod+Shift+Print exec --no-startup-id gnome-screenshot -a -c -f ~/Pictures/screenshots/`date +%Y-%m-%d_%H.%M.%S`.png
-
 
 # I want pretty GUI transitions and stuff!
 exec --no-startup-id compton -f
@@ -214,6 +214,3 @@ exec google-chrome
 exec spotify
 exec atom
 exec i3-sensible-terminal
-
-#Setup SSH-Agent
-exec eval $$(ssh-agent) && ssh-add ~/.ssh/id_rsa.github && ssh-add ~/.ssh/id_rsa.trac
