@@ -94,7 +94,7 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+z focus child
 
 # Workspace Variable definitions
 set $workspace1 "1.Terminals"
@@ -143,6 +143,11 @@ workspace $workspace7 output VGA1  #
 workspace $workspace8 output VGA1  #
 workspace $workspace9 output VGA1  # Chat
 workspace $workspace10 output VGA1 # Music
+
+# Move workspace to other screen
+bindsym $mod+Shift+period move workspace to output right
+bindsym $mod+Shift+comma move workspace to output left
+
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
