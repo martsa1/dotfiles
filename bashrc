@@ -120,6 +120,9 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 . /usr/local/bin/virtualenvwrapper.sh
 
 
+# NodeJS path addition
+export PATH=$PATH:~/.node/bin
+
 # Work definitions.
 # If this machine is a work machine, there will be a set of bash extensions
 # located on it, which should be sourced, but not kept under public VCS
