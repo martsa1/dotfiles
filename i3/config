@@ -148,7 +148,6 @@ workspace $workspace10 output VGA1 # Music
 bindsym $mod+Shift+period move workspace to output right
 bindsym $mod+Shift+comma move workspace to output left
 
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -249,3 +248,10 @@ exec google-chrome
 exec spotify
 exec atom
 exec i3-sensible-terminal
+
+# Start Corporate Lan ethernet
+exec nmcli connection up Corporate\ LAN
+
+#Ensure that monitors are appropriately setup
+exec xrandr --output VGA1 --auto --right-of HDMI1
+exec xrandr --output HDMI1 --primary
