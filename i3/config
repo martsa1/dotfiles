@@ -201,6 +201,7 @@ set $base0C #a1efe4
 set $base0D #66d9ef
 set $base0E #ae81ff
 set $base0F #cc6633
+
 # window colors
 #                       border    background  text     indicator
 client.focused          $base0D   $base0D     $base00  $base0B
@@ -235,9 +236,9 @@ assign [class="Pantheon-terminal"] $workspace1
 assign [class="skypeforlinux"] $workspace9
 
 # Attempt at a screenshot utility
-bindsym --release Print exec --no-startup-id gnome-screenshot -c -f ~/Pictures/screenshots/`date +%Y-%m-%d_%H.%M.%S`.png
-bindsym --release $mod+Print exec --no-startup-id gnome-screenshot -w -c -f ~/Pictures/screenshots/`date +%Y-%m-%d_%H.%M.%S`.png
-bindsym --release $mod+Shift+Print exec --no-startup-id gnome-screenshot -a -c -f ~/Pictures/screenshots/`date +%Y-%m-%d_%H.%M.%S`.png
+bindsym --release Print exec --no-startup-id --release shutter -f -o ~/Pictures/screenshots/`date +%Y-%m-%d_%H.%M.%S`.png
+bindsym --release $mod+Print exec --no-startup-id --release shutter -a -o ~/Pictures/screenshots/`date +%Y-%m-%d_%H.%M.%S`.png
+bindsym --release $mod+Shift+Print exec --no-startup-id shutter -s -o ~/Pictures/screenshots/`date +%Y-%m-%d_%H.%M.%S`.png
 
 # I want pretty GUI transitions and stuff!
 exec --no-startup-id compton -f
