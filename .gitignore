@@ -1,0 +1,2 @@
+# By default, ignore everything until we explictly start tracking it in the repo
+**/*
