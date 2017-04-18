@@ -270,7 +270,8 @@ exec spotify
 exec atom
 exec i3-sensible-terminal
 
-# Start Corporate Lan ethernet
+# Start Corporate Lan ethernet & Network Manager Applet
+exec --no-startup-id nm-applet
 exec nmcli connection up Corporate\ LAN
 
 #Ensure that monitors are appropriately setup
