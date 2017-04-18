@@ -44,7 +44,7 @@ bindsym $mod+Shift+q kill
 # # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Use Rofi rather than dmenu
-bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 450 -opacity "85" -bw 0 -bg "#49483e" -hlbg "#fd971f"  -fg "#f8f8f2"  -hlfg "#272822" -font "System San Francisco Display 14"
+bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 450 -opacity "85" -bw 0 -bg "#49483e" -hlbg "#fd971f"  -fg "#f8f8f2"  -hlfg "#2728221" -font "System San Francisco Display 14"
 
 # change focus
 bindsym $mod+j focus left
@@ -168,6 +168,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # Lock the sessiuon by using this cool script
 bindsym $mod+Shift+x exec /home/sam/.config/i3/scripts/lock.sh
+# bindsym $mod+Shift+x exec i3lock
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
