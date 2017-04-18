@@ -44,7 +44,7 @@ bindsym $mod+Shift+q kill
 # # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # Use Rofi rather than dmenu
-bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 450 -opacity "85" -bw 0 -hlfg "#9575cd" -font "System San Francisco Display 18"
+bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 450 -opacity "85" -bw 0 -bg "#49483e" -hlbg "#fd971f"  -fg "#f8f8f2"  -hlfg "#272822" -font "System San Francisco Display 14"
 
 # change focus
 bindsym $mod+j focus left
