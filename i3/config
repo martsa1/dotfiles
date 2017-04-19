@@ -270,6 +270,7 @@ exec google-chrome
 exec spotify
 exec atom
 exec i3-sensible-terminal
+exec --no-startup-id shutter
 
 # Start Corporate Lan ethernet & Network Manager Applet
 exec --no-startup-id nm-applet
@@ -278,3 +279,6 @@ exec nmcli connection up Corporate\ LAN
 #Ensure that monitors are appropriately setup
 exec xrandr --output VGA1 --auto --right-of HDMI1
 exec xrandr --output HDMI1 --primary
+
+# If Nautilus tries to launch a Desktop, try running:
+# gsettings set org.gnome.desktop.background show-desktop-icons false
