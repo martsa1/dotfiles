@@ -223,12 +223,13 @@ client.unfocused        $base01   $base01     $base03  $base01
 client.urgent           $base02   $base08     $base07  $base08
 
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+# Top Bar to hold status information - May be updated to use Polybar in future!
 bar {
     # status_command i3status
     tray_output primary
     status_command i3blocks -c /home/sam/.config/i3/i3blocks.conf
+    id status-bar
+    workspace_buttons no
 
     colors {
       separator $base03
@@ -239,6 +240,25 @@ bar {
       inactive_workspace $base01 $base01 $base03
       urgent_workspace $base08 $base08 $base07
    }
+   position top
+}
+
+# Bottom Bar to hold workspace Buttons only
+bar {
+    tray_output none
+    id workspace-bar
+    workspace_buttons yes
+
+    colors {
+      separator $base03
+      background $base01
+      statusline $base05
+      focused_workspace $base0C $base0D $base00
+      active_workspace $base02 $base02 $base07
+      inactive_workspace $base01 $base01 $base03
+      urgent_workspace $base08 $base08 $base07
+   }
+   position bottom
 }
 
 # Default Workspaces for various applications
