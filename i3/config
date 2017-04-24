@@ -161,6 +161,12 @@ workspace $workspace10 output VGA1
 bindsym $mod+Shift+period move workspace to output right
 bindsym $mod+Shift+comma move workspace to output left
 
+# Allow jumping back to the previous workspace without having to remember where you where
+workspace_auto_back_and_forth yes
+
+# Don't by default steal focus even if the requesting window is on an active workspace
+focus_on_window_activation urgent
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
