@@ -304,3 +304,7 @@ exec --no-startup-id shutter --min_at_startup
 # Start Corporate Lan ethernet & Network Manager Applet
 exec --no-startup-id nm-applet
 exec nmcli connection up corpLan
+
+# Programs that need to be installed:
+# lxappearance gtk-chteme qt4-qtconfig shutter scrot rofi i3blocks
+# playerctl curl 
