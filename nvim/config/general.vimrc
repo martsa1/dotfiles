@@ -57,13 +57,18 @@ if has("autocmd")
 endif " has("autocmd")
 
 " tab stuff
-set tabstop=4
-set softtabstop=4
+filetype plugin indent on
+set tabstop=2
 set expandtab
-set smarttab
-set shiftwidth=4
-set autoindent
-set smartindent
+set shiftwidth=2
+set softtabstop=2
+"set tabstop=4
+"set softtabstop=4
+"set expandtab
+"set smarttab
+"set shiftwidth=4
+"set autoindent
+"set smartindent
 
 set nrformats-=octal
 
@@ -119,5 +124,5 @@ set clipboard=unnamedplus
 
 set completeopt=longest,menuone,preview
 
-let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python_host_prog = '/usr/local/src/pyenvs/py2/neovim2/bin/python'
+let g:python3_host_prog = '/usr/local/src/pyenvs/py3/neovim3/bin/python'

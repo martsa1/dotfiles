@@ -1,4 +1,4 @@
-filetype plugin indent on
+"filetype plugin indent on
 "" CtrlP
 let g:ctrlp_prompt_mappings={'PrtClearCache()':['<Leader><F5>']}
 let g:ctrlp_prompt_mappings={'PrtdeleteEnt()':['<Leader><F7>']}
@@ -18,6 +18,6 @@ augroup end
 "" deoplete
 let g:deoplete#enable_at_startup = 1
 "let g:deoplete#complete_method = "complete"
-call deoplete#custom#set('jedi', 'debug_enabled', 1)
-call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
+"call deoplete#custom#set('jedi', 'debug_enabled', 1)
+"call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
 
