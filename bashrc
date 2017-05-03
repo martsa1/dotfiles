@@ -115,7 +115,7 @@ export PATH=$PATH:$GOPATH/bin
 
 
 #Python VirtualEnv Settings
-export WORKON_HOME=~/.Envs
+export WORKON_HOME=~/.python
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 . /usr/local/bin/virtualenvwrapper.sh
 
