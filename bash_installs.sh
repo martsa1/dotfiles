@@ -7,7 +7,7 @@ if [ $? -ne 0 ]; then
   read -p "Install Python 3 (y/n)? " continueOrNot
   if [ $continueOrNot == "y" -o $continueOrNot == "Y" ]; then
     sudo apt-get install python3 python3-dev
-    sudo pip3 install virtualenvwrapper
+    pip3 install --user virtualenvwrapper
   fi
 fi
 
@@ -19,7 +19,7 @@ if [ $? -ne 0 ]; then
   read -p "Install Trash (y/n)? " continueOrNot
   if [ $continueOrNot == "y" -o $continueOrNot == "Y" ]; then
     echo -e "\nSetting up Trash"
-    sudo -H pip install trash-cli
+    pip install --user trash-cli
   fi
 fi
 

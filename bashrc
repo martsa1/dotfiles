@@ -98,6 +98,12 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# NodeJS path addition
+export PATH=$PATH:~/.node/bin
+
+# Ensure local python packages are on path
+export PATH=$PATH:~/.local/bin
+
 # Ensure all the programs I use on a regular basis are installed
 if [ -f ~/.config/bash_installs.sh ]; then
     . ~/.config/bash_installs.sh
@@ -117,11 +123,7 @@ export PATH=$PATH:$GOPATH/bin
 #Python VirtualEnv Settings
 export WORKON_HOME=~/.python
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-. /usr/local/bin/virtualenvwrapper.sh
-
-
-# NodeJS path addition
-export PATH=$PATH:~/.node/bin
+. ~/.local/bin/virtualenvwrapper.sh
 
 # Work definitions.
 # If this machine is a work machine, there will be a set of bash extensions
