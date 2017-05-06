@@ -31,24 +31,24 @@ let g:neomake_python_enabled_makers = ['flake8', 'pylint']
 "      \ '--disable=I',
 "    \ ],
 "\ }
-let g:neomake_python_pylint_maker_args = [
-    \ '--disable=I',
-\ ]
+"let g:neomake_python_pylint_maker_args = [
+"    \ '--disable=I'
+"\ ]
 
-"let g:neomake_python_pylint_maker = {
-"        \ 'args': [
-"            \ '--disable=I',
-"            \ '--output-format=text',
-"            \ '--msg-template="{path}:{line}:{column}:{C}: [{symbol}] {msg} [{msg_id}]"',
-"            \ '--reports=no'
-"        \ ],
-"        \ 'errorformat':
-"            \ '%A%f:%l:%c:%t: %m,' .
-"            \ '%A%f:%l: %m,' .
-"            \ '%A%f:(%l): %m,' .
-"            \ '%-Z%p^%.%#,' .
-"            \ '%-G%.%#'
-"            \ }
+let g:neomake_python_pylint_maker = {
+        \ 'args': [
+            \ '--disable=I',
+            \ '--output-format=text',
+            \ '--msg-template="{path}:{line}:{column}:{C}: [{symbol}] {msg} [{msg_id}]"',
+            \ '--reports=no'
+        \ ],
+        \ 'errorformat':
+            \ '%A%f:%l:%c:%t: %m,' .
+            \ '%A%f:%l: %m,' .
+            \ '%A%f:(%l): %m,' .
+            \ '%-Z%p^%.%#,' .
+            \ '%-G%.%#'
+            \ }
 " Neomake open location list
 "let g:neomake_open_list = 2
 autocmd BufWritePost *.py Neomake
