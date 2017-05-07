@@ -21,3 +21,12 @@ let g:deoplete#enable_at_startup = 1
 "call deoplete#custom#set('jedi', 'debug_enabled', 1)
 "call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
 
+" jedi --- test if jedi-vim options work with deoplete-jedi
+"let g:jedi#goto_command = "<leader>d"
+"let g:jedi#goto_assignments_command = "<leader>g"
+"let g:jedi#goto_definitions_command = ""
+"let g:jedi#documentation_command = "K"
+"let g:jedi#usages_command = "<leader>n"
+"let g:jedi#completions_command = "<C-Space>"
+"let g:jedi#rename_command = "<leader>r"
+"let g:jedi#show_call_signatures = 2
