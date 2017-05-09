@@ -124,5 +124,5 @@ set clipboard=unnamedplus
 
 set completeopt=longest,menuone,preview
 
-let g:python_host_prog = '/usr/local/src/pyenvs/py2/neovim2/bin/python'
-let g:python3_host_prog = '/usr/local/src/pyenvs/py3/neovim3/bin/python'
+let g:python_host_prog = '/usr/local/src/pyenvs/py2/neovim/bin/python'
+let g:python3_host_prog = '/usr/local/src/pyenvs/py3/neovim/bin/python'
