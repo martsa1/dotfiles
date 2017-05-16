@@ -95,7 +95,7 @@ nmap <Leader><Space>n :lnext<CR>
 nmap <Leader><Space>p :lprev<CR>
 
 " folding
-nmap <Leader>f zf%
+"nmap <Leader>f zf%
 
 "" tern
 "autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
