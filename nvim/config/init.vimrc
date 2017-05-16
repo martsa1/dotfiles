@@ -12,5 +12,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'davidhalter/jedi-vim'
+Plug 'tmhedberg/SimpylFold'
 
 call plug#end()
