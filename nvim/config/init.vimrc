@@ -13,5 +13,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'davidhalter/jedi-vim'
 Plug 'tmhedberg/SimpylFold'
+" Maybe checkout ack.vim for source code searching.
 
 call plug#end()
