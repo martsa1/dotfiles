@@ -24,7 +24,7 @@ Plug 'davidhalter/jedi-vim'
 " Create a source tree listing
 Plug 'tmhedberg/SimpylFold'
 " Create and remove entries on file save/write
-Plug 'craigemery/vim-autotag'$
+Plug 'craigemery/vim-autotag'
 " Maybe checkout ack.vim for source code searching.
 
 call plug#end()
