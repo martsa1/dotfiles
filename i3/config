@@ -30,7 +30,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # Use Rofi rather than dmenu
-bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 450 -opacity "85" -bw 0 -bg "#49483e" -hlbg "#fd971f"  -fg "#f8f8f2"  -hlfg "#2728221" -font "System San Francisco Display 14"
+bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -fuzzy -width 100 -padding 450 -opacity "85" -bw 0 -bg "#49483e" -hlbg "#fd971f"  -fg "#f8f8f2"  -hlfg "#2728221" -font "System San Francisco Display 14"
 
 bindsym $mod+Shift+d exec rofi -show ssh -lines 3 -eh 2 -width 100 -padding 450 -opacity "85" -bw 0 -bg "#49483e" -hlbg "#fd971f"  -fg "#f8f8f2"  -hlfg "#2728221" -font "System San Francisco Display 14"
 
@@ -93,6 +93,9 @@ bindsym $mod+z focus child
 exec xrandr --output HDMI-1 --primary
 exec xrandr --output VGA-1 --auto --right-of HDMI-1
 
+# Rename a workspace
+bindsym $mod+Shift+backslash exec '/home/sam/.config/i3/scripts/rename_workspace.py'
+
 # Workspace Variable definitions
 # Terminals
 set $workspace1 "1 "
@@ -111,46 +114,60 @@ set $workspace9 "9 "
 # Music
 set $workspace10 "10 "
 
+#Set default workspace names on login
+exec rename workspace number 1 to $workspace1
+exec rename workspace number 2 to $workspace2
+exec rename workspace number 3 to $workspace3
+exec rename workspace number 4 to $workspace4
+exec rename workspace number 5 to $workspace5
+exec rename workspace number 6 to $workspace6
+exec rename workspace number 7 to $workspace7
+exec rename workspace number 8 to $workspace8
+exec rename workspace number 9 to $workspace9
+exec rename workspace number 10 to $workspace10
+
 # switch to workspace
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
-bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace $workspace6
-bindsym $mod+7 workspace $workspace7
-bindsym $mod+8 workspace $workspace8
-bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace10
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $workspace1
-bindsym $mod+Shift+2 move container to workspace $workspace2
-bindsym $mod+Shift+3 move container to workspace $workspace3
-bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace $workspace5
-bindsym $mod+Shift+6 move container to workspace $workspace6
-bindsym $mod+Shift+7 move container to workspace $workspace7
-bindsym $mod+Shift+8 move container to workspace $workspace8
-bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace $workspace10
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
 
 # Assign Workspaces to specific screens
 # Terminals
-workspace $workspace1 output HDMI-1
+workspace 1 output HDMI-1
 # Editors
-workspace $workspace2 output HDMI-1
+workspace 2 output HDMI-1
 # Browsers
-workspace $workspace3 output VGA-1
-workspace $workspace4 output VGA-1
-workspace $workspace6 output VGA-1
-workspace $workspace5 output VGA-1
-workspace $workspace7 output VGA-1
-workspace $workspace8 output VGA-1
+workspace 3 output VGA-1
+workspace 4 output VGA-1
+workspace 6 output VGA-1
+workspace 5 output VGA-1
+workspace 7 output VGA-1
+workspace 8 output VGA-1
 # Chat
-workspace $workspace9 output VGA-1
+workspace 9 output VGA-1
 # Music
-workspace $workspace10 output VGA-1
+workspace 10 output VGA-1
 
 # Move workspace to other screen (Uses < and >)
 bindsym $mod+Shift+period move workspace to output right
@@ -197,6 +214,13 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+mode "insert" {
+  # back to normal: Enter or Escape
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+}
+bindsym $mod+i mode "insert"
 
 set $base00 #272822
 set $base01 #383830
@@ -300,7 +324,7 @@ exec --no-startup-id numlockx on
 # Start Corporate Lan ethernet & Network Manager Applet
 exec --no-startup-id nm-applet
 exec nmcli connection up corpLan
-exec --no-startup-id gnmoe-settings-daemon
+exec --no-startup-id gnome-settings-daemon
 
 # Programs that need to be installed:
 # lxappearance gtk-chteme qt4-qtconfig shutter scrot rofi i3blocks
