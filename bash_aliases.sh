@@ -23,6 +23,6 @@ alias squish='git status && git commit -a --amend -C HEAD'
 . /usr/share/autojump/autojump.sh
 
 # Add a shortcut for Docker-Compose
-alias dc='docker-compose'
+alias dc='docker-compose' && complete -F _docker_compose dc
 alias dlf='docker logs --follow'
 alias dm='docker-machine'
