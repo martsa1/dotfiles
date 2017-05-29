@@ -135,4 +135,4 @@ if [ -f ~/.config/bash_work.sh ]; then
 fi
 
 # Add support for theFuck console corrector
-eval $(thefuck --alias !)
+eval $(thefuck --alias fuck)
