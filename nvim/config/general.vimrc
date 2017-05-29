@@ -83,8 +83,9 @@ set ffs=unix,dos,mac
 
 " Always utf8
 set termencoding=utf-8
-" set encoding=utf-8
-set fileencoding=utf-8
+set encoding=utf-8
+"set fileencoding=utf-8
+setglobal fileencoding=utf-8
 
 set so=5 " scroll lines above/below cursor
 set sidescrolloff=5
