@@ -4,6 +4,24 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4
 
+" original font monospace regular
+set encoding=utf-8
+set fileencoding=utf-8
+
+set colorcolumn=90
+highlight ColorColumn ctermbg=0 guibg=0
+
+"" IndentLine Plugin Settings
+let g:indentLine_color_term=22
+"let g:indentLine_char = 'Ì∫ê' " insert mode ctrl+v or c followed by
+"uNUMBERS OR simply insert \uCODEPOINT or \UCODEPOINT
+"let g:indentLine_char = 'Ì∫ê'
+"" Other IndentLine Options
+"let g:indentLine_concealcursor = 'inc'
+"let g:indentLine_conceallevel = 2
+"let g:indentLine_setConceal = 0
+"let g:indentLine_enabled = 0
+
 "let g:neomake_flake8_maker = {
 "    \ 'exe': 'flake8',
 "    \ 'args': ['--option', 'x'],
