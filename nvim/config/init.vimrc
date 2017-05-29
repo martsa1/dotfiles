@@ -6,7 +6,7 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'kien/ctrlp.vim'
 " Python project used by deoplete for code completion
 Plug 'zchee/deoplete-jedi'
-Plug 'https://github.com/neomake/neomake.git'
+Plug 'neomake/neomake'
 " powerline is fucked up, use vim-airline instead
 "Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim'}
 Plug 'vim-airline/vim-airline'
@@ -21,10 +21,22 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Old jedi vim not using deoplete -- for some reason need both deoplete-jedi
 " and this
 Plug 'davidhalter/jedi-vim'
-" Create a source tree listing
+" Source code folding pluggin
 Plug 'tmhedberg/SimpylFold'
-" Create and remove entries on file save/write
-Plug 'craigemery/vim-autotag'
+""" START: - AUTOTAGGING - features one or the other, currently not a good idea
+""" until exploring stock vim features and manual key map for tag generation
+""""" Create and remove entries on file save/write
+""""Plug 'craigemery/vim-autotag'
+""""""
+""""Plug 'xolox/vim-easytags' " Requires vim-misc as dependency
+""""Plug 'xolox/vim-misc' " Dependency of easytag
+""" END: - AUTOTAGGING -
+" source tree listing/menu containing definitions
+Plug 'majutsushi/tagbar'
+" Visually display indentation
+Plug 'Yggdroot/indentLine'
+" Color theming - supposedly the best
+Plug 'vim-scripts/Solarized'
 " Maybe checkout ack.vim for source code searching.
 
 call plug#end()
