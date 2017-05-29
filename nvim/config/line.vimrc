@@ -26,13 +26,13 @@ set t_Co=256
 "let g:airline#extensions#tabline#show_tab_type=0
 "let g:airline#extensions#tmuxline#enabled=0
 "let g:airline_theme = 'base16_pop'
-"if !exists('g:airline_symbols')
-"  let g:airline_symbols = {}
-"endif
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
 
 "let g:airline_symbols.linenr = ''
 "let g:airline_symbols.paste = 'ρ'
-"let g:airline_symbols.readonly = ''
+let g:airline_symbols.readonly = ''
 "
 "let g:airline#extensions#quickfix#quickfix_text = 'QF'
 "let g:airline#extensions#quickfix#location_text = 'LL'

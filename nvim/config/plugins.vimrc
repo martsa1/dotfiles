@@ -16,6 +16,10 @@ augroup omnifuncs
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
   autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 augroup end
+" Solarized settings:
+"set background=light "(light|dark)
+set background=dark "(light|dark)
+colorscheme solarized
 "" deoplete
 " This appears to be needed on, otherwise nothing works
 let g:deoplete#enable_at_startup = 1
