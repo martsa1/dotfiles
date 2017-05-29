@@ -33,6 +33,8 @@ let g:deoplete#sources#jedi#show_docstring = 1
 call deoplete#custom#set('jedi', 'debug_enabled', 1)
 call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
 
+" Tagbar
+nnoremap ,tt :TagbarToggle<CR><C-w><C-w>
 " jedi --- test if jedi-vim options work with deoplete-jedi
 "let g:jedi#goto_command = "<leader>d"
 "let g:jedi#goto_assignments_command = "<leader>g"
