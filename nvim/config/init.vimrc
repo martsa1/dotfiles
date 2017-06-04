@@ -37,6 +37,9 @@ Plug 'majutsushi/tagbar'
 Plug 'Yggdroot/indentLine'
 " Color theming - supposedly the best
 Plug 'vim-scripts/Solarized'
+"" JS stuff
 " Maybe checkout ack.vim for source code searching.
-
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' } " needs sudo?
+Plug 'ternjs/tern_for_vim'
+"Plug 'pangloss/vim-javascript'
 call plug#end()
