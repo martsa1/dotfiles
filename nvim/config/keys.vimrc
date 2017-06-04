@@ -8,6 +8,8 @@ nmap <Leader>j gj
 nmap <Leader>k gk
 
 "" buffer keys
+" List buffers
+nnoremap <Leader>ls :ls<CR>
 nnoremap <Leader>bb :b#<CR>
 nnoremap <Leader>bn :bn<CR>
 nnoremap <Leader>bp :bp<CR>
@@ -17,6 +19,13 @@ nnoremap <Leader>bw :w<CR>:bd<CR>
 nnoremap <Leader>bd :bd!<CR>
 "" new buffer/tab
 nnoremap <Leader>e :enew<CR>
+
+"" List marks
+nnoremap <Leader>mls :marks<CR>
+"
+"" List registers
+nnoremap <Leader>rls :reg<CR>
+
 
 "" build tags - expand this to an async call for use within vim
 "ctags -R --fields=+l --exclude=build,dist --languages=python -f ./tags $(python -c "import os, sys; print(' '.join('{}'.format(d) for d in sys.path if os.path.isdir(d)))") $(pwd)
