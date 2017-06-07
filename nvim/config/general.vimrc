@@ -8,6 +8,9 @@ set number
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
+" Set delay/timeout of key mapping sequences
+set timeoutlen=4000
+
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
 else
