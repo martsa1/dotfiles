@@ -11,6 +11,16 @@ set backspace=indent,eol,start
 " Set delay/timeout of key mapping sequences
 set timeoutlen=4000
 
+" http://vim.wikia.com/wiki/Diff_current_buffer_and_the_original_file
+function! s:DiffWithSaved()
+  let filetype=&ft
+  diffthis
+  vnew | r # | normal! 1Gdd
+  diffthis
+  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
+endfunction
+com! DiffSaved call s:DiffWithSaved()
+
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
 else
