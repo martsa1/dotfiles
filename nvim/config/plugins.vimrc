@@ -17,8 +17,8 @@ augroup omnifuncs
   autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 augroup end
 " Solarized settings:
-"set background=light "(light|dark)
-set background=dark "(light|dark)
+set background=light "(light|dark)
+"set background=dark "(light|dark)
 colorscheme solarized
 "" deoplete
 " This appears to be needed on, otherwise nothing works
