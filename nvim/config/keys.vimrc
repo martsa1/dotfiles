@@ -3,6 +3,8 @@ let mapleader = ","
 " keep backward f search, remapping it to ,;
 nnoremap <Leader>; ,
 
+" Disable Ex-mode because it's a pile of shit
+nnoremap Q <nop>
 " in-line scrolling
 nmap <Leader>j gj
 nmap <Leader>k gk
