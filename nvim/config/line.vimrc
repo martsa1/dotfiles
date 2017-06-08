@@ -22,6 +22,7 @@ set t_Co=256
 " airline config
 "let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1  " buffers at the top as tabs
+let g:airline#extensions#tabline#buffer_idx_mode = 1
 " let g:airline#extensions#tabline#show_tabs=0
 "let g:airline#extensions#tabline#show_tab_type=0
 "let g:airline#extensions#tmuxline#enabled=0
