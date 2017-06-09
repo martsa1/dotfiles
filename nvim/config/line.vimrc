@@ -22,7 +22,10 @@ set t_Co=256
 " airline config
 "let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1  " buffers at the top as tabs
-let g:airline#extensions#tabline#buffer_idx_mode = 1
+" Shows buffer index which is not the buffer ID (buffer_id = :ls)
+"let g:airline#extensions#tabline#buffer_idx_mode = 1
+" shows buffer ID same as :ls
+let g:airline#extensions#tabline#buffer_nr_show = 1
 " let g:airline#extensions#tabline#show_tabs=0
 "let g:airline#extensions#tabline#show_tab_type=0
 "let g:airline#extensions#tmuxline#enabled=0
