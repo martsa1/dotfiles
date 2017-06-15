@@ -31,6 +31,8 @@ nnoremap <Leader>rls :reg<CR>
 
 "" build tags - expand this to an async call for use within vim
 "ctags -R --fields=+l --exclude=build,dist --languages=python -f ./tags $(python -c "import os, sys; print(' '.join('{}'.format(d) for d in sys.path if os.path.isdir(d)))") $(pwd)
+" ctags -R --fields=+l --exclude=build,dist --languages=C++,C -f ./tags $(pwd)
+" ctags -R --fields=+liaS --exclude=build,dist --languages=C++,C -f ./tags $(pwd)
 " window keys
 nnoremap <Leader>w< <C-w><
 nnoremap <Leader>w> <C-w>>
