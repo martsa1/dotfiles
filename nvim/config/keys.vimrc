@@ -24,7 +24,7 @@ nnoremap <Leader>e :enew<CR>
 
 "" List marks
 nnoremap <Leader>mls :marks<CR>
-"
+
 "" List registers
 nnoremap <Leader>rls :reg<CR>
 
@@ -33,6 +33,7 @@ nnoremap <Leader>rls :reg<CR>
 "ctags -R --fields=+l --exclude=build,dist --languages=python -f ./tags $(python -c "import os, sys; print(' '.join('{}'.format(d) for d in sys.path if os.path.isdir(d)))") $(pwd)
 " ctags -R --fields=+l --exclude=build,dist --languages=C++,C -f ./tags $(pwd)
 " ctags -R --fields=+liaS --exclude=build,dist --languages=C++,C -f ./tags $(pwd)
+
 " window keys
 nnoremap <Leader>w< <C-w><
 nnoremap <Leader>w> <C-w>>
