@@ -29,6 +29,8 @@ Plug 'tmhedberg/SimpylFold'
 """"Plug 'craigemery/vim-autotag'
 """"""
 """"Plug 'xolox/vim-easytags' " Requires vim-misc as dependency
+" Most comprehensive tagging plugin for vim?
+Plug 'ludovicchabant/vim-gutentags'
 """"Plug 'xolox/vim-misc' " Dependency of easytag
 """ END: - AUTOTAGGING -
 " source tree listing/menu containing definitions
