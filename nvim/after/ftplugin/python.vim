@@ -11,7 +11,7 @@ set softtabstop=4
 set encoding=utf-8
 set fileencoding=utf-8
 
-set colorcolumn=90
+set colorcolumn=100
 highlight ColorColumn ctermbg=0 guibg=0
 
 "" IndentLine Plugin Settings
