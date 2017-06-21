@@ -4,6 +4,9 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4
 
+"find occurrences
+"nnoremap <leader>f :"zyiw !rgrep -n <C-R>z --exclude=*.pyc
+
 " original font monospace regular
 set encoding=utf-8
 set fileencoding=utf-8
