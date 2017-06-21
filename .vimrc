@@ -59,7 +59,7 @@ let g:indentLine_color_term = 239
 filetype plugin indent on
 syntax on
 set number
-set colorcolumn=80
+set colorcolumn=100
 
 " Settings for Syntastic
 set statusline+=%#warningmsg#

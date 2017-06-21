@@ -188,7 +188,7 @@ bindsym $mod+Next workspace next
 bindsym $mod+Prior workspace prev
 # Cycling through all workspaces on the current monitor
 bindsym $mod+Shift+Next workspace next_on_output
-bindsym $mod+Shift+Prior workspace prev_on_ouput
+bindsym $mod+Shift+Prior workspace prev_on_output
 
 # Don't by default steal focus even if the requesting window is on an
 # active workspace
