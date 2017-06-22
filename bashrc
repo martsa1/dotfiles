@@ -108,13 +108,13 @@ export PATH=$PATH:~/.node/bin
 export PATH=$PATH:~/.local/bin
 
 # Ensure all the programs I use on a regular basis are installed
-if [ -f ~/.config/bash_installs.sh ]; then
-    . ~/.config/bash_installs.sh
+if [ -f ~/code/personal/dotfiles/bash_installs.sh ]; then
+    . ~/code/personal/dotfiles//bash_installs.sh
 fi
 
 # Alias definitions.
-if [ -f ~/.config/bash_aliases.sh ]; then
-    . ~/.config/bash_aliases.sh
+if [ -f ~/code/personal/dotfiles//bash_aliases.sh ]; then
+    . ~/code/personal/dotfiles//bash_aliases.sh
 fi
 
 
@@ -132,8 +132,8 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 # If this machine is a work machine, there will be a set of bash extensions
 # located on it, which should be sourced, but not kept under public VCS
 
-if [ -f ~/.config/bash_work.sh ]; then
-    . ~/.config/bash_work.sh
+if [ -f ~/code/personal/dotfiles//bash_work.sh ]; then
+    . ~/code/personal/dotfiles//bash_work.sh
 fi
 
 # Add support for theFuck console corrector
