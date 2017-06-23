@@ -26,3 +26,5 @@ alias squish='git status && git commit -a --amend -C HEAD'
 alias dc='docker-compose' && complete -F _docker_compose dc
 alias dlf='docker logs --follow'
 alias dm='docker-machine'
+
+alias tmx="tmux -L mysocket -S /home/${USER}/.tmux_sockets/mysocket"
