@@ -49,8 +49,8 @@ if has("autocmd")
   augroup vimrcEx
     au!
 
-    " For all text files set 'textwidth' to 78 characters.
-    autocmd FileType text setlocal textwidth=108
+    " For all text files set 'textwidth' to 100 characters.
+    autocmd FileType text setlocal textwidth=100
 
     " Trim whitespace onsave
     autocmd BufWritePre * %s/\s\+$//e
@@ -122,6 +122,7 @@ endif
 if &tabpagemax < 50
   set tabpagemax=50
 endif
+" viminfo is deprecated, this should use shada instead
 if !empty(&viminfo)
   set viminfo^=!
 endif
@@ -132,9 +133,6 @@ set hid " buffer becomes hidden when abandoned
 
 " stop highlighting of underscores in markdown files
 autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown :syntax match markdownIgnore "_"
-
-" clipboard
-set clipboard=unnamedplus
 
 set completeopt=longest,menuone,preview
 
