@@ -109,12 +109,12 @@ export PATH=$PATH:~/.local/bin
 
 # Ensure all the programs I use on a regular basis are installed
 if [ -f ~/code/personal/dotfiles/bash_installs.sh ]; then
-    . ~/code/personal/dotfiles//bash_installs.sh
+    . ~/code/personal/dotfiles/bash_installs.sh
 fi
 
 # Alias definitions.
-if [ -f ~/code/personal/dotfiles//bash_aliases.sh ]; then
-    . ~/code/personal/dotfiles//bash_aliases.sh
+if [ -f ~/code/personal/dotfiles/bash_aliases.sh ]; then
+    . ~/code/personal/dotfiles/bash_aliases.sh
 fi
 
 
@@ -132,14 +132,12 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 # If this machine is a work machine, there will be a set of bash extensions
 # located on it, which should be sourced, but not kept under public VCS
 
-if [ -f ~/code/personal/dotfiles//bash_work.sh ]; then
-    . ~/code/personal/dotfiles//bash_work.sh
+if [ -f ~/code/personal/dotfiles/bash_work.sh ]; then
+    . ~/code/personal/dotfiles/bash_work.sh
 fi
 
 # Add support for theFuck console corrector
 eval $(thefuck --alias fuck)
-
-
 
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
