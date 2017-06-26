@@ -133,8 +133,8 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 # If this machine is a work machine, there will be a set of bash extensions
 # located on it, which should be sourced, but not kept under public VCS
 
-if [ -f ~/code/personal/dotfiles/bash_work.sh ]; then
-    . ~/code/personal/dotfiles/bash_work.sh
+if [ -f ~/.config/bash_work.sh ]; then
+    . ~/.config/bash_work.sh
 fi
 
 # Add support for theFuck console corrector
