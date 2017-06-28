@@ -349,6 +349,6 @@ exec --no-startup-id gnome-settings-daemon
 
 # Programs that need to be installed:
 # lxappearance gtk-chteme qt4-qtconfig shutter scrot rofi i3blocks
-# playerctl curl
+# playerctl curl roxterm
 #
 # https://help.ubuntu.com/community/UbuntuStudio/UsbAudioDevices

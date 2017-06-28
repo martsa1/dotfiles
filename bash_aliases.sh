@@ -28,3 +28,6 @@ alias dlf='docker logs --follow'
 alias dm='docker-machine'
 
 alias tmx="tmux -L mysocket -S /home/${USER}/.tmux_sockets/mysocket"
+
+alias monoterm="dbus-send --session /net/sf/roxterm/Options net.sf.roxterm.Options.SetProfile string:$ROXTERM_ID string:monoterm"
+alias codeterm="dbus-send --session /net/sf/roxterm/Options net.sf.roxterm.Options.SetProfile string:$ROXTERM_ID string:codeterm"
