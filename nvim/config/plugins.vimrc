@@ -29,7 +29,7 @@ let g:deoplete#complete_method = "complete"
 "let g:deoplete#complete_method = "omnifunc"
 let g:deoplete#sources#jedi#debug_server = 1
 " Not about this one.
-let g:deoplete#sources#jedi#show_docstring = 1
+let g:deoplete#sources#jedi#show_docstring = 0
 call deoplete#custom#set('jedi', 'debug_enabled', 1)
 "call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
 
