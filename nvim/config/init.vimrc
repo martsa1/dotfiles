@@ -44,5 +44,8 @@ Plug 'vim-scripts/Solarized'
 "Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' } " needs sudo?
 "Plug 'ternjs/tern_for_vim'
 "Plug 'pangloss/vim-javascript'
+
+Plug 'scrooloose/nerdcommenter'
+
 Plug 'pelodelfuego/vim-swoop'
 call plug#end()
