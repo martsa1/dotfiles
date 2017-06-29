@@ -1,7 +1,9 @@
 [roxterm profile]
 font=NanumBarunGothic Italic 10
-colour_scheme=Default
+colour_scheme=Dracula
 show_add_tab_btn=0
 hide_menubar=0
 always_show_tabs=0
 disable_menu_access=1
+scroll_on_output=0
+scroll_on_keystroke=1

@@ -1,5 +1,6 @@
 [roxterm options]
-colour_scheme=Default
+colour_scheme=Dracula
 profile=monoterm
 warn_close=1
 only_warn_running=1
+prefer_dark_theme=1
