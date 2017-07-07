@@ -123,3 +123,20 @@ nmap <Leader><Space>p :lprev<CR>
 "
 "" colorizer
 "nmap <Leader>tc :ColorToggle<CR>
+
+" Terminal Mode Keybindings
+tnoremap <A-Esc> <C-\><C-n>
+tnoremap <S-Esc> <C-\><C-n>
+"tnoremap <A-h> <C-\><C-n><C-w>h
+"tnoremap <A-j> <C-\><C-n><C-w>j
+"tnoremap <A-k> <C-\><C-n><C-w>k
+"tnoremap <A-l> <C-\><C-n><C-w>l
+
+
+" Line & Block movement key bindings
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv<Paste>
