@@ -69,8 +69,8 @@ noremap <F9> gg=G
 "" Don't use Ex mode, use Q for formatting
 "map Q gq
 
-"" relative line numbers
-"nnoremap <Leader>3 :NumbersToggle<CR>
+"" toggle relative line numbers
+nnoremap <Leader>rn :set relativenumber!<CR>
 
 "" remap number increment to C-s (C-a is already in use by tmux)
 "nmap <C-s> <C-a>
