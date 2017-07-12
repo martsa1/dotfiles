@@ -44,3 +44,10 @@ nnoremap <Leader>tt :TagbarToggle<CR><C-w><C-w>
 "let g:jedi#completions_command = "<C-Space>"
 "let g:jedi#rename_command = "<leader>r"
 "let g:jedi#show_call_signatures = 2
+
+" Swoop
+let g:swoopUseDefaultKeyMap = 0
+nnoremap <Leader>ss :call Swoop()<CR>
+vnoremap <Leader>ss :call SwoopSelection()<CR>
+nnoremap <Leader>sm :call SwoopMulti()<CR>
+vnoremap <Leader>sm :call SwoopMultiSelection()<CR>
