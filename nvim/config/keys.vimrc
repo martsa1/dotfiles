@@ -6,8 +6,8 @@ nnoremap <Leader>; ,
 " Disable Ex-mode because it's a pile of shit
 nnoremap Q <nop>
 " in-line scrolling
-nmap <Leader>j gj
-nmap <Leader>k gk
+nnoremap <Leader>j gj
+nnoremap <Leader>k gk
 
 "" buffer keys
 " List buffers
@@ -73,7 +73,7 @@ noremap <F9> gg=G
 nnoremap <Leader>rn :set relativenumber!<CR>
 
 "" remap number increment to C-s (C-a is already in use by tmux)
-"nmap <C-s> <C-a>
+"nnoremap <C-s> <C-a>
 "
 "" Word count selection
 "vnoremap <Leader>w :w !wc -w<CR>
@@ -87,7 +87,7 @@ set showmode
 "cmap w!! %!sudo tee > /dev/null %
 
 "" allow ,, for vimsneak
-"nmap <Leader>, <Plug>SneakPrevious
+"nnoremap <Leader>, <Plug>SneakPrevious
 
 "" camelCase motion settings
 "map <silent> w <Plug>CamelCaseMotion_w
@@ -101,17 +101,17 @@ set showmode
 "vmap <Enter> <Plug>(EasyAlign)
 
 "" start interactive EasyAlign for a motion/text object (e.g. gaip)
-"nmap ga <Plug>(EasyAlign)
+"nnoremap ga <Plug>(EasyAlign)
 
 " neomake
-nmap <Leader><Space>o :lopen<CR>
-nmap <Leader><Space>c :lclose<CR>
-nmap <Leader><Space>, :ll<CR>
-nmap <Leader><Space>n :lnext<CR>
-nmap <Leader><Space>p :lprev<CR>
+nnoremap <Leader><Space>o :lopen<CR>
+nnoremap <Leader><Space>c :lclose<CR>
+nnoremap <Leader><Space>, :ll<CR>
+nnoremap <Leader><Space>n :lnext<CR>
+nnoremap <Leader><Space>p :lprev<CR>
 
 " folding
-"nmap <Leader>f zf%
+"nnoremap <Leader>f zf%
 
 "" tern
 "autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
@@ -122,7 +122,7 @@ nmap <Leader><Space>p :lprev<CR>
 "inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 "
 "" colorizer
-"nmap <Leader>tc :ColorToggle<CR>
+"nnoremap <Leader>tc :ColorToggle<CR>
 
 " Terminal Mode Keybindings
 tnoremap <A-Esc> <C-\><C-n>
