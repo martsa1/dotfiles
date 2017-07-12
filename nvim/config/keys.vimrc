@@ -122,7 +122,7 @@ nnoremap <Leader><Space>p :lprev<CR>
 "inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 "
 "" colorizer
-"nnoremap <Leader>tc :ColorToggle<CR>
+nnoremap <Leader>tc :ColorToggle<CR>
 
 " Terminal Mode Keybindings
 tnoremap <A-Esc> <C-\><C-n>
