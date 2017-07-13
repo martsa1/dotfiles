@@ -107,7 +107,7 @@ set showmode
 " Apparently preview window unique per buffer
 nnoremap <Leader>po :lopen<CR>
 nnoremap <Leader>pc :lclose<CR>
-nnoremap <Leader>p, :ll<CR>
+nnoremap <Leader>pl :ll<CR>
 nnoremap <Leader>pn :lnext<CR>
 nnoremap <Leader>pp :lprev<CR>
 
@@ -117,7 +117,7 @@ nnoremap <Leader>pp :lprev<CR>
 " `vimgrep!`
 nnoremap <Leader>qo :copen<CR>
 nnoremap <Leader>qc :cclose<CR>
-nnoremap <Leader>q, :cl<CR>
+nnoremap <Leader>ql :cl<CR>
 nnoremap <Leader>qp :cprev<CR>
 nnoremap <Leader>qn :cnext<CR>
 
