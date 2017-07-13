@@ -103,12 +103,13 @@ set showmode
 "" start interactive EasyAlign for a motion/text object (e.g. gaip)
 "nnoremap ga <Plug>(EasyAlign)
 
-" neomake
-nnoremap <Leader><Space>o :lopen<CR>
-nnoremap <Leader><Space>c :lclose<CR>
-nnoremap <Leader><Space>, :ll<CR>
-nnoremap <Leader><Space>n :lnext<CR>
-nnoremap <Leader><Space>p :lprev<CR>
+" Preview window - mostly used with linters and neomake
+" Apparently preview window unique per buffer
+nnoremap <Leader>po :lopen<CR>
+nnoremap <Leader>pc :lclose<CR>
+nnoremap <Leader>p, :ll<CR>
+nnoremap <Leader>pn :lnext<CR>
+nnoremap <Leader>pp :lprev<CR>
 
 " folding
 "nnoremap <Leader>f zf%
