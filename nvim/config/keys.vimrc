@@ -115,11 +115,11 @@ nnoremap <Leader>pp :lprev<CR>
 " Mostly used for external commands such as grep or internal like
 " vimgrep etc. suffix with ! to override existing window (IE):
 " `vimgrep!`
-nnoremap <Leader>qo :lopen<CR>
-nnoremap <Leader>qc :lclose<CR>
-nnoremap <Leader>q, :ll<CR>
-nnoremap <Leader>qp :lprev<CR>
-nnoremap <Leader>qn :lnext<CR>
+nnoremap <Leader>qo :copen<CR>
+nnoremap <Leader>qc :cclose<CR>
+nnoremap <Leader>q, :cl<CR>
+nnoremap <Leader>qp :cprev<CR>
+nnoremap <Leader>qn :cnext<CR>
 
 
 " folding
