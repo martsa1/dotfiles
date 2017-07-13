@@ -111,6 +111,17 @@ nnoremap <Leader>p, :ll<CR>
 nnoremap <Leader>pn :lnext<CR>
 nnoremap <Leader>pp :lprev<CR>
 
+" Quick fix window is apparently vim wide (shared with all buffers).
+" Mostly used for external commands such as grep or internal like
+" vimgrep etc. suffix with ! to override existing window (IE):
+" `vimgrep!`
+nnoremap <Leader>qo :lopen<CR>
+nnoremap <Leader>qc :lclose<CR>
+nnoremap <Leader>q, :ll<CR>
+nnoremap <Leader>qp :lprev<CR>
+nnoremap <Leader>qn :lnext<CR>
+
+
 " folding
 "nnoremap <Leader>f zf%
 
