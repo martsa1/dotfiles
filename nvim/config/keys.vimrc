@@ -110,6 +110,7 @@ nnoremap <Leader>pc :lclose<CR>
 nnoremap <Leader>pl :ll<CR>
 nnoremap <Leader>pn :lnext<CR>
 nnoremap <Leader>pp :lprev<CR>
+nnoremap <Leader>pw :lexpr []<CR> " Clear location list (w for wipe)
 
 " Quick fix window is apparently vim wide (shared with all buffers).
 " Mostly used for external commands such as grep or internal like
@@ -120,6 +121,7 @@ nnoremap <Leader>qc :cclose<CR>
 nnoremap <Leader>ql :cl<CR>
 nnoremap <Leader>qp :cprev<CR>
 nnoremap <Leader>qn :cnext<CR>
+nnoremap <Leader>qw :cexpr []<CR> " Clear quick fix (w for wipe)
 
 
 " folding
