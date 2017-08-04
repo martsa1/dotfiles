@@ -48,4 +48,7 @@ Plug 'vim-scripts/Solarized'
 Plug 'scrooloose/nerdcommenter'
 
 Plug 'pelodelfuego/vim-swoop'
+
+" Lots of language file type highlighting
+Plug 'hoelzro/vim-polyglot'
 call plug#end()
