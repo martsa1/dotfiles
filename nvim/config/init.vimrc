@@ -51,4 +51,7 @@ Plug 'pelodelfuego/vim-swoop'
 
 " Lots of language file type highlighting
 Plug 'hoelzro/vim-polyglot'
+
+"Add Yang language support to vim
+Plug 'Shathur/yang.vim'
 call plug#end()
