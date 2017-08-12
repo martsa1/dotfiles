@@ -89,8 +89,10 @@ set ttimeout
 set ttimeoutlen=100
 
 " detect .md as markdown instead of modula-2
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
+augroup filetype_html
+  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+augroup END
+  "
 " Unix as standard file type
 set ffs=unix,dos,mac
 
@@ -132,7 +134,9 @@ set sessionoptions-=options
 set hid " buffer becomes hidden when abandoned
 
 " stop highlighting of underscores in markdown files
-autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown :syntax match markdownIgnore "_"
+augroup filetype_html
+  autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown :syntax match markdownIgnore "_"
+augroup END
 
 set completeopt=longest,menuone,preview
 
