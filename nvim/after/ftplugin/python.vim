@@ -77,8 +77,10 @@ let g:neomake_python_pylint_maker = {
             \ }
 " Neomake open location list
 "let g:neomake_open_list = 2
-autocmd BufWritePost *.py Neomake
-autocmd BufEnter *.py Neomake
+augroup my_py_group
+  autocmd BufWritePost *.py Neomake
+  autocmd BufEnter *.py Neomake
+augroup END
 "autocmd TextChangedI *.py Neomake
 " linting on the fly
 " https://github.com/neomake/neomake/pull/1167
