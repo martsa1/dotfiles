@@ -19,9 +19,6 @@ alias gb='git branch -vv'
 alias wip='git commit -a -m WIP'
 alias squish='git status && git commit -a --amend -C HEAD'
 
-# Autojump Autostart..
-. /usr/share/autojump/autojump.sh
-
 # Add a shortcut for Docker-Compose
 alias dc='docker-compose' && complete -F _docker_compose dc
 alias dlf='docker logs --follow'
@@ -31,3 +28,10 @@ alias tmx="tmux -L mysocket -S /home/${USER}/.tmux_sockets/mysocket"
 
 alias monoterm="dbus-send --session /net/sf/roxterm/Options net.sf.roxterm.Options.SetProfile string:$ROXTERM_ID string:monoterm"
 alias codeterm="dbus-send --session /net/sf/roxterm/Options net.sf.roxterm.Options.SetProfile string:$ROXTERM_ID string:codeterm"
+
+alias ipython="ipython --TerminalInteractiveShell.editing_mode=vi"
+alias python_tags=$'ctags -R --fields=+l --languages=python --python-kinds=-iv -f ./tags $(python -c "import os, sys; print(\' \'.join(\'{}\'.format(d) for d in sys.path if os.path.isdir(d)))")'
+
+if [ -f ~/.config/bash_work.sh ]; then
+    . ~/.config/bash_work.sh
+fi

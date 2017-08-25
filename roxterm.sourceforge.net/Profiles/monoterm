@@ -1,5 +1,5 @@
 [roxterm profile]
-font=Fira Mono for Powerline 10
+font=Fira Mono for Powerline 11
 colour_scheme=Dracula
 show_add_tab_btn=0
 hide_menubar=0
@@ -7,4 +7,6 @@ always_show_tabs=0
 disable_menu_access=1
 scroll_on_output=0
 scroll_on_keystroke=1
-term=screen-256color
+term=xterm
+full_screen=0
+maximise=1

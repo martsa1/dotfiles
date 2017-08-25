@@ -303,8 +303,7 @@ bar {
 assign [class="[Ss]potify"] $workspace10
 assign [class="Atom"] $workspace2
 assign [class="Google-chrome"] $workspace3
-assign [class="Gnome-terminal"] $workspace1
-assign [class="Pantheon-terminal"] $workspace1
+assign [title="ROXTerm"] $workspace1
 assign [class="skypeforlinux"] $workspace9
 
 # Attempt at a screenshot utility
@@ -335,7 +334,6 @@ exec --no-startup-id compton -f
 exec --no-startup-id synergy
 exec google-chrome
 exec spotify
-exec atom
 exec i3-sensible-terminal
 exec --no-startup-id shutter --min_at_startup
 
@@ -348,7 +346,7 @@ exec nmcli connection up corpLan
 exec --no-startup-id gnome-settings-daemon
 
 # Programs that need to be installed:
-# lxappearance gtk-chteme qt4-qtconfig shutter scrot rofi i3blocks
+# lxappearance gtk-chtheme qt4-qtconfig shutter scrot rofi i3blocks
 # playerctl curl roxterm
 #
 # https://help.ubuntu.com/community/UbuntuStudio/UsbAudioDevices
