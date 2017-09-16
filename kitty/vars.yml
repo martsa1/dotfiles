@@ -1,4 +1,4 @@
 ---
-
+# Variables used when building and installing Kitty from source.  Adjust as needed
 user: sam
 repo_base_dir: /home/{{user}}/code/personal/kitty

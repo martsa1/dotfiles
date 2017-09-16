@@ -5,7 +5,7 @@
     - vars.yml
 
   tasks:
-
+    ##############################
     # Setup dependencies for kitty
     ##############################
     - name: Install required apt packages
@@ -35,7 +35,7 @@
         path: "{{repo_base_dir}}"
         state: "directory"
 
-    - name: Get the GLFW repo to build the GLFW dependency for Kitty
+    - name: Clone GLFW repo dependency for Kitty
       git:
         repo: "https://github.com/glfw/glfw.git"
         dest: "{{repo_base_dir}}/glfw"
@@ -46,21 +46,17 @@
         update: yes
       register: glfw_repo
 
-    - name: Generate Makefiles to build GLFW
-      command: "cmake -DBUILD_SHARED_LIBS=ON ."
+    - name: Build & install GLFW
+      command: "{{item}}" #"cmake -DBUILD_SHARED_LIBS=ON ."
       args:
         chdir: "{{repo_base_dir}}/glfw"
-      when: glfw_repo | changed
-
-    - name: Compile GLFW
-      command: "make install"
-      args:
-        chdir: "{{repo_base_dir}}/glfw"
-        # creates: "/usr/local/include/GLFW"
+      with_items:
+        - "cmake -DBUILD_SHARED_LIBS=ON ."
+        - "make install"
       become: true
       when: glfw_repo | changed
 
-    - name: Get the Glew repo to build the Glew dependency for Kitty
+    - name: Clone Glew repo dependency for Kitty
       git:
         repo: "https://github.com/nigels-com/glew.git"
         dest: "{{repo_base_dir}}/glew"
@@ -71,16 +67,13 @@
         update: yes
       register: glew_repo
 
-    - name: Compile Glew 1 of 2
-      command: "make"
+    - name: Compile Glew
+      command: "{{item[0]}}"
       args:
-        chdir: "{{repo_base_dir}}/glew/auto"
-      when: glew_repo | changed
-
-    - name: Compile Glew 2 of 2
-      command: "make glew.lib"
-      args:
-        chdir: "{{repo_base_dir}}/glew"
+        chdir: "{{item[1]}}"
+      with_items:
+        - [["make", "{{repo_base_dir}}/glew/auto"]]
+        - [["make glew.lib", "{{repo_base_dir}}/glew"]]
       when: glew_repo | changed
 
     - name: Install Glew
@@ -101,10 +94,11 @@
       command: "ldconfig"
       become: true
       when: ld_config_changed | changed
-    ##############################
 
+    ##############################
     # Setup Kitty itself
-    - name: Pull in Kitty source
+    ##############################
+    - name: Clone Kitty Repo
       git:
         repo: "https://github.com/kovidgoyal/kitty"
         dest: "{{repo_base_dir}}/kitty"
@@ -115,15 +109,12 @@
       register: kitty_repo_changed
 
     - name: Build Kitty
-      command: "python3 setup.py build"
+      command: "{{item}}"
       args:
         chdir: "{{repo_base_dir}}/kitty"
-      when: kitty_repo_changed | changed
-
-    - name: Build Kitty Linux Package
-      command: "python3 setup.py linux-package"
-      args:
-        chdir: "{{repo_base_dir}}/kitty"
+      with_items:
+        - "python3 setup.py build"
+        - "python3 setup.py linux-package"
       when: kitty_repo_changed | changed
 
     - name: Install Kitty
