@@ -1,0 +1,142 @@
+---
+
+- hosts: all
+  vars_files:
+    - vars.yml
+
+  tasks:
+
+    # Setup dependencies for kitty
+    ##############################
+    - name: Install required apt packages
+      become: true
+      apt:
+        name: "{{item}}"
+        state: "present"
+        cache_valid_time: 600
+      with_items:
+        - "build-essential"
+        - "cmake"
+        - "fontconfig"
+        - "git"
+        - "libgl-dev"
+        - "libosmesa-dev"
+        - "libxi-dev"
+        - "libxmu-dev"
+        - "pkg-config"
+        - "python3"
+        - "python3-dev"
+        - "software-properties-common"
+        - "xorg-dev"
+        - "xsel"
+
+    - name: Setup kitty and dependency source directory
+      file:
+        path: "{{repo_base_dir}}"
+        state: "directory"
+
+    - name: Get the GLFW repo to build the GLFW dependency for Kitty
+      git:
+        repo: "https://github.com/glfw/glfw.git"
+        dest: "{{repo_base_dir}}/glfw"
+        version: latest
+        accept_hostkey: yes
+        force: yes
+        clone: yes
+        update: yes
+      register: glfw_repo
+
+    - name: Generate Makefiles to build GLFW
+      command: "cmake -DBUILD_SHARED_LIBS=ON ."
+      args:
+        chdir: "{{repo_base_dir}}/glfw"
+      when: glfw_repo | changed
+
+    - name: Compile GLFW
+      command: "make install"
+      args:
+        chdir: "{{repo_base_dir}}/glfw"
+        # creates: "/usr/local/include/GLFW"
+      become: true
+      when: glfw_repo | changed
+
+    - name: Get the Glew repo to build the Glew dependency for Kitty
+      git:
+        repo: "https://github.com/nigels-com/glew.git"
+        dest: "{{repo_base_dir}}/glew"
+        version: glew-2.1.0
+        accept_hostkey: yes
+        force: yes
+        clone: yes
+        update: yes
+      register: glew_repo
+
+    - name: Compile Glew 1 of 2
+      command: "make"
+      args:
+        chdir: "{{repo_base_dir}}/glew/auto"
+      when: glew_repo | changed
+
+    - name: Compile Glew 2 of 2
+      command: "make glew.lib"
+      args:
+        chdir: "{{repo_base_dir}}/glew"
+      when: glew_repo | changed
+
+    - name: Install Glew
+      command: "make install"
+      args:
+        chdir: "{{repo_base_dir}}/glew"
+      become: true
+      when: glew_repo | changed
+
+    - name: Add libGLEW to LD Config
+      copy:
+        content: "/usr/lib64\n"
+        dest: "/etc/ld.so.conf.d/libGLEW.conf"
+      become: true
+      register: ld_config_changed
+
+    - name: Refresh LD Config
+      command: "ldconfig"
+      become: true
+      when: ld_config_changed | changed
+    ##############################
+
+    # Setup Kitty itself
+    - name: Pull in Kitty source
+      git:
+        repo: "https://github.com/kovidgoyal/kitty"
+        dest: "{{repo_base_dir}}/kitty"
+        accept_hostkey: yes
+        clone: yes
+        update: yes
+        version: v0.3.0
+      register: kitty_repo_changed
+
+    - name: Build Kitty
+      command: "python3 setup.py build"
+      args:
+        chdir: "{{repo_base_dir}}/kitty"
+      when: kitty_repo_changed | changed
+
+    - name: Build Kitty Linux Package
+      command: "python3 setup.py linux-package"
+      args:
+        chdir: "{{repo_base_dir}}/kitty"
+      when: kitty_repo_changed | changed
+
+    - name: Install Kitty
+      file:
+        src: "{{repo_base_dir}}/kitty/linux-package/{{item}}"
+        dest: "/usr/{{item}}"
+        state: link
+      become: true
+      with_items:
+        - "bin/kitty"
+        - "lib/kitty"
+        - "share/applications/kitty.desktop"
+        - "share/icons/hicolor/256x256/kitty.png"
+        - "share/terminfo/x/xterm-kitty"
+      when: kitty_repo_changed | changed
+
