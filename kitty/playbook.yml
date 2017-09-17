@@ -131,3 +131,8 @@
         - "share/terminfo/x/xterm-kitty"
       when: kitty_repo_changed | changed
 
+    - name: Symlink Kitty config
+      file:
+        src: "{{dotfiles_base_dir}}/kitty/kitty.conf"
+        dest: "{{config_base_dir}}/kitty/kitty.conf"
+        state: link
