@@ -44,17 +44,16 @@
         force: yes
         clone: yes
         update: yes
-      register: glfw_repo
 
     - name: Build & install GLFW
-      command: "{{item}}" #"cmake -DBUILD_SHARED_LIBS=ON ."
+      command: "{{item[0]}}"
       args:
         chdir: "{{repo_base_dir}}/glfw"
+        creates: "{{item[1]}}"
       with_items:
-        - "cmake -DBUILD_SHARED_LIBS=ON ."
-        - "make install"
+        - [["cmake -DBUILD_SHARED_LIBS=ON .", "{{repo_base_dir}}/glfw/cmake_install.cmake"]]
+        - [["make install", "/usr/local/lib/libglfw.so.3.2"]]
       become: true
-      when: glfw_repo | changed
 
     - name: Clone Glew repo dependency for Kitty
       git:
@@ -65,7 +64,6 @@
         force: yes
         clone: yes
         update: yes
-      register: glew_repo
 
     - name: Compile Glew
       command: "{{item[0]}}"
@@ -74,26 +72,22 @@
       with_items:
         - [["make", "{{repo_base_dir}}/glew/auto"]]
         - [["make glew.lib", "{{repo_base_dir}}/glew"]]
-      when: glew_repo | changed
 
     - name: Install Glew
       command: "make install"
       args:
         chdir: "{{repo_base_dir}}/glew"
       become: true
-      when: glew_repo | changed
 
     - name: Add libGLEW to LD Config
       copy:
         content: "/usr/lib64\n"
         dest: "/etc/ld.so.conf.d/libGLEW.conf"
       become: true
-      register: ld_config_changed
 
     - name: Refresh LD Config
       command: "ldconfig"
       become: true
-      when: ld_config_changed | changed
 
     ##############################
     # Setup Kitty itself
@@ -106,16 +100,16 @@
         clone: yes
         update: yes
         version: v0.3.0
-      register: kitty_repo_changed
 
     - name: Build Kitty
       command: "{{item}}"
       args:
         chdir: "{{repo_base_dir}}/kitty"
+        creates: "{{repo_base_dir}}/kitty/linux-package"
+      become: true
       with_items:
         - "python3 setup.py build"
         - "python3 setup.py linux-package"
-      when: kitty_repo_changed | changed
 
     - name: Install Kitty
       file:
@@ -129,7 +123,11 @@
         - "share/applications/kitty.desktop"
         - "share/icons/hicolor/256x256/kitty.png"
         - "share/terminfo/x/xterm-kitty"
-      when: kitty_repo_changed | changed
+
+    - name: Setup kitty config directory
+      file:
+        path: "{{config_base_dir}}/kitty"
+        state: "directory"
 
     - name: Symlink Kitty config
       file:
