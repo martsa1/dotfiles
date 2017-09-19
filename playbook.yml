@@ -1,0 +1,20 @@
+---
+
+# Play to install my various configuration files as symlinks back to this repository
+
+- import_playbook: bash/playbook.yml
+- import_playbook: kitty/playbook.yml
+#- hosts: all
+  #vars_files:
+    #- vars.yml
+
+  #tasks:
+    #- name: "Symlink i3 config"
+      #file:
+        #src: "{{dotfiles_base_dir}}/i3"
+        #dest: "{{config_base_dir}}/i3"
+        #state: link
+        #force: true
+
+
+
