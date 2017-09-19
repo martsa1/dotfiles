@@ -29,6 +29,12 @@
       #  with_items:
       #    - "vim-plug"
 
+      - name: Symlink bash_it bashrc
+        file:
+          src: "{{dotfiles_base_dir}}/bash/bashrc"
+          dest: "/home/{{user}}/.bashrc"
+          state: link
+
       - name: Clone bashit repo
         git:
           repo: "https://github.com/Bash-it/bash-it.git"
@@ -107,7 +113,7 @@
           dest: "{{item[1]}}"
           state: link
         with_items:
-          - [["{{dotfiles_base_dir}}/bash_aliases.sh", "{{bashit_repo}}/aliases/custom.aliases.bash"]]
-          - [["{{dotfiles_base_dir}}/bash_envs.sh",    "{{bashit_repo}}/custom/custom_envs.bash"]]
+          - [["{{dotfiles_base_dir}}/bash/bash_aliases.sh", "{{bashit_repo}}/aliases/custom.aliases.bash"]]
+          - [["{{dotfiles_base_dir}}/bash/bash_envs.sh",    "{{bashit_repo}}/custom/custom_envs.bash"]]
 
 
