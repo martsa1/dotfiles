@@ -67,6 +67,16 @@ def update_workspace_name(new_workspace_name: str):
     if workspace_number is None:
         return TypeError('New Workspace Number is a required value')
 
+    # Pre-designated Workspace names:
+    if new_workspace_name.lower() in ['console', 'terminal']:
+        new_workspace_name = ''
+    if new_workspace_name.lower() in ['mail', 'email']:
+        new_workspace_name = ''
+    if new_workspace_name.lower() in ['comms', 'skype', 'hangouts', 'mattermost', 'irc']:
+        new_workspace_name = ''
+    if new_workspace_name.lower() in ['music', 'spotify']:
+        new_workspace_name = ''
+
     update_workspace_command = [
         'i3-msg',
         'rename',

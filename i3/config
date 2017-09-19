@@ -25,7 +25,7 @@ font pango:System San Francisco Display 10, FontAwesome 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -301,9 +301,8 @@ bar {
 
 # Default Workspaces for various applications
 assign [class="[Ss]potify"] $workspace10
-assign [class="Atom"] $workspace2
 assign [class="Google-chrome"] $workspace3
-assign [title="ROXTerm"] $workspace1
+assign [title="kitty"] $workspace1
 assign [class="skypeforlinux"] $workspace9
 
 # Attempt at a screenshot utility
@@ -330,11 +329,9 @@ bindsym XF86HomePage exec playerctl previous
 # I want pretty GUI transitions and stuff!
 exec --no-startup-id compton -f
 
-# I also want to get synergy, chrome, atom & a terminal to start on login
-exec --no-startup-id synergy
-exec google-chrome
+# I also want to get synergy, chrome & a terminal to start on login exec --no-startup-id synergy exec google-chrome
 exec spotify
-exec i3-sensible-terminal
+exec kitty
 exec --no-startup-id shutter --min_at_startup
 
 # I like numlock...
