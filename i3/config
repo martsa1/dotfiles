@@ -116,7 +116,7 @@ set $workspace7 "7"
 # Mail
 set $workspace8 "8: "
 # Chat
-set $workspace9 "9: "
+set $workspace9 "9: "
 # Music
 set $workspace10 "10: "
 
