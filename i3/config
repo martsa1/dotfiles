@@ -104,21 +104,21 @@ bindsym $mod+Shift+backslash exec \
 
 # Workspace Variable definitions
 # Terminals
-set $workspace1 "1 "
+set $workspace1 "1: "
 # Editor
-set $workspace2 "2 "
+set $workspace2 "2: "
 # Chrome
-set $workspace3 "3 "
+set $workspace3 "3: "
 set $workspace4 "4"
 set $workspace5 "5"
 set $workspace6 "6"
 set $workspace7 "7"
 # Mail
-set $workspace8 "8 "
+set $workspace8 "8: "
 # Chat
-set $workspace9 "9 "
+set $workspace9 "9: "
 # Music
-set $workspace10 "10 "
+set $workspace10 "10: "
 
 #Set default workspace names on login
 exec rename workspace number 1 to $workspace1
