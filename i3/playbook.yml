@@ -7,7 +7,7 @@
     - vars.yml
 
   tasks:
-    - name: Symlink bash_it bashrc
+    - name: Symlink i3 config into place
       file:
         src: "{{dotfiles_base_dir}}/i3"
         dest: "{{config_base_dir}}/i3"
@@ -87,3 +87,10 @@
     #    - [["{{dotfiles_base_dir}}/bash/bash_envs.sh",    "{{bashit_repo}}/custom/custom_envs.bash"]]
 
 
+
+
+# Programs that need to be installed:
+# lxappearance gtk-chtheme qt4-qtconfig shutter scrot rofi i3blocks
+# playerctl curl roxterm
+#
+# https://help.ubuntu.com/community/UbuntuStudio/UsbAudioDevices
