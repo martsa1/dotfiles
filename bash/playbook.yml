@@ -42,6 +42,7 @@
           #depth: 1
           clone: yes
           update: yes
+          force: yes
         register: bash_it_changed
 
       #- name: Check if bashit is installed
@@ -66,6 +67,13 @@
         args:
           chdir: "{{personal_code_base_dir}}/bash_it/"
         when: bash_it_changed
+
+      - name: Get rid of stupid T function
+        replace:
+          path: "{{bashit_repo}}/plugins/available/base.plugin.bash"
+          regexp: 'function t \(\)'
+          replace: "function someshitillneveruse ()"
+        #when: bash_it_changed
 
       - name: Symlink bash_it plugins
         file:
