@@ -14,79 +14,18 @@
         state: link
         force: yes
 
-# TODO: Add installation of i3wm in here
+    - name: Generate i3 config for the target host
+      template:
+        src: "{{dotfiles_base_dir}}/i3/base_config/config.j2"
+        dest: "{{config_base_dir}}/i3/config"
+        force: yes
+
+# TODO: Add installation of i3wm in a co-located playbook
 # TODO: Add a playbook called workstation at dotfiles root which installs
 #       everything i need for my nice workstation, including fonts, tools,
 #       map in any themeing I want etc.
 # TODO: Add logic here to determine what host the play is running on, and
 #       compile the i3 config from machine specific and base configurations
-
-
-    #- name: Clone bashit repo
-    #  git:
-    #    repo: "https://github.com/Bash-it/bash-it.git"
-    #    dest: "{{bashit_repo}}"
-    #    #depth: 1
-    #    clone: yes
-    #    update: yes
-    #  register: bash_it_changed
-
-    #- name: update bashit
-    #  command: 'bash -lc "bash-it update"'
-    #  args:
-    #    chdir: "{{personal_code_base_dir}}/bash_it/"
-    #  when: bash_it_changed
-
-    #- name: Symlink bash_it plugins
-    #  file:
-    #    src: "{{bashit_repo}}/plugins/available/{{item[0]}}"
-    #    dest: "{{bashit_repo}}/plugins/enabled/{{item[1]}}"
-    #    state: link
-    #  with_items:
-    #    - [["autojump.plugin.bash",         "250---autojump.plugin.bash"]]
-    #    - [["base.plugin.bash",             "250---base.plugin.bash"]]
-    #    - [["dirs.plugin.bash",             "250---dirs.plugin.bash"]]
-    #    - [["tmux.plugin.bash",             "250---tmux.plugin.bash"]]
-    #    - [["virtualenv.plugin.bash",       "250---virtualenv.plugin.bash"]]
-    #    - [["alias-completion.plugin.bash", "365---alias-completion.plugin.bash"]]
-
-    #- name: Symlink bash_it aliases
-    #  file:
-    #    src: "{{bashit_repo}}/aliases/available/{{item[0]}}"
-    #    dest: "{{bashit_repo}}/aliases/enabled/{{item[1]}}"
-    #    state: link
-    #  with_items:
-    #    - [["fuck.aliases.bash",    "150---fuck.aliases.bash"]]
-    #    - [["general.aliases.bash", "150---general.aliases.bash"]]
-
-    #- name: Symlink bash_it completion
-    #  file:
-    #    src: "{{bashit_repo}}/completion/available/{{item[0]}}"
-    #    dest: "{{bashit_repo}}/completion/enabled/{{item[1]}}"
-    #    state: link
-    #  with_items:
-    #    - [["bash-it.completion.bash",        "350---bash-it.completion.bash"]]
-    #    - [["defaults.completion.bash",       "350---defaults.completion.bash"]]
-    #    - [["dirs.completion.bash",           "350---dirs.completion.bash"]]
-    #    - [["docker-compose.completion.bash", "350---docker-compose.completion.bash"]]
-    #    - [["docker.completion.bash",         "350---docker.completion.bash"]]
-    #    - [["git.completion.bash",            "350---git.completion.bash"]]
-    #    - [["pip.completion.bash",            "350---pip.completion.bash"]]
-    #    - [["pip3.completion.bash",           "350---pip3.completion.bash"]]
-    #    - [["ssh.completion.bash",            "350---ssh.completion.bash"]]
-    #    - [["system.completion.bash",         "350---system.completion.bash"]]
-    #    - [["tmux.completion.bash",           "350---tmux.completion.bash"]]
-
-    #- name: Symlink bash_it custom additions
-    #  file:
-    #    src: "{{item[0]}}"
-    #    dest: "{{item[1]}}"
-    #    state: link
-    #  with_items:
-    #    - [["{{dotfiles_base_dir}}/bash/bash_aliases.sh", "{{bashit_repo}}/aliases/custom.aliases.bash"]]
-    #    - [["{{dotfiles_base_dir}}/bash/bash_envs.sh",    "{{bashit_repo}}/custom/custom_envs.bash"]]
-
-
 
 
 # Programs that need to be installed:
