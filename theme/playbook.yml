@@ -1,0 +1,2 @@
+# To apply a theme into gnome-settings daemon:
+#gsettings set org.gnome.desktop.interface gtk-theme "CoolestThemeOnEarth"
