@@ -75,6 +75,15 @@
           replace: "function someshitillneveruse ()"
         #when: bash_it_changed
 
+      - name: Setup kitty and dependency source directory
+        file:
+          path: "{{bashit_repo}}/{{item}}"
+          state: "directory"
+        with_items:
+          - "plugins/enabled"
+          - "aliases/enabled"
+          - "completion/enabled"
+
       - name: Symlink bash_it plugins
         file:
           src: "{{bashit_repo}}/plugins/available/{{item[0]}}"
