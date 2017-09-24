@@ -46,9 +46,9 @@ set_from_resource $bright_white i3wm.color15    #E6E6E6
 
 # window colors
 #                       border      background  text        indicator child_border
-client.focused          $magenta    $magenta    $black      $yellow   $magenta
+client.focused          $purple    $purple    $background      $yellow   $purple
 client.focused_inactive $green      $green      $background $yellow   $green
-client.unfocused        $purple     $purple     $background $yellow   $purple
+client.unfocused        $background     $background     $foreground $yellow   $background
 client.urgent           $bright_red $bright_red $background $yellow   $bright_red
 #client.focused          $purple     $purple     $background $yellow   $purple
 #client.focused_inactive $cyan       $cyan       $background $yellow   $green
@@ -81,9 +81,9 @@ bar {
 
     colors {
       background         $background
-      focused_workspace  $background $background $magenta
+      focused_workspace  $purple $purple $background
       active_workspace   $background $background $green
-      inactive_workspace $background $background $purple
+      inactive_workspace $background $background $foreground
       urgent_workspace   $bright_red $bright_red $background
       binding_mode       $background $background $green
    }
