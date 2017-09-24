@@ -5,46 +5,55 @@
 
 # Font for window titles. Will also be used by the bar unless a different
 # font is used in the bar {} block below.
-font pango:System San Francisco Display 10, FontAwesome 10
+#font pango:System San Francisco Display 10, FontAwesome 10
+font pango:Fira Mono Regular 10, FontAwesome 10
+
+# Background/Foreground
+set_from_resource $background i3wm.background   #282A36
+set_from_resource $foreground i3wm.foreground   #F8F8F2
 
 # Black
-set $base00 #272822
-set $base08 #f92672
+set_from_resource $black i3wm.color0            #040404
+set_from_resource $bright_black i3wm.color8     #4D4D4D
 
 # Red
-set $base01 #383830
-set $base09 #fd971f
+set_from_resource $red i3wm.color1              #FF5555
+set_from_resource $bright_red i3wm.color9       #DD6E67
 
 # Green
-set $base02 #49483e
-set $base0A #f4bf75
+set_from_resource $green i3wm.color2            #50FA7B
+set_from_resource $bright_green i3wm.color10    #5AF78E
 
 # Yellow
-set $base03 #75715e
-set $base0B #a6e22e
+set_from_resource $yellow i3wm.color3           #F1FA8C
+set_from_resource $bright_yellow i3wm.color11   #F4F99D
 
 # Blue
-set $base04 #a59f85
-set $base0C #a1efe4
+set_from_resource $purple i3wm.color4           #BD93F9
+set_from_resource $bright_purple i3wm.color12   #CAA9FA
 
 # Magenta
-set $base05 #f8f8f2
-set $base0D #66d9ef
+set_from_resource $magenta i3wm.color5          #FF79C6
+set_from_resource $bright_magenta i3wm.color13  #FF92D0
 
 # Cyan
-set $base06 #f5f4f1
-set $base0E #ae81ff
+set_from_resource $cyan i3wm.color6             #8BE9FD
+set_from_resource $bright_cyan i3wm.color14     #9AEDFE
 
 # White
-set $base07 #f9f8f5
-set $base0F #cc6633
+set_from_resource $white i3wm.color7            #BFBFBF
+set_from_resource $bright_white i3wm.color15    #E6E6E6
 
 # window colors
-#                       border    background  text     indicator
-client.focused          $base0D   $base0D     $base00  $base0B
-client.focused_inactive $base02   $base02     $base03  $base01
-client.unfocused        $base01   $base01     $base03  $base01
-client.urgent           $base02   $base08     $base07  $base08
+#                       border      background  text        indicator child_border
+client.focused          $magenta    $magenta    $black      $yellow   $magenta
+client.focused_inactive $green      $green      $background $yellow   $green
+client.unfocused        $purple     $purple     $background $yellow   $purple
+client.urgent           $bright_red $bright_red $background $yellow   $bright_red
+#client.focused          $purple     $purple     $background $yellow   $purple
+#client.focused_inactive $cyan       $cyan       $background $yellow   $green
+#client.unfocused        $green      $green      $background $yellow   $green
+#client.urgent           $bright_red $bright_red $background $yellow   $bright_red
 
 # Top Bar to hold status information - May be updated to use Polybar in
 # future!
@@ -56,13 +65,10 @@ bar {
     workspace_buttons no
 
     colors {
-      separator $base03
-      background $base01
-      statusline $base05
-      focused_workspace $base0C $base0D $base00
-      active_workspace $base02 $base02 $base07
-      inactive_workspace $base01 $base01 $base03
-      urgent_workspace $base08 $base08 $base07
+      background   $background
+      separator    $foreground
+      statusline   $foreground
+      binding_mode $background $background $green
    }
    position top
 }
@@ -74,13 +80,12 @@ bar {
     workspace_buttons yes
 
     colors {
-      separator $base03
-      background $base01
-      statusline $base05
-      focused_workspace $base0C $base0D $base00
-      active_workspace $base02 $base02 $base07
-      inactive_workspace $base01 $base01 $base03
-      urgent_workspace $base08 $base08 $base07
+      background         $background
+      focused_workspace  $background $background $magenta
+      active_workspace   $background $background $green
+      inactive_workspace $background $background $purple
+      urgent_workspace   $bright_red $bright_red $background
+      binding_mode       $background $background $green
    }
    position bottom
 }
@@ -99,13 +104,13 @@ bindsym $mod+Return exec kitty
 bindsym $mod+Shift+q kill
 
 # Use Rofi as default launcher
-bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -fuzzy -width 60 \
-  -padding 5 -opacity "85" -bw 0 -bg "#49483e" -hlbg "#fd971f"  \
-  -fg "#f8f8f2"  -hlfg "#2728221" -font "System San Francisco Display 14"
+bindsym $mod+d exec rofi -show run -lines 5 -eh 1.2 -fuzzy -width 60 \
+  -padding 5 -opacity "90" -bw 1 -bc "#BD93F9" -bg "#282A36" -hlbg "#282A36" \
+  -fg "#8BE9FD"  -hlfg "#FF79C6" -font "Fira Mono Regular 13"
 
-bindsym $mod+Shift+d exec rofi -show ssh -lines 3 -eh 2 -width 60 \
-  -padding 5 -opacity "85" -bw 0 -bg "#49483e" -hlbg "#fd971f"  \
-  -fg "#f8f8f2"  -hlfg "#2728221" -font "System San Francisco Display 14"
+bindsym $mod+Shift+d exec rofi -show ssh -lines 5 -eh 1.2 -width 60 \
+  -padding 5 -opacity "85" -bw 1 -bc "#BD93F9"  -bg "#282A36" -hlbg "#282A36" \
+  -fg "#8BE9FD"  -hlfg "#FF79C6" -font "Fira Mono Regular 13"
 
 # Launch a file browser
 # If Nautilus tries to launch a Desktop, try running:
@@ -223,7 +228,7 @@ bindsym --release $mod+Shift+Print exec --no-startup-id \
   "shutter -s -o ~/Pictures/screenshots/`date +%Y-%m-%d_%H.%M.%S`.png"
 
 # resize window (you can also use the mouse for that)
-mode "resize" {
+mode "Resize" {
         # These bindings trigger as soon as you enter the resize mode
 
         # Pressing left will shrink the window’s width.
