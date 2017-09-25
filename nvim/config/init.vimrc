@@ -56,10 +56,17 @@ Plug 'hoelzro/vim-polyglot'
 "Add Yang language support to vim
 Plug 'Shathur/yang.vim'
 
+" Add colour highlighting for colours in NVim
+Plug 'ap/vim-css-color'
+
+" Add support for i3 config files
+Plug 'PotatoesMaster/i3-vim-syntax'
+
 " Adds support for using * and # keys with visual selection searching
 Plug 'nelstrom/vim-visual-star-search'
 
 " Adds support for surround text with characters of your choosing
 Plug 'tpope/vim-surround'
+
 
 call plug#end()
