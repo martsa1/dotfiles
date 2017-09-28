@@ -1,0 +1,55 @@
+---
+
+# Play to install and configure Tmux
+
+- hosts: all
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: Install required apt packages
+      become: true
+      apt:
+        name: "{{item}}"
+        state: "present"
+        cache_valid_time: 600
+      with_items:
+        - "build-essential"
+        - "cmake"
+        - "git"
+        - "libevent-2.0-5"
+        - "libevent-dev"
+        - "libncurses5-dev"
+        - "ncurses-base"
+        - "pkg-config"
+
+    - name: Symlink Tmux Config into place
+      file:
+        src: "{{dotfiles_base_dir}}/tmux/tmux.conf"
+        dest: "/home/{{user}}/.tmux.conf"
+        state: link
+        force: yes
+
+    - name: Pull Tmux Release
+      get_url:
+        url: https://github.com/tmux/tmux/releases/download/2.5/tmux-2.5.tar.gz
+        dest: "/home/{{user}}/Downloads/"
+
+    - name: Unpack Tmux
+      unarchive:
+        src: "/home/{{user}}/Downloads/tmux-2.5.tar.gz"
+        dest: "{{personal_code_base_dir}}/"
+
+    - name: Build Tmux
+      command: "{{item}}"
+      args:
+        chdir: "{{personal_code_base_dir}}/tmux-2.5/"
+      with_items:
+        - "./configure"
+        - "make"
+
+    - name: Install Tmux
+      command: make install
+      args:
+        chdir: "{{personal_code_base_dir}}/tmux-2.5/"
+      become: true
