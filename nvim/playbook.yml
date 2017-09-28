@@ -1,0 +1,173 @@
+---
+
+- hosts: all
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: add neovim repo
+      become: true
+      apt_repository:
+        repo: "ppa:neovim-ppa/stable"
+
+    - name: install apt requirements
+      become: true
+      apt:
+        name: "{{item}}"
+        state: "present"
+        cache_valid_time: 600
+      with_items:
+        - "exuberant-ctags"
+        - "git"
+        - "neovim"
+        - "python-dev"
+        - "python-pip"
+        - "python-virtualenv"
+        - "python3"
+        - "python3-dev"
+        - "python3-pip"
+        - "ruby"
+        - "ruby-dev"
+        - "software-properties-common"
+
+    - name: Gem install neovim dependencies
+      gem:
+        name: neovim
+        state: latest
+        user_install: no
+      become: yes
+
+    - name: "Ensure config & dotfiles directories exist"
+      file:
+        path: "{{item}}"
+        state: "directory"
+      with_items:
+        - "{{config_base_dir}}"
+        - "{{personal_code_base_dir}}"
+
+    - name: Clone Nvim config repo
+      git:
+        repo: "{{nvim_repo}}"
+        dest: "{{personal_code_base_dir}}/nvim"
+        accept_hostkey: yes
+        # FORCE: when local commit doesn't reflect commit of last run (assumes local modifications)
+        # look at docs
+        #force: yes
+        clone: yes
+        update: yes
+
+    - name: symlink nvim configs into place
+      file:
+        src: "{{personal_code_base_dir}}/nvim"
+        dest: "{{config_base_dir}}/nvim"
+        state: link
+        #force: true
+
+    - name: Pull in nvim package manager (Vim-Plug)
+      git:
+        repo: "https://github.com/junegunn/vim-plug.git"
+        dest: "{{personal_code_base_dir}}/vim-plug/"
+        clone: yes
+        update: yes
+
+    - name: Ensure nvim autoload directory exists
+      file:
+        path: "{{config_base_dir}}/nvim/autoload"
+        state: "directory"
+
+    - name: Symlink vim-plug into autoload
+      file:
+        src: "{{personal_code_base_dir}}/vim-plug/plug.vim"
+        dest: "{{config_base_dir}}/nvim/autoload/plug.vim"
+        state: link
+        #force: true
+
+    - name: Update neovim and remote plugins
+      command: 'nvim --headless +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall'
+
+    - name: Symlink neomake maker recipes into neovim autoload
+      file:
+        src: "{{personal_code_base_dir}}/nvim/plugged/neomake/autoload/neomake/makers"
+        dest: "{{personal_code_base_dir}}/nvim/autoload/makers"
+        state: link
+
+         ################################################################
+        #                                                                #
+        #      running on host (self). Note comma after `localhost`      #
+        #      and `local` for transport method                          #
+        #                                                                #
+         ################################################################
+        #
+        # ansible-playbook -i 'localhost,' -c local -K playbook.yml
+        # ansible-playbook -i '172.16.20.159,' -u sam -k -K playbook.yml
+        #
+         ################################################################
+        #                                                                #
+        #      Below is related to automated installation of plugins     #
+        #      and updating neovim with the fact                         #
+        #                                                                #
+         ################################################################
+        #
+        # Maybe this would be bad to use since it's slow through CLI
+        # when running in CLI it seems to run sequencially and not
+        # in parellel
+        # nvim +PlugInstall +UpdateRemotePlugins +qall
+
+
+    ################################################################################
+    ############################## Linter Installs #################################
+    ################################################################################
+    # TODO: Adjust this to install all the linters for all the languages Ansible supports
+    - name: create neovim virtualenvs with installs
+      pip:
+        name: "{{item[2]}}"
+        virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/neovim"
+        virtualenv_python: "{{item[0]}}"
+      with_nested:
+        - [["python3", "py3"], ["python", "py2"]]
+        - ["neovim", "jedi"]
+      become: yes
+
+    - name: install python linters globally
+      pip:
+        name: "{{item[2]}}"
+        virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/{{item[2]}}"
+        virtualenv_python: "{{item[0]}}"
+      with_nested:
+         - [["python3", "py3"]]
+         - ["pylint", "flake8"]
+      become: yes
+      # linearized (IE): python3 py3 (pylint|flake8)
+
+    - name: install ansible linter globally
+      pip:
+        name: "{{item[2]}}"
+        virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/{{item[2]}}"
+        virtualenv_python: "{{item[0]}}"
+      with_nested:
+         - [["python2", "py2"]]
+         - ["ansible-lint"]
+      become: yes
+
+    - name: symlink python linters into PATH -- works for both python2 and python3
+      file:
+         src: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[0]}}/{{item[1]}}/bin/{{item[1]}}"
+         dest: "/usr/local/sbin/{{item[1]}}"
+         state: link
+         #force: true
+      with_nested:
+         - ["py3"]
+         - ["pylint", "flake8"]
+      become: yes
+      # linearized (IE): python3 py3 (pylint|flake8)
+
+    - name: symlink ansible linters into PATH  -- only supported by python2
+      file:
+         src: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[0]}}/{{item[1]}}/bin/{{item[1]}}"
+         dest: "/usr/local/sbin/{{item[1]}}"
+         state: link
+         force: true
+      with_nested:
+         - ["py2"]
+         - ["ansible-lint"]
+      become: yes
