@@ -12,6 +12,7 @@
         name: compton
         state: "present"
         cache_valid_time: 600
+      become: yes
 
     - name: Symlink compton config into place
       file:
