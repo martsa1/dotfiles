@@ -25,3 +25,7 @@ set show-all-if-unmodified On
 # Editor mode settings
 set editing-mode vi
 set show-mode-in-prompt On
+
+set keymap vi-insert
+"\e.":yank-last-arg
+"\et":transpose-words
