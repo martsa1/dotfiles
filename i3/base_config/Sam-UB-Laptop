@@ -22,3 +22,5 @@ workspace 9 output eDP1
 # Music
 workspace 10 output eDP1
 
+# Set Keyboard layout to UK
+exec setxkbmap -layout gb
