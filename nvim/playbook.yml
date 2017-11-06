@@ -123,6 +123,7 @@
         name: "{{item[2]}}"
         virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/neovim"
         virtualenv_python: "{{item[0]}}"
+        state: latest
       with_nested:
         - [["python3", "py3"], ["python", "py2"]]
         - ["neovim", "jedi"]
@@ -133,6 +134,7 @@
         name: "{{item[2]}}"
         virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/{{item[2]}}"
         virtualenv_python: "{{item[0]}}"
+        state: latest
       with_nested:
          - [["python3", "py3"]]
          - ["pylint", "flake8"]
@@ -144,6 +146,7 @@
         name: "{{item[2]}}"
         virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/{{item[2]}}"
         virtualenv_python: "{{item[0]}}"
+        state: latest
       with_nested:
          - [["python2", "py2"]]
          - ["ansible-lint"]
