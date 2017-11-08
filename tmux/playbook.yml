@@ -32,18 +32,18 @@
 
     - name: Pull Tmux Release
       get_url:
-        url: https://github.com/tmux/tmux/releases/download/2.5/tmux-2.5.tar.gz
+        url: https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
         dest: "/home/{{user}}/Downloads/"
 
     - name: Unpack Tmux
       unarchive:
-        src: "/home/{{user}}/Downloads/tmux-2.5.tar.gz"
+        src: "/home/{{user}}/Downloads/tmux-2.6.tar.gz"
         dest: "{{personal_code_base_dir}}/"
 
     - name: Build Tmux
       command: "{{item}}"
       args:
-        chdir: "{{personal_code_base_dir}}/tmux-2.5/"
+        chdir: "{{personal_code_base_dir}}/tmux-2.6/"
       with_items:
         - "./configure"
         - "make"
@@ -51,5 +51,5 @@
     - name: Install Tmux
       command: make install
       args:
-        chdir: "{{personal_code_base_dir}}/tmux-2.5/"
+        chdir: "{{personal_code_base_dir}}/tmux-2.6/"
       become: true
