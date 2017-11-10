@@ -57,4 +57,8 @@ Plug 'Shathur/yang.vim'
 
 " Adds support for using * and # keys with visual selection searching
 Plug 'nelstrom/vim-visual-star-search'
+
+" Adds support for surround text with characters of your choosing
+Plug 'tpope/vim-surround'
+
 call plug#end()
