@@ -54,4 +54,7 @@ Plug 'hoelzro/vim-polyglot'
 
 "Add Yang language support to vim
 Plug 'Shathur/yang.vim'
+
+" Adds support for using * and # keys with visual selection searching
+Plug 'nelstrom/vim-visual-star-search'
 call plug#end()
