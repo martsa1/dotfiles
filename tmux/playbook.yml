@@ -53,3 +53,20 @@
       args:
         chdir: "{{personal_code_base_dir}}/tmux-2.6/"
       become: true
+
+    - name: Pull in Tmux Plugin Manager
+      git:
+        repo: "https://github.com/tmux-plugins/tpm"
+        dest: "/home/{{user}}/.tmux/plugins/tpm"
+        version: master
+        accept_hostkey: yes
+        force: yes
+        clone: yes
+        update: yes
+
+    - name: Install & Update Tmux Plugins
+      command: "{{item}}"
+      with_items:
+        - "/home/sam/.tmux/plugins/tpm/bin/install_plugins"
+        - "/home/sam/.tmux/plugins/tpm/bin/update_plugins all"
+
