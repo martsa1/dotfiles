@@ -1,4 +1,4 @@
-source $HOME/.config/nvim/config/init.vimrc
+source $HOME/.config/nvim/config/plugins/init.vimrc
 source $HOME/.config/nvim/config/general.vimrc
 " source keys because <Leader> is remapped, if mapping happens after plugins
 " <Leader> is still mapped to old key
