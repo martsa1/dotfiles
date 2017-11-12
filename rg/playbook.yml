@@ -1,0 +1,44 @@
+---
+
+- hosts: all
+  vars_files:
+    - vars.yml
+
+  tasks:
+    ##############################
+    # Setup ripgrep
+    ##############################
+    - name: Unpack Ripgrep
+      unarchive:
+        src: "https://github.com/BurntSushi/ripgrep/releases/download/{{rg_version}}/ripgrep-{{rg_version}}-x86_64-unknown-linux-musl.tar.gz"
+        dest: "{{user_bin}}"
+        remote_src: yes
+
+    - name: Delete Existing rg
+      file:
+        state: absent
+        path: "{{user_bin}}/ripgrep"
+
+    - name: Relocate
+      command: "mv -f ripgrep-{{rg_version}}-x86_64-unknown-linux-musl ripgrep"
+      args:
+        chdir: "/home/{{user}}/bin"
+
+    - name: Install ripgrep
+      file:
+        src:  "{{user_bin}}/ripgrep/{{item[0]}}"
+        dest: "{{item[1]}}"
+        state: link
+      with_items:
+        - [["rg", "{{user_bin}}/rg"]]
+
+    - name: Install ripgrep Completion
+      file:
+        src:  "{{user_bin}}/ripgrep/{{item[0]}}"
+        dest: "{{item[1]}}"
+        state: link
+        force: yes
+      with_items:
+        - [["complete/rg.bash-completion", "/etc/bash_completion.d/rg.bash_completion"]]
+      become: yes
+
