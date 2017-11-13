@@ -19,8 +19,22 @@ augroup omnifuncs
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
   autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 augroup end
-colorscheme dracula
-color dracula
+
+"Setup the colourscheme - Default to Solarized Light, unless VAMPIRE
+"environment variable is set (Dracula Theme), or DARKSUN is set (Solarized
+"Dark)
+if exists("$VAMPIRE")
+  colorscheme dracula
+  color dracula
+elseif exists("$DARKSUN")
+	set background=dark "(light|dark)
+	colorscheme solarized
+else
+	set background=light "(light|dark)
+	colorscheme solarized
+endif
+
+
 " deoplete
 " This appears to be needed on, otherwise nothing works
 let g:deoplete#enable_at_startup = 1
