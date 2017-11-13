@@ -1,5 +1,7 @@
 # Editor Settings
 export EDITOR=nvim
+#Sets nvim's default colourscheme to Dracula
+export VAMPIRE=1
 export NVIM_CONFIG_BASE="${HOME}/code/personal/nvim"
 
 # NodeJS path addition
