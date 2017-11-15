@@ -5,6 +5,10 @@ nnoremap <Leader>; ,
 
 " Disable Ex-mode because it's a pile of shit
 nnoremap Q <nop>
+
+" copy absolute file path to system clipboard
+nnoremap <Leader>yf :let @+ = expand('%:p')<CR>
+
 " in-line scrolling
 nnoremap <Leader>j gj
 nnoremap <Leader>k gk
