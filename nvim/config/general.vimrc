@@ -5,10 +5,6 @@ set hlsearch
 
 set number
 
-" If we are in a TrueColour terminal, use true colours
-if has("termguicolors")
-  set termguicolors
-endif
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start

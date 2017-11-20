@@ -1,9 +1,17 @@
-"Plug 'pelodelfuego/vim-swoop'
+" Swoop
 
 let g:swoopUseDefaultKeyMap = 0
 
-set nnoremap <Leader>ss :call Swoop()<CR>
-set vnoremap <Leader>ss :call SwoopSelection()<CR>
+nnoremap <Leader>ss :call Swoop()<CR>
+vnoremap <Leader>ss :call SwoopSelection()<CR>
 
-set nnoremap <Leader>sm :call SwoopMulti()<CR>
-set vnoremap <Leader>sm :call SwoopMultiSelection()<CR>
+nnoremap <Leader>sm :call SwoopMulti()<CR>
+vnoremap <Leader>sm :call SwoopMultiSelection()<CR>
+
+"" Swoop
+"let g:swoopUseDefaultKeyMap = 0
+"nnoremap <Leader>ss :call Swoop()<CR>
+"vnoremap <Leader>ss :call SwoopSelection()<CR>
+"nnoremap <Leader>sm :call SwoopMulti()<CR>
+"vnoremap <Leader>sm :call SwoopMultiSelection()<CR>
+

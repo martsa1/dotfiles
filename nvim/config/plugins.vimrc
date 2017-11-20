@@ -20,19 +20,6 @@ augroup omnifuncs
   autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 augroup end
 
-"Setup the colourscheme - Default to Solarized Light, unless VAMPIRE
-"environment variable is set (Dracula Theme), or DARKSUN is set (Solarized
-"Dark)
-if exists("$VAMPIRE")
-  colorscheme dracula
-  color dracula
-elseif exists("$DARKSUN")
-	set background=dark "(light|dark)
-	colorscheme solarized
-else
-	set background=light "(light|dark)
-	colorscheme solarized
-endif
 
 
 " deoplete
@@ -60,9 +47,4 @@ nnoremap <Leader>tt :TagbarToggle<CR><C-w><C-w>
 "let g:jedi#rename_command = "<leader>r"
 "let g:jedi#show_call_signatures = 2
 
-" Swoop
-let g:swoopUseDefaultKeyMap = 0
-nnoremap <Leader>ss :call Swoop()<CR>
-vnoremap <Leader>ss :call SwoopSelection()<CR>
-nnoremap <Leader>sm :call SwoopMulti()<CR>
-vnoremap <Leader>sm :call SwoopMultiSelection()<CR>
+

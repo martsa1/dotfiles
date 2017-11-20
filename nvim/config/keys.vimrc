@@ -1,3 +1,8 @@
+" map Leader
+let mapleader = ","
+" keep backward f search, remapping it to ,;
+nnoremap <Leader>; ,
+
 " Disable Ex-mode because it's a pile of shit
 nnoremap Q <nop>
 
