@@ -1,8 +1,3 @@
-" map Leader
-let mapleader = ","
-" keep backward f search, remapping it to ,;
-nnoremap <Leader>; ,
-
 " Disable Ex-mode because it's a pile of shit
 nnoremap Q <nop>
 
@@ -61,7 +56,7 @@ nnoremap <Leader>wx :close<CR>
 nnoremap <silent> <F2> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 nnoremap <F3> :set hlsearch!<CR>
 nnoremap <F5> :source $HOME/.config/nvim/init.vim<CR>
-nnoremap <C-w> :NERDTreeToggle<CR>
+nnoremap <Leader>e :NERDTreeToggle<CR>
 "nnoremap <F7> :UndotreeToggle<CR>
 "nnoremap <F8> :Geeknote<CR>
 " indent whole file according to syntax rules
