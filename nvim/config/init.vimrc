@@ -5,3 +5,4 @@ runtime ./config/colourscheme.vimrc
 runtime ./config/general.vimrc
 runtime ./config/keys.vimrc
 runtime ./config/line.vimrc
+runtime ./config/plugins.vimrc
