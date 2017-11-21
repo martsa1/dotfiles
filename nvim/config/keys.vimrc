@@ -9,6 +9,9 @@ nnoremap Q <nop>
 " copy absolute file path to system clipboard
 nnoremap <Leader>yf :let @+ = expand('%:p')<CR>
 
+" Add Ctrl+v Esc as terminal escape key
+tnoremap <C-v><Esc> <C-\><C-n>
+
 " in-line scrolling
 nnoremap <Leader>j gj
 nnoremap <Leader>k gk
@@ -143,8 +146,6 @@ nnoremap <Leader>qw :cexpr []<CR> " Clear quick fix (w for wipe)
 nnoremap <Leader>tc :ColorToggle<CR>
 
 " Terminal Mode Keybindings
-tnoremap <A-Esc> <C-\><C-n>
-tnoremap <S-Esc> <C-\><C-n>
 "tnoremap <A-h> <C-\><C-n><C-w>h
 "tnoremap <A-j> <C-\><C-n><C-w>j
 "tnoremap <A-k> <C-\><C-n><C-w>k
