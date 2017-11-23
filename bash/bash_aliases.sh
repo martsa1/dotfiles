@@ -35,3 +35,22 @@ alias python_tags=$'ctags -R --fields=+l --languages=python --python-kinds=-iv -
 if [ -f ~/.config/bash_work.sh ]; then
     . ~/.config/bash_work.sh
 fi
+
+# Add some paging related aliases for use when inside tmux, as the tmux moude mode fucks with them by default
+declare -a tmux_unscrollables=('less' 'more' 'man')
+
+function tmux_scrollable() {
+  echo "tmux_scrollable called with arguments: ${*}"
+  tmux_command=$1;
+  shift;
+  if [[ "${TMUX}" != '' ]]; then
+    $(tmux set -g mouse off) && $tmux_command $* && $(tmux set -g mouse on);
+  else
+    echo "Executing ${tmux_command}, with arguments: ${*}"
+    $tmux_command $*
+  fi
+}
+
+for item in "${tmux_unscrollables[@]}"; do
+  alias t$item="tmux_scrollable $item"
+done;
