@@ -1,0 +1,16 @@
+---
+
+# Play to configure the system to my preferences
+
+- hosts: all
+  vars_files:
+    - vars.yml
+
+  tasks:
+      - name: Symlink password feedback config
+        file:
+          src: "{{dotfiles_base_dir}}/system/pwfeedback"
+          dest: "/etc/sudoers.d/pwfeedback"
+          state: link
+        become: yes
+
