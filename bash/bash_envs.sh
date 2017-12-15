@@ -18,7 +18,9 @@ export PATH=$PATH:$GOPATH/bin
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
-. /home/sam/.local/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
+powerline_bash_script=~/.local/venvs/powerline-status/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
+chmod +x  $powerline_bash_script
+ $powerline_bash_script
 
 
 #Python VirtualEnv Settings
@@ -37,3 +39,6 @@ shopt -s histverify
 # Rebind the terminal stop keybind so that we can use ^s to search forward
 # in history
 stty stop ^J
+
+# Make Whalebrew work with local bin, rather than a global one which requres root
+export WHALEBREW_INSTALL_PATH=/home/sam/bin
