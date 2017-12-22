@@ -42,6 +42,9 @@ bindsym XF86Sleep --release exec "sudo pm-suspend --quirk-dpms-on"
 # Ensure that my primary network connection is brought up
 exec nmcli connection up Ethernet
 
+# Use the keyboard calculator button to launch a calculator
+bindsym XF86Calculator exec "io.elementary.calculator"
+
 # Launch RescueTime
 exec --no-startup-id rescuetime
 
