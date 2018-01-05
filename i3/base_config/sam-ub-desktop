@@ -48,5 +48,8 @@ exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg
 # Launch Bluetooth Daemon
 exec --no-startup-id blueman-applet
 
+# Launch RescueTime
+exec --no-startup-id rescuetime
+
 # Use the keyboard calculator button to launch a calculator
 bindsym XF86Calculator exec "gnome-calculator"

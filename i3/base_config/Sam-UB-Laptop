@@ -24,3 +24,6 @@ workspace 10 output eDP1
 
 # Set Keyboard layout to UK
 exec setxkbmap -layout gb
+
+# Launch RescueTime
+exec --no-startup-id rescuetime
