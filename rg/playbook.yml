@@ -6,6 +6,14 @@
 
   tasks:
     ##############################
+    # Ensure bin directory is present
+    ##############################
+    - name: Ensure bin directory exists
+      file:
+        path: "{{user_bin}}"
+        state: "directory"
+
+    ##############################
     # Setup ripgrep
     ##############################
     - name: Unpack Ripgrep
