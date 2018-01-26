@@ -56,3 +56,16 @@ function tmux_scrollable() {
 for item in "${tmux_unscrollables[@]}"; do
   alias t$item="tmux_scrollable $item"
 done;
+
+# Lets use chrome from within a docker container so we can easily constrain its system consumption!!
+alias dchrome='docker run -it \
+    --net host \ # may as well YOLO
+    --cpuset-cpus "0-2" \ # control the cpu
+    --memory 1024m \ # max memory it can use
+    -v /tmp/.X11-unix:/tmp/.X11-unix \ # mount the X11 socket
+    -e DISPLAY=unix$DISPLAY \ # pass the display
+    -v $HOME/Downloads:/root/Downloads \ # optional, but nice
+    -v $HOME/.config/google-chrome/:/data \ # if you want to save state
+    --device /dev/snd \ # so we have sound
+    --name chrome \
+    jess/chrome'
