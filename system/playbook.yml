@@ -7,18 +7,10 @@
     - vars.yml
 
   tasks:
-      - name: Copy password settings file into place
+      - name: Copy password feedback config to /etc
         copy:
           src: "{{dotfiles_base_dir}}/system/pwfeedback"
           dest: "/etc/sudoers.d/pwfeedback"
-        become: yes
-
-      - name: Set permissions for password settings file
-        file:
-          path: "/etc/sudoers.d/pwfeedback"
           owner: root
-          group: root
-          mode: "0644"
-          #mode: "u=rwx,g-rwx,o-rwx"
         become: yes
 

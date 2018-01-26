@@ -7,13 +7,6 @@
     - vars.yml
 
   tasks:
-      - name: Copy password feedback config to /etc
-        copy:
-          src: "{{dotfiles_base_dir}}/system/pwfeedback"
-          dest: "/etc/sudoers.d/pwfeedback"
-          owner: root
-        become: yes
-
       - name: Setup mosh
         apt:
           name: mosh
