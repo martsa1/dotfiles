@@ -1,0 +1,65 @@
+---
+
+# Play to install and configure i3wm
+
+- hosts: all
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: Ensure polybar build dependencies are in place
+      apt:
+        name: "{{item}}"
+        state: present
+        cache_valid_time: 600
+      become: yes
+      with_items:
+        - "cmake"
+        - "cmake-data"
+        - "i3-wm"
+        - "libasound2-dev"
+        - "libcairo2-dev"
+        - "libcurl4-openssl-dev"
+        - "libiw-dev"
+        - "libjsoncpp-dev"
+        - "libmpdclient-dev"
+        - "libpulse-dev"
+        - "libxcb-cursor-dev"
+        - "libxcb-ewmh-dev"
+        - "libxcb-icccm4-dev"
+        - "libxcb-image0-dev"
+        - "libxcb-randr0-dev"
+        - "libxcb-util0-dev"
+        - "libxcb-xkb-dev"
+        - "libxcb-xrm-dev"
+        - "libxcb1-dev"
+        - "pkg-config"
+        - "python-xcbgen"
+        - "xcb-proto"
+
+    - name: Pull in Polybar Repo
+      git:
+        repo: "https://github.com/jaagr/polybar"
+        dest: "{{personal_code_base_dir}}/polybar"
+        accept_hostkey: yes
+        clone: yes
+        force: yes
+        recursive: yes
+        update: yes
+        version: 3.1.0
+
+    - name: Ensure build directory exists
+      file:
+        path: "{{personal_code_base_dir}}/polybar/build"
+        state: directory
+
+    - name: Build polybar
+      command: "cmake .."
+      args:
+        chdir: "{{personal_code_base_dir}}/polybar/build"
+
+    - name: Install polybar
+      command: "make install"
+      args:
+        chdir: "{{personal_code_base_dir}}/polybar"
+      become: yes
