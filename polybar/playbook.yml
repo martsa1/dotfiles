@@ -63,3 +63,16 @@
       args:
         chdir: "{{personal_code_base_dir}}/polybar"
       become: yes
+
+    - name: Setup Polybar config directory
+      file:
+        path: "/home/{{user}}/.config/polybar"
+        state: directory
+
+    - name: Link polybar config
+      file:
+        src: "{{dotfiles_base_dir}}/polybar/config"
+        dest: "/home/{{user}}/.config/polybar/config"
+        state: link
+
+
