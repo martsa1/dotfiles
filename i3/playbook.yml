@@ -16,7 +16,7 @@
 
     - name: Symlink XResources file
       file:
-        src: "{{dotfiles_base_dir}}/xresources/XResources"
+        src: "{{dotfiles_base_dir}}/xresources/Xresources"
         dest: "/home/{{user}}/.Xresources"
         state: link
         force: yes

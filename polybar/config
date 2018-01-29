@@ -8,33 +8,59 @@
 ;=====================================================
 
 [colors]
-;background = ${xrdb:color0:#222}
-background = #222
-background-alt = #444
-;foreground = ${xrdb:color7:#222}
-foreground = #dfdfdf
-foreground-alt = #555
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+; Dracula Xresources palette
+foreground = #F8F8F2
+background = #282A36
+color0 =     #000000
+color8 =     #4D4D4D
+color1 =     #FF5555
+color9 =     #FF6E67
+color2 =     #50FA7B
+color10 =    #5AF78E
+color3 =     #F1FA8C
+color11 =    #F4F99D
+color4 =     #BD93F9
+color12 =    #CAA9FA
+color5 =     #FF79C6
+color13 =    #FF92D0
+color6 =     #8BE9FD
+color14 =    #9AEDFE
+color7 =     #BFBFBF
+color15 =    #E6E6E6
 
-[bar/example]
-;monitor = ${env:MONITOR:HDMI-1}
+background-alt = ${self.color8}
+foreground-alt = ${self.color15}
+primary = ${self.color4}
+secondary = ${self.color2}
+alert = ${self.color1}
+highlight = ${self.color3}
+;background = ${xrdb:i3wm.background:#2828A36}
+;foreground = ${xrdb:color7:#222}
+;primary = #ffb52a
+;secondary = #e60053
+;alert = #bd2c40
+
+[bar/left]
+monitor = ${env:MONITOR:}
 width = 100%
 height = 27
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 6.0
+;radius = 6.0
 fixed-center = false
 
 background = ${colors.background}
 foreground = ${colors.foreground}
+primary = ${colors.primary}
+secondary = ${colors.secondary}
+foreground-alt = ${colors.foreground-alt}
 
 line-size = 3
-line-color = #f00
+line-color = ${colors.highlight}
+;line-color = #f00
 
 border-size = 4
-border-color = #00000000
+border-color = ${colors.color0}
 
 padding-left = 0
 padding-right = 2
@@ -42,18 +68,18 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
+font-0 = "Fira Mono Regular:size=9"
+font-1 = "FontAwesome:size=9"
+;font-2 = siji:pixelsize=10;1
 
-modules-left = bspwm i3
-modules-center = mpd
+modules-left = i3
+modules-center = spotify
 modules-right = filesystem xbacklight volume xkeyboard memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
-;tray-transparent = true
-;tray-background = #0063ff
+tray-transparent = false
+tray-background = ${colors.background}
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -63,11 +89,17 @@ tray-padding = 2
 ;scroll-up = bspwm-desknext
 ;scroll-down = bspwm-deskprev
 
-;scroll-up = i3wm-wsnext
-;scroll-down = i3wm-wsprev
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
+[bar/right]
+inherit= bar/left
+tray-position =
+
+
 
 [module/xwindow]
 type = internal/xwindow
@@ -122,48 +154,54 @@ label-empty-padding = 2
 type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
-wrapping-scroll = false
+wrapping-scroll = true
 
 ; Only show workspaces on the same output as the bar
-;pin-workspaces = true
+pin-workspaces = true
 
 label-mode-padding = 2
-label-mode-foreground = #000
+label-mode-foreground = ${colors.foreground}
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
-label-focused = %index%
-label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-underline = ${module/bspwm.label-focused-underline}
-label-focused-padding = ${module/bspwm.label-focused-padding}
+label-focused = %name%
+;label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline = ${colors.primary}
+label-focused-padding = 4
 
 ; unfocused = Inactive workspace on any monitor
-label-unfocused = %index%
-label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+label-unfocused = %name%
+;label-unfocused = %index%
+label-unfocused-padding = 2
+label-unfocused-underline = ${colors.background-alt}
 
 ; visible = Active workspace on unfocused monitor
-label-visible = %index%
+label-visible = %name%
 label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
+label-visible-underline = ${colors.color2}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
-label-urgent = %index%
-label-urgent-background = ${module/bspwm.label-urgent-background}
-label-urgent-padding = ${module/bspwm.label-urgent-padding}
+label-urgent = %name%
+label-urgent-background = ${colors.color1}
+label-urgent-padding = 2
 
-[module/mpd]
-type = internal/mpd
-format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+[module/spotify]
+type = custom/script
+exec = $HOME/code/personal/dotfiles/polybar/modules/spotify.sh
+exec-if = ps -u $USER | grep spotify
 
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
+label = %output%
+format = <label>
+format-background = ${colors.background-alt}
+format-foreground = ${colors.foreground}
+format-padding = 2
 
-label-song-maxlen = 25
-label-song-ellipsis = true
+click-left = playerctl --player=spotify play-pause
+scroll-up = playerctl --player=spotify previous
+scroll-down = playerctl --player=spotify next
+tail = true
 
 [module/xbacklight]
 type = internal/xbacklight

@@ -58,37 +58,40 @@ client.urgent           $bright_red  $bright_red  $background  $yellow    $brigh
 # Top Bar to hold status information - May be updated to use Polybar in
 # future!
 bar {
-    # status_command i3status
-    tray_output primary
-    status_command i3blocks -c /home/sam/.config/i3/i3blocks.conf
-    id status-bar
-    workspace_buttons no
-
-    colors {
-      background   $background
-      separator    $foreground
-      statusline   $foreground
-      binding_mode $background $background $green
-   }
-   position top
+		 i3bar_command ~/code/personal/dotfiles/polybar/launch.sh
 }
+#bar {
+#    # status_command i3status
+#    tray_output primary
+#    status_command i3blocks -c /home/sam/.config/i3/i3blocks.conf
+#    id status-bar
+#    workspace_buttons no
 
-# Bottom Bar to hold workspace Buttons only
-bar {
-    tray_output none
-    id workspace-bar
-    workspace_buttons yes
+#    colors {
+#      background   $background
+#      separator    $foreground
+#      statusline   $foreground
+#      binding_mode $background $background $green
+#   }
+#   position top
+#}
 
-    colors {
-      background         $background
-      focused_workspace  $purple $purple $background
-      active_workspace   $background $background $green
-      inactive_workspace $background $background $white
-      urgent_workspace   $bright_red $bright_red $background
-      binding_mode       $background $background $green
-   }
-   position bottom
-}
+## Bottom Bar to hold workspace Buttons only
+#bar {
+#    tray_output none
+#    id workspace-bar
+#    workspace_buttons yes
+
+#    colors {
+#      background         $background
+#      focused_workspace  $purple $purple $background
+#      active_workspace   $background $background $green
+#      inactive_workspace $background $background $white
+#      urgent_workspace   $bright_red $bright_red $background
+#      binding_mode       $background $background $green
+#   }
+#   position bottom
+#}
 
 ################################################################################
 ############################### System Key Binds ###############################
