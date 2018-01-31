@@ -74,7 +74,7 @@ font-1 = "FontAwesome:size=9"
 
 modules-left = i3
 modules-center = spotify
-modules-right = filesystem xbacklight volume xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = timetrap filesystem xbacklight volume xkeyboard memory cpu wlan eth battery temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -203,6 +203,22 @@ scroll-up = playerctl --player=spotify previous
 scroll-down = playerctl --player=spotify next
 tail = true
 
+[module/timetrap]
+type = custom/script
+exec = $HOME/code/personal/dotfiles/polybar/modules/timetrap.py
+;exec-if = ps -u $USER | grep spotify
+
+label = %output%
+format = <label>
+format-background = ${colors.background-alt}
+format-foreground = ${colors.foreground}
+format-padding = 2
+
+;click-left =
+;scroll-up =
+;scroll-down =
+tail = false
+
 [module/xbacklight]
 type = internal/xbacklight
 
@@ -265,7 +281,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = vetheab6eca
+interface = enp3s0
 interval = 3.0
 
 format-connected-underline = #55aa55
