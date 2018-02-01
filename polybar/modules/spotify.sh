@@ -28,7 +28,7 @@ while [[ $(ps -u $USER | grep spotify) ]]; do
   function get_info {
     position=`printf ""%d:%02d"" $(($elapsed%3600/60)) $(($elapsed%60))`
 
-    echo "$title %{F$alt}by%{F-} $artist %{F$alt}%{F-} $album  %{F$alt}|%{F-}  $position %{F$alt}%{F-} $timestamp"
+    echo "%{F$primary}$title%{F-} %{F$alt}|%{F-} %{F$primary}$artist%{F-} %{F$alt}|%{F-} %{F$primary}$album%{F-}  %{F$alt}|%{F-}  %{F$primary}$position%{F-} %{F$alt}|%{F-} %{F$primary}$timestamp%{F-}"
   }
 
   if [ "$(playerctl status)" = "Playing" ]; then
