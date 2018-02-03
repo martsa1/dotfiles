@@ -1,5 +1,5 @@
-\.molecule
-.pyc
+.molecule
+*.pyc
 .pytest_cache
 .vagrant
 __pycache__

@@ -1,0 +1,14 @@
+---
+
+# Primary tasks to setup the dotfiles repo
+#
+- name: Setup dotfiles base directory
+  file:
+    path: "{{dotfiles_base_path}}"
+    state: directory
+
+- import_tasks: packages.apt.yml
+  when: ansible_pkg_mgr|lower == 'apt'
+
+- import_tasks: packages.arch.yml
+  when: ansible_pkg_mgr|lower == 'pacman'
