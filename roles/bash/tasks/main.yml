@@ -11,22 +11,23 @@
   git:
     repo: "https://github.com/Bash-it/bash-it.git"
     dest: "{{bashit_repo}}"
-    #depth: 1
-    clone: yes
-    update: yes
-    force: yes
+    # depth: 1
+    version: master
+    clone: "yes"
+    update: "yes"
+    force: "yes"
   register: bash_it_changed
 
-#- name: Check if bashit is installed
+# - name: Check if bashit is installed
 #  shell: 'bash -lc "declare -F bash-it"'
 #  register: is_bashit_installed_or_on_path
 #  ignore_errors: True
 
-#- name: debug is bash installed RC
+# - name: debug is bash installed RC
 #  debug:
 #    msg: "{{is_bashit_installed_or_on_path}}"
 
-#- name: install bashit
+# - name: install bashit
 #  command: "{{item[1]}}"
 #  args:
 #    chdir: "{{remote_repo_dir}}/{{item[0]}}/"
@@ -45,7 +46,7 @@
     path: "{{bashit_repo}}/plugins/available/base.plugin.bash"
     regexp: 'function t \(\)'
     replace: "function someshitillneveruse ()"
-  #when: bash_it_changed
+    # when: bash_it_changed
 
 - name: Setup alias directories (Configures Bash-it functionality)
   file:
@@ -62,11 +63,11 @@
     dest: "{{bashit_repo}}/plugins/enabled/{{item[1]}}"
     state: link
   with_items:
-    - [["autojump.plugin.bash",         "250---autojump.plugin.bash"]]
-    - [["base.plugin.bash",             "250---base.plugin.bash"]]
-    - [["dirs.plugin.bash",             "250---dirs.plugin.bash"]]
-    - [["tmux.plugin.bash",             "250---tmux.plugin.bash"]]
-    - [["virtualenv.plugin.bash",       "250---virtualenv.plugin.bash"]]
+    - [["autojump.plugin.bash", "250---autojump.plugin.bash"]]
+    - [["base.plugin.bash", "250---base.plugin.bash"]]
+    - [["dirs.plugin.bash", "250---dirs.plugin.bash"]]
+    - [["tmux.plugin.bash", "250---tmux.plugin.bash"]]
+    - [["virtualenv.plugin.bash", "250---virtualenv.plugin.bash"]]
     - [["alias-completion.plugin.bash", "365---alias-completion.plugin.bash"]]
 
 - name: Symlink bash_it aliases
@@ -75,7 +76,7 @@
     dest: "{{bashit_repo}}/aliases/enabled/{{item[1]}}"
     state: link
   with_items:
-    - [["fuck.aliases.bash",    "150---fuck.aliases.bash"]]
+    - [["fuck.aliases.bash", "150---fuck.aliases.bash"]]
     - [["general.aliases.bash", "150---general.aliases.bash"]]
 
 - name: Symlink bash_it completion
@@ -84,17 +85,17 @@
     dest: "{{bashit_repo}}/completion/enabled/{{item[1]}}"
     state: link
   with_items:
-    - [["bash-it.completion.bash",        "350---bash-it.completion.bash"]]
-    - [["defaults.completion.bash",       "350---defaults.completion.bash"]]
-    - [["dirs.completion.bash",           "350---dirs.completion.bash"]]
+    - [["bash-it.completion.bash", "350---bash-it.completion.bash"]]
+    - [["defaults.completion.bash", "350---defaults.completion.bash"]]
+    - [["dirs.completion.bash", "350---dirs.completion.bash"]]
     - [["docker-compose.completion.bash", "350---docker-compose.completion.bash"]]
-    - [["docker.completion.bash",         "350---docker.completion.bash"]]
-    - [["git.completion.bash",            "350---git.completion.bash"]]
-    - [["pip.completion.bash",            "350---pip.completion.bash"]]
-    - [["pip3.completion.bash",           "350---pip3.completion.bash"]]
-    - [["ssh.completion.bash",            "350---ssh.completion.bash"]]
-    - [["system.completion.bash",         "350---system.completion.bash"]]
-    - [["tmux.completion.bash",           "350---tmux.completion.bash"]]
+    - [["docker.completion.bash", "350---docker.completion.bash"]]
+    - [["git.completion.bash", "350---git.completion.bash"]]
+    - [["pip.completion.bash", "350---pip.completion.bash"]]
+    - [["pip3.completion.bash", "350---pip3.completion.bash"]]
+    - [["ssh.completion.bash", "350---ssh.completion.bash"]]
+    - [["system.completion.bash", "350---system.completion.bash"]]
+    - [["tmux.completion.bash", "350---tmux.completion.bash"]]
 
 - name: Symlink bash_it custom additions
   file:
@@ -103,6 +104,4 @@
     state: link
   with_items:
     - [["{{dotfiles_base_dir}}/bash/bash_aliases.sh", "{{bashit_repo}}/aliases/custom.aliases.bash"]]
-    - [["{{dotfiles_base_dir}}/bash/bash_envs.sh",    "{{bashit_repo}}/custom/custom_envs.bash"]]
-
-
+    - [["{{dotfiles_base_dir}}/bash/bash_envs.sh", "{{bashit_repo}}/custom/custom_envs.bash"]]
