@@ -1,3 +1,7 @@
+\.molecule
+.pyc
+.pytest_cache
+.vagrant
+__pycache__
 playbook.retry
 tags
-.vagrant
