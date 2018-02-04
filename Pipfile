@@ -1,0 +1,20 @@
+[[source]]
+
+verify_ssl = true
+name = "pypi"
+url = "https://pypi.python.org/simple"
+
+
+[packages]
+
+ansible = "*"
+molecule = "*"
+docker-py = "*"
+testinfra = "*"
+
+
+[dev-packages]
+
+ipython = "*"
+pylint = "*"
+"flake8" = "*"
