@@ -10,10 +10,20 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-def test_user_dotfiles_dir(host):
+def test_user_dotfiles_root_dir(host):
     ''' Checks that the dotfiles directory is created.
     '''
-    dotfiles_directory = host.file('/home/root/code/personal/dotfiles/')
+    dotfiles_base_dir = host.file('/home/root/code/personal/')
 
-    assert dotfiles_directory.exists
-    assert dotfiles_directory.is_directory
+    assert dotfiles_base_dir.exists
+    assert dotfiles_base_dir.is_directory
+
+
+def test_dotfiles_clone(host):
+    ''' Checks that a dotfiles git repo was successfully cloned into the
+        appropriate default location.
+    '''
+    dotfiles_base_dir = host.file('/home/root/code/personal/dotfiles/.git/')
+
+    assert dotfiles_base_dir.exists
+    assert dotfiles_base_dir.is_directory

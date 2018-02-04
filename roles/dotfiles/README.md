@@ -12,7 +12,9 @@ Role Variables
 --------------
 
 `target_user`: The name of the user for which the dotfiles should be installed. Defaults to `{{ansible_user_id}}`
-`dotfiles_base_path`: The absolute base path to install the dotfiles to.  Defaults to `/home/{{target_user}}/code/personal/dotfiles`
+`dotfiles_root_path`: The absolute path at which the dotfiles repo should be cloned.  Defaults to `/home/{{target_user}}/code/personal`
+`dotfiles_base_name`: The name of the dotfiles folder to clone into. Defaults to `dotfiles`
+`dotfiles_repo`:  The git URL of the dotfiles to clone in. Defaults to `https://github.com/ABitMoreDepth/dotfiles.git`
 
 Dependencies
 ------------

@@ -1,4 +1,6 @@
 ---
 
 target_user: "{{ansible_user_id}}"
-dotfiles_base_path: "/home/{{target_user}}/code/personal/dotfiles"
+dotfiles_root_path: "/home/{{target_user}}/code/personal"
+dotfiles_base_name: "dotfiles"
+dotfiles_repo: "https://github.com/ABitMoreDepth/dotfiles.git"

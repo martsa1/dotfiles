@@ -4,7 +4,7 @@
 #
 - name: Setup dotfiles base directory
   file:
-    path: "{{dotfiles_base_path}}"
+    path: "{{dotfiles_root_path}}"
     state: directory
 
 - import_tasks: packages.apt.yml
@@ -12,3 +12,12 @@
 
 - import_tasks: packages.arch.yml
   when: ansible_pkg_mgr|lower == 'pacman'
+
+- name: Clone dotfiles repo
+  git:
+    repo: "{{dotfiles_repo}}"
+    dest: "{{dotfiles_root_path}}/{{dotfiles_base_name}}"
+    accept_hostkey: "yes"
+    clone: "yes"
+    update: "yes"
+    version: master
