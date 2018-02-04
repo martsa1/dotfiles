@@ -11,11 +11,10 @@
   git:
     repo: "https://github.com/Bash-it/bash-it.git"
     dest: "{{bashit_repo}}"
-    # depth: 1
+    accept_hostkey: "yes"
     version: master
     clone: "yes"
     update: "yes"
-    force: "yes"
   register: bash_it_changed
 
 # - name: Check if bashit is installed
@@ -46,16 +45,9 @@
   args:
     chdir: "{{personal_code_base_dir}}/bash_it/"
     executable: "/bin/bash"
-  when: bash_it_changed
+  when: bash_it_changed.changed
   tags:
     - skip_ansible_lint
-
-- name: Get rid of stupid T function (Interferes with timetrap)
-  replace:
-    path: "{{bashit_repo}}/plugins/available/base.plugin.bash"
-    regexp: 'function t \(\)'
-    replace: "function someshitillneveruse ()"
-  when: bash_it_changed
 
 - name: Setup alias directories (Configures Bash-it functionality)
   file:
