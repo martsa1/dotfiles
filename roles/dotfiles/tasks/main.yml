@@ -7,11 +7,7 @@
     path: "{{dotfiles_root_path}}"
     state: directory
 
-- import_tasks: packages.apt.yml
-  when: ansible_pkg_mgr|lower == 'apt'
-
-- import_tasks: packages.arch.yml
-  when: ansible_pkg_mgr|lower == 'pacman'
+- include_tasks: "packages.{{ansible_pkg_mgr|lower}}.yml"
 
 - name: Clone dotfiles repo
   git:
