@@ -10,11 +10,10 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-def test_hosts_file(host):
-    ''' Sample test to check the hosts file exists.
+def test_user_dotfiles_dir(host):
+    ''' Checks that the dotfiles directory is created.
     '''
-    f = host.file('/etc/hosts')
+    dotfiles_directory = host.file('/home/root/code/personal/dotfiles/')
 
-    assert f.exists
-    assert f.user == 'root'
-    assert f.group == 'root'
+    assert dotfiles_directory.exists
+    assert dotfiles_directory.is_directory
