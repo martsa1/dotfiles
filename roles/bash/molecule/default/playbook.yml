@@ -3,3 +3,4 @@
   hosts: all
   roles:
     - role: bash
+      user: sam

@@ -19,13 +19,19 @@
   register: bash_it_changed
 
 # - name: Check if bashit is installed
-#  shell: 'bash -lc "declare -F bash-it"'
-#  register: is_bashit_installed_or_on_path
-#  ignore_errors: True
+#   shell: "source /home/{{user}}/.bashrc && declare -F bash-it"
+#   args:
+#     executable: "/bin/bash"
+#   register: is_bashit_installed_or_on_path
+#   ignore_errors: "true"
+#   tags:
+#     - skip_ansible_lint
 
 # - name: debug is bash installed RC
-#  debug:
-#    msg: "{{is_bashit_installed_or_on_path}}"
+#   debug:
+#     msg: "{{is_bashit_installed_or_on_path}}"
+#   tags:
+#     - skip_ansible_lint
 
 # - name: install bashit
 #  command: "{{item[1]}}"
@@ -36,17 +42,20 @@
 #  when: is_bashit_installed_or_on_path.rc != 0
 
 - name: update bashit
-  command: 'bash -lc "bash-it update"'
+  shell: "source /home/{{user}}/.bashrc && bash-it update"
   args:
     chdir: "{{personal_code_base_dir}}/bash_it/"
+    executable: "/bin/bash"
   when: bash_it_changed
+  tags:
+    - skip_ansible_lint
 
 - name: Get rid of stupid T function (Interferes with timetrap)
   replace:
     path: "{{bashit_repo}}/plugins/available/base.plugin.bash"
     regexp: 'function t \(\)'
     replace: "function someshitillneveruse ()"
-    # when: bash_it_changed
+  when: bash_it_changed
 
 - name: Setup alias directories (Configures Bash-it functionality)
   file:
