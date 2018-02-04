@@ -1,5 +1,6 @@
-.molecule
+*.log
 *.pyc
+.molecule
 .pytest_cache
 .vagrant
 __pycache__
