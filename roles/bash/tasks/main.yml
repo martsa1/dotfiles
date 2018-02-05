@@ -6,6 +6,9 @@
     src: "{{dotfiles_base_dir}}/bash/bashrc"
     dest: "/home/{{user}}/.bashrc"
     state: link
+    # TODO: Sort out a user role before enabling these!!
+    #owner: "{{user}}"
+    #group: "{{user}}"
 
 - name: Clone bashit repo
   git:
