@@ -21,6 +21,6 @@ def test_bashit_installed(host):
     ''' Checks that the bash-it command is available for use.
     '''
     bash_it_present = host.run(
-        "'source /home/sam/.bashrc && command -v bash-it'"
+        "bash -c 'source /home/sam/.bashrc && command -v bash-it'"
     )
     assert bash_it_present.rc == 0
