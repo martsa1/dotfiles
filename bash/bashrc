@@ -50,3 +50,8 @@ export SCM_CHECK=true
 
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
+
+# Bash-it includes some stupid T function, which interferes with the timetrap
+# alias I use all the time, so we unset it here, allowing us to use the
+# timetrap alias as we expect.
+unset t
