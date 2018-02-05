@@ -4,5 +4,5 @@
 .pytest_cache
 .vagrant
 __pycache__
-playbook.retry
+*.retry
 tags
