@@ -16,9 +16,10 @@ export PATH=$PATH:$GOPATH/bin
 
 # Setup the powerline daemon for use with tmux etc.
 powerline-daemon -q
+PYTHON_VERSION=$(python3 --version | sed -n 's/.*\(3\..\).*/\1/p')
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
-powerline_bash_script=~/.local/venvs/powerline-status/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
+powerline_bash_script=~/.local/venvs/powerline-status/lib/python${PYTHON_VERSION}/site-packages/powerline/bindings/bash/powerline.sh
 chmod +x  $powerline_bash_script
  $powerline_bash_script
 
