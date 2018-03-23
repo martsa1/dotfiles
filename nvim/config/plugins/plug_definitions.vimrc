@@ -6,6 +6,9 @@ Plug 'ap/vim-css-color'
 " Give git hints on current buffer line: Add, Modify, Remove within NerdTree
 Plug 'airblade/vim-gitgutter'
 
+" Vim TOML Syntax Highlighting
+Plug 'cespare/vim-toml'
+
 " Old jedi vim not using deoplete -- for some reason need both deoplete-jedi
 " and this
 Plug 'davidhalter/jedi-vim'
