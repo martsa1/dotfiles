@@ -29,6 +29,9 @@ Plug 'kien/ctrlp.vim'
 " Lots of language file type highlighting
 Plug 'hoelzro/vim-polyglot'
 
+" Support for the Jinja Templating language
+Plug 'lepture/vim-jinja'
+
 " Most comprehensive tagging plugin for vim?
 Plug 'ludovicchabant/vim-gutentags'
 
