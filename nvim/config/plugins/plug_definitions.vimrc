@@ -16,6 +16,10 @@ Plug 'davidhalter/jedi-vim'
 " Dracular theme is a nice Dark Theme
 Plug 'dracula/vim'
 
+
+" Markdown Previewer
+Plug 'JamshedVesuna/vim-markdown-preview'
+
 " Fuzzy file finder
 Plug 'kien/ctrlp.vim'
 
