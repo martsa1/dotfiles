@@ -21,3 +21,18 @@ if has("termguicolors")
   set termguicolors
 endif
 
+" ################################################
+" ########## General Appearance settings #########
+" ################################################
+
+" Setup the status/command line
+set cmdheight=1
+set display+=lastline
+
+" general config
+set laststatus=2 " always show status line
+set showtabline=2 " always show tabline
+set noshowmode " hide default mode text (e.g. INSERT) as airline already displays it
+
+" Use 256 colours (Use this setting only if your terminal supports 256 colours)
+set t_Co=256
