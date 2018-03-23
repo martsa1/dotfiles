@@ -16,6 +16,9 @@ Plug 'davidhalter/jedi-vim'
 " Dracular theme is a nice Dark Theme
 Plug 'dracula/vim'
 
+" Vim Test harness integration - Supports standard test harnesses for multiple
+" languages etc.
+Plug 'janko-m/vim-test'
 
 " Markdown Previewer
 Plug 'JamshedVesuna/vim-markdown-preview'
