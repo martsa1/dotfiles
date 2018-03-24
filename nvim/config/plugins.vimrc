@@ -47,4 +47,12 @@ nnoremap <Leader>tt :TagbarToggle<CR><C-w><C-w>
 "let g:jedi#rename_command = "<leader>r"
 "let g:jedi#show_call_signatures = 2
 
+" deoplete-go
 
+let g:deoplete#sources#go#gocode_binary = $HOME . '/go/bin/gocode'
+
+" deoplete-rust
+
+let g:deoplete#sources#rust#racer_binary = $HOME . '/.cargo/bin/racer'
+
+let g:deoplete#sources#rust#rust_source_path = $HOME . '/bare_sources/rust/src'
