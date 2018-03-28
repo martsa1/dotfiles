@@ -92,4 +92,15 @@ Plug 'zchee/deoplete-jedi'
 "Plug 'ternjs/tern_for_vim'
 "Plug 'pangloss/vim-javascript'
 
+" ------------------ Go Lang ------------------
+
+" Go auto completion client
+Plug 'zchee/deoplete-go', { 'do': 'make'}
+
+" ------------------ Rust Lang ------------------
+
+" Rust auto completion client
+Plug 'sebastianmarkow/deoplete-rust'
+
+
 call plug#end()
