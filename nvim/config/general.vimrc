@@ -93,7 +93,7 @@ set ttimeoutlen=100
 augroup filetype_html
   autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 augroup END
-  "
+
 " Unix as standard file type
 set ffs=unix,dos,mac
 
@@ -125,6 +125,7 @@ endif
 if &tabpagemax < 50
   set tabpagemax=50
 endif
+
 " viminfo is deprecated, this should use shada instead
 if !empty(&viminfo)
   set viminfo^=!

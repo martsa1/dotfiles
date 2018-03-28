@@ -1,12 +1,3 @@
-" All status line configuration goes here
-
-set cmdheight=1
-set display+=lastline
-
-" general config
-set laststatus=2 " always show status line
-set showtabline=2 " always show tabline
-set noshowmode " hide default mode text (e.g. INSERT) as airline already displays it
 
 
 " powerline config
@@ -16,8 +7,6 @@ set noshowmode " hide default mode text (e.g. INSERT) as airline already display
 "set rtp+=/usr/local/src/pyenvs/py3/powerline_status/lib/python3.5/site-packages/powerline/bindings/vim/
 "set rtp+=/usr/local/src/pyenvs/py2/powerline_status/lib/python2.7/site-packages/powerline/bindings/vim/
 "set rtp+=/home/mhahe/.local/lib/python2.7/site-packages/powerline/bindings/vim/
-" Use 256 colours (Use this setting only if your terminal supports 256 colours)
-set t_Co=256
 
 " airline config
 "let g:airline_powerline_fonts=1

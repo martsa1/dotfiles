@@ -6,6 +6,9 @@ Plug 'ap/vim-css-color'
 " Give git hints on current buffer line: Add, Modify, Remove within NerdTree
 Plug 'airblade/vim-gitgutter'
 
+" Vim TOML Syntax Highlighting
+Plug 'cespare/vim-toml'
+
 " Old jedi vim not using deoplete -- for some reason need both deoplete-jedi
 " and this
 Plug 'davidhalter/jedi-vim'
@@ -13,11 +16,21 @@ Plug 'davidhalter/jedi-vim'
 " Dracular theme is a nice Dark Theme
 Plug 'dracula/vim'
 
+" Vim Test harness integration - Supports standard test harnesses for multiple
+" languages etc.
+Plug 'janko-m/vim-test'
+
+" Markdown Previewer
+Plug 'JamshedVesuna/vim-markdown-preview'
+
 " Fuzzy file finder
 Plug 'kien/ctrlp.vim'
 
 " Lots of language file type highlighting
 Plug 'hoelzro/vim-polyglot'
+
+" Support for the Jinja Templating language
+Plug 'lepture/vim-jinja'
 
 " Most comprehensive tagging plugin for vim?
 Plug 'ludovicchabant/vim-gutentags'

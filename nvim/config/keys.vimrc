@@ -1,7 +1,6 @@
-" map Leader
-let mapleader = ","
-" keep backward f search, remapping it to ,;
-nnoremap <Leader>; ,
+" ################################################
+" ############### General key maps #'#############
+" ################################################
 
 " Disable Ex-mode because it's a pile of shit
 nnoremap Q <nop>
