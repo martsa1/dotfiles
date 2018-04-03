@@ -40,7 +40,7 @@ highlight = ${self.color3}
 ;secondary = #e60053
 ;alert = #bd2c40
 
-[bar/left]
+[bar/secondary]
 monitor = ${env:MONITOR:}
 width = 100%
 height = 27
@@ -84,8 +84,8 @@ scroll-down = i3wm-wsprev
 cursor-click = pointer
 cursor-scroll = ns-resize
 
-[bar/right]
-inherit= bar/left
+[bar/primary]
+inherit= bar/secondary
 
 tray-position = right
 tray-padding = 2
