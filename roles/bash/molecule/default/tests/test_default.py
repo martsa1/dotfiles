@@ -6,6 +6,14 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
+def test_profile(host):
+    ''' Checks that the .profile file exists and is owned by the correct user.
+    '''
+    profile_file = host.file('/home/sam/.profile')
+
+    assert profile_file.exists
+
+
 def test_bashrc(host):
     ''' Checks that the bashrc file exists and is owned by the correct user.
     '''

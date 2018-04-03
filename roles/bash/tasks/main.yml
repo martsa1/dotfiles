@@ -10,6 +10,12 @@
     #owner: "{{user}}"
     #group: "{{user}}"
 
+- name: Symlink .profile
+  file:
+    src: "{{dotfiles_base_dir}}/xprofile"
+    dest: "/home/{{user}}/.profile"
+    state: link
+
 - name: Clone bashit repo
   git:
     repo: "https://github.com/Bash-it/bash-it.git"
