@@ -29,8 +29,7 @@ def kill_polybar():
         )
 
     except CalledProcessError:
-        LOG.error('Attempt to kill polybar failed.')
-        sys.exit(1)
+        LOG.error('No Polybar instances found')
 
 
 def get_monitor_info():
