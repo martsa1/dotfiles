@@ -43,3 +43,6 @@ stty stop ^J
 
 # Make Whalebrew work with local bin, rather than a global one which requres root
 export WHALEBREW_INSTALL_PATH=/home/sam/bin
+
+# Put a timestamp into my bash history
+export HISTTIMEFORMAT="%d/%m/%y %T "
