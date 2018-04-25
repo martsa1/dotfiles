@@ -1,0 +1,24 @@
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored
+zstyle ':completion:*' max-errors 8
+zstyle :compinstall filename '/home/sam/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=10000
+setopt appendhistory autocd extendedglob notify
+bindkey -v
+# End of lines configured by zsh-newuser-install
+
+# Allow vim-like autocompletion of history
+bindkey "^P" history-beginning-search-backward
+bindkey "^N" history-beginning-search-forward
+
+
+# Enable Powerline shell
+. /home/sam/.local/venvs/powerline-status/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
