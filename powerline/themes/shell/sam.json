@@ -36,10 +36,6 @@
             "width": "auto"
           },
           {
-            "function": "powerline.segments.shell.last_pipe_status",
-            "priority": 10
-          },
-          {
             "function": "powerline.segments.common.vcs.stash",
             "priority": 50
           },
