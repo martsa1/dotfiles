@@ -19,6 +19,8 @@ bindkey -v
 bindkey "^P" history-beginning-search-backward
 bindkey "^N" history-beginning-search-forward
 
+# Source aliases
+source ~/code/personal/dotfiles/zsh/aliases.zsh
 
 # Enable Powerline shell
 . /home/sam/.local/venvs/powerline-status/lib/python3.5/site-packages/powerline/bindings/zsh/powerline.zsh
