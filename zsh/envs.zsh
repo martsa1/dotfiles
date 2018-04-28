@@ -31,7 +31,13 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 #stty stop ^J
 
 # Make Whalebrew work with local bin, rather than a global one which requres root
-export WHALEBREW_INSTALL_PATH=/home/sam/bin
+export WHALEBREW_INSTALL_PATH="$HOME/bin"
 
 # Put a timestamp into my bash history
 export HISTTIMEFORMAT="%d/%m/%y %T "
+
+# Put ZPLUG under ~/.config/zplug
+export ZPLUG_HOME="$HOME/.config/zplug"
+
+# Use ~/code/personal/dotfiles/zsh/zplug.zsh for plugin definitions etc.
+export ZPLUG_LOADFILE="$HOME/code/personal/dotfiles/zsh/zplug.zsh"

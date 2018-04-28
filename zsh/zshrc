@@ -19,8 +19,25 @@ bindkey -v
 bindkey "^P" history-beginning-search-backward
 bindkey "^N" history-beginning-search-forward
 
+
 # Source aliases
 source ~/code/personal/dotfiles/zsh/aliases.zsh
 
 # Source Environment settings
 source ~/code/personal/dotfiles/zsh/envs.zsh
+
+# Begin loading of zplug plugins etc.
+source ~/.config/zplug/init.zsh
+#
+# Source ZPlug definitions
+source ~/code/personal/dotfiles/zsh/zplug.zsh
+
+# zplug check returns true if all packages are installed
+# Therefore, when it returns false, run zplug install
+if ! zplug check; then
+    zplug install
+fi
+
+# MUST BE AT THE BOTTOM!!
+# Load all plugins
+zplug load
