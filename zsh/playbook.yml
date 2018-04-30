@@ -8,7 +8,7 @@
 
   tasks:
       - name: Install ZSH
-        become: true
+        become: yes
         apt:
           name: "{{item}}"
           state: "present"
@@ -43,4 +43,9 @@
         get_url:
           url: "https://github.com/docker/cli/raw/master/contrib/completion/zsh/_docker"
           dest: "/home/{{user}}/.zsh/completion/_docker"
+
+      - name: Set default shell to ZSH for the target user
+        shell: "chsh -s $(which zsh) {{user}}"
+        become: yes
+
 
