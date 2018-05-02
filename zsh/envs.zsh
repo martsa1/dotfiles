@@ -24,11 +24,14 @@ source  $powerline_script
 #Python VirtualEnv Settings
 export WORKON_HOME=~/.python
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-. ~/.local/bin/virtualenvwrapper.sh
+source ~/.local/bin/virtualenvwrapper.sh
 
 # Rebind the terminal stop keybind so that we can use ^s to search forward
 # in history
 #stty stop ^J
+
+# Start Autojump - quicker directory navigation
+source /usr/share/autojump/autojump.sh
 
 # Make Whalebrew work with local bin, rather than a global one which requres root
 export WHALEBREW_INSTALL_PATH="$HOME/bin"
