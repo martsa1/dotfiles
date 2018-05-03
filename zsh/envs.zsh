@@ -10,6 +10,9 @@ export PATH=$PATH:~/.node/bin
 # Ensure local python packages are on path
 export PATH=$PATH:~/.local/bin
 
+# Ensure various locally installed things are on the path
+export PATH=$PATH:~/bin/
+
 #Set the Go Path to ~/Coding/go
 export GOPATH=$HOME/Coding/go
 export PATH=$PATH:$GOPATH/bin
