@@ -38,11 +38,17 @@ Plug 'ludovicchabant/vim-gutentags'
 " source tree listing/menu containing definitions
 Plug 'majutsushi/tagbar'
 
+" JSX plugin
+Plug 'mxw/vim-jsx'
+
 " Adds support for using * and # keys with visual selection searching
 Plug 'nelstrom/vim-visual-star-search'
 
 "Async builder for Neovim
 Plug 'neomake/neomake'
+
+" Javascript language support
+Plug 'pangloss/vim-javascript'
 
 " Swoop provides multi-buffer find and replace
 Plug 'pelodelfuego/vim-swoop'
@@ -90,7 +96,6 @@ Plug 'zchee/deoplete-jedi'
 " Maybe checkout ack.vim for source code searching.
 "Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' } " needs sudo?
 "Plug 'ternjs/tern_for_vim'
-"Plug 'pangloss/vim-javascript'
 
 " ------------------ Go Lang ------------------
 
