@@ -29,6 +29,9 @@ source ~/code/personal/dotfiles/zsh/envs.zsh
 # Source Extra Key bindings
 source ~/code/personal/dotfiles/zsh/keys.zsh
 
+# Source SSH-Agent Management tooling
+source ~/code/personal/dotfiles/zsh/ssh_agent.zsh
+
 # Begin loading of zplug plugins etc.
 source ~/.config/zplug/init.zsh
 #
