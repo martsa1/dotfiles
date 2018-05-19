@@ -5,6 +5,6 @@
     name: "{{item}}"
     state: present
     cache_valid_time: 600
-  become: yes
+  become: true
   with_items:
     - "git"
