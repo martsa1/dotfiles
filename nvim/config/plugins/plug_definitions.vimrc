@@ -11,7 +11,9 @@ Plug 'cespare/vim-toml'
 
 " Old jedi vim not using deoplete -- for some reason need both deoplete-jedi
 " and this
-Plug 'davidhalter/jedi-vim'
+" This seems to complete with deoplete-jedi and causes some weird behavior
+" Completion still seems to work without this plugin enabled
+"Plug 'davidhalter/jedi-vim'
 
 " Dracular theme is a nice Dark Theme
 Plug 'dracula/vim'
