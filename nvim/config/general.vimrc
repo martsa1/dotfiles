@@ -140,7 +140,8 @@ augroup filetype_html
   autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown :syntax match markdownIgnore "_"
 augroup END
 
-set completeopt=longest,menuone,preview
+set completeopt=longest,menuone
+set completeopt-=preview
 
 "Lint files with neomake
 " When writing a buffer, reading a bufer, and on normal mode changes (after 750ms).

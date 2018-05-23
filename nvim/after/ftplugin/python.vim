@@ -12,9 +12,9 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 " Disable docstring window popup on code completion
-augroup filetype_python
-  autocmd FileType python setlocal completeopt-=preview
-augroup End
+"augroup filetype_python
+"  autocmd FileType python setlocal completeopt-=preview
+"augroup End
 
 set colorcolumn=100
 highlight ColorColumn ctermbg=0 guibg=0
