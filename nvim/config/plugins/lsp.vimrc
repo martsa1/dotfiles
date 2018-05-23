@@ -3,16 +3,6 @@ let g:LanguageClient_serverCommands = {}
 
 let g:LanguageClient_serverCommands.python = ['pyls']
 
-" Map renaming in python
-autocmd FileType python nnoremap <buffer>
-  \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
-" <leader>ld to go to definition
-autocmd FileType python nnoremap <buffer>
-  \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
-" <leader>lh for type info under cursor
-autocmd FileType python nnoremap <buffer>
-  \ <leader>lh :call LanguageClient_textDocument_hover()<cr>
-
 " Minimal LSP configuration for JavaScript
 "if executable('javascript-typescript-stdio')
 "  let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-stdio']
@@ -23,12 +13,18 @@ autocmd FileType python nnoremap <buffer>
 "  :cq
 "endif
 
-" <leader>ld to go to definition
-autocmd FileType javascript nnoremap <buffer>
+" Go to definition under cursor
+autocmd FileType javascript,python nnoremap <buffer>
   \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
-" <leader>lh for type info under cursor
-autocmd FileType javascript nnoremap <buffer>
+" Show docs for symbol under cursor
+autocmd FileType javascript,python nnoremap <buffer>
   \ <leader>lh :call LanguageClient_textDocument_hover()<cr>
-" <leader>lr to rename variable under cursor
-autocmd FileType javascript nnoremap <buffer>
+" Rename variable under cursor
+autocmd FileType javascript,python nnoremap <buffer>
   \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
+" List all symbols within the buffer
+autocmd FileType javascript,python nnoremap <buffer>
+  \ <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
+" List all symbols under the cursor
+autocmd FileType javascript,python nnoremap <buffer>
+  \ <leader>lR :call LanguageClient_textDocument_references()<cr>

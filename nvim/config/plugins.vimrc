@@ -13,18 +13,16 @@ augroup end
 
 
 
-" deoplete
-" This appears to be needed on, otherwise nothing works
+" deoplete options
 let g:deoplete#enable_at_startup = 1
-" Sane version of complete_method
-let g:deoplete#complete_method = "complete"
-" This setting seems to screw with ctrl+space completion
-"let g:deoplete#complete_method = "omnifunc"
-let g:deoplete#sources#jedi#debug_server = 1
-" Not about this one.
-let g:deoplete#sources#jedi#show_docstring = 0
 call deoplete#custom#source('jedi', 'debug_enabled', 1)
-"call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
+call deoplete#enable_logging('DEBUG', '/tmp/deoplete.log')
+" Sane version of complete_method
+"let g:deoplete#complete_method = "complete"
+
+" deoplete-jedi options
+"let g:deoplete#sources#jedi#show_docstring = 0
+"let g:deoplete#sources#jedi#debug_server = 1
 
 " Tagbar
 nnoremap <Leader>tt :TagbarToggle<CR><C-w><C-w>
@@ -38,12 +36,18 @@ nnoremap <Leader>tt :TagbarToggle<CR><C-w><C-w>
 "let g:jedi#rename_command = "<leader>r"
 "let g:jedi#show_call_signatures = 2
 
-" deoplete-go
+" NOTE: deoplete#custom#source seems to be a replacement for
+" deoplete#sources#LANGUAGE = "completion server" but leaving as is for now
+" and will come back to investigate
+" the later seems to be dropped in change notes, but oddly things are still working
 
+" deoplete python
+let g:deoplete#sources#python = "LanguageClient"
+let g:deoplete#sources#python3 = "LanguageClient"
+
+" deoplete-go
 let g:deoplete#sources#go#gocode_binary = $HOME . '/go/bin/gocode'
 
 " deoplete-rust
-
 let g:deoplete#sources#rust#racer_binary = $HOME . '/.cargo/bin/racer'
-
 let g:deoplete#sources#rust#rust_source_path = $HOME . '/bare_sources/rust/src'

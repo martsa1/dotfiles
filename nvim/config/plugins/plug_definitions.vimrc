@@ -92,7 +92,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
 
 " Python project used by deoplete for code completion
-Plug 'zchee/deoplete-jedi'
+"Plug 'zchee/deoplete-jedi'
 
 "" JS stuff
 " Maybe checkout ack.vim for source code searching.
@@ -109,5 +109,14 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 " Rust auto completion client
 Plug 'sebastianmarkow/deoplete-rust'
 
+" Language Server Protocol
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+" (Optional) but needed if LanguageServer wants to display multiple
+" completion candidates
+Plug 'junegunn/fzf', {'do': './install --all'}
 
 call plug#end()
