@@ -1,5 +1,6 @@
 # Editor Settings
 export EDITOR=nvim
+export SHELL=$(which zsh)
 #Sets nvim's default colourscheme to Dracula
 export VAMPIRE=1
 export NVIM_CONFIG_BASE="${HOME}/code/personal/nvim"
@@ -47,3 +48,6 @@ export ZPLUG_HOME="$HOME/.config/zplug"
 
 # Use ~/code/personal/dotfiles/zsh/zplug.zsh for plugin definitions etc.
 export ZPLUG_LOADFILE="$HOME/code/personal/dotfiles/zsh/zplug.zsh"
+
+# Pull in FZF for shell usage.
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
