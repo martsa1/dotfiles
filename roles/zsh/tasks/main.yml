@@ -1,0 +1,56 @@
+---
+# Tasks needed to setup ZSH
+- name: Install ZSH
+  become: true
+  apt:
+    name: "{{item}}"
+    state: "present"
+    cache_valid_time: 600
+  with_items:
+    - "zsh"
+
+- name: Symlink ZSH configs
+  file:
+    src: "{{dotfiles_base_dir}}/zsh/zshrc"
+    dest: "/home/{{user}}/.zshrc"
+    state: link
+  become: true
+  become_user: "{{user}}"
+
+- name: Ensure user's .config exists
+  file:
+    path: "/home/{{user}}/.config"
+    state: directory
+  become: true
+  become_user: "{{user}}"
+
+- name: Ensure users zsh completion directory exists
+  file:
+    path: "/home/{{user}}/.zsh/completion"
+    state: directory
+  become: true
+  become_user: "{{user}}"
+
+- name: pull zplug installer
+  git:
+    repo: "https://github.com/zplug/zplug"
+    dest: "/home/{{user}}/.config/zplug"
+    version: "2.4.2"
+    clone: true
+    update: true
+  become: true
+  become_user: "{{user}}"
+
+- name: pull docker completion file for ZSH
+  get_url:
+    url: "https://github.com/docker/cli/raw/master/contrib/completion/zsh/_docker"
+    dest: "/home/{{user}}/.zsh/completion/_docker"
+  become: true
+  become_user: "{{user}}"
+
+#- name: Set default shell to ZSH for the target user
+#  shell: "chsh -s $(which zsh) {{user}}"
+#  become: true
+#  become_user: "{{user}}"
+#  tags:
+#    - skip_ansible_lint
