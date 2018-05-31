@@ -102,14 +102,16 @@ set showmode
 "" start interactive EasyAlign for a motion/text object (e.g. gaip)
 "nnoremap ga <Plug>(EasyAlign)
 
-" Preview window - mostly used with linters and neomake
-" Apparently preview window unique per buffer
-nnoremap <Leader>po :lopen<CR>
-nnoremap <Leader>pc :lclose<CR>
-nnoremap <Leader>pl :ll<CR>
-nnoremap <Leader>pn :lnext<CR>
-nnoremap <Leader>pp :lprev<CR>
-nnoremap <Leader>pw :lexpr []<CR> " Clear location list (w for wipe)
+" Location List - mostly used with linters and neomake
+nnoremap <Leader>lo :lopen<CR>
+nnoremap <Leader>lc :lclose<CR>
+nnoremap <Leader>ll :ll<CR>
+nnoremap <Leader>ln :lnext<CR>
+nnoremap <Leader>lp :lprev<CR>
+nnoremap <Leader>lw :lexpr []<CR> " Clear location list (w for wipe)
+
+" Preview Window - mostly used with linters and neomake
+nnoremap <Leader>pc :pclose<CR>
 
 " Quick fix window is apparently vim wide (shared with all buffers).
 " Mostly used for external commands such as grep or internal like
