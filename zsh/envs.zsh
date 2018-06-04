@@ -14,6 +14,9 @@ export PATH=$PATH:~/.local/bin
 # Ensure various locally installed things are on the path
 export PATH=$PATH:~/bin/
 
+# Ensure Nix managed tooling is on PATH
+export PATH=$PATH:~/.nix-profile/bin/
+
 #Set the Go Path to ~/Coding/go
 export GOPATH=$HOME/Coding/go
 export PATH=$PATH:$GOPATH/bin

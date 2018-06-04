@@ -15,6 +15,10 @@ setopt appendhistory autocd extendedglob notify
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
+# Allow ZSH to treat # characters like comments when used on the command line.
+# For some reason, this isn't default behaviour.
+setopt interactivecomments
+
 # Allow vim-like autocompletion of history
 bindkey "^P" history-beginning-search-backward
 bindkey "^N" history-beginning-search-forward
@@ -47,3 +51,5 @@ fi
 # MUST BE AT THE BOTTOM!!
 # Load all plugins
 zplug load
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
