@@ -1,0 +1,69 @@
+---
+
+# Play to install and configure Tmux
+- name: Install required apt packages
+  become: true
+  apt:
+    name: "{{item}}"
+    state: "present"
+    cache_valid_time: 600
+  with_items:
+    - "build-essential"
+    - "cmake"
+    - "git"
+    - "libevent-2.0-5"
+    - "libevent-dev"
+    - "libncurses5-dev"
+    - "ncurses-base"
+    - "pkg-config"
+
+- name: Symlink Tmux Config into place
+  file:
+    src: "{{dotfiles_base_dir}}/tmux/tmux.conf"
+    dest: "/home/{{user}}/.tmux.conf"
+    state: link
+    force: "yes"
+
+- name: Pull Tmux Release
+  get_url:
+    url: "https://github.com/tmux/tmux/releases/download/{{tmux_version}}/tmux-{{tmux_version}}.tar.gz"
+    dest: "/home/{{user}}/Downloads/"
+
+- name: Unpack Tmux
+  unarchive:
+    src: "/home/{{user}}/Downloads/tmux-{{tmux_version}}.tar.gz"
+    dest: "{{personal_code_base_dir}}/"
+  warn: "no"
+
+- name: Build Tmux
+  command: "{{item}}"
+  args:
+    chdir: "{{personal_code_base_dir}}/tmux-{{tmux_version}}/"
+  with_items:
+    - "./configure"
+    - "make"
+  warn: "no"
+
+- name: Install Tmux
+  command: make install
+  args:
+    chdir: "{{personal_code_base_dir}}/tmux-{{tmux_version}}/"
+  become: true
+  warn: "no"
+
+- name: Pull in Tmux Plugin Manager
+  git:
+    repo: "https://github.com/tmux-plugins/tpm"
+    dest: "/home/{{user}}/.tmux/plugins/tpm"
+    version: master
+    accept_hostkey: "yes"
+    clone: "yes"
+    update: "yes"
+  # register: tpm_installed
+
+- name: Install & Update Tmux Plugins
+  command: "{{item}}"
+  with_items:
+    - "/home/sam/.tmux/plugins/tpm/bin/install_plugins"
+    - "/home/sam/.tmux/plugins/tpm/bin/update_plugins all"
+  # when: tpm_installed.changed
