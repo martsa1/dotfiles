@@ -5,6 +5,7 @@ zstyle ':completion:*' max-errors 8
 zstyle :compinstall filename '/home/sam/.zshrc'
 
 autoload -Uz compinit
+fpath+=~/.config/zsh_completions
 compinit
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install

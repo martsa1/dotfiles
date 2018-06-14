@@ -1,0 +1,105 @@
+# vim: se filetype=yaml.ansible
+---
+
+- hosts: all
+  vars_files:
+    - vars.yml
+
+  tasks:
+    #########################################
+    # Ensure base dependencies are present.
+    #########################################
+    - name: Install required apt packages
+      become: true
+      apt:
+        name: "{{item}}"
+        state: "present"
+        cache_valid_time: 600
+      with_items:
+        - "cmake"
+        - "gzip"
+        - "libfontconfig1-dev"
+        - "libfreetype6-dev"
+        - "xclip"
+
+
+    ##############################
+    # Setup rustup & rust
+    ##############################
+    - name: Download rustup.rs
+      get_url:
+        url: "https://sh.rustup.rs"
+        dest: "/tmp/rustup_setup"
+        mode: "ug=rwx,o=r"
+
+    - name: Install rustup
+      command: "sh /tmp/rustup_setup -y --no-modify-path"
+
+    ##################
+    # Build Alacritty
+    ##################
+    - name: Clone Alacritty Repo
+      git:
+        repo: https://github.com/jwilm/alacritty.git
+        dest: "{{repo_base_dir}}"
+        version: master
+
+    #- name: Cargo install alacritty
+    #  command: "{{item}}"
+    #  args:
+    #    chdir: "{{repo_base_dir}}"
+    #  with_items:
+    #    - "cargo install alacritty"
+
+    - name: Set rustup to use stable and ensure its up to date
+      command: "{{item}}"
+      args:
+        chdir: "{{repo_base_dir}}"
+      with_items:
+        - "rustup override set stable"
+        - "rustup update stable"
+
+    - name: "Build Alacritty"
+      command: "{{item}}"
+      args:
+        chdir: "{{repo_base_dir}}"
+      with_items:
+        - "cargo build --release"
+        - "tic -x -o target/release/terminfo alacritty.info"
+
+    - name: "Install Alacritty"
+      file:
+        src: "{{repo_base_dir}}/target/release/alacritty"
+        dest: "{{user_bin}}/alacritty"
+        state: link
+
+    - name: "Symlink Alacritty TermInfo"
+      file:
+        src: "{{repo_base_dir}}/target/release/terminfo/a/{{item}}"
+        dest: "/usr/share/terminfo/a/{{item}}"
+        state: link
+      become: true
+      with_items:
+        - "alacritty"
+        - "alacritty-256color"
+
+    - name: Install alacritty man pages
+      command: "{{item}}"
+      args:
+        chdir: "{{repo_base_dir}}"
+      become: true
+      with_items:
+        - "gzip -k --force alacritty.man"
+        - "mv alacritty.man.gz /usr/local/share/man/man1/alacritty.1.gz"
+
+    - name: Ensure alacritty config folder exists
+      file:
+        path: "/home/{{user}}/.config/alacritty"
+        state: directory
+
+    - name: "Symlink Alacritty config into place"
+      file:
+        src: "{{dotfiles_base_dir}}/alacritty/alacritty.yml"
+        dest: "/home/{{user}}/.config/alacritty/alacritty.yml"
+        state: link
+

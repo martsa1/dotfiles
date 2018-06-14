@@ -21,6 +21,9 @@ export PATH=$PATH:~/.nix-profile/bin/
 export GOPATH=$HOME/Coding/go
 export PATH=$PATH:$GOPATH/bin
 
+# Put Rust on the path
+export PATH=$PATH:$HOME/.cargo/bin
+
 # Setup the powerline daemon for use with tmux etc.
 powerline-daemon -q
 PYTHON_VERSION=$(python3 --version | sed -n 's/.*\(3\..\).*/\1/p')
