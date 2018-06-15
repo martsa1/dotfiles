@@ -56,15 +56,15 @@
       args:
         chdir: "{{repo_base_dir}}"
       with_items:
-        - "rustup override set stable"
-        - "rustup update stable"
+        - "/home/{{user}}/.cargo/bin/rustup override set stable"
+        - "/home/{{user}}/.cargo/bin/rustup update stable"
 
     - name: "Build Alacritty"
       command: "{{item}}"
       args:
         chdir: "{{repo_base_dir}}"
       with_items:
-        - "cargo build --release"
+        - "/home/sam/.cargo/bin/cargo build --release"
         - "tic -x -o target/release/terminfo alacritty.info"
 
     - name: "Install Alacritty"
