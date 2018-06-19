@@ -82,6 +82,10 @@ Plug 'tpope/vim-surround'
 " powerline is fucked up, use vim-airline instead
 Plug 'vim-airline/vim-airline'
 
+" Close all buffers save the current with :BufOnly - add a number to close all
+" save that number.
+Plug 'vim-scripts/BufOnly.vim'
+
 " Solarized Theme is one of the most popular colourschemes
 Plug 'vim-scripts/Solarized'
 
