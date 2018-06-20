@@ -25,6 +25,9 @@ Plug 'janko-m/vim-test'
 " Markdown Previewer
 Plug 'JamshedVesuna/vim-markdown-preview'
 
+" Vim RG integration
+Plug 'jremmen/vim-ripgrep'
+
 " Fuzzy file finder
 Plug 'kien/ctrlp.vim'
 
