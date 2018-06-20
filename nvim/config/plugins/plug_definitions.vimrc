@@ -40,6 +40,9 @@ Plug 'lepture/vim-jinja'
 " Most comprehensive tagging plugin for vim?
 Plug 'ludovicchabant/vim-gutentags'
 
+" Highlight yank regions
+Plug 'machakann/vim-highlightedyank'
+
 " source tree listing/menu containing definitions
 Plug 'majutsushi/tagbar'
 
