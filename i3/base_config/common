@@ -64,7 +64,6 @@ set $mod Mod4
 floating_modifier $mod
 
 # start a terminal
-#bindsym $mod+Return exec kitty
 bindsym $mod+Return exec alacritty
 
 # kill focused window
@@ -265,7 +264,7 @@ focus_on_window_activation urgent
 # Default Workspaces for various applications
 assign [class="[Ss]potify"] $workspace10
 assign [class="Google-chrome"] $workspace3
-assign [title="kitty"] $workspace1
+assign [title="alacritty"] $workspace1
 assign [class="skypeforlinux"] $workspace9
 assign [class="discord"] $workspace9
 
@@ -276,7 +275,7 @@ exec --no-startup-id compton -f
 exec --no-startup-id synergy
 exec google-chrome
 exec spotify
-exec kitty
+exec alacritty
 exec --no-startup-id shutter --min_at_startup
 
 # Enable numlock by default
