@@ -1,0 +1,12 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: dotfiles
+      user: example
+
+    #- role: python
+    #  user: example
+
+    - role: neovim
+      user: example
