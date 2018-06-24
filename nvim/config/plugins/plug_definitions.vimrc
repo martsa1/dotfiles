@@ -58,6 +58,9 @@ Plug 'neomake/neomake'
 " Javascript language support
 Plug 'pangloss/vim-javascript'
 
+" Ansible File support in vim
+Plug 'pearofducks/ansible-vim'
+
 " Swoop provides multi-buffer find and replace
 Plug 'pelodelfuego/vim-swoop'
 
