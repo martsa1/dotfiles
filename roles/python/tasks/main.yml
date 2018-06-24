@@ -1,0 +1,33 @@
+---
+# Install and manage the various base python packages.
+
+- include_tasks: "packages.{{ansible_distribution|lower}}.yml"
+
+- name: Pull in Pipsi
+  get_url:
+    url: "https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py"
+    dest: "/tmp/get-pipsi.py"
+  become: true
+  become_user: "{{user}}"
+
+- name: Install pipsi
+  command: "python3 /tmp/get-pipsi.py"
+  tags:
+    - skip_ansible_lint
+  become: true
+  become_user: "{{user}}"
+
+- name: Install various python packages
+  command: "pipsi install {{item[0]}}"
+  args:
+    creates: "{{python_bin_dir}}/{{item[1]}}"
+  with_items:
+    - [["glances", "glances"]]
+    - [["pipenv", "pipenv"]]
+    - [["powerline-status", "powerline"]]
+  become: true
+  become_user: "{{user}}"
+  environment:
+    LC_ALL: "C.UTF-8"
+    LANG: "C.UTF-8"
+    PATH: "/home/{{user}}/.local/bin:{{ansible_env.PATH}}"
