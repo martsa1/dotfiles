@@ -25,6 +25,9 @@ Plug 'janko-m/vim-test'
 " Markdown Previewer
 Plug 'JamshedVesuna/vim-markdown-preview'
 
+" Vim RG integration
+Plug 'jremmen/vim-ripgrep'
+
 " Fuzzy file finder
 Plug 'kien/ctrlp.vim'
 
@@ -36,6 +39,9 @@ Plug 'lepture/vim-jinja'
 
 " Most comprehensive tagging plugin for vim?
 Plug 'ludovicchabant/vim-gutentags'
+
+" Highlight yank regions
+Plug 'machakann/vim-highlightedyank'
 
 " source tree listing/menu containing definitions
 Plug 'majutsushi/tagbar'
@@ -51,6 +57,9 @@ Plug 'neomake/neomake'
 
 " Javascript language support
 Plug 'pangloss/vim-javascript'
+
+" Ansible File support in vim
+Plug 'pearofducks/ansible-vim'
 
 " Swoop provides multi-buffer find and replace
 Plug 'pelodelfuego/vim-swoop'
@@ -81,6 +90,10 @@ Plug 'tpope/vim-surround'
 
 " powerline is fucked up, use vim-airline instead
 Plug 'vim-airline/vim-airline'
+
+" Close all buffers save the current with :BufOnly - add a number to close all
+" save that number.
+Plug 'vim-scripts/BufOnly.vim'
 
 " Solarized Theme is one of the most popular colourschemes
 Plug 'vim-scripts/Solarized'

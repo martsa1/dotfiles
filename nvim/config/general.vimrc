@@ -143,6 +143,11 @@ augroup END
 set completeopt=longest,menuone
 set completeopt-=preview
 
+" Make things like substitute commands act incrementally, and provide
+" offscreen operations in a preview window.  Command acts exactly the same,
+" but shows you what will happen live.
+set inccommand=split
+
 "Lint files with neomake
 " When writing a buffer, reading a bufer, and on normal mode changes (after 750ms).
 call neomake#configure#automake({
