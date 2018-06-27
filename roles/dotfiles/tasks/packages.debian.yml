@@ -1,0 +1,10 @@
+---
+# Role package dependency installs for Apt managed distributions
+- name: Install role package dependencies
+  apt:
+    name: "{{item}}"
+    state: present
+    cache_valid_time: 600
+  become: true
+  with_items:
+    - "git"
