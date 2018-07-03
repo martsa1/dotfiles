@@ -1,0 +1,14 @@
+---
+- hosts: all
+  vars:
+    user: "sam"
+    target_user: "sam"
+  roles:
+    - role: "dotfiles"
+    #- role: "bash"
+    - role: "python"
+    - role: "tmux"
+    - role: "zsh"
+    - role: "nvim"
+
+
