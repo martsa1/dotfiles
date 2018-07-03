@@ -1,7 +1,8 @@
 ---
 # Variables used when building and installing Kitty from source.  Adjust as needed
-user: sam
-repo_base_dir: /home/{{user}}/code/personal/alacritty
-dotfiles_base_dir: /home/{{user}}/code/personal/dotfiles
-config_base_dir: /home/{{user}}/.config
-user_bin: /home/{{user}}/bin
+user: "sam"
+repo_base_dir: "/home/{{user}}/code/personal/alacritty"
+fonts_base_dir: "/home/{{user}}/.local/share/fonts"
+dotfiles_base_dir: "/home/{{user}}/code/personal/dotfiles"
+config_base_dir: "/home/{{user}}/.config"
+user_bin: "/home/{{user}}/bin"

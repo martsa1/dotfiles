@@ -103,3 +103,18 @@
         dest: "{{config_base_dir}}/alacritty/alacritty.yml"
         state: link
 
+    - name: "Pull in Fira Mono nerdfont"
+      get_url:
+        url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraMono.zip"
+        dest: "/tmp/FiraMono.zip"
+
+    - name: "Unpack Fira Mono"
+      unarchive:
+        src: "/tmp/FiraMono.zip"
+        dest: "{{fonts_base_dir}}"
+
+    - name: "Update Font Cache"
+      command: "fc-cache -vf {{fonts_base_dir}}"
+
+
+

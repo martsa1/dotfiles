@@ -62,21 +62,21 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Fira Mono for Powerline
+    family: "Fura Mono Nerd Font"
     # Style can be specified to pick a specific face.
-    # style: Medium
+    style: regular
 
   # The bold font face
   bold:
-    family: Fira Mono for Powerline
+    family: "Fura Mono Nerd Font"
     # Style can be specified to pick a specific face.
     style: Bold
 
   # The italic font face
   italic:
-    family: monospace
+    family: "Fura Mono Nerd Font"
     # Style can be specified to pick a specific face.
-    # style: Italic
+    style: Italic
 
   # Point size of the font
   size: 11.0
