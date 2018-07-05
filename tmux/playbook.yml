@@ -22,6 +22,8 @@
         - "libncurses5-dev"
         - "ncurses-base"
         - "pkg-config"
+      tags:
+        - install
 
     - name: Symlink Tmux Config into place
       file:
@@ -29,16 +31,22 @@
         dest: "/home/{{user}}/.tmux.conf"
         state: link
         force: yes
+      tags:
+        - config
 
     - name: Pull Tmux Release
       get_url:
         url: https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
         dest: "/home/{{user}}/Downloads/"
+      tags:
+        - install
 
     - name: Unpack Tmux
       unarchive:
         src: "/home/{{user}}/Downloads/tmux-2.6.tar.gz"
         dest: "{{personal_code_base_dir}}/"
+      tags:
+        - install
 
     - name: Build Tmux
       command: "{{item}}"
@@ -47,12 +55,16 @@
       with_items:
         - "./configure"
         - "make"
+      tags:
+        - install
 
     - name: Install Tmux
       command: make install
       args:
         chdir: "{{personal_code_base_dir}}/tmux-2.6/"
       become: true
+      tags:
+        - install
 
     - name: Pull in Tmux Plugin Manager
       git:
@@ -63,10 +75,16 @@
         force: yes
         clone: yes
         update: yes
+      tags:
+        - config
 
     - name: Install & Update Tmux Plugins
       command: "{{item}}"
       with_items:
         - "/home/sam/.tmux/plugins/tpm/bin/install_plugins"
         - "/home/sam/.tmux/plugins/tpm/bin/update_plugins all"
+      environment:
+        TMUX_PLUGIN_MANAGER_PATH: "/home/sam/.tmux/plugins/"
+      tags:
+        - config
 
