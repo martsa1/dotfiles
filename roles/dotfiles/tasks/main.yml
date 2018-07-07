@@ -2,7 +2,7 @@
 
 # Primary tasks to setup the dotfiles repo
 #
-- name: Ensure various groups exist
+- name: "Ensure various groups exist"
   group:
     name: "{{item}}"
     state: present
@@ -11,7 +11,7 @@
     - docker
     - sudo
 
-- name: Setup user
+- name: "Setup user"
   user:
     name: "{{user}}"
     shell: /usr/bin/zsh
@@ -23,7 +23,7 @@
     password: "$6$cXV2LAy2$FBObTVKl6pc3u35/82X.dC2shTzcQBmq7aiL3yB3HK.4bWR8.9jZ1NwDW8EV1q2iPrcYPBHWRoxTTDUbjbhnO0"
   become: true
 
-- name: Setup user's various directories
+- name: "Setup user's various directories"
   file:
     path: "/home/{{user}}/{{item}}"
     state: directory
@@ -37,7 +37,7 @@
     - "Downloads"
     - "bin"
 
-- name: Setup dotfiles base directory
+- name: "Setup dotfiles base directory"
   file:
     path: "{{dotfiles_root_path}}"
     state: directory
@@ -45,9 +45,14 @@
   become_user: "{{user}}"
   become: true
 
-- include_tasks: "packages.{{ansible_distribution|lower}}.yml"
+- name: "Ensure git is installed"
+  package:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - "git"
 
-- name: Clone dotfiles repo
+- name: "Clone dotfiles repo"
   git:
     repo: "{{dotfiles_repo}}"
     dest: "{{dotfiles_root_path}}/{{dotfiles_base_name}}"

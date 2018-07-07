@@ -1,8 +1,0 @@
----
-# Role package dependency installs for Apt managed distributions
-- name: Install role package dependencies
-  pacman:
-    name: "{{item}}"
-    state: present
-  with_items:
-    - "git"
