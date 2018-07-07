@@ -8,3 +8,9 @@ RUN if [ $(command -v apt-get) ]; then apt-get update && apt-get upgrade -y && a
     elif [ $(command -v zypper) ]; then zypper refresh && zypper update -y && zypper install -y python sudo bash python-xml && zypper clean -a; \
     elif [ $(command -v apk) ]; then apk update && apk add --no-cache python sudo bash ca-certificates; \
     elif [ $(command -v pacman) ]; then pacman --noconfirm -Syu python2 && ln -sf /usr/bin/python2 /usr/bin/python; fi;
+
+RUN getent group sudo || groupadd sudo
+RUN useradd -d /home/tmp -m tmp
+RUN usermod -a -G sudo tmp
+
+RUN sed -i 's/%sudo\tALL=(ALL:ALL) ALL/%sudo\tALL=(ALL:ALL) NOPASSWD: ALL/' /etc/sudoers
