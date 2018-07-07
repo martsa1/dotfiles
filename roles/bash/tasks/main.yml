@@ -1,20 +1,32 @@
 ---
 # tasks file for shell
 # Play to install and configure bash_it, including symlinking together my aliases & extensions etc.
+- name: "Ensure bash and git installed"
+  package:
+    name: "{{item}}"
+    state: present
+  become: true
+  with_items:
+    - "git"
+    - "bash"
+
 - name: Symlink bash_it bashrc
   file:
     src: "{{dotfiles_base_dir}}/bash/bashrc"
     dest: "/home/{{user}}/.bashrc"
     state: link
-    # TODO: Sort out a user role before enabling these!!
-    #owner: "{{user}}"
-    #group: "{{user}}"
+    force: true
+    owner: "{{user}}"
+    group: "{{user}}"
 
 - name: Symlink .profile
   file:
     src: "{{dotfiles_base_dir}}/xprofile"
     dest: "/home/{{user}}/.profile"
     state: link
+    force: true
+    owner: "{{user}}"
+    group: "{{user}}"
 
 - name: Clone bashit repo
   git:
@@ -24,41 +36,10 @@
     version: master
     clone: "yes"
     update: "yes"
-  register: bash_it_changed
+  become: true
+  become_user: "{{user}}"
 
-# - name: Check if bashit is installed
-#   shell: "source /home/{{user}}/.bashrc && declare -F bash-it"
-#   args:
-#     executable: "/bin/bash"
-#   register: is_bashit_installed_or_on_path
-#   ignore_errors: "true"
-#   tags:
-#     - skip_ansible_lint
-
-# - name: debug is bash installed RC
-#   debug:
-#     msg: "{{is_bashit_installed_or_on_path}}"
-#   tags:
-#     - skip_ansible_lint
-
-# - name: install bashit
-#  command: "{{item[1]}}"
-#  args:
-#    chdir: "{{remote_repo_dir}}/{{item[0]}}/"
-#  with_items:
-#    - [["bash_it", "./install.sh --silent"]]
-#  when: is_bashit_installed_or_on_path.rc != 0
-
-- name: update bashit
-  shell: "source /home/{{user}}/.bashrc && bash-it update"
-  args:
-    chdir: "{{personal_code_base_dir}}/bash_it/"
-    executable: "/bin/bash"
-  when: bash_it_changed.changed
-  tags:
-    - skip_ansible_lint
-
-- name: Setup alias directories (Configures Bash-it functionality)
+- name: "Setup alias directories (Configures Bash-it functionality)"
   file:
     path: "{{bashit_repo}}/{{item}}"
     state: "directory"
@@ -66,6 +47,8 @@
     - "plugins/enabled"
     - "aliases/enabled"
     - "completion/enabled"
+  become: true
+  become_user: "{{user}}"
 
 - name: Symlink bash_it plugins
   file:
@@ -79,6 +62,8 @@
     - [["tmux.plugin.bash", "250---tmux.plugin.bash"]]
     - [["virtualenv.plugin.bash", "250---virtualenv.plugin.bash"]]
     - [["alias-completion.plugin.bash", "365---alias-completion.plugin.bash"]]
+  become: true
+  become_user: "{{user}}"
 
 - name: Symlink bash_it aliases
   file:
@@ -88,6 +73,8 @@
   with_items:
     - [["fuck.aliases.bash", "150---fuck.aliases.bash"]]
     - [["general.aliases.bash", "150---general.aliases.bash"]]
+  become: true
+  become_user: "{{user}}"
 
 - name: Symlink bash_it completion
   file:
@@ -106,6 +93,8 @@
     - [["ssh.completion.bash", "350---ssh.completion.bash"]]
     - [["system.completion.bash", "350---system.completion.bash"]]
     - [["tmux.completion.bash", "350---tmux.completion.bash"]]
+  become: true
+  become_user: "{{user}}"
 
 - name: Symlink bash_it custom additions
   file:
@@ -115,3 +104,5 @@
   with_items:
     - [["{{dotfiles_base_dir}}/bash/bash_aliases.sh", "{{bashit_repo}}/aliases/custom.aliases.bash"]]
     - [["{{dotfiles_base_dir}}/bash/bash_envs.sh", "{{bashit_repo}}/custom/custom_envs.bash"]]
+  become: true
+  become_user: "{{user}}"
