@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Path to the bash it configuration
-export BASH_IT="/home/sam/code/personal/bash_it"
+export BASH_IT="/home/${USER}/code/personal/bash_it"
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/
@@ -55,3 +55,5 @@ source "$BASH_IT"/bash_it.sh
 # alias I use all the time, so we unset it here, allowing us to use the
 # timetrap alias as we expect.
 unset t
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
