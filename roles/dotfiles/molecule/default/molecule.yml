@@ -7,9 +7,9 @@ lint:
   name: yamllint
 platforms:
   - name: arch
-    image: archimg/base-devel
+    image: "archimg/base-devel:latest"
   - name: ubuntu
-    image: ubuntu:xenial
+    image: "ubuntu:xenial"
 provisioner:
   name: ansible
   lint:
