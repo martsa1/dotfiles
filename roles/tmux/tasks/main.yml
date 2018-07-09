@@ -1,23 +1,11 @@
 ---
 
 # Play to install and configure Tmux
-- name: Install required apt packages
-  become: true
-  apt:
-    name: "{{item}}"
-    state: "present"
-    cache_valid_time: 600
-  with_items:
-    - "build-essential"
-    - "cmake"
-    - "git"
-    - "libevent-2.0-5"
-    - "libevent-dev"
-    - "libncurses5-dev"
-    - "ncurses-base"
-    - "pkg-config"
+- name: "Install tmux build dependencies"
+  include_tasks: "packages.apt.yml"
+  when: ansible_os_family == "Debian"
 
-- name: Symlink Tmux Config into place
+- name: "Symlink Tmux Config into place"
   file:
     src: "{{dotfiles_base_dir}}/tmux/tmux.conf"
     dest: "/home/{{user}}/.tmux.conf"
@@ -26,45 +14,52 @@
   become: true
   become_user: "{{user}}"
 
-- name: Pull Tmux Release
+- name: "Install latest Tmux from package repos"
+  package:
+    name: "tmux"
+    state: present
+  become: true
+  when: ansible_os_family == "Archlinux"
+
+- name: "Pull Tmux Release"
   get_url:
-    url: |
-      "https://github.com/tmux/tmux/releases/download/{{tmux_version}}/tmux-{{tmux_version}}.tar.gz"
-    dest: "/home/{{user}}/Downloads/"
+    url: "https://github.com/tmux/tmux/releases/download/{{tmux_version}}/tmux-{{tmux_version}}.tar.gz"
+    dest: "/home/{{user}}/Downloads/tmux-{{tmux_version}}.tar.gz"
   become: true
   become_user: "{{user}}"
+  when: ansible_os_family == "Debian"
 
-- name: Unpack Tmux
+- name: "Unpack Tmux"
   unarchive:
     src: "/home/{{user}}/Downloads/tmux-{{tmux_version}}.tar.gz"
     dest: "{{personal_code_base_dir}}/"
-  warn: "no"
   become: true
-  become_user: "{{user}}"
+  # become_user: "{{user}}"
+  when: ansible_os_family == "Debian"
 
-- name: Build Tmux
+- name: "Build Tmux"
   command: "{{item}}"
   args:
     chdir: "{{personal_code_base_dir}}/tmux-{{tmux_version}}/"
   with_items:
     - "./configure"
     - "make"
-  warn: "no"
   become: true
   become_user: "{{user}}"
+  when: ansible_os_family == "Debian"
   tags:
     - skip_ansible_lint
 
-- name: Install Tmux
+- name: "Install Tmux"
   command: make install
   args:
     chdir: "{{personal_code_base_dir}}/tmux-{{tmux_version}}/"
-  warn: "no"
   become: true
+  when: ansible_os_family == "Debian"
   tags:
     - skip_ansible_lint
 
-- name: Pull in Tmux Plugin Manager
+- name: "Pull in Tmux Plugin Manager"
   git:
     repo: "https://github.com/tmux-plugins/tpm"
     dest: "/home/{{user}}/.tmux/plugins/tpm"
@@ -72,17 +67,21 @@
     accept_hostkey: "yes"
     clone: "yes"
     update: "yes"
-  # register: tpm_installed
   become: true
   become_user: "{{user}}"
 
-- name: Install & Update Tmux Plugins
-  command: "{{item}}"
+- name: "Install & Update Tmux Plugins"
+  shell: "source /home/{{user}}/.bashrc && {{item}}"
+  args:
+    executable: /bin/bash
   with_items:
-    - "/home/sam/.tmux/plugins/tpm/bin/install_plugins"
-    - "/home/sam/.tmux/plugins/tpm/bin/update_plugins all"
+    - "/home/{{user}}/.tmux/plugins/tpm/bin/install_plugins"
+    - "/home/{{user}}/.tmux/plugins/tpm/bin/update_plugins all"
   # when: tpm_installed.changed
   become: true
   become_user: "{{user}}"
+  environment:
+    LC_ALL: "en_US.UTF-8"
+    LANG: "en_US.UTF-8"
   tags:
     - skip_ansible_lint
