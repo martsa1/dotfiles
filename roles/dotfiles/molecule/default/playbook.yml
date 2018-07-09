@@ -3,5 +3,4 @@
   hosts: all
   roles:
     - role: dotfiles
-      # We set a default name here for us to test against with testinfra
-      user: joebloggs
+      user: example

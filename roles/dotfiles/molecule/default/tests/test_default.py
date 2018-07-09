@@ -14,19 +14,17 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 def test_user_dotfiles_root_dir(host):
     ''' Checks that the dotfiles directory is created.
     '''
-    dotfiles_base_dir = host.file('/home/joebloggs/code/personal/')
-
-    assert dotfiles_base_dir.exists
-    assert dotfiles_base_dir.is_directory
+    dotfiles_base_dir = host.run(
+        "sudo ls /home/example/code/personal"
+    )
+    assert dotfiles_base_dir.rc == 0
 
 
 def test_dotfiles_clone(host):
     ''' Checks that a dotfiles git repo was successfully cloned into the
         appropriate default location.
     '''
-    dotfiles_base_dir = host.file(
-        '/home/joebloggs/code/personal/dotfiles/.git/'
+    dotfiles_base_dir = host.run(
+        "sudo ls /home/example/code/personal/dotfiles/.git"
     )
-
-    assert dotfiles_base_dir.exists
-    assert dotfiles_base_dir.is_directory
+    assert dotfiles_base_dir.rc == 0

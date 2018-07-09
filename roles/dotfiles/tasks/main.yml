@@ -14,7 +14,7 @@
 - name: "Setup user"
   user:
     name: "{{user}}"
-    shell: /usr/bin/zsh
+    # shell: /usr/bin/zsh
     groups:
       - adm
       - docker
@@ -49,6 +49,7 @@
   package:
     name: "{{item}}"
     state: present
+  become: true
   with_items:
     - "git"
 
