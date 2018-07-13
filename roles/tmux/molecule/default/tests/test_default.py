@@ -7,7 +7,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-def test_bashrc(host):
+def test_tmux_conf(host):
     ''' Checks that the tmux config file exists and is owned by the correct
         user.
     '''
@@ -21,6 +21,7 @@ def test_tmux_installed(host):
     ''' Checks that tmux is available for use.
     '''
     tmux_installed = host.run(
-        "tmux --version"
+        "tmux -V"
     )
     assert tmux_installed.rc == 0
+    assert tmux_installed.stdout == 'tmux 2.7'

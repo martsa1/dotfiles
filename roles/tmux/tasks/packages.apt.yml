@@ -10,7 +10,6 @@
     - "build-essential"
     - "cmake"
     - "git"
-    - "libevent-2.0-5"
     - "libevent-dev"
     - "libncurses5-dev"
     - "ncurses-base"

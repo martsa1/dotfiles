@@ -25,16 +25,23 @@
   get_url:
     url: "https://github.com/tmux/tmux/releases/download/{{tmux_version}}/tmux-{{tmux_version}}.tar.gz"
     dest: "/home/{{user}}/Downloads/tmux-{{tmux_version}}.tar.gz"
+  tags:
+    - install
   become: true
   become_user: "{{user}}"
   when: ansible_os_family == "Debian"
 
-- name: "Unpack Tmux"
-  unarchive:
-    src: "/home/{{user}}/Downloads/tmux-{{tmux_version}}.tar.gz"
-    dest: "{{personal_code_base_dir}}/"
+  # For some reason, unarchive can't locate the file downloaded above.
+  # Fuck you, unarchive.
+- name: Unpack Tmux
+  command: "{{item}}"
+  tags:
+    - install
   become: true
-  # become_user: "{{user}}"
+  beome_user: "{{user}}"
+  with_items:
+    - "tar -xf /home/{{user}}/Downloads/tmux-{{tmux_version}}.tar.gz -C {{personal_code_base_dir}}"
+    - "chown -R {{user}}:{{user}} {{personal_code_base_dir}}"
   when: ansible_os_family == "Debian"
 
 - name: "Build Tmux"
