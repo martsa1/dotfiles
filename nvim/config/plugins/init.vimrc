@@ -6,6 +6,7 @@ runtime ./config/plugins/airline.vimrc
 runtime ./config/plugins/ctrlp.vimrc
 runtime ./config/plugins/devdocs.vimrc
 runtime ./config/plugins/markdown_preview.vimrc
+runtime ./config/plugins/nerdcommenter.vimrc
 runtime ./config/plugins/rg.vimrc
 runtime ./config/plugins/swoop.vimrc
 runtime ./config/plugins/vim_test.vimrc
