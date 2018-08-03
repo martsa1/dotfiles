@@ -26,6 +26,8 @@ alias dm='docker-machine'
 
 alias tmx="tmux -L mysocket -S /home/${USER}/.tmux_sockets/mysocket"
 
+alias igrep="grep -i"
+
 alias ipython="ipython --TerminalInteractiveShell.editing_mode=vi"
 alias python_tags=$'ctags -R --fields=+l --languages=python --python-kinds=-iv -f ./tags $(python -c "import os, sys; print(\' \'.join(\'{}\'.format(d) for d in sys.path if os.path.isdir(d)))")'
 
