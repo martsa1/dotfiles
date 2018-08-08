@@ -104,6 +104,9 @@ Plug 'vim-scripts/BufOnly.vim'
 " Solarized Theme is one of the most popular colourschemes
 Plug 'vim-scripts/Solarized'
 
+" System-d syntax highlighting for systemd unit files
+Plug 'wgwoods/vim-systemd-syntax'
+
 " Give git hints on files/dirs regarding: Add, Modify, Remove within NerdTree
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
