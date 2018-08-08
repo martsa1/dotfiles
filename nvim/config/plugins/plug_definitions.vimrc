@@ -67,6 +67,9 @@ Plug 'pelodelfuego/vim-swoop'
 " Add support for i3 config files
 Plug 'PotatoesMaster/i3-vim-syntax'
 
+" DevDocs plugin - epic documentation aid
+Plug 'rhysd/devdocs.vim'
+
 " Epic Comment management
 Plug 'scrooloose/nerdcommenter'
 
