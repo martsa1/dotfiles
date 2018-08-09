@@ -16,9 +16,9 @@ galaxy_info:
         - 18.04
         - 16.04
 
-galaxy_tags:
-  - personal
-  - dotfiles
+  galaxy_tags:
+    - personal
+    - dotfiles
 
-dependencies:
-  - dotfiles
+  dependencies:
+    - dotfiles
