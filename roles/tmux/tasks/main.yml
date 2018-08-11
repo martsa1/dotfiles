@@ -10,7 +10,7 @@
     src: "{{dotfiles_base_dir}}/tmux/tmux.conf"
     dest: "/home/{{user}}/.tmux.conf"
     state: link
-    force: "yes"
+    force: true
   become: true
   become_user: "{{user}}"
 
@@ -71,9 +71,9 @@
     repo: "https://github.com/tmux-plugins/tpm"
     dest: "/home/{{user}}/.tmux/plugins/tpm"
     version: master
-    accept_hostkey: "yes"
-    clone: "yes"
-    update: "yes"
+    accept_hostkey: true
+    clone: true
+    update: true
   become: true
   become_user: "{{user}}"
 
