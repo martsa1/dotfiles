@@ -1,6 +1,13 @@
 ---
 # Variables used when setting up tools
 user: "{{ansible_user_id}}"
-personal_code_base_dir: "/home/{{user}}/code/personal"
 dotfiles_base_dir: "{{personal_code_base_dir}}/dotfiles"
+personal_code_base_dir: "/home/{{user}}/code/personal"
+pyenv_repo: "https://github.com/pyenv/pyenv.git"
 python_bin_dir: "/home/{{user}}/.local/bin"
+python_tools:  # Note, first is the package to install, second is the executable to check for!
+  - [["glances", "glances"]]
+  - [["hatch", "hatch"]]
+  - [["pipenv", "pipenv"]]
+  - [["powerline-status", "powerline"]]
+  - [["yq", "yq"]]

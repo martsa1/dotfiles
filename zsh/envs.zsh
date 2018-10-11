@@ -57,3 +57,10 @@ export ZPLUG_LOADFILE="$HOME/code/personal/dotfiles/zsh/zplug.zsh"
 
 # Pull in FZF for shell usage.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Setup environment variables needed for pyenv
+export PYENV_ROOT="$HOME/code/personal/pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi

@@ -1,0 +1,27 @@
+---
+# vars file for python
+depends:
+  - "build-essential"
+  - "curl"
+  - "libbz2-dev"
+  - "libffi-dev"
+  - "libncurses5-dev"
+  - "libreadline-dev"
+  - "libsqlite3-dev"
+  - "libssl-dev"
+  - "libxml2-dev"
+  - "libxmlsec1-dev"
+  - "llvm"
+  - "make"
+  - "python3-dev"
+  - "python3-venv"
+  - "python3-pip"
+  - "tk-dev"
+  - "wget"
+  - "xz-utils"
+  - "zlib1g-dev"
+
+env:
+  LC_ALL: "C.UTF-8"
+  LANG: "C.UTF-8"
+  PATH: "/home/{{user}}/.local/bin:{{ansible_env.PATH}}"

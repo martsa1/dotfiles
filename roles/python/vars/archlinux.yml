@@ -1,0 +1,13 @@
+---
+# vars file for python
+depends:
+  - "base-devel"
+  - "openssl"
+  - "python"
+  - "python-pip"
+  - "zlib"
+
+env:
+  LC_ALL: "en_US.utf8"
+  LANG: "en_US.utf8"
+  PATH: "/home/{{user}}/.local/bin:{{ansible_env.PATH}}"

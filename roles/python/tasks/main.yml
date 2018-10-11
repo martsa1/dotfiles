@@ -1,7 +1,25 @@
 ---
 # Install and manage the various base python packages.
 
-- include_tasks: "packages.{{ansible_distribution|lower}}.yml"
+- name: Import OS specific vars
+  include_vars: "{{ansible_os_family|lower()|default(omit)}}.yml"
+
+- name: "Install python base packages"
+  package:
+    name: "{{ depends }}"
+    state: present
+  become: true
+
+- name: Install virtualenvwrapper for pipsi
+  command: "pip3 install --user virtualenvwrapper"
+  tags:
+    - skip_ansible_lint
+  become: true
+  become_user: "{{user}}"
+  environment:
+    LC_ALL: "C.UTF-8"
+    LANG: "C.UTF-8"
+    PATH: "/home/{{user}}/.local/bin:{{ansible_env.PATH}}"
 
 - name: Pull in Pipsi
   get_url:
@@ -16,18 +34,35 @@
     - skip_ansible_lint
   become: true
   become_user: "{{user}}"
+  environment:
+    LC_ALL: "C.UTF-8"
+    LANG: "C.UTF-8"
+    PATH: "/home/{{user}}/.local/bin:{{ansible_env.PATH}}"
+
+- name: Clone pyenv repo
+  git:
+    repo: "{{pyenv_repo}}"
+    dest: "/home/{{user}}/code/personal/pyenv"
+    accept_hostkey: "yes"
+    clone: "yes"
+    update: "yes"
+    version: master
+  become: true
+  become_user: "{{user}}"
 
 - name: Install various python packages
   command: "pipsi install {{item[0]}}"
   args:
     creates: "{{python_bin_dir}}/{{item[1]}}"
-  with_items:
-    - [["glances", "glances"]]
-    - [["pipenv", "pipenv"]]
-    - [["powerline-status", "powerline"]]
+  with_items: "{{ python_tools }}"
   become: true
   become_user: "{{user}}"
-  environment:
-    LC_ALL: "C.UTF-8"
-    LANG: "C.UTF-8"
-    PATH: "/home/{{user}}/.local/bin:{{ansible_env.PATH}}"
+  environment: "{{env}}"
+
+- name: Ensure personal code directory exists
+  file:
+    path: "/home/{{user}}/code/personal"
+    state: directory
+    owner: "{{user}}"
+  become: true
+  become_user: "{{user}}"
