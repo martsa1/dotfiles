@@ -1,9 +1,14 @@
 ---
 
 # Play to install and configure Tmux
+- name: Import OS specific vars
+  include_vars: "{{ansible_os_family|lower()|default(omit)}}.yml"
+
 - name: "Install tmux build dependencies"
-  include_tasks: "packages.apt.yml"
-  when: ansible_os_family == "Debian"
+  package:
+    name: "{{depends}}"
+    state: "present"
+  become: true
 
 - name: "Symlink Tmux Config into place"
   file:
@@ -11,12 +16,13 @@
     dest: "/home/{{user}}/.tmux.conf"
     state: link
     force: true
+    owner: "{{user}}"
+    group: "{{user}}"
   become: true
-  become_user: "{{user}}"
 
 - name: "Install latest Tmux from package repos"
   package:
-    name: "tmux"
+    name: "{{depends}}"
     state: present
   become: true
   when: ansible_os_family == "Archlinux"
@@ -25,24 +31,24 @@
   get_url:
     url: "https://github.com/tmux/tmux/releases/download/{{tmux_version}}/tmux-{{tmux_version}}.tar.gz"
     dest: "/home/{{user}}/Downloads/tmux-{{tmux_version}}.tar.gz"
+    owner: "{{user}}"
+    group: "{{user}}"
   tags:
     - install
   become: true
-  become_user: "{{user}}"
   when: ansible_os_family == "Debian"
 
-  # For some reason, unarchive can't locate the file downloaded above.
-  # Fuck you, unarchive.
-- name: Unpack Tmux
-  command: "{{item}}"
+- name: "Unpack Tmux"
+  unarchive:
+    src: "/home/{{user}}/Downloads/tmux-{{tmux_version}}.tar.gz"
+    dest: "{{personal_code_base_dir}}"
+    remote_src: true
+    owner: "{{user}}"
+    group: "{{user}}"
   tags:
     - install
-  become: true
-  beome_user: "{{user}}"
-  with_items:
-    - "tar -xf /home/{{user}}/Downloads/tmux-{{tmux_version}}.tar.gz -C {{personal_code_base_dir}}"
-    - "chown -R {{user}}:{{user}} {{personal_code_base_dir}}"
   when: ansible_os_family == "Debian"
+  become: true
 
 - name: "Build Tmux"
   command: "{{item}}"
@@ -55,6 +61,7 @@
   become_user: "{{user}}"
   when: ansible_os_family == "Debian"
   tags:
+    - install
     - skip_ansible_lint
 
 - name: "Install Tmux"
@@ -64,6 +71,7 @@
   become: true
   when: ansible_os_family == "Debian"
   tags:
+    - install
     - skip_ansible_lint
 
 - name: "Pull in Tmux Plugin Manager"

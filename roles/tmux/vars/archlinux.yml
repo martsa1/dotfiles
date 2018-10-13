@@ -1,2 +1,4 @@
 ---
 # vars file for tmux
+depends:
+  - "tmux"
