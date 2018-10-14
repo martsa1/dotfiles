@@ -11,10 +11,9 @@ def test_tmux_conf(host):
     ''' Checks that the tmux config file exists and is owned by the correct
         user.
     '''
-    tmux_config = host.run(
-        "sudo ls /home/example/.tmux.conf"
-    )
-    assert tmux_config.rc == 0
+    with host.sudo():
+        host.run_expect([0], 'test -e /home/example/.tmux.conf')
+        host.run_expect([0], 'test -L /home/example/.tmux.conf')
 
 
 def test_tmux_installed(host):
