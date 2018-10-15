@@ -61,3 +61,8 @@ def test_nvim_plugins_installed(host):
 
     for plugin in plugin_file_content:
         assert plugin.split('/')[1] in plugged_contents
+
+
+def test_python3_enables(host):
+    # command to run: nvim --headless '+echo has("python3")' +qall
+    pass

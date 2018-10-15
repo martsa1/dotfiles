@@ -1,7 +1,27 @@
 # vim: se filetype=yaml.ansible
 ---
 
-- include_tasks: "packages.{{ansible_distribution|lower}}.yml"
+# - include_tasks: "packages.{{ansible_distribution|lower}}.yml"
+- name: "Import OS specific vars"
+  include_vars: "{{ansible_distribution|lower()|default(omit)}}.yml"
+
+- name: "add neovim repo"
+  become: true
+  when: ansible_distribution|lower() == "debian"
+  apt_repository:
+    repo: "ppa:neovim-ppa/stable"
+
+- name: "Update apt repo's after adding neovim PPA"
+  become: true
+  when: ansible_distribution|lower() == "ubuntu"
+  apt:
+    update_cache: true
+
+- name: "Install neovim and dependencies"
+  package:
+    name: "{{ depends }}"
+    state: present
+  become: true
 
 - name: "Gem install neovim dependencies"
   gem:
@@ -90,65 +110,65 @@
 ############################## Linter Installs #################################
 ################################################################################
 # TODO: Adjust this to install all the linters for all the languages Ansible supports
-- name: "Create neovim virtualenvs with installs"
-  pip:
-    name: "{{item[2]}}"
-    virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/neovim"
-    virtualenv_python: "{{item[0]}}"
-    state: latest
-  with_nested:
-    - [["python3", "py3"], ["python", "py2"]]
-    - ["neovim", "jedi"]
-  become: "yes"
-  tags:
-    - skip_ansible_lint
+# - name: "Create neovim virtualenvs with installs"
+#   pip:
+#     name: "{{item[2]}}"
+#     virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/neovim"
+#     virtualenv_python: "{{item[0]}}"
+#     state: latest
+#   with_nested:
+#     - [["python3", "py3"], ["python", "py2"]]
+#     - ["neovim", "jedi"]
+#   become: "yes"
+#   tags:
+#     - skip_ansible_lint
 
-- name: "Install python linters globally"
-  pip:
-    name: "{{item[2]}}"
-    virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/{{item[2]}}"
-    virtualenv_python: "{{item[0]}}"
-    state: latest
-  with_nested:
-    - [["python3", "py3"]]
-    - ["pylint", "flake8"]
-  become: "yes"
-  # linearized (IE): python3 py3 (pylint|flake8)
-  tags:
-    - skip_ansible_lint
+# - name: "Install python linters globally"
+#   pip:
+#     name: "{{item[2]}}"
+#     virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/{{item[2]}}"
+#     virtualenv_python: "{{item[0]}}"
+#     state: latest
+#   with_nested:
+#     - [["python3", "py3"]]
+#     - ["pylint", "flake8"]
+#   become: "yes"
+#   # linearized (IE): python3 py3 (pylint|flake8)
+#   tags:
+#     - skip_ansible_lint
 
-- name: "Install ansible linter globally"
-  pip:
-    name: "{{item[2]}}"
-    virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/{{item[2]}}"
-    virtualenv_python: "{{item[0]}}"
-    state: latest
-  with_nested:
-    - [["python2", "py2"]]
-    - ["ansible-lint"]
-  become: "yes"
-  tags:
-    - skip_ansible_lint
+# - name: "Install ansible linter globally"
+#   pip:
+#     name: "{{item[2]}}"
+#     virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/{{item[2]}}"
+#     virtualenv_python: "{{item[0]}}"
+#     state: latest
+#   with_nested:
+#     - [["python2", "py2"]]
+#     - ["ansible-lint"]
+#   become: "yes"
+#   tags:
+#     - skip_ansible_lint
 
-- name: "Symlink python linters into PATH -- works for both python2 and python3"
-  file:
-    src: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[0]}}/{{item[1]}}/bin/{{item[1]}}"
-    dest: "/usr/local/sbin/{{item[1]}}"
-    state: link
-    # force: true
-  with_nested:
-    - ["py3"]
-    - ["pylint", "flake8"]
-  become: "yes"
-  # linearized (IE): python3 py3 (pylint|flake8)
+# - name: "Symlink python linters into PATH -- works for both python2 and python3"
+#   file:
+#     src: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[0]}}/{{item[1]}}/bin/{{item[1]}}"
+#     dest: "/usr/local/sbin/{{item[1]}}"
+#     state: link
+#     # force: true
+#   with_nested:
+#     - ["py3"]
+#     - ["pylint", "flake8"]
+#   become: "yes"
+#   # linearized (IE): python3 py3 (pylint|flake8)
 
-- name: "Symlink ansible linters into PATH  -- only supported by python2"
-  file:
-    src: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[0]}}/{{item[1]}}/bin/{{item[1]}}"
-    dest: "/usr/local/sbin/{{item[1]}}"
-    state: link
-    force: true
-  with_nested:
-    - ["py2"]
-    - ["ansible-lint"]
-  become: "yes"
+# - name: "Symlink ansible linters into PATH  -- only supported by python2"
+#   file:
+#     src: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[0]}}/{{item[1]}}/bin/{{item[1]}}"
+#     dest: "/usr/local/sbin/{{item[1]}}"
+#     state: link
+#     force: true
+#   with_nested:
+#     - ["py2"]
+#     - ["ansible-lint"]
+#   become: "yes"
