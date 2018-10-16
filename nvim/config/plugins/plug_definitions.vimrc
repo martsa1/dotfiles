@@ -73,6 +73,9 @@ Plug 'rhysd/devdocs.vim'
 " Dev Icons in NERDTree...
 Plug 'ryanoasis/vim-devicons'
 
+" Vim NeoFormat -- Code formatting plugin
+Plug 'sbdchd/neoformat'
+
 " Epic Comment management
 Plug 'scrooloose/nerdcommenter'
 
