@@ -66,3 +66,10 @@
     owner: "{{user}}"
   become: true
   become_user: "{{user}}"
+
+- name: "Symlink style.yapf to home directory"
+  file:
+    src: "{{dotfiles_base_dir}}/python/style.yapf"
+    dest: "/home{{user}}/.style.yapf"
+    owner: "{{user}}"
+    group: "{{user}}"
