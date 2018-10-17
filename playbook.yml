@@ -4,5 +4,4 @@
 
 - import_playbook: bash/playbook.yml
 - import_playbook: i3/playbook.yml
-- import_playbook: kitty/playbook.yml
 
