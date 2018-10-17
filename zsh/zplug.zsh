@@ -8,3 +8,6 @@ zplug "zsh-users/zsh-completions"
 
 # Add support for pip completion
 zplug "srijanshetty/zsh-pip-completion"
+
+# ZSH Syntax Highlighting
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
