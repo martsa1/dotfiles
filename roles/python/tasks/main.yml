@@ -71,5 +71,6 @@
   file:
     src: "{{dotfiles_base_dir}}/python/style.yapf"
     dest: "/home/{{user}}/.style.yapf"
+    state: link
     owner: "{{user}}"
     group: "{{user}}"
