@@ -21,6 +21,7 @@
       - sudo
     append: true
     password: "$6$cXV2LAy2$FBObTVKl6pc3u35/82X.dC2shTzcQBmq7aiL3yB3HK.4bWR8.9jZ1NwDW8EV1q2iPrcYPBHWRoxTTDUbjbhnO0"
+    update_password: on_create
   become: true
 
 - name: "Setup user's various directories"
