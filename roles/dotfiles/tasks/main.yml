@@ -62,7 +62,7 @@
     clone: "yes"
     update: "yes"
     # version: master
-    owner: "{{user}}"
-    group: "{{user}}"
+  become: "true"
+  become_user: "{{user}}"
   tags:
     - skip_ansible_lint
