@@ -120,6 +120,10 @@
     - [["python3", "py3"], ["python", "py2"]]
     - ["neovim", "jedi"]
   become: "yes"
+  environment:
+    LC_ALL: "C.UTF-8"
+    LANG: "C.UTF-8"
+    PATH: "/home/{{user}}/.local/bin:{{ansible_env.PATH}}"
   tags:
     - skip_ansible_lint
 
