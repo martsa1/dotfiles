@@ -110,18 +110,18 @@
 ############################## Linter Installs #################################
 ################################################################################
 # TODO: Adjust this to install all the linters for all the languages Ansible supports
-# - name: "Create neovim virtualenvs with installs"
-#   pip:
-#     name: "{{item[2]}}"
-#     virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/neovim"
-#     virtualenv_python: "{{item[0]}}"
-#     state: latest
-#   with_nested:
-#     - [["python3", "py3"], ["python", "py2"]]
-#     - ["neovim", "jedi"]
-#   become: "yes"
-#   tags:
-#     - skip_ansible_lint
+- name: "Create neovim virtualenvs with installs"
+  pip:
+    name: "{{item[2]}}"
+    virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/neovim"
+    virtualenv_python: "{{item[0]}}"
+    state: latest
+  with_nested:
+    - [["python3", "py3"], ["python", "py2"]]
+    - ["neovim", "jedi"]
+  become: "yes"
+  tags:
+    - skip_ansible_lint
 
 # - name: "Install python linters globally"
 #   pip:
