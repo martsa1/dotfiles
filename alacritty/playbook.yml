@@ -73,6 +73,12 @@
         dest: "{{user_bin}}/alacritty"
         state: link
 
+    - name: "Ensure terminfo dir exists"
+      file:
+        path: "/usr/share/terminfo/a"
+        state: directory
+      become: true
+
     - name: "Symlink Alacritty TermInfo"
       file:
         src: "{{repo_base_dir}}/target/release/terminfo/a/{{item}}"
@@ -81,7 +87,7 @@
       become: true
       with_items:
         - "alacritty"
-        - "alacritty-256color"
+        # - "alacritty-256color"
 
     - name: Install alacritty man pages
       command: "{{item}}"
@@ -107,6 +113,11 @@
       get_url:
         url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraMono.zip"
         dest: "/tmp/FiraMono.zip"
+
+    - name: "Ensure {{fonts_base_dir}} exists"
+      file:
+        path: "{{fonts_base_dir}}"
+        state: directory
 
     - name: "Unpack Fira Mono"
       unarchive:
