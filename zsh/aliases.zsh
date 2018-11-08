@@ -10,7 +10,7 @@ alias la='ls -A'
 alias l='ls -CF'
 
 # Safer RM handling than standard.  Provides recovery options from terminal rm
-alias rm=trash
+# alias rm=trash
 
 # Git related Aliases
 alias gs='git status'
