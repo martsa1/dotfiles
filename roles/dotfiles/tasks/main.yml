@@ -61,6 +61,8 @@
     accept_hostkey: "yes"
     clone: "yes"
     update: "yes"
-    version: master
-  become: true
-  become_user: "{{user}}"
+    # version: master
+    owner: "{{user}}"
+    group: "{{user}}"
+  tags:
+    - skip_ansible_lint
