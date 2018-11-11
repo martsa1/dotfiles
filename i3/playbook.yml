@@ -34,9 +34,11 @@
 # TODO: Add logic here to determine what host the play is running on, and
 #       compile the i3 config from machine specific and base configurations
 
+    - name: "Install various programs needed for i3 operation"
+      package:
+        name: "{{ installs }}"
+        state: present
+      become: true
 
-# Programs that need to be installed:
-# lxappearance gtk-chtheme qt4-qtconfig shutter scrot rofi i3blocks
-# playerctl curl roxterm
-#
+
 # https://help.ubuntu.com/community/UbuntuStudio/UsbAudioDevices
