@@ -92,6 +92,21 @@
   tags:
     - skip_ansible_lint
 
+- name: "Create neovim virtualenvs with installs"
+  pip:
+    name: "neovim"
+    virtualenv: "/home/{{user}}/.python/neovim-{{item[1]}}"
+    virtualenv_python: "{{item[0]}}"
+    state: latest
+  with_items:
+    - [["python3", "py3"]]
+    - [["python2", "py2"]]
+  become: "true"
+  become_user: "{{user}}"
+  environment: "{{env}}"
+  tags:
+    - skip_ansible_lint
+
 - name: "Update neovim and remote plugins"
   command: "nvim --headless +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall"
   tags:
@@ -110,22 +125,6 @@
 ############################## Linter Installs #################################
 ################################################################################
 # TODO: Adjust this to install all the linters for all the languages Ansible supports
-- name: "Create neovim virtualenvs with installs"
-  pip:
-    name: "{{item[2]}}"
-    virtualenv: "{{system_global_path}}/{{sys_global_pyenv_prefix}}/{{item[1]}}/neovim"
-    virtualenv_python: "{{item[0]}}"
-    state: latest
-  with_nested:
-    - [["python3", "py3"], ["python", "py2"]]
-    - ["neovim", "jedi"]
-  become: "yes"
-  environment:
-    LC_ALL: "C.UTF-8"
-    LANG: "C.UTF-8"
-    PATH: "/home/{{user}}/.local/bin:{{ansible_env.PATH}}"
-  tags:
-    - skip_ansible_lint
 
 # - name: "Install python linters globally"
 #   pip:
