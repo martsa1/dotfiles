@@ -70,6 +70,9 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 " DevDocs plugin - epic documentation aid
 Plug 'rhysd/devdocs.vim'
 
+" Logstash file syntax support
+Plug 'robbles/logstash.vim'
+
 " Dev Icons in NERDTree...
 Plug 'ryanoasis/vim-devicons'
 
