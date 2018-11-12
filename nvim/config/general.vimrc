@@ -157,5 +157,7 @@ call neomake#configure#automake({
 \ 'BufWinEnter': {'delay': 0},
 \ }, 750)
 
-let g:python_host_prog = '/usr/local/src/pyenvs/py2/neovim/bin/python'
-let g:python3_host_prog = '/usr/local/src/pyenvs/py3/neovim/bin/python'
+let g:python_host_prog = '/home/sam/.python/neovim-py2/bin/python'
+let g:python3_host_prog = '/home/sam/.python/neovim-py3/bin/python'
+" let g:python_host_prog = '/usr/local/src/pyenvs/py2/neovim/bin/python'
+" let g:python3_host_prog = '/usr/local/src/pyenvs/py3/neovim/bin/python'
