@@ -30,3 +30,5 @@ exec nmcli connection up Wired connection 1
 bar {
 		 i3bar_command ~/code/personal/dotfiles/polybar/launch.py
 }
+
+exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg
