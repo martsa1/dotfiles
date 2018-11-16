@@ -12,6 +12,15 @@ set backspace=indent,eol,start
 " Set delay/timeout of key mapping sequences
 set timeoutlen=4000
 
+" Set vim swap file write frequency and various plugin update frequency
+" like tagbar
+set ut=50
+" ut long form:
+" set updatetime=50
+
+" Disable vim swap files
+" set noswap
+
 " http://vim.wikia.com/wiki/Diff_current_buffer_and_the_original_file
 function! s:DiffWithSaved()
   let filetype=&ft
