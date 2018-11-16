@@ -111,6 +111,9 @@ Plug 'Yggdroot/indentLine'
 " Python project used by deoplete for code completion
 "Plug 'zchee/deoplete-jedi'
 
+" Symantic python highlighting
+Plug 'numirias/semshi'
+
 "" JS stuff
 " Maybe checkout ack.vim for source code searching.
 "Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' } " needs sudo?
