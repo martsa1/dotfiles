@@ -18,6 +18,10 @@ Plug 'cespare/vim-toml'
 " Dracular theme is a nice Dark Theme
 Plug 'dracula/vim'
 
+
+" Add buffer explorer for easier buffer traversal
+Plug 'jlanzarotta/bufexplorer'
+
 " Vim Test harness integration - Supports standard test harnesses for multiple
 " languages etc.
 Plug 'janko-m/vim-test'
