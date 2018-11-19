@@ -159,12 +159,15 @@ set inccommand=split
 
 "Lint files with neomake
 " When writing a buffer, reading a bufer, and on normal mode changes (after 750ms).
-call neomake#configure#automake({
-\ 'TextChanged': {},
-\ 'InsertLeave': {},
-\ 'BufWritePost': {'delay': 0},
-\ 'BufWinEnter': {'delay': 0},
-\ }, 750)
+"call neomake#configure#automake({
+"\ 'TextChanged': {},
+"\ 'InsertLeave': {},
+"\ 'BufWritePost': {'delay': 0},
+"\ 'BufWinEnter': {'delay': 0},
+"\ }, 750)
 
-let g:python_host_prog = '/usr/local/src/pyenvs/py2/neovim/bin/python'
-let g:python3_host_prog = '/usr/local/src/pyenvs/py3/neovim/bin/python'
+" Need to dynamically set this up depending on system?
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
+"let g:python_host_prog = '/usr/local/src/pyenvs/py2/neovim/bin/python'
+"let g:python3_host_prog = '/usr/local/src/pyenvs/py3/neovim/bin/python'
