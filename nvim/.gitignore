@@ -1,3 +1,6 @@
+**/tags
+**/*vimsession
+
 autoload/**
 backup/**
 plugged/**
