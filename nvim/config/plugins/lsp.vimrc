@@ -32,7 +32,7 @@ let g:LanguageClient_serverCommands = {}
 "let g:LanguageClient_rootMarkers = {
 "    \ 'javascript': ['project.json'],
 "    \ 'rust': ['Cargo.toml'],
-"    \ 'python': ['porject.toml', '.root'],
+"    \ 'python': ['pyproject.toml', '.root', 'setup.py', '.git'],
 "    \ }
 
 let g:LanguageClient_serverCommands.python = ['pyls', '-vv', '--log-file', '/tmp/pyls.log']
