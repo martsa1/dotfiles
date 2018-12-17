@@ -12,10 +12,10 @@ align_closing_bracket_with_visual_indent=False
 allow_multiline_dictionary_keys=False
 
 # Allow lambdas to be formatted on more than one line.
-allow_multiline_lambdas=False
+allow_multiline_lambdas=True
 
 # Allow splits before the dictionary value.
-allow_split_before_dict_value=True
+allow_split_before_dict_value=False
 
 # Number of blank lines surrounding top-level function and class
 # definitions.
@@ -152,7 +152,8 @@ spaces_before_comment=2
 space_between_ending_comma_and_closing_bracket=True
 
 # Split before arguments
-split_all_comma_separated_values=True
+# split_all_comma_separated_values=True
+split_all_comma_separated_values=False
 
 # Split before arguments if the argument list is terminated by a
 # comma.
@@ -217,7 +218,7 @@ split_before_named_assigns=True
 split_complex_comprehension=True
 
 # The penalty for splitting right after the opening bracket.
-split_penalty_after_opening_bracket=0
+split_penalty_after_opening_bracket=1
 
 # The penalty for splitting the line after a unary operator.
 split_penalty_after_unary_operator=10000
@@ -238,7 +239,7 @@ split_penalty_excess_character=7000
 
 # The penalty incurred by adding a line split to the unwrapped line. The
 # more line splits added the higher the penalty.
-split_penalty_for_added_line_split=0
+split_penalty_for_added_line_split=100
 
 # The penalty of splitting a list of "import as" names. For example:
 #
