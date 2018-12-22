@@ -3,6 +3,7 @@
 - hosts: all
   vars:
     user: "sam"
+  import_playbook: terminal_system.yml
   roles:
     - role: "dotfiles"
     - role: "zsh"
