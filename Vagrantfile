@@ -14,6 +14,9 @@ Vagrant.configure("2") do |config|
       # Display the VirtualBox GUI when booting the machine
       vb.gui = true
 
+      # Name the VM in Virtualbox
+      vb.name = "sm-dev-ubuntu"
+
       # Customize the amount of memory on the VM:
       vb.memory = "4096"
       vb.cpus = "4"
@@ -23,7 +26,7 @@ Vagrant.configure("2") do |config|
       inline: "apt-get update && apt-get install -y python # && ln -sf /usr/bin/python2 /usr/bin/python"
 
     config.vm.provision :ansible do |ansible|
-      ansible.playbook = "setup_tui.yml"
+      ansible.playbook = "gui_system.yml"
     end
   end
   #################################################################################################
@@ -42,6 +45,9 @@ Vagrant.configure("2") do |config|
       # Display the VirtualBox GUI when booting the machine
       vb.gui = true
 
+      # Name the VM in Virtualbox
+      vb.name = "sm-dev-ubuntu"
+
       # Customize the amount of memory on the VM:
       vb.memory = "4096"
       vb.cpus = "4"
@@ -51,7 +57,7 @@ Vagrant.configure("2") do |config|
       inline: "pacman --noconfirm -S python2 && ln -sf /usr/bin/python2 /usr/bin/python"
 
     config.vm.provision :ansible do |ansible|
-      ansible.playbook = "setup_tui.yml"
+      ansible.playbook = "gui_system.yml"
     end
   end
   #################################################################################################
