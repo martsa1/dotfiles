@@ -1,0 +1,16 @@
+---
+# packages to be installed alongside i3wm
+installs:
+  - arandr
+  - compton
+  - curl
+  - feh
+  - gtk-chtheme
+  - i3
+  - i3blocks
+  - lxappearance
+  - qt4-qtconfig
+  - rofi
+  - scrot
+  - shutter
+  # - playerctl
