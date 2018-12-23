@@ -14,3 +14,5 @@ installs:
   - scrot
   - shutter
   # - playerctl
+  - ubuntu-desktop  # TODO: Eventually it would be nice to drop this and build a more minimal environment.
+  - xinit
