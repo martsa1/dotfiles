@@ -72,7 +72,7 @@ font-0 =  "Fura Mono Nerd Font:size=9"
 
 modules-left = i3
 modules-center = spotify
-modules-right = timetrap filesystem xbacklight volume xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = timetrap filesystem xbacklight volume xkeyboard memory cpu wlan eth battery temperature powermenu
 
 ;wm-restack = i3
 ;override-redirect = true
@@ -91,7 +91,7 @@ tray-padding = 2
 tray-transparent = false
 tray-background = ${colors.background}
 
-modules-right = timetrap filesystem xbacklight volume xkeyboard memory cpu wlan eth battery temperature
+modules-right = timetrap filesystem xbacklight volume xkeyboard memory cpu wlan eth battery temperature date
 
 
 [module/xwindow]
