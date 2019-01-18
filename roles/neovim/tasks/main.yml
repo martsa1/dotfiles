@@ -7,13 +7,13 @@
 
 - name: "add neovim repo"
   become: true
-  when: ansible_distribution|lower() == "debian"
+  when: ansible_os_family|lower() == "debian"
   apt_repository:
     repo: "ppa:neovim-ppa/stable"
 
 - name: "Update apt repo's after adding neovim PPA"
   become: true
-  when: ansible_distribution|lower() == "ubuntu"
+  when: ansible_os_family|lower() == "ubuntu"
   apt:
     update_cache: true
 
