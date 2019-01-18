@@ -69,3 +69,6 @@ fi
 if command -v pipenv > /dev/null; then
   eval "$(pipenv --completion)"
 fi
+
+# Enable Better Exceptions in python code
+export BETTER_EXCEPTIONS=1
