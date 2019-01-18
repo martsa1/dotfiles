@@ -13,7 +13,7 @@
 
 - name: "Update apt repo's after adding neovim PPA"
   become: true
-  when: ansible_os_family|lower() == "ubuntu"
+  when: ansible_os_family|lower() == "debian"
   apt:
     update_cache: true
 
