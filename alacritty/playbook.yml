@@ -12,15 +12,14 @@
     - name: Install required apt packages
       become: true
       apt:
-        name: "{{item}}"
+        name:
+          - "cmake"
+          - "gzip"
+          - "libfontconfig1-dev"
+          - "libfreetype6-dev"
+          - "xclip"
         state: "present"
         cache_valid_time: 600
-      with_items:
-        - "cmake"
-        - "gzip"
-        - "libfontconfig1-dev"
-        - "libfreetype6-dev"
-        - "xclip"
 
 
     ##############################
