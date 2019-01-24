@@ -32,3 +32,5 @@ bar {
 }
 
 exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg
+
+exec setxkbmap us

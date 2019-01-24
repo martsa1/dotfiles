@@ -286,16 +286,20 @@ focus_on_window_activation urgent
 # Default Workspaces for various applications
 assign [class="[Ss]potify"] $workspace10
 assign [class="Google-chrome"] $workspace3
+assign [class="Vivaldi-stable"] $workspace3
 assign [title="alacritty"] $workspace1
 assign [class="skypeforlinux"] $workspace9
 assign [class="discord"] $workspace9
+assign [class="Slack"] $workspace9
 
 # I want pretty GUI transitions and stuff!
 exec --no-startup-id compton -f
 
-# I also want to get synergy, chrome & a terminal to start on login
-exec --no-startup-id synergy
-exec google-chrome
+# # I also want to get synergy, chrome & a terminal to start on login
+# I also want to get vivaldi & a terminal to start on login
+# exec --no-startup-id synergy
+# exec google-chrome
+exec vivaldi-bin
 exec spotify
 exec alacritty
 exec --no-startup-id shutter --min_at_startup
