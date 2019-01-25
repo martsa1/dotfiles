@@ -53,3 +53,9 @@ exec --no-startup-id rescuetime
 bar {
 		 i3bar_command ~/code/personal/dotfiles/polybar/launch.py
 }
+
+# Set the desktop background
+exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg
+
+# Set Keyboard layout to UK
+exec setxkbmap -layout gb

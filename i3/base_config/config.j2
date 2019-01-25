@@ -1,4 +1,4 @@
 {{ lookup('file', 'common') }}
 
-{{ lookup('file', '{{ansible_hostname}}') }}
+{{ lookup('file', '{{ansible_hostname}}', errors='ignore') }}
 
