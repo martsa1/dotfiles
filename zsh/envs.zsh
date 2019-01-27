@@ -34,7 +34,7 @@ source  $powerline_script
 #Python VirtualEnv Settings
 export WORKON_HOME=~/.python
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source ~/.local/bin/virtualenvwrapper.sh
+[ -f ~/.local/bin/virtualenvwrapper.sh ] && source ~/.local/bin/virtualenvwrapper.sh
 
 # Rebind the terminal stop keybind so that we can use ^s to search forward
 # in history
