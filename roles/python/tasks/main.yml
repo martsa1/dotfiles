@@ -10,16 +10,61 @@
     state: present
   become: true
 
-- name: Install virtualenvwrapper for pipsi
-  command: "pip3 install --user virtualenvwrapper"
+- name: Ensure personal code directory exists
+  file:
+    path: "/home/{{user}}/code/personal"
+    state: directory
+    owner: "{{user}}"
+  become: true
+  become_user: "{{user}}"
+
+- name: "Pull in pyenv installer script"
+  get_url:
+    url: "https://pyenv.run"
+    dest: "/tmp/pyenv.run"
+  become: true
+  become_user: "{{user}}"
+
+- name: "Install pyenv"
+  command: "bash /tmp/pyenv.run"
+  args:
+    creates: "/home/{{user}}/code/personal/pyenv"
+  environment: "{{env}}"
   tags:
     - skip_ansible_lint
   become: true
   become_user: "{{user}}"
-  environment:
-    LC_ALL: "C.UTF-8"
-    LANG: "C.UTF-8"
-    PATH: "/home/{{user}}/.local/bin:{{ansible_env.PATH}}"
+
+- name: "Install python versions"
+  shell: 'eval "$(pyenv init -)" && pyenv install {{item}}'
+  args:
+    executable: "/bin/bash"
+    creates: "/home/{{user}}/code/personal/pyenv/versions/{{item}}"
+  with_items: "{{python_versions}}"
+  become: true
+  become_user: "{{user}}"
+  environment: "{{env}}"
+
+
+- name: "Set global default python version to {{default_python_version}}"
+  shell: 'eval "$(pyenv init -)" && pyenv global {{default_python_version}}'
+  args:
+    executable: "/bin/bash"
+  tags:
+    - skip_ansible_lint
+  become: true
+  become_user: "{{user}}"
+  environment: "{{env}}"
+
+- name: Install virtualenvwrapper for pipsi
+  shell: 'eval "$(pyenv init -)" && pip install --user virtualenvwrapper'
+  args:
+    executable: "/bin/bash"
+  tags:
+    - skip_ansible_lint
+  become: true
+  become_user: "{{user}}"
+  environment: "{{env}}"
 
 - name: Pull in Pipsi
   get_url:
@@ -29,43 +74,24 @@
   become_user: "{{user}}"
 
 - name: Install pipsi
-  command: "python3 /tmp/get-pipsi.py"
+  shell: 'eval "$(pyenv init -)" && python /tmp/get-pipsi.py'
+  args:
+    executable: "/bin/bash"
   tags:
     - skip_ansible_lint
   become: true
   become_user: "{{user}}"
-  environment:
-    LC_ALL: "C.UTF-8"
-    LANG: "C.UTF-8"
-    PATH: "/home/{{user}}/.local/bin:{{ansible_env.PATH}}"
+  environment: "{{env}}"
 
-- name: Clone pyenv repo
-  git:
-    repo: "{{pyenv_repo}}"
-    dest: "/home/{{user}}/code/personal/pyenv"
-    accept_hostkey: "yes"
-    clone: "yes"
-    update: "yes"
-    version: master
-  become: true
-  become_user: "{{user}}"
-
-- name: Install various python packages
-  command: "pipsi install {{item[0]}}"
+- name: "Install various python packages"
+  shell: 'eval "$(pyenv init -)" && pipsi install {{item[0]}}'
   args:
+    executable: "/bin/bash"
     creates: "{{python_bin_dir}}/{{item[1]}}"
   with_items: "{{ python_tools }}"
   become: true
   become_user: "{{user}}"
   environment: "{{env}}"
-
-- name: Ensure personal code directory exists
-  file:
-    path: "/home/{{user}}/code/personal"
-    state: directory
-    owner: "{{user}}"
-  become: true
-  become_user: "{{user}}"
 
 - name: "Symlink style.yapf to home directory"
   file:
@@ -74,4 +100,4 @@
     state: link
     owner: "{{user}}"
     group: "{{user}}"
-  become: "true"
+  become: true

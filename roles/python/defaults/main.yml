@@ -1,13 +1,25 @@
 ---
 # Variables used when setting up tools
 user: "{{ansible_user_id}}"
+
 dotfiles_base_dir: "{{personal_code_base_dir}}/dotfiles"
 personal_code_base_dir: "/home/{{user}}/code/personal"
-pyenv_repo: "https://github.com/pyenv/pyenv.git"
 python_bin_dir: "/home/{{user}}/.local/bin"
-python_tools:  # Note, first is the package to install, second is the executable to check for!
+
+pyenv_repo: "https://github.com/pyenv/pyenv.git"
+
+default_python_version: "3.6.8"
+python_versions:
+  - "2.7.15"
+  - "3.7.2"
+  - "{{default_python_version}}"
+
+# Note, first is the package to install, second is the executable to check for!
+python_tools:
+  - [["ansible", "ansible"]]
   - [["glances", "glances"]]
   - [["hatch", "hatch"]]
   - [["pipenv", "pipenv"]]
   - [["powerline-status", "powerline"]]
+  - [["yamllint", "yamllint"]]
   - [["yq", "yq"]]
