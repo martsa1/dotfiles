@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   ################################## Ubuntu #######################################################
   # For complete reference, please see https://docs.vagrantup.com.
   config.vm.define "sm-dev-ubuntu" do |ubuntu|
-    config.vm.box = "ubuntu/xenial64"
+    config.vm.box = "ubuntu/bionic64"
 
     config.vm.network "public_network"
 
@@ -46,7 +46,7 @@ Vagrant.configure("2") do |config|
       vb.gui = true
 
       # Name the VM in Virtualbox
-      vb.name = "sm-dev-ubuntu"
+      vb.name = "sm-dev-arch"
 
       # Customize the amount of memory on the VM:
       vb.memory = "4096"
