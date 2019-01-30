@@ -288,6 +288,7 @@ assign [class="[Ss]potify"] $workspace10
 assign [class="Google-chrome"] $workspace3
 assign [class="Vivaldi-stable"] $workspace3
 assign [title="alacritty"] $workspace1
+assign [title="Alacritty"] $workspace1
 assign [class="skypeforlinux"] $workspace9
 assign [class="discord"] $workspace9
 assign [class="Slack"] $workspace9
