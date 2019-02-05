@@ -157,14 +157,16 @@ set completeopt-=preview
 " but shows you what will happen live.
 set inccommand=split
 
+if exists("$VAMPIRE")
 "Lint files with neomake
 " When writing a buffer, reading a bufer, and on normal mode changes (after 750ms).
-"call neomake#configure#automake({
-"\ 'TextChanged': {},
-"\ 'InsertLeave': {},
-"\ 'BufWritePost': {'delay': 0},
-"\ 'BufWinEnter': {'delay': 0},
-"\ }, 750)
+  call neomake#configure#automake({
+  \ 'TextChanged': {},
+  \ 'InsertLeave': {},
+  \ 'BufWritePost': {'delay': 0},
+  \ 'BufWinEnter': {'delay': 0},
+  \ }, 750)
+endif
 
 " Need to dynamically set this up depending on system?
 let g:python_host_prog = '/usr/local/bin/python'
