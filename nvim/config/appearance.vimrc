@@ -8,6 +8,7 @@
 if exists("$VAMPIRE")
   colorscheme dracula
   color dracula
+  set colorcolumn=100
 elseif exists("$DARKSUN")
 	set background=dark "(light|dark)
 	colorscheme solarized

@@ -71,6 +71,18 @@ Plug 'pelodelfuego/vim-swoop'
 " Add support for i3 config files
 Plug 'PotatoesMaster/i3-vim-syntax'
 
+" DevDocs plugin - epic documentation aid
+Plug 'rhysd/devdocs.vim'
+
+" Logstash file syntax support
+Plug 'robbles/logstash.vim'
+
+" Dev Icons in NERDTree...
+Plug 'ryanoasis/vim-devicons'
+
+" Vim NeoFormat -- Code formatting plugin
+Plug 'sbdchd/neoformat'
+
 " Epic Comment management
 Plug 'scrooloose/nerdcommenter'
 
@@ -101,6 +113,9 @@ Plug 'vim-scripts/BufOnly.vim'
 
 " Solarized Theme is one of the most popular colourschemes
 Plug 'vim-scripts/Solarized'
+
+" System-d syntax highlighting for systemd unit files
+Plug 'wgwoods/vim-systemd-syntax'
 
 " Give git hints on files/dirs regarding: Add, Modify, Remove within NerdTree
 Plug 'Xuyuanp/nerdtree-git-plugin'
