@@ -34,4 +34,4 @@ bar {
 exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg
 
 # Set Keyboard layout to US
-exec setxkbmap -layout us
+exec setxkbmap -layout us -option ctrl:nocaps
