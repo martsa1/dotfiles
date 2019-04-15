@@ -24,12 +24,6 @@ export PATH=$PATH:$GOPATH/bin
 # Put Rust on the path
 export PATH=$PATH:$HOME/.cargo/bin
 
-# Setup the powerline daemon for use with tmux etc.
-powerline-daemon -q
-PYTHON_VERSION=$(python3 --version | sed -n 's/.*\(3\..\).*/\1/p')
-powerline_script=~/.local/venvs/powerline-status/lib/python${PYTHON_VERSION}/site-packages/powerline/bindings/zsh/powerline.zsh
-source  $powerline_script
-
 
 #Python VirtualEnv Settings
 export WORKON_HOME=~/.python
@@ -69,6 +63,12 @@ fi
 if command -v pipenv > /dev/null; then
   eval "$(pipenv --completion)"
 fi
+
+# Setup the powerline daemon for use with tmux etc.
+powerline-daemon -q
+PYTHON_VERSION=$(python3 --version | sed -n 's/.*\(3\..\).*/\1/p')
+powerline_script=~/.local/venvs/powerline-status/lib/python${PYTHON_VERSION}/site-packages/powerline/bindings/zsh/powerline.zsh
+source  $powerline_script
 
 # Enable Better Exceptions in python code
 export BETTER_EXCEPTIONS=1
