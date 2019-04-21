@@ -72,3 +72,6 @@ fi
 
 # Enable Better Exceptions in python code
 export BETTER_EXCEPTIONS=1
+
+# AddCargo to PATH for work with rust
+export PATH="~/.cargo/bin:$PATH"
