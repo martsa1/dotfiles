@@ -3,8 +3,8 @@
 ################################################################################
 
 #Ensure that monitors are appropriately setup
-exec xrandr --output Virtual1 --primary
-exec xrandr --output Virtual2 --auto --right-of Virtual1
+exec xrandr --output VGA-1 --primary
+exec xrandr --output VGA-2 --auto --right-of VGA-1
 
 # Assign Workspaces to specific screens
 # Terminals
@@ -35,3 +35,6 @@ exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg
 
 # Set Keyboard layout to US
 exec setxkbmap -layout us -option ctrl:nocaps
+
+# Keepmenu (Keepass for Rofi)
+bindsym $mod+p exec keepmenu
