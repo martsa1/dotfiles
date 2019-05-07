@@ -4,9 +4,9 @@
   vars:
     user: "sam"
   roles:
-    - role: "dotfiles"
-    - role: "zsh"
+    # - role: "dotfiles"
+    # - role: "zsh"
     # - role: "bash"
-    - role: "python"
-    - role: "tmux"
-    - role: "nvim"
+    # - role: "python"
+    # - role: "tmux"
+    - role: "neovim"
