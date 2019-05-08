@@ -36,11 +36,7 @@
             "width": "auto"
           },
           {
-            "function": "powerline.segments.common.vcs.stash",
-            "priority": 50
-          },
-          {
-            "function": "powerline.segments.common.vcs.branch",
+            "function": "powerline_gitstatus.gitstatus",
             "priority": 40
           },
           {
@@ -55,10 +51,12 @@
     ],
     "left": [
       {
+        "function": "powerline.segments.shell.last_pipe_status",
+        "priority": 10
+      },
+      {
         "function": "powerline.segments.shell.last_status",
-        "priority": 10,
-        "draw_soft_divider": true,
-        "draw_hard_divider": true
+        "priority": 10
       },
       {
         "type": "string",
