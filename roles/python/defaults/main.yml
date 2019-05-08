@@ -21,5 +21,6 @@ python_tools:
   - [["hatch", "hatch"]]
   - [["pipenv", "pipenv"]]
   - [["powerline-status", "powerline"]]
+  - [["powerline-gitstatus", "powerline-gitstatus"]]
   - [["yamllint", "yamllint"]]
   - [["yq", "yq"]]
