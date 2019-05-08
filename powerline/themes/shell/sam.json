@@ -55,10 +55,6 @@
         "priority": 10
       },
       {
-        "function": "powerline.segments.shell.last_status",
-        "priority": 10
-      },
-      {
         "type": "string",
         "highlight_groups": ["cwd"],
         "contents": " ",
