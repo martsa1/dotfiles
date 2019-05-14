@@ -1,3 +1,6 @@
+# Prompt for a password using Zenity
+
+export SUDO_ASKPASS="${HOME}/code/personal/dotfiles/i3/scripts/password_prompt.sh"
 # Editor Settings
 export EDITOR=nvim
 export SHELL=$(which zsh)
