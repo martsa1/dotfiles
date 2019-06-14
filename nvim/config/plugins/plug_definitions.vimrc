@@ -77,6 +77,12 @@ Plug 'rhysd/devdocs.vim'
 " Logstash file syntax support
 Plug 'robbles/logstash.vim'
 
+" Quickfix helpers
+Plug 'romainl/vim-qf'
+
+" Add the base rust syntax highlighting plugin
+Plug 'rust-lang/rust.vim'
+
 " Dev Icons in NERDTree...
 Plug 'ryanoasis/vim-devicons'
 
