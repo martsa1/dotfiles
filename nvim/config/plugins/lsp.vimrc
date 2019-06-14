@@ -7,19 +7,27 @@ let g:LanguageClient_autoStart = 1
 " Valid options: "Never", "Auto", "Always"
 let g:LanguageClient_hoverPreview = "Always"
 let g:LanguageClient_serverCommands = {}
+
+" Put LSP output into location list rather than quickfix by default
+let g:LanguageClient_diagnosticsList = "Location"
+
 " waitOutputTimeout default is 10
 "let g:LanguageClient_waitOutputTimeout = 10
+"
 " We can load language server settings instead of setting
 " them here?
 " default: ".vim/settings.json"
 "let g:LanguageClient_settingsPath = <insert settings file path here>
+
 " default: 0
 " values: 0, 1
 "let g:LanguageClient_loadSettings = 0
+
 " Controls how frequently client sends server text changes
 " default is disabled
 " value: in seconds
 "let g:LanguageClient_changeThrottle = 0.5
+
 " Whether to bring up hover info for current cursor position
 " Valid options: 'Never', 'Auto', 'Always'
 " default: 'Auto'

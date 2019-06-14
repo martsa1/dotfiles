@@ -144,7 +144,7 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 " Rust auto completion client
 Plug 'sebastianmarkow/deoplete-rust'
 
-" Language Server Protocol
+" Language Server Protocol - LSP
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
