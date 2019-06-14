@@ -9,15 +9,8 @@ Plug 'airblade/vim-gitgutter'
 " Vim TOML Syntax Highlighting
 Plug 'cespare/vim-toml'
 
-" Old jedi vim not using deoplete -- for some reason need both deoplete-jedi
-" and this
-" This seems to complete with deoplete-jedi and causes some weird behavior
-" Completion still seems to work without this plugin enabled
-"Plug 'davidhalter/jedi-vim'
-
 " Dracular theme is a nice Dark Theme
 Plug 'dracula/vim'
-
 
 " Add buffer explorer for easier buffer traversal
 Plug 'jlanzarotta/bufexplorer'
@@ -65,17 +58,8 @@ Plug 'pangloss/vim-javascript'
 " Ansible File support in vim
 Plug 'pearofducks/ansible-vim'
 
-" Swoop provides multi-buffer find and replace
-Plug 'pelodelfuego/vim-swoop'
-
 " Add support for i3 config files
 Plug 'PotatoesMaster/i3-vim-syntax'
-
-" DevDocs plugin - epic documentation aid
-Plug 'rhysd/devdocs.vim'
-
-" Logstash file syntax support
-Plug 'robbles/logstash.vim'
 
 " Quickfix helpers
 Plug 'romainl/vim-qf'
@@ -94,9 +78,6 @@ Plug 'scrooloose/nerdcommenter'
 
 " File tree within vim
 Plug 'scrooloose/nerdtree'
-
-"Add Yang language support to vim
-Plug 'Shathur/yang.vim'
 
 " Async support for nvim calling out to python process
 Plug 'Shougo/deoplete.nvim'
@@ -129,23 +110,11 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Visually display indentation
 Plug 'Yggdroot/indentLine'
 
-" Python project used by deoplete for code completion
-"Plug 'zchee/deoplete-jedi'
-
 " Symantic python highlighting
 Plug 'numirias/semshi'
 
-"" JS stuff
-" Maybe checkout ack.vim for source code searching.
-"Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' } " needs sudo?
-"Plug 'ternjs/tern_for_vim'
-
-" ------------------ Go Lang ------------------
-
 " Go auto completion client
 Plug 'zchee/deoplete-go', { 'do': 'make'}
-
-" ------------------ Rust Lang ------------------
 
 " Rust auto completion client
 Plug 'sebastianmarkow/deoplete-rust'
