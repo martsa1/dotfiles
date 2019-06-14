@@ -18,3 +18,5 @@ let g:neoformat_python_yapf = {
     \ }
 
 let g:neoformat_enabled_python = ['yapf']
+
+let g:neoformat_enabled_json = ['jq']
