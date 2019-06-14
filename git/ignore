@@ -4,3 +4,4 @@
 .atom-build.json
 .ctagsignore
 tags
+.vim/
