@@ -50,6 +50,16 @@
   when: ansible_os_family == "Debian"
   become: true
 
+- name: "Ensure correct ownership of tmux source"
+  file:
+    path: "{{personal_code_base_dir}}/tmux-{{tmux_version}}/"
+    state: directory
+    recurse: true
+    owner: "{{user}}"
+    group: "{{user}}"
+  when: ansible_os_family == "Debian"
+  become: true
+
 - name: "Build Tmux"
   command: "{{item}}"
   args:

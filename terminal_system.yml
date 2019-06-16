@@ -8,5 +8,5 @@
     # - role: "zsh"
     # - role: "bash"
     # - role: "python"
-    # - role: "tmux"
-    - role: "neovim"
+    - role: "tmux"
+    # - role: "neovim"
