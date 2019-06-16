@@ -70,7 +70,7 @@ fi
 # Setup the powerline daemon for use with tmux etc.
 powerline-daemon -q
 PYTHON_VERSION=$(python3 --version | sed -n 's/.*\(3\..\).*/\1/p')
-powerline_script=~/.local/venvs/powerline-status/lib/python${PYTHON_VERSION}/site-packages/powerline/bindings/zsh/powerline.zsh
+powerline_script=~/.local/pipx/venvs/powerline-status/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh
 source  $powerline_script
 
 # Enable Better Exceptions in python code
