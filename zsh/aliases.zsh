@@ -15,6 +15,7 @@ alias l='ls -CF'
 # Git related Aliases
 alias gs='git status'
 alias gb='git branch -vv'
+alias gd='git log --left-right --graph --cherry-pick --oneline'
 
 alias wip='git commit -a -m WIP'
 alias squish='git status && git commit -a --amend -C HEAD'
