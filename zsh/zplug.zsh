@@ -1,5 +1,8 @@
 # zplug definitions for extensions to ZSH
 
+# Allow Zplug to manage itself
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
 # Adds "k" - A super sexy directory listing tool.
 zplug "supercrabtree/k"
 

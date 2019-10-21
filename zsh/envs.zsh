@@ -31,7 +31,7 @@ export PATH=$PATH:$HOME/.cargo/bin
 #Python VirtualEnv Settings
 export WORKON_HOME=~/.python
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-[ -f ~/.local/bin/virtualenvwrapper.sh ] && source ~/.local/bin/virtualenvwrapper.sh
+[ -f ~/.local/bin/virtualenvwrapper_lazy.sh ] && source ~/.local/bin/virtualenvwrapper_lazy.sh
 
 # Rebind the terminal stop keybind so that we can use ^s to search forward
 # in history
@@ -56,18 +56,20 @@ export ZPLUG_LOADFILE="$HOME/code/personal/dotfiles/zsh/zplug.zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Setup environment variables needed for pyenv
-if (( ! ${+POETRY_ACTIVE} )); then
-  export PYENV_ROOT="$HOME/code/personal/pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init -)"
-  fi
-fi
+export PYENV_ROOT="$HOME/code/personal/pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+pyenv () {
+  unset -f pyenv
+  eval "$(command pyenv init -)"
+  pyenv $@
+}
 
 # Enable Pipenv Completions
-if command -v pipenv > /dev/null; then
-  eval "$(pipenv --completion)"
-fi
+pipenv () {
+  unset -f pipenv
+  eval "$(command pipenv --completion)"
+  pipenv $@
+}
 
 # Setup the powerline daemon for use with tmux etc.
 powerline-daemon -q
@@ -80,3 +82,24 @@ export BETTER_EXCEPTIONS=1
 
 # AddCargo to PATH for work with rust
 export PATH="~/.cargo/bin:$PATH"
+
+
+# NVM settings
+# placeholder nvm shell function
+# On first use, it will set nvm up properly which will replace the `nvm`
+# shell function with the real one
+nvm() {
+  if command -v nvm 1>/dev/null 2>&1; then
+    export NVM_DIR="$HOME/.nvm"
+    # shellcheck disable=SC1090
+    source "${NVM_DIR}/nvm.sh"
+    if [[ -e ~/.nvm/alias/default ]]; then
+      PATH="${PATH}:${HOME}.nvm/versions/node/$(cat ~/.nvm/alias/default)/bin"
+    fi
+    # invoke the real nvm function now
+    nvm "$@"
+  else
+    echo "nvm is not installed" >&2
+    return 1
+  fi
+}
