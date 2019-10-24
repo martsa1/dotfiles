@@ -1,22 +1,21 @@
 [[source]]
-
 verify_ssl = true
 name = "pypi"
 url = "https://pypi.python.org/simple"
 
 [packages]
-
 ansible = "*"
 molecule = "*"
 docker-py = "*"
 
 [dev-packages]
-
 ipython = "==6.5.0"
 pylint = "*"
 "flake8" = "*"
 passlib = "*"
 ansible-lint = "*"
+ansible = "*"
+ipdb = "*"
 
 [requires]
 python_version = "3.6.8"
