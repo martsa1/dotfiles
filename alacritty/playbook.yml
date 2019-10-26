@@ -6,10 +6,25 @@
     - vars.yml
 
   tasks:
+    #####################################
+    # Ensure configuration is in place. #
+    #####################################
+    - name: Ensure alacritty config folder exists
+      file:
+        path: "/home/{{ user }}/.config/alacritty"
+        state: directory
+
+    - name: "Symlink Alacritty config into place"
+      file:
+        src: "{{ dotfiles_base_dir }}/alacritty/alacritty.yml"
+        dest: "{{ config_base_dir }}/alacritty/alacritty.yml"
+        state: link
+
     #########################################
-    # Ensure base dependencies are present.
+    # Ensure base dependencies are present. #
     #########################################
-    - name: Install required apt packages
+
+    - name: Install required apt packages for alacritty compilation
       become: true
       apt:
         name:
@@ -17,114 +32,145 @@
           - "gzip"
           - "libfontconfig1-dev"
           - "libfreetype6-dev"
+          - "libxcb-xfixes0-dev"
+          - "pkg-config"
+          - "python3"
           - "xclip"
         state: "present"
         cache_valid_time: 600
 
+    #######################
+    # Setup rustup & rust #
+    #######################
 
-    ##############################
-    # Setup rustup & rust
-    ##############################
-    - name: Download rustup.rs
+    - name: "Ensure rustup is installed"
+      register: rustup
+      stat:
+        path: "/home/{{ user }}/.cargo/bin/rustup"
+
+    - name: "Download rustup"
+      when: rustup.stat.exists
+      register: rustup_download
       get_url:
         url: "https://sh.rustup.rs"
         dest: "/tmp/rustup_setup"
         mode: "ug=rwx,o=r"
 
-    - name: Install rustup
+    - name: "Install rustup"
+      when: rustup_download.changed
       command: "sh /tmp/rustup_setup -y --no-modify-path"
 
-    ##################
-    # Build Alacritty
-    ##################
-    - name: Clone Alacritty Repo
+    ###################
+    # Build Alacritty #
+    ###################
+    - name: "Clone Alacritty Repo"
+      register: alacritty_repo
       git:
         repo: https://github.com/jwilm/alacritty.git
-        dest: "{{repo_base_dir}}"
+        dest: "{{ repo_base_dir }}"
         version: master
 
-    #- name: Cargo install alacritty
-    #  command: "{{item}}"
-    #  args:
-    #    chdir: "{{repo_base_dir}}"
-    #  with_items:
-    #    - "cargo install alacritty"
-
-    - name: Set rustup to use stable and ensure its up to date
-      command: "{{item}}"
-      args:
-        chdir: "{{repo_base_dir}}"
+    - name: "Update rustup for alacritty repo"
+      register: alacritty_rustup
+      when: alacritty_repo.changed
       with_items:
-        - "/home/{{user}}/.cargo/bin/rustup override set stable"
-        - "/home/{{user}}/.cargo/bin/rustup update stable"
-
-    - name: "Build Alacritty"
-      command: "{{item}}"
+        - "/home/{{ user }}/.cargo/bin/rustup override set stable"
+        - "/home/{{ user }}/.cargo/bin/rustup update stable"
       args:
-        chdir: "{{repo_base_dir}}"
-      with_items:
-        - "/home/sam/.cargo/bin/cargo build --release"
-        - "tic -x -o target/release/terminfo alacritty.info"
+        chdir: "{{ repo_base_dir }}"
+      command: "{{ item }}"
 
-    - name: "Install Alacritty"
+    - name: "Compile Alacritty"
+      register: alacritty_built
+      when: alacritty_repo.changed
+      with_items:
+        - "/home/{{ user }}/.cargo/bin/cargo build --release"
+      args:
+        chdir: "{{ repo_base_dir }}"
+      command: "{{ item }}"
+
+    - name: "Link Alacritty"
       file:
-        src: "{{repo_base_dir}}/target/release/alacritty"
-        dest: "{{user_bin}}/alacritty"
+        src: "{{ repo_base_dir }}/target/release/alacritty"
+        dest: "{{ user_bin }}/alacritty"
         state: link
 
     - name: "Ensure terminfo dir exists"
+      become: true
       file:
         path: "/usr/share/terminfo/a"
         state: directory
-      become: true
 
     - name: "Symlink Alacritty TermInfo"
-      file:
-        src: "{{repo_base_dir}}/target/release/terminfo/a/{{item}}"
-        dest: "/usr/share/terminfo/a/{{item}}"
-        state: link
       become: true
+      file:
+        src: "{{ repo_base_dir }}/target/release/terminfo/a/{{ item }}"
+        dest: "/usr/share/terminfo/a/{{ item }}"
+        state: link
       with_items:
         - "alacritty"
-        # - "alacritty-256color"
+        - "alacritty+common"
+        - "alacritty-256color"
+        - "alacritty-direct"
 
-    - name: Install alacritty man pages
-      command: "{{item}}"
-      args:
-        chdir: "{{repo_base_dir}}"
+    - name: "Ensure man page dir exists."
+      file:
+        path: "/usr/local/share/man/man1/"
+        state: directory
+
+    - name: "Install alacritty man pages"
       become: true
+      when: alacritty_built.changed
+      args:
+        chdir: "{{ repo_base_dir }}/extra"
       with_items:
         - "gzip -k --force alacritty.man"
         - "mv alacritty.man.gz /usr/local/share/man/man1/alacritty.1.gz"
+      command: "{{ item }}"
 
-    - name: Ensure alacritty config folder exists
+    #####################
+    # Pull in nerdfonts #
+    #####################
+    - name: "Ensure {{ fonts_base_dir }} exists"
       file:
-        path: "/home/{{user}}/.config/alacritty"
+        path: "{{ fonts_base_dir }}"
         state: directory
 
-    - name: "Symlink Alacritty config into place"
-      file:
-        src: "{{dotfiles_base_dir}}/alacritty/alacritty.yml"
-        dest: "{{config_base_dir}}/alacritty/alacritty.yml"
-        state: link
+    - name: "Check fonts installed"
+      register: fonts_installed
+      stat:
+        path: "{{ fonts_base_dir }}/Fura Mono Regular Nerd Font Complete.otf"
 
-    - name: "Pull in Fira Mono nerdfont"
+    - name: "Download Fira Mono"
+      register: "download_fonts"
+      when: fonts_installed.stat.exists == false
       get_url:
         url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraMono.zip"
         dest: "/tmp/FiraMono.zip"
 
-    - name: "Ensure {{fonts_base_dir}} exists"
-      file:
-        path: "{{fonts_base_dir}}"
-        state: directory
-
-    - name: "Unpack Fira Mono"
+    - name: "Unpack Fonts"
+      when: fonts_installed.stat.exists == false
+      notify: "Update Font Cache"
       unarchive:
         src: "/tmp/FiraMono.zip"
-        dest: "{{fonts_base_dir}}"
+        dest: "{{ fonts_base_dir }}"
 
+    # #######################################################################
+    # # Alacritty now provides pre-built debs from github.  We just need to #
+    # # download one of those from now on.                                  #
+    # #######################################################################
+
+    # - name: Download debian package
+    #   get_url:
+    #     url: "https://github.com/jwilm/alacritty/releases/download/v{{ alacritty_version }}/Alacritty-v{{ alacritty_version }}-ubuntu_18_04_amd64.deb"
+    #     dest: "/home/{{ user }}/Downloads/alacritty.deb"
+
+    # - name: "Install alacritty package"
+    #   apt:
+    #     deb: "/home/{{ user }}/Downloads/alacritty.deb"
+    #   become: true
+
+  handlers:
     - name: "Update Font Cache"
-      command: "fc-cache -vf {{fonts_base_dir}}"
-
-
+      command: "fc-cache -vf {{ fonts_base_dir }}"
 
