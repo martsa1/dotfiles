@@ -49,7 +49,7 @@
         path: "/home/{{ user }}/.cargo/bin/rustup"
 
     - name: "Download rustup"
-      when: rustup.stat.exists
+      when: rustup.stat.exists == false
       register: rustup_download
       get_url:
         url: "https://sh.rustup.rs"
@@ -103,15 +103,15 @@
 
     - name: "Symlink Alacritty TermInfo"
       become: true
-      file:
-        src: "{{ repo_base_dir }}/target/release/terminfo/a/{{ item }}"
-        dest: "/usr/share/terminfo/a/{{ item }}"
-        state: link
       with_items:
         - "alacritty"
         - "alacritty+common"
         - "alacritty-256color"
         - "alacritty-direct"
+      file:
+        src: "{{ repo_base_dir }}/target/release/terminfo/a/{{ item }}"
+        dest: "/usr/share/terminfo/a/{{ item }}"
+        state: link
 
     - name: "Ensure man page dir exists."
       file:
