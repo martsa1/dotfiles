@@ -10,7 +10,7 @@
     # Ensure base dependencies are present. #
     #########################################
 
-    - name: Install required apt packages for alacritty compilation
+    - name: Install required apt packages for rofi compilation
       become: true
       apt:
         name:
