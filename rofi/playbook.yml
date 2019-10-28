@@ -1,0 +1,90 @@
+# vim: se filetype=yaml.ansible
+---
+
+- hosts: all
+  vars_files:
+    - vars.yml
+
+  tasks:
+    #########################################
+    # Ensure base dependencies are present. #
+    #########################################
+
+    - name: Install required apt packages for alacritty compilation
+      become: true
+      apt:
+        name:
+          - "autoconf"
+          - "automake"
+          - "bison"
+          - "build-essential"
+          - "check"
+          - "flex"
+          - "meson"
+          - "pkgconf"
+
+          # - "gio-unix-2.0-dev"
+          # - "gmodule-2.0-dev"
+          - "libcairo2-dev"
+          # - "libcairo2-xcb-dev"
+          - "libglib2.0-dev"
+          - "libpango1.0-dev"
+          - "libpangocairo-1.0-0"
+          - "librsvg2-dev"
+          - "libstartup-notification0-dev"
+          - "libxcb1-dev"
+          - "libxkbcommon-dev"
+          - "libxkbcommon-x11-dev"
+          - "libxcb-util-dev"
+          # - "libxcb-util-wm-dev"
+          - "libxcb-xrm-dev"
+          - "libxcb-xinerama0-dev"
+
+        state: "present"
+        cache_valid_time: 600
+
+
+    ##############
+    # Build Rofi #
+    ##############
+    - name: "Clone Rofi Repo"
+      register: rofi_repo
+      git:
+        repo: https://github.com/davatorium/rofi.git
+        dest: "{{ repo_base_dir }}"
+        version: master
+
+    - name: "Configure Rofi build"
+      with_items:
+        - "meson setup build"
+        - "ninja -C build"
+      args:
+        chdir: "{{ repo_base_dir }}"
+      command: "{{ item }}"
+
+    - name: "Install Rofi"
+      become: true
+      with_items:
+        - "ninja -C build install"
+      args:
+        chdir: "{{ repo_base_dir }}"
+      command: "{{ item }}"
+
+    # #####################################
+    # # Ensure configuration is in place. #
+    # #####################################
+    - name: Ensure rofi config folder exists
+      file:
+        path: "/home/{{ user }}/.config/rofi"
+        state: directory
+
+    - name: "Symlink Rofi config into place"
+      with_items:
+        - [["config", "config.rasi"]]
+        - [["dracula.rasi", "dracula.rasi"]]
+      file:
+        src: "{{ dotfiles_base_dir }}/rofi/{{ item[0] }}"
+        dest: "{{ config_base_dir }}/rofi/{{ item[1] }}"
+        state: link
+
+
