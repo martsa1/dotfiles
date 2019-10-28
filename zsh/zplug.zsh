@@ -13,4 +13,4 @@ zplug "zsh-users/zsh-completions"
 zplug "srijanshetty/zsh-pip-completion"
 
 # ZSH Syntax Highlighting
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zdharma/fast-syntax-highlighting", defer:2
