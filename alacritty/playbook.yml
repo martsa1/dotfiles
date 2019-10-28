@@ -101,17 +101,10 @@
         path: "/usr/share/terminfo/a"
         state: directory
 
-    - name: "Symlink Alacritty TermInfo"
+    - name: "Install Alacritty TermInfo"
       become: true
-      with_items:
-        - "alacritty"
-        - "alacritty+common"
-        - "alacritty-256color"
-        - "alacritty-direct"
-      file:
-        src: "{{ repo_base_dir }}/target/release/terminfo/a/{{ item }}"
-        dest: "/usr/share/terminfo/a/{{ item }}"
-        state: link
+      when: alacritty_repo.changed
+      command: "tic -xe alacritty,alacritty-direct {{ repo_base_dir }}/extra/alacritty.info"
 
     - name: "Ensure man page dir exists."
       file:
