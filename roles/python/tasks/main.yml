@@ -56,39 +56,49 @@
   become_user: "{{user}}"
   environment: "{{env}}"
 
-- name: Install virtualenvwrapper for pipsi
-  shell: 'eval "$(pyenv init -)" && pip install --user virtualenvwrapper'
+  #- name: Install virtualenvwrapper for pipsi
+  #  shell: 'eval "$(pyenv init -)" && pip install --user virtualenvwrapper'
+  #  args:
+  #    executable: "/bin/bash"
+  #  tags:
+  #    - skip_ansible_lint
+  #  become: true
+  #  become_user: "{{user}}"
+  #  environment: "{{env}}"
+
+  #- name: Pull in Pipsi
+  #  get_url:
+  #    url: "https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py"
+  #    dest: "/tmp/get-pipsi.py"
+  #  become: true
+  #  become_user: "{{user}}"
+
+- name: Install pipx
+  shell: 'eval "$(pyenv init -)" && pip install --user pipx'
   args:
     executable: "/bin/bash"
   tags:
     - skip_ansible_lint
   become: true
-  become_user: "{{user}}"
-  environment: "{{env}}"
-
-- name: Pull in Pipsi
-  get_url:
-    url: "https://raw.githubusercontent.com/mitsuhiko/pipsi/master/get-pipsi.py"
-    dest: "/tmp/get-pipsi.py"
-  become: true
-  become_user: "{{user}}"
-
-- name: Install pipsi
-  shell: 'eval "$(pyenv init -)" && python /tmp/get-pipsi.py'
-  args:
-    executable: "/bin/bash"
-  tags:
-    - skip_ansible_lint
-  become: true
-  become_user: "{{user}}"
-  environment: "{{env}}"
+  become_user: "{{ user }}"
+  environment: "{{ env }}"
 
 - name: "Install various python packages"
-  shell: 'eval "$(pyenv init -)" && pipsi install {{item[0]}}'
+  shell: 'eval "$(pyenv init -)" && pipx install {{item[0]}}'
   args:
     executable: "/bin/bash"
     creates: "{{python_bin_dir}}/{{item[1]}}"
   with_items: "{{ python_tools }}"
+  become: true
+  become_user: "{{user}}"
+  environment: "{{env}}"
+  register: pipx_installs
+ 
+- name: "Inject gitstatus into powerline virtualenv"
+  when: pipx_installs.changed
+  shell: 'eval "$(pyenv init -)" && pipx inject powerline-status powerline-gitstatus'
+  args:
+    executable: "/bin/bash"
   become: true
   become_user: "{{user}}"
   environment: "{{env}}"

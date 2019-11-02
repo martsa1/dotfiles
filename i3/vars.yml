@@ -14,7 +14,7 @@ installs:
   - i3blocks
   - lxappearance
   - qt4-qtconfig
-  - rofi
+  #- rofi
   - scrot
-  - shutter
+  #- shutter
   # - playerctl

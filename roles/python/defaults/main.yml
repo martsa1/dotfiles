@@ -6,11 +6,8 @@ dotfiles_base_dir: "{{personal_code_base_dir}}/dotfiles"
 personal_code_base_dir: "/home/{{user}}/code/personal"
 python_bin_dir: "/home/{{user}}/.local/bin"
 
-pyenv_repo: "https://github.com/pyenv/pyenv.git"
-
 default_python_version: "3.6.8"
 python_versions:
-  - "2.7.15"
   - "3.7.2"
   - "{{default_python_version}}"
 
@@ -21,6 +18,6 @@ python_tools:
   - [["hatch", "hatch"]]
   - [["pipenv", "pipenv"]]
   - [["powerline-status", "powerline"]]
-  - [["powerline-gitstatus", "powerline-gitstatus"]]
+    #- [["powerline-gitstatus", "powerline-gitstatus"]]
   - [["yamllint", "yamllint"]]
   - [["yq", "yq"]]

@@ -54,6 +54,11 @@
   with_items:
     - "git"
 
+- name: "Check if dotfiles are present"
+  register: dotfiles_cloned
+  stat:
+    path: "{{dotfiles_root_path}}/{{dotfiles_base_name}}/.git/"
+
 - name: "Clone dotfiles repo"
   git:
     repo: "{{dotfiles_repo}}"
@@ -66,3 +71,4 @@
   become_user: "{{user}}"
   tags:
     - skip_ansible_lint
+  when:  dotfiles_cloned.stat.isdir is not defined

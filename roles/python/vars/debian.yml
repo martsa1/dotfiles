@@ -14,7 +14,7 @@ depends:
   - "libreadline-dev"
   - "libsqlite3-dev"
   - "libssl-dev"
-  - "libssl1.0-dev"  # Needed for python < 3.5.3 on Ubuntu Bionic.
+    #- "libssl1.0-dev"  # Needed for python < 3.5.3 on Ubuntu Bionic.
   - "libxml2-dev"
   - "libxmlsec1-dev"
   - "llvm"
