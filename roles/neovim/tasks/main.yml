@@ -7,7 +7,7 @@
 
 - name: "add neovim repo"
   become: true
-  when: ansible_os_family|lower() == "debian"
+  when: ansible_os_family|lower() == "debian" and ansible_distribution_major_version < "19"
   apt_repository:
     repo: "ppa:neovim-ppa/stable"
 
