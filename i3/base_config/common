@@ -70,13 +70,8 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # Use Rofi as default launcher
-bindsym $mod+d exec rofi -show run -lines 5 -eh 1.2 -fuzzy -width 60 \
-  -padding 5 -opacity "90" -bw 1 -bc "#BD93F9" -bg "#282A36" -hlbg "#282A36" \
-  -fg "#8BE9FD"  -hlfg "#FF79C6" -font "Fura Mono Nerd Font 13"
-
-bindsym $mod+Shift+d exec rofi -show ssh -lines 5 -eh 1.2 -width 60 \
-  -padding 5 -opacity "85" -bw 1 -bc "#BD93F9"  -bg "#282A36" -hlbg "#282A36" \
-  -fg "#8BE9FD"  -hlfg "#FF79C6" -font "Fura Mono Nerd Font 13"
+bindsym $mod+d exec rofi -show run
+bindsym $mod+Shift+d exec rofi -show ssh
 
 # Launch a file browser
 # If Nautilus tries to launch a Desktop, try running:
