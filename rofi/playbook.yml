@@ -43,6 +43,17 @@
         state: "present"
         cache_valid_time: 600
 
+    - name: "Add 19.10 specific dependencies"
+      become: true
+      apt:
+        name:
+          - libxcb-ewmh-dev
+          - libxcb-icccm4-dev
+          - libxcb-randr0-dev
+        state: present
+        cache_valid_time: 600
+      when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "19.10"
+
 
     ###############################################
     # Build newer version of check (c unit tests) #
