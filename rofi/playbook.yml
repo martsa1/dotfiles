@@ -44,6 +44,41 @@
         cache_valid_time: 600
 
 
+    ###############################################
+    # Build newer version of check (c unit tests) #
+    ###############################################
+    - name: "Download check source code"
+      when: ansible_distribution_major_version == "18"
+      get_url:
+        # url: "https://github.com/libcheck/check/archive/0.13.0.tar.gz"
+        url: "https://github.com/libcheck/check/releases/download/0.13.0/check-0.13.0.tar.gz"
+        dest: /tmp/check.tar.gz
+
+    - name: "unpack check"
+      when: ansible_distribution_major_version == "18"
+      unarchive:
+        src: /tmp/check.tar.gz
+        dest: "/home/{{ user }}/code/personal"
+
+    - name: "Build check"
+      when: ansible_distribution_major_version == "18"
+      args:
+        chdir: "/home/{{ user }}/code/personal/check-0.13.0"
+      with_items:
+        - "autoreconf --install"
+        - "./configure"
+        - "make"
+      command: "{{ item }}"
+
+    - name: "install check"
+      when: ansible_distribution_major_version == "18"
+      args:
+        chdir: "/home/{{ user }}/code/personal/check-0.13.0"
+      become: true
+      with_items:
+        - "make install"
+      command: "{{ item }}"
+
     ##############
     # Build Rofi #
     ##############
@@ -52,22 +87,37 @@
       git:
         repo: https://github.com/davatorium/rofi.git
         dest: "{{ repo_base_dir }}"
-        version: master
+        version: 1.5.4
+        recursive: true
+
+    - name: "Ensure rofi build dir"
+      file:
+        path: "{{ repo_base_dir }}/build"
+        state: directory
+
+    - name: "Run autoreconf"
+      args:
+        chdir: "{{ repo_base_dir}}"
+      command: "autoreconf -i"
 
     - name: "Configure Rofi build"
       with_items:
-        - "meson setup build"
-        - "ninja -C build"
+        # - "meson setup build"
+        # - "ninja -C build"
+        # - "autoreconf -i"
+        - "../configure"
+        - "make"
       args:
-        chdir: "{{ repo_base_dir }}"
+        chdir: "{{ repo_base_dir }}/build"
       command: "{{ item }}"
 
     - name: "Install Rofi"
       become: true
       with_items:
-        - "ninja -C build install"
+        # - "ninja -C build install"
+        - "make install"
       args:
-        chdir: "{{ repo_base_dir }}"
+        chdir: "{{ repo_base_dir }}/build"
       command: "{{ item }}"
 
     # #####################################
