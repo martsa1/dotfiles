@@ -5,4 +5,4 @@ repo_base_dir: /home/{{user}}/code/personal/rg
 dotfiles_base_dir: /home/{{user}}/code/personal/dotfiles
 config_base_dir: /home/{{user}}/.config
 user_bin: /home/{{user}}/bin
-rg_version: 0.7.1
+rg_version: 11.0.2
