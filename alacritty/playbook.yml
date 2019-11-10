@@ -68,7 +68,7 @@
       git:
         repo: https://github.com/jwilm/alacritty.git
         dest: "{{ repo_base_dir }}"
-        version: master
+        version: "{{ alacritty_branch }}"
 
     - name: "Update rustup for alacritty repo"
       register: alacritty_rustup
