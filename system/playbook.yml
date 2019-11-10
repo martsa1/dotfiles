@@ -7,10 +7,16 @@
     - vars.yml
 
   tasks:
-      - name: Copy password feedback config to /etc
+      - name: "Copy password feedback config to /etc"
         copy:
           src: "{{dotfiles_base_dir}}/system/pwfeedback"
           dest: "/etc/sudoers.d/pwfeedback"
           owner: root
         become: yes
 
+      - name: "Copy touchpad configuration to /etc/X11/xorg.conf.d/"
+        copy:
+          src: "{{dotfiles_base_dir}}/system/90-touchpad.conf"
+          dest: "/etc/X11/xorg.conf.d/90-touchpad.conf"
+          owner: root
+        become: yes
