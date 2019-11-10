@@ -12,9 +12,10 @@ installs:
   - gtk-chtheme
   - i3
   - i3blocks
+  - imagemagick
   - lxappearance
   - qt4-qtconfig
-  #- rofi
   - scrot
-  #- shutter
+  # - rofi
+  # - shutter
   # - playerctl
