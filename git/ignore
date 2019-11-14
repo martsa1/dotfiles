@@ -5,3 +5,4 @@
 .ctagsignore
 tags
 .vim/
+.vscode/
