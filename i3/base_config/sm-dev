@@ -38,3 +38,6 @@ exec setxkbmap -layout us -option ctrl:nocaps
 
 # Keepmenu (Keepass for Rofi)
 bindsym $mod+p exec keepmenu
+
+# Auto-mount disks
+exec --no-startup-id udiskie --tray
