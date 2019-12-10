@@ -204,11 +204,11 @@ bindsym $mod+Shift+x exec /home/sam/.config/i3/scripts/lock.sh
 
 # Screenshot utility
 bindsym --release Print exec --no-startup-id --release \
-  "shutter -f -o ~/Pictures/screenshots/`date +%Y-%m-%d_%H.%M.%S`.png"
+  "flameshot gui -p ~/Pictures/screenshots"
 bindsym --release $mod+Print exec --no-startup-id --release \
-  "shutter -a -o ~/Pictures/screenshots/`date +%Y-%m-%d_%H.%M.%S`.png"
+  "flameshot gui -p ~/Pictures/screenshots"
 bindsym --release $mod+Shift+Print exec --no-startup-id \
-  "shutter -s -o ~/Pictures/screenshots/`date +%Y-%m-%d_%H.%M.%S`.png"
+  "flameshot gui -p ~/Pictures/screenshots"
 
 # resize window (you can also use the mouse for that)
 mode "Resize" {
