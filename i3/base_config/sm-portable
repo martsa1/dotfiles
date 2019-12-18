@@ -25,6 +25,8 @@ workspace 10 output eDP-1-1
 
 # XF86MonBrightnessUp
 # XF86MonBrightnessDown
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl s 10%+
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl s 10%-
 # XF86Search
 
 # Volume controls
