@@ -45,6 +45,7 @@ let g:LanguageClient_diagnosticsList = "Location"
 
 let g:LanguageClient_serverCommands.python = ['pyls', '-vv', '--log-file', '/tmp/pyls.log']
 let g:LanguageClient_serverCommands.rust = ['rustup', 'run', 'stable', 'rls']
+let g:LanguageClient_serverCommands.sh = ['bash-language-server', 'start']
 
 " Minimal LSP configuration for JavaScript
 "if executable('javascript-typescript-stdio')
@@ -79,20 +80,20 @@ nnoremap <silent> <Leader>lim :call LanguageClient#textDocument_implementation()
 " Find all references to what is under the current cursor position
 nnoremap <silent> <Leader>lu :call LanguageClient#textDocument_references()<cr>
 " Go to definition under cursor -- (statically and dynamically typed languages)
-autocmd FileType javascript,python,rust nnoremap <buffer>
+autocmd FileType javascript,python,rust,sh nnoremap <buffer>
   \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
 " Go to TYPE definition under cursor  -- (staticly typed languages)
-autocmd FileType javascript,python,rust nnoremap <buffer>
+autocmd FileType javascript,python,rust,sh nnoremap <buffer>
   \ <leader>ltd :call LanguageClient_textDocument_definition()<cr>
 " Show docs for symbol under cursor
-autocmd FileType javascript,python,rust nnoremap <buffer>
+autocmd FileType javascript,python,rust,sh nnoremap <buffer>
   \ <leader>lho :call LanguageClient_textDocument_hover()<cr>
 " Rename variable under cursor
-autocmd FileType javascript,python,rust nnoremap <buffer>
+autocmd FileType javascript,python,rust,sh nnoremap <buffer>
   \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
 " List all symbols within the buffer
-autocmd FileType javascript,python,rust nnoremap <buffer>
+autocmd FileType javascript,python,rust,sh nnoremap <buffer>
   \ <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
 " List all symbols under the cursor
-autocmd FileType javascript,python,rust nnoremap <buffer>
+autocmd FileType javascript,python,rust,sh nnoremap <buffer>
   \ <leader>lR :call LanguageClient_textDocument_references()<cr>
