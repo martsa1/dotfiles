@@ -1,32 +1,43 @@
 call plug#begin('~/.config/nvim/plugged')
 
+" Give git hints on current buffer line: Add, Modify, Remove within NerdTree
+Plug 'airblade/vim-gitgutter'
+
 " Add colour highlighting for colours in NVim
 Plug 'ap/vim-css-color'
 
-" Give git hints on current buffer line: Add, Modify, Remove within NerdTree
-Plug 'airblade/vim-gitgutter'
+" Language Server Protocol - LSP
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 " Vim TOML Syntax Highlighting
 Plug 'cespare/vim-toml'
 
+" Fuzzy file finder
+Plug 'ctrlpvim/ctrlp.vim'
+
 " Dracular theme is a nice Dark Theme
 Plug 'dracula/vim'
 
-" Add buffer explorer for easier buffer traversal
-Plug 'jlanzarotta/bufexplorer'
+" Markdown Previewer
+Plug 'JamshedVesuna/vim-markdown-preview'
 
 " Vim Test harness integration - Supports standard test harnesses for multiple
 " languages etc.
 Plug 'janko-m/vim-test'
 
-" Markdown Previewer
-Plug 'JamshedVesuna/vim-markdown-preview'
+" Add buffer explorer for easier buffer traversal
+Plug 'jlanzarotta/bufexplorer'
 
 " Vim RG integration
 Plug 'jremmen/vim-ripgrep'
 
-" Fuzzy file finder
-Plug 'kien/ctrlp.vim'
+" (Optional) but needed if LanguageServer wants to display multiple
+" completion candidates
+" Plug 'junegunn/fzf', {'do': './install --all'}
+Plug 'junegunn/fzf'
 
 " Lots of language file type highlighting
 Plug 'hoelzro/vim-polyglot'
@@ -51,6 +62,9 @@ Plug 'nelstrom/vim-visual-star-search'
 
 "Async builder for Neovim
 Plug 'neomake/neomake'
+
+" Symantic python highlighting
+Plug 'numirias/semshi'
 
 " Javascript language support
 Plug 'pangloss/vim-javascript'
@@ -78,6 +92,9 @@ Plug 'scrooloose/nerdcommenter'
 
 " File tree within vim
 Plug 'scrooloose/nerdtree'
+
+" Rust auto completion client
+Plug 'sebastianmarkow/deoplete-rust'
 
 " Async support for nvim calling out to python process
 Plug 'Shougo/deoplete.nvim'
@@ -113,23 +130,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 " Visually display indentation
 Plug 'Yggdroot/indentLine'
 
-" Symantic python highlighting
-Plug 'numirias/semshi'
-
 " Go auto completion client
 Plug 'zchee/deoplete-go', { 'do': 'make'}
-
-" Rust auto completion client
-Plug 'sebastianmarkow/deoplete-rust'
-
-" Language Server Protocol - LSP
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-
-" (Optional) but needed if LanguageServer wants to display multiple
-" completion candidates
-Plug 'junegunn/fzf', {'do': './install --all'}
 
 call plug#end()
