@@ -85,6 +85,9 @@ Plug 'Shougo/deoplete.nvim'
 " Source code folding pluggin
 Plug 'tmhedberg/SimpylFold'
 
+" Add support for the Gherkin file type
+Plug 'tpope/vim-cucumber'
+
 " Git functionaility within vim for git (status|diff|bisect|....others]
 Plug 'tpope/vim-fugitive'
 
