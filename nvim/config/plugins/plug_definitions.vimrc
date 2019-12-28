@@ -21,6 +21,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 " Dracular theme is a nice Dark Theme
 Plug 'dracula/vim'
 
+" Lots of language file type highlighting
+Plug 'hoelzro/vim-polyglot'
+
 " Markdown Previewer
 Plug 'JamshedVesuna/vim-markdown-preview'
 
@@ -39,8 +42,6 @@ Plug 'jremmen/vim-ripgrep'
 " Plug 'junegunn/fzf', {'do': './install --all'}
 Plug 'junegunn/fzf'
 
-" Lots of language file type highlighting
-Plug 'hoelzro/vim-polyglot'
 
 " Support for typescript language syntax
 Plug 'leafgarland/typescript-vim'
