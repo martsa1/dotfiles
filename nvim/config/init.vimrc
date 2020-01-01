@@ -5,6 +5,7 @@ runtime ./config/plugins/init.vimrc
 
 runtime ./config/appearance.vimrc
 runtime ./config/general.vimrc
+runtime ./config/gui.vimrc
 runtime ./config/keys.vimrc
 runtime ./config/plugins.vimrc
 runtime ./config/plugins/lsp.vimrc
