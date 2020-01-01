@@ -138,15 +138,27 @@
       register: "download_fonts"
       when: fonts_installed.stat.exists == false
       get_url:
-        url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraMono.zip"
-        dest: "/tmp/FiraMono.zip"
+        url:  "{{ item.download }}"
+        dest: "{{ item.dir }}"
+      with_items:
+        - {
+        download: 'https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraMono.zip',
+        dir: /tmp/FiraMono.zip,
+        }
+        - {
+        download: 'https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/FiraCode.zip',
+        dir: /tmp/FiraCode.zip,
+        }
 
     - name: "Unpack Fonts"
       when: fonts_installed.stat.exists == false
       notify: "Update Font Cache"
       unarchive:
-        src: "/tmp/FiraMono.zip"
+        src: "{{ item }}"
         dest: "{{ fonts_base_dir }}"
+      with_items:
+        - "/tmp/FiraMono.zip"
+        - "/tmp/FiraCode.zip"
 
     # #######################################################################
     # # Alacritty now provides pre-built debs from github.  We just need to #
