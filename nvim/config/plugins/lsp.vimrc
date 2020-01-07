@@ -11,6 +11,10 @@ let g:LanguageClient_serverCommands = {}
 " Put LSP output into location list rather than quickfix by default
 let g:LanguageClient_diagnosticsList = "Location"
 
+" Log to a file in /tmp
+let g:LanguageClient_loggingFile = "/tmp/lsp.log"
+let g:LanguageClient_loggingLevel = "DEBUG"
+
 " waitOutputTimeout default is 10
 "let g:LanguageClient_waitOutputTimeout = 10
 "
@@ -44,8 +48,16 @@ let g:LanguageClient_diagnosticsList = "Location"
 "    \ }
 
 let g:LanguageClient_serverCommands.python = ['pyls', '-vv', '--log-file', '/tmp/pyls.log']
+" let g:LanguageClient_serverCommands.rust = ['rustup', 'run', 'nightly', 'rls']
 let g:LanguageClient_serverCommands.rust = ['rustup', 'run', 'stable', 'rls']
 let g:LanguageClient_serverCommands.sh = ['bash-language-server', 'start']
+
+
+" Maximum MessageType to show messages from window/logMessage notifications.
+" Default: "Warning"
+" Valid options: "Error" | "Warning" | "Info" | "Log"
+let g:LanguageClient_windowLogMessageLevel  = "Log"
+
 
 " Minimal LSP configuration for JavaScript
 "if executable('javascript-typescript-stdio')
