@@ -23,11 +23,16 @@
       become: true
       when: ff_download.changed
       unarchive:
-        dest: "install_dir"
+        dest: "{{ install_base }}"
         remote_src: true
         src: "/tmp/ffd.tar.bz2"
         owner: "{{ user }}"
         group: "{{ user }}"
+
+    - name: "Rename extracted files"
+      become: true
+      command: "mv {{ install_base }}/firefox {{ install_dir }}"
+      when: ff_download.changed
 
     - name: "Symlink Firefox to system PATH"
       become: true
