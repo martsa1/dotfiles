@@ -42,6 +42,9 @@ Plug 'junegunn/fzf'
 " Lots of language file type highlighting
 Plug 'hoelzro/vim-polyglot'
 
+" Support for typescript language syntax
+Plug 'leafgarland/typescript-vim'
+
 " Support for the Jinja Templating language
 Plug 'lepture/vim-jinja'
 
