@@ -1,5 +1,5 @@
 ################################################################################
-####################### Config for sam-elem-desktop ############################
+######################## Config for sm-fswbsk013 ###############################
 ################################################################################
 
 #Ensure that monitors are appropriately setup
@@ -25,8 +25,8 @@ workspace 10 output eDP-1-1
 
 # XF86MonBrightnessUp
 # XF86MonBrightnessDown
-bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl s 10%+
-bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl s 10%-
+bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl s 5%+
+bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl s 5%-
 # XF86Search
 
 # Volume controls
@@ -53,7 +53,7 @@ bindsym XF86Sleep --release exec "systemctl suspend"
 exec nmcli connection up Ethernet
 
 # Use the keyboard calculator button to launch a calculator
-bindsym XF86Calculator exec "io.elementary.calculator"
+bindsym XF86Calculator exec "gnome-calculator"
 
 # Top Bar to hold status information - May be updated to use Polybar in
 # future!
