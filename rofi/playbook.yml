@@ -59,20 +59,43 @@
     # Build newer version of check (c unit tests) #
     ###############################################
     - name: "Download check source code"
-      when: ansible_distribution_major_version == "18"
+      when: ansible_distribution_major_version >= "18"
       get_url:
         # url: "https://github.com/libcheck/check/archive/0.13.0.tar.gz"
         url: "https://github.com/libcheck/check/releases/download/0.13.0/check-0.13.0.tar.gz"
         dest: /tmp/check.tar.gz
 
     - name: "unpack check"
-      when: ansible_distribution_major_version == "18"
+      when: ansible_distribution_major_version >= "18"
       unarchive:
         src: /tmp/check.tar.gz
         dest: "/home/{{ user }}/code/personal"
 
+    - name: "Add Check dependency specific dependencies"
+      become: true
+      apt:
+        name:
+          - autoconf
+          - automake
+          - libtool
+          - pkg-config
+          - sed
+          - texinfo
+        state: present
+        cache_valid_time: 600
+      when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version >= "18"
+
+    - name: "Remove apt based check library"
+      become: true
+      apt:
+        name:
+          - check
+        state: absent
+        cache_valid_time: 600
+      when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version >= "18"
+
     - name: "Build check"
-      when: ansible_distribution_major_version == "18"
+      when: ansible_distribution_major_version >= "18"
       args:
         chdir: "/home/{{ user }}/code/personal/check-0.13.0"
       with_items:
@@ -82,12 +105,13 @@
       command: "{{ item }}"
 
     - name: "install check"
-      when: ansible_distribution_major_version == "18"
+      when: ansible_distribution_major_version >= "18"
       args:
         chdir: "/home/{{ user }}/code/personal/check-0.13.0"
       become: true
       with_items:
         - "make install"
+        - "ldconfig"
       command: "{{ item }}"
 
     ##############
