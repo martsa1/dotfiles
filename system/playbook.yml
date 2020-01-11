@@ -14,6 +14,12 @@
           owner: root
         become: yes
 
+      - name: "Ensure Xorg config dir exists"
+        file:
+          path: "/etc/X11/xorg.conf.d"
+          state: directory
+        become: yes
+
       - name: "Copy touchpad configuration to /etc/X11/xorg.conf.d/"
         copy:
           src: "{{dotfiles_base_dir}}/system/90-touchpad.conf"
