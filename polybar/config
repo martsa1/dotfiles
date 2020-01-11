@@ -315,7 +315,7 @@ adapter = ADP1
 full-at = 98
 time-format = %H:%M
 
-format-charging = <animation-charging> <label-charging>
+format-charging =  <animation-charging> <label-charging>
 format-charging-underline = #ffb52a
 label-charging = %percentage%% - %time%
 
