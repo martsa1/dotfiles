@@ -8,13 +8,11 @@ import sys
 from subprocess import check_output, CalledProcessError, DEVNULL
 
 MOD_KEY = 'Mod4'
-LOG_FORMAT_STRING = ('[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%'
-                     '(lineno)d] %(message)s')
-logging.basicConfig(
-    format=LOG_FORMAT_STRING,
-    datefmt='%Y-%m-%d %H:%M:%S',
-    level=logging.DEBUG
+LOG_FORMAT_STRING = (
+    '[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%'
+    '(lineno)d] %(message)s'
 )
+logging.basicConfig(format=LOG_FORMAT_STRING, datefmt='%Y-%m-%d %H:%M:%S', level=logging.DEBUG)
 LOGGER = logging.getLogger(__name__)
 
 
@@ -22,11 +20,7 @@ def get_workspaces() -> list:
     ''' Runs a sub-process that calls to i3-msg to retrieve the workspace
         data we want to iterate over
     '''
-    workspace_data = check_output([
-        'i3-msg',
-        '-t',
-        'get_workspaces'
-    ]).decode('utf8')
+    workspace_data = check_output(['i3-msg', '-t', 'get_workspaces']).decode('utf8')
 
     workspace_data_json = json.loads(workspace_data)
     LOGGER.debug('Workspace Data: %s', workspace_data)
@@ -48,9 +42,9 @@ def get_active_workspace_name() -> tuple:
             # a tuple
             LOGGER.debug(workspace)
             LOGGER.debug(type(workspace))
-            LOGGER.debug('Found the active workspace: %d%s',
-                         workspace.get('num'),
-                         workspace.get('name'))
+            LOGGER.debug(
+                'Found the active workspace: %d%s', workspace.get('num'), workspace.get('name')
+            )
             return (workspace.get('name'), workspace.get('num'))
 
 
@@ -60,33 +54,27 @@ def update_workspace_name(new_workspace_name: str):
     '''
     if new_workspace_name is None:
         return TypeError('New Workspace Name is a required value')
-    existing_workspace_name, workspace_number = (
-        get_active_workspace_name()
-    )
+    existing_workspace_name, workspace_number = (get_active_workspace_name())
 
     if workspace_number is None:
         return TypeError('New Workspace Number is a required value')
 
     # Pre-designated Workspace names:
     workspace_mapping = {
+        ('browser', 'ff', 'firefox'): '',
+        ('code', 'editor'): '',
+        ('comms', 'hangouts', 'irc', 'mattermost', 'skype'): '',
         ('console', 'terminal'): '',
         ('mail', 'email'): '',
-        ('comms', 'skype', 'hangouts', 'mattermost', 'irc'): '',
         ('music', 'spotify'): '',
-        ('browser', 'ff', 'firefox'): '',
     }
     for key in workspace_mapping:
         if new_workspace_name.lower() in key:
             new_workspace_name = workspace_mapping[key]
             break
 
-
     update_workspace_command = [
-        'i3-msg',
-        'rename',
-        'workspace',
-        '"{}"'.format(existing_workspace_name),
-        'to',
+        'i3-msg', 'rename', 'workspace', '"{}"'.format(existing_workspace_name), 'to',
         '"{}: {}"'.format(workspace_number, new_workspace_name)
     ]
 
@@ -99,12 +87,7 @@ def get_new_name() -> str:
     ''' Gets the User's new name from a zenity prompt
     '''
     new_name_command = [
-        'zenity',
-        '--entry',
-        '--title',
-        'Workspace Name',
-        '--text',
-        'New Workspace Name'
+        'zenity', '--entry', '--title', 'Workspace Name', '--text', 'New Workspace Name'
     ]
     try:
         new_name = check_output(new_name_command, stderr=DEVNULL)
