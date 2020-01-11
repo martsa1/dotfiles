@@ -241,7 +241,7 @@ bindsym $mod+r mode "resize"
 # Terminals
 set $workspace1 "1: "
 # Editor
-set $workspace2 "2: "
+set $workspace2 "2: "
 # Chrome
 set $workspace3 "3: "
 set $workspace4 "4"
@@ -279,14 +279,14 @@ workspace_auto_back_and_forth yes
 focus_on_window_activation urgent
 
 # Default Workspaces for various applications
-assign [class="[Ss]potify"] $workspace10
+assign [class="Firefox Developer Edition"] $workspace3
+assign [class="Firefox"] $workspace3
 assign [class="Google-chrome"] $workspace3
-assign [class="Vivaldi-stable"] $workspace3
-assign [title="alacritty"] $workspace1
-assign [title="Alacritty"] $workspace1
-assign [class="skypeforlinux"] $workspace9
+assign [class="Slack"]
 assign [class="discord"] $workspace9
-assign [class="Slack"] $workspace9
+assign [class="skypeforlinux"] $workspace9
+assign [title="[aA]lacritty"] $workspace1
+for_window [class="[sS]potify"] move window to workspace $workspace10
 
 # I want pretty GUI transitions and stuff!
 exec --no-startup-id compton -f
@@ -295,10 +295,10 @@ exec --no-startup-id compton -f
 # I also want to get vivaldi & a terminal to start on login
 # exec --no-startup-id synergy
 # exec google-chrome
-exec vivaldi-bin
+exec firefox-dev
 exec spotify
 exec alacritty
-exec --no-startup-id shutter --min_at_startup
+exec --no-startup-id flameshot --min_at_startup
 
 # Enable numlock by default
 exec --no-startup-id numlockx on
@@ -306,6 +306,9 @@ exec --no-startup-id numlockx on
 # Network Manager Applet & gnome settings daemon
 exec --no-startup-id nm-applet
 exec --no-startup-id gnome-settings-daemon
+
+# Lock on timeout
+exec xautolock -time 5 -locker ~/code/personal/dotfiles/i3/scripts/lock.sh
 
 ################################################################################
 
