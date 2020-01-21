@@ -243,7 +243,7 @@ set $workspace1 "1: "
 # Editor
 set $workspace2 "2: "
 # Chrome
-set $workspace3 "3: "
+set $workspace3 "3: "
 set $workspace4 "4"
 set $workspace5 "5"
 set $workspace6 "6"
@@ -282,11 +282,14 @@ focus_on_window_activation urgent
 assign [class="Firefox Developer Edition"] $workspace3
 assign [class="Firefox"] $workspace3
 assign [class="Google-chrome"] $workspace3
-assign [class="Slack"]
+assign [class="Slack"] $workspace9
 assign [class="discord"] $workspace9
 assign [class="skypeforlinux"] $workspace9
 assign [title="[aA]lacritty"] $workspace1
 for_window [class="[sS]potify"] move window to workspace $workspace10
+
+# Run the lxpolkit daemon
+exec --no-startup-id mate-polkit
 
 # I want pretty GUI transitions and stuff!
 exec --no-startup-id compton -f

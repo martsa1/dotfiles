@@ -64,12 +64,15 @@ bar {
 # Set the desktop background
 exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg
 
-# Set Keyboard layout to UK
+# Set Keyboard layout to US
 # TODO - Run a script to detect if I'm docked or not and choose layout accordingly.
 exec setxkbmap -layout us -option ctrl:nocaps
 
 # Keepmenu (Keepass for Rofi)
 bindsym $mod+p exec keepmenu
+
+# Rofipass (Pass with Rofi)
+bindsym $mod+shift+p exec rofi-pass
 
 # Auto-mount disks
 exec --no-startup-id udiskie --tray
