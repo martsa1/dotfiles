@@ -2,17 +2,17 @@
 
 config="polybar --config=$HOME/code/personal/dotfiles/polybar/config"
 
-primary=$($config --dump=primary left)
-secondary=$($config --dump=secondary left)
-alt=$($config --dump=foreground-alt left)
+primary="#BD93F9"
+secondary="#50FA7B"
+alt="#E6E6E6"
 elapsed="0"
 cache=""
 
 while [[ $(ps -u $USER | grep spotify) ]]; do
-  title=`exec playerctl metadata xesam:title`
-  artist=`exec playerctl metadata xesam:artist`
-  album=`exec playerctl metadata xesam:album`
-  length=`exec playerctl metadata mpris:length`
+  title=`exec playerctl metadata xesam:title 2>/dev/null`
+  artist=`exec playerctl metadata xesam:artist 2>/dev/null`
+  album=`exec playerctl metadata xesam:album 2>/dev/null`
+  length=`exec playerctl metadata mpris:length 2>/dev/null`
 
   secs=$(($length/1000000))
   timestamp=`printf ""%d:%02d"" $(($secs%3600/60)) $(($secs%60))`
@@ -31,7 +31,7 @@ while [[ $(ps -u $USER | grep spotify) ]]; do
     echo "%{F$primary}$title%{F-} %{F$alt}|%{F-} %{F$primary}$artist%{F-} %{F$alt}|%{F-} %{F$primary}$album%{F-}  %{F$alt}|%{F-}  %{F$primary}$position%{F-} %{F$alt}|%{F-} %{F$primary}$timestamp%{F-}"
   }
 
-  if [ "$(playerctl status)" = "Playing" ]; then
+  if [ "$(playerctl status 2>/dev/null)" = "Playing" ]; then
     elapsed=$(($elapsed + 1))
     update_cache
 
