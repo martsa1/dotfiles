@@ -114,3 +114,18 @@ nvm() {
     return 1
   fi
 }
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+rvm() {
+  if command -v rvm 1>/dev/null 2>&1; then
+    unset -f rvm
+    source /home/sam/.rvm/scripts/rvm
+    rvm "$@"
+  else
+    echo "RVM is not installed" >&2
+    return 1
+  fi
+}
+
+
