@@ -74,5 +74,8 @@ bindsym $mod+p exec keepmenu
 # Rofipass (Pass with Rofi)
 bindsym $mod+shift+p exec rofi-pass
 
+# Rofi Calculator
+bindsym $mod+c exec rofi -show calc -modi calc -no-show-match -no-sort
+
 # Auto-mount disks
 exec --no-startup-id udiskie --tray
