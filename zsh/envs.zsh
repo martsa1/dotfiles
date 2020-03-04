@@ -65,14 +65,32 @@ fi
 
 pyenv () {
   unset -f pyenv
-  eval "$(command pyenv init -)"
+  if [[ ! -n $VIRTUAL_ENV ]]; then
+    eval "$(command pyenv init -)"
+  fi
   pyenv $@
+}
+pip () {
+  unset -f pip
+  if [[ ! -n $VIRTUAL_ENV ]]; then
+    eval "$(command pyenv init -)"
+  fi
+  pip $@
+}
+python () {
+  unset -f python
+  if [[ ! -n $VIRTUAL_ENV ]]; then
+    eval "$(command pyenv init -)"
+  fi
+  python $@
 }
 
 # Enable Pipenv Completions
 pipenv () {
   unset -f pipenv
-  eval "$(command pipenv --completion)"
+  if [[ ! -n $VIRTUAL_ENV ]]; then
+    eval "$(command pipenv --completion)"
+  fi
   pipenv $@
 }
 
