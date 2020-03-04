@@ -58,6 +58,11 @@ export ZPLUG_LOADFILE="$HOME/code/personal/dotfiles/zsh/zplug.zsh"
 # Setup environment variables needed for pyenv
 export PYENV_ROOT="$HOME/code/personal/pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+
+if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
+  source "${VIRTUAL_ENV}/bin/activate"
+fi
+
 pyenv () {
   unset -f pyenv
   eval "$(command pyenv init -)"
