@@ -206,6 +206,9 @@ bar-empty-foreground = ${colors.foreground-alt}
 inherit = module/xbacklight
 type = internal/backlight
 card = intel_backlight
+enable-scroll = true
+format = <label> <bar>
+label = 
 
 [module/cpu]
 type = internal/cpu
