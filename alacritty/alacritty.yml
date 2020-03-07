@@ -69,6 +69,12 @@ window:
   # Window class (Linux only):
   #class: Alacritty
 
+  # GTK theme variant (Linux/BSD only)
+  #
+  # Override the variant of the GTK theme. Commonly supported values are `dark` and `light`.
+  # Set this to `None` to use the default theme variant.
+  #gtk_theme_variant: None
+
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
@@ -77,15 +83,6 @@ scrolling:
   # Number of lines the viewport will move for every line scrolled when
   # scrollback is enabled (history > 0).
   multiplier: 3
-
-  # Faux Scrolling
-  #
-  # The `faux_multiplier` setting controls the number of lines the terminal
-  # should scroll when the alternate screen buffer is active. This is used
-  # to allow mouse scrolling for applications like `man`.
-  #
-  # Specifying `0` will disable faux scrolling.
-  # faux_multiplier: 0
 
   # Scroll to the bottom when new text is written to the terminal.
   auto_scroll: true
@@ -250,7 +247,7 @@ colors:
   # Example:
   #   `- { index: 16, color: '0xff00ff' }`
   #
-  indexed_colors: []
+  #indexed_colors: []
 
 # Visual Bell
 #
@@ -274,9 +271,9 @@ colors:
 #
 # Specifying a `duration` of `0` will disable the visual bell.
 visual_bell:
-  # animation: EaseOutExpo
-  animation: EaseOut
-  duration: 3
+  animation: EaseOutExpo
+  # animation: EaseOut
+  duration: 100
   color: '0xffffff'
 
 # Background opacity
