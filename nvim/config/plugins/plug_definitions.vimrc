@@ -42,6 +42,8 @@ Plug 'jremmen/vim-ripgrep'
 " Plug 'junegunn/fzf', {'do': './install --all'}
 Plug 'junegunn/fzf'
 
+" Add support for Typescript syntax
+Plug 'leafgarland/typescript-vim'
 
 " Support for typescript language syntax
 Plug 'leafgarland/typescript-vim'
