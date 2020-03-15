@@ -68,3 +68,11 @@ fi
 # MUST BE AT THE BOTTOM!!
 # Load all plugins
 zplug load
+
+
+# add a couple of commands to the auto-ignored commands list, so that we don't
+# get notified about them in zsh-autonotify
+AUTO_NOTIFY_IGNORE+=("pipenv shell")
+AUTO_NOTIFY_IGNORE+=("poetry shell")
+AUTO_NOTIFY_IGNORE+=("python -m poetry shell")
+
