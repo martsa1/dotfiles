@@ -74,6 +74,9 @@ bindsym $mod+p exec keepmenu
 # Rofipass (Pass with Rofi)
 bindsym $mod+shift+p exec rofi-pass
 
+# Rofi Window switcher
+bindsym $mod+shift+w exec rofi -show window
+
 # Rofi Calculator
 bindsym $mod+c exec rofi -show calc -modi calc -no-show-match -no-sort
 
