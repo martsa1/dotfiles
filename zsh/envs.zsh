@@ -70,6 +70,7 @@ pyenv () {
   fi
   pyenv $@
 }
+
 pip () {
   unset -f pip
   if [[ ! -n $VIRTUAL_ENV ]]; then
@@ -77,12 +78,21 @@ pip () {
   fi
   pip $@
 }
+
 python () {
   unset -f python
   if [[ ! -n $VIRTUAL_ENV ]]; then
     eval "$(command pyenv init -)"
   fi
   python $@
+}
+
+poetry () {
+  unset -f poetry
+  if [[ ! -n $VIRTUAL_ENV ]]; then
+    eval "$(command pyenv init -)"
+  fi
+  poetry $@
 }
 
 # Enable Pipenv Completions
@@ -146,4 +156,6 @@ rvm() {
   fi
 }
 
-
+# Some tools seem to need this set
+export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+export SSL_CERT_DIR=/etc/ssl/certs
