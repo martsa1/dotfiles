@@ -60,6 +60,9 @@ Plug 'machakann/vim-highlightedyank'
 " source tree listing/menu containing definitions
 Plug 'majutsushi/tagbar'
 
+" Groovy syntax support
+Plug 'modille/groovy.vim'
+
 " JSX plugin
 Plug 'mxw/vim-jsx'
 
