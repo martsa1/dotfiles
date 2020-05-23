@@ -256,16 +256,16 @@ set $workspace9 "9: "
 set $workspace10 "10: "
 
 #Set default workspace names on login
-exec rename workspace number 1 to $workspace1
-exec rename workspace number 2 to $workspace2
-exec rename workspace number 3 to $workspace3
-exec rename workspace number 4 to $workspace4
-exec rename workspace number 5 to $workspace5
-exec rename workspace number 6 to $workspace6
-exec rename workspace number 7 to $workspace7
-exec rename workspace number 8 to $workspace8
-exec rename workspace number 9 to $workspace9
-exec rename workspace number 10 to $workspace10
+exec --no-startup-id rename workspace number 1 to $workspace1
+exec --no-startup-id rename workspace number 2 to $workspace2
+exec --no-startup-id rename workspace number 3 to $workspace3
+exec --no-startup-id rename workspace number 4 to $workspace4
+exec --no-startup-id rename workspace number 5 to $workspace5
+exec --no-startup-id rename workspace number 6 to $workspace6
+exec --no-startup-id rename workspace number 7 to $workspace7
+exec --no-startup-id rename workspace number 8 to $workspace8
+exec --no-startup-id rename workspace number 9 to $workspace9
+exec --no-startup-id rename workspace number 10 to $workspace10
 
 # Allow jumping back to the previous workspace without having to remember
 # where you were
@@ -289,7 +289,7 @@ assign [title="[aA]lacritty"] $workspace1
 for_window [class="[sS]potify"] move window to workspace $workspace10
 
 # Run the lxpolkit daemon
-exec --no-startup-id mate-polkit
+exec --no-startup-id mate-polkit & disown
 
 # I want pretty GUI transitions and stuff!
 exec --no-startup-id compton -f

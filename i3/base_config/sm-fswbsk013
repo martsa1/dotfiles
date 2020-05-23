@@ -3,9 +3,9 @@
 ################################################################################
 
 #Ensure that monitors are appropriately setup
-exec xrandr --output DP-1-1-2 --primary
-exec xrandr --output DP-1-1-1 --auto --right-of DP-1-1-2
-exec xrandr --output eDP-1-1 --auto --mode 1920x1080 --below DP-1-1-1
+exec --no-startup-id xrandr --output DP-1-1-2 --primary
+exec --no-startup-id xrandr --output DP-1-1-1 --auto --right-of DP-1-1-2
+exec --no-startup-id xrandr --output eDP-1-1 --auto --mode 1920x1080 --below DP-1-1-1
 
 # Assign Workspaces to specific screens
 # Terminals
@@ -50,7 +50,7 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86Sleep --release exec "systemctl suspend"
 
 # Ensure that my primary network connection is brought up
-exec nmcli connection up Ethernet
+exec --no-startup-id nmcli connection up Ethernet
 
 # Use the keyboard calculator button to launch a calculator
 bindsym XF86Calculator exec "gnome-calculator"
@@ -66,7 +66,7 @@ exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg
 
 # Set Keyboard layout to US
 # TODO - Run a script to detect if I'm docked or not and choose layout accordingly.
-exec setxkbmap -layout us -option ctrl:nocaps
+exec --no-startup-id setxkbmap -layout us -option ctrl:nocaps
 
 # Keepmenu (Keepass for Rofi)
 bindsym $mod+p exec keepmenu
@@ -81,4 +81,4 @@ bindsym $mod+shift+w exec rofi -show window
 bindsym $mod+c exec rofi -show calc -modi calc -no-show-match -no-sort
 
 # Auto-mount disks
-exec --no-startup-id udiskie --tray
+exec --no-startup-id udiskie --tray & disown
