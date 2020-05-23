@@ -77,3 +77,6 @@ alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v exten
 nv () {
   neovide $@ & disown
 }
+
+# I use this one so much now that I'm doing a lot with poetry...
+alias pshell='python -m poetry shell'

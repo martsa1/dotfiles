@@ -76,3 +76,6 @@ AUTO_NOTIFY_IGNORE+=("pipenv shell")
 AUTO_NOTIFY_IGNORE+=("poetry shell")
 AUTO_NOTIFY_IGNORE+=("python -m poetry shell")
 
+
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
