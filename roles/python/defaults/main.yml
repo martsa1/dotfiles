@@ -6,9 +6,8 @@ dotfiles_base_dir: "{{personal_code_base_dir}}/dotfiles"
 personal_code_base_dir: "/home/{{user}}/code/personal"
 python_bin_dir: "/home/{{user}}/.local/bin"
 
-default_python_version: "3.6.8"
+default_python_version: "3.8.2"
 python_versions:
-  - "3.7.2"
   - "{{default_python_version}}"
 
 # Note, first is the package to install, second is the executable to check for!
