@@ -108,11 +108,11 @@ pipenv () {
 powerline-daemon -q
 PYTHON_VERSION=$(python3 --version | sed -n 's/.*\(3\..\).*/\1/p')
 
-if [ -f "$HOME/.local/pipx/venvs/powerline-status/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
-  powerline_script="$HOME/.local/pipx/venvs/powerline-status/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh"
+if [ -f "$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
+  powerline_script="$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
   source  $powerline_script
-elif [ -f "$HOME/.local/venvs/powerline-status/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
-  powerline_script="$HOME/.local/venvs/powerline-status/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh"
+elif [ -f "$HOME/.local/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
+  powerline_script="$HOME/.local/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
   source  $powerline_script
 fi
 
