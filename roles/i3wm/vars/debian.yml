@@ -8,6 +8,7 @@ installs:
   - compton
   - curl
   - feh
+  - flameshot
   - gitg
   - gtk-chtheme
   - i3
