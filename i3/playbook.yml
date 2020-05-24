@@ -30,7 +30,7 @@
 # TODO: Add installation of i3wm in a co-located playbook
 # TODO: Add a playbook called workstation at dotfiles root which installs
 #       everything i need for my nice workstation, including fonts, tools,
-#       map in any themeing I want etc.
+#       map in any theming I want etc.
 # TODO: Add logic here to determine what host the play is running on, and
 #       compile the i3 config from machine specific and base configurations
 
