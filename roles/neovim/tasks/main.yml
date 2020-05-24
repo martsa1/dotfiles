@@ -42,6 +42,11 @@
   become_user: "{{user}}"
   become: true
 
+- name: "Check if neovim configs are present"
+  register: nvim_config_cloned
+  stat:
+    path: "{{personal_code_base_dir}}/nvim"
+
 - name: "Clone Nvim config repo"
   git:
     repo: "{{nvim_repo}}"
@@ -53,6 +58,7 @@
   become: true
   tags:
     - skip_ansible_lint
+  when:  nvim_config_cloned.stat.isdir is not defined
 
 - name: "Symlink nvim configs into place"
   file:
@@ -92,20 +98,23 @@
   tags:
     - skip_ansible_lint
 
-- name: "Create neovim virtualenvs with installs"
-  pip:
-    name: "neovim"
-    virtualenv: "/home/{{user}}/.python/neovim-{{item[1]}}"
-    virtualenv_python: "{{item[0]}}"
-    state: latest
-  with_items:
-    - [["python3", "py3"]]
-    - [["python2", "py2"]]
+- name: "Create neovim virtualenv"
+  shell: 'eval "$(pyenv init -)" && python -m venv /home/{{user}}/.local/neovim_py_venv'
+  args:
+    executable: "/bin/bash"
+    creates: "/home/{{user}}/.local/neovim_py_venv/bin/python"
+  environment: "{{env}}"
   become: "true"
   become_user: "{{user}}"
+
+- name: "Setup neovim python library in dedicated venv."
+  shell: 'eval "$(pyenv init -)" && /home/{{user}}/.local/neovim_py_venv/bin/pip install --upgrade neovim'
+  args:
+    executable: "/bin/bash"
+    creates: "/home/{{user}}/.local/neovim_py_venv/lib/python3.8/site-packages/neovim"
   environment: "{{env}}"
-  tags:
-    - skip_ansible_lint
+  become: "true"
+  become_user: "{{user}}"
 
 - name: "Update neovim and remote plugins"
   command: "nvim --headless +PlugInstall +PlugUpdate +UpdateRemotePlugins +qall"
