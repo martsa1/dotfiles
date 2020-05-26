@@ -110,7 +110,7 @@ def launch_polybars(list_of_monitors):
 
             check_call(
                 [
-                    '/bin/bash -c'
+                    '/usr/bin/env bash -c'
                     ' "polybar --config={polybar_config_location} --reload '
                     '{bar_config} & disown"'.format(
                         polybar_config_location=polybar_config_location,
@@ -129,8 +129,9 @@ def launch_polybars(list_of_monitors):
                 stderr=subprocess.DEVNULL,
             )
 
-    except CalledProcessError:
-        LOG.exception('Failed to launch polybar instances')
+    except CalledProcessError as err:
+        LOG.exception('Failed to launch polybar instances: %s', err, exc_info=True)
+        LOG.exception("StdOut: %s\n\nStdErr: %s", err.output, err.stderr)
         sys.exit(1)
 
 
