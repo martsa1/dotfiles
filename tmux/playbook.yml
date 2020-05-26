@@ -22,6 +22,7 @@
         - "libncurses5-dev"
         - "ncurses-base"
         - "pkg-config"
+      when: ansible_os_family == "Debian"
       tags:
         - install
 
@@ -38,6 +39,7 @@
       get_url:
         url: https://github.com/tmux/tmux/releases/download/2.6/tmux-2.6.tar.gz
         dest: "/home/{{user}}/Downloads/"
+      when: ansible_os_family == "Debian"
       tags:
         - install
 
@@ -45,6 +47,7 @@
       unarchive:
         src: "/home/{{user}}/Downloads/tmux-2.6.tar.gz"
         dest: "{{personal_code_base_dir}}/"
+      when: ansible_os_family == "Debian"
       tags:
         - install
 
@@ -55,6 +58,7 @@
       with_items:
         - "./configure"
         - "make"
+      when: ansible_os_family == "Debian"
       tags:
         - install
 
@@ -63,6 +67,7 @@
       args:
         chdir: "{{personal_code_base_dir}}/tmux-2.6/"
       become: true
+      when: ansible_os_family == "Debian"
       tags:
         - install
 
@@ -85,6 +90,15 @@
         - "/home/sam/.tmux/plugins/tpm/bin/update_plugins all"
       environment:
         TMUX_PLUGIN_MANAGER_PATH: "/home/sam/.tmux/plugins/"
+      tags:
+        - config
+
+    - name: "Symlink Powerline theme into place."
+      file:
+        src: "{{dotfiles_base_dir}}/powerline"
+        dest: "{{config_base_dir}}/powerline"
+        state: link
+        force: yes
       tags:
         - config
 
