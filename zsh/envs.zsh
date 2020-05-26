@@ -38,7 +38,8 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 #stty stop ^J
 
 # Start Autojump - quicker directory navigation
-source /usr/share/autojump/autojump.sh
+[ -f /usr/share/autojump/autojump.zsh ] && source /usr/share/autojump/autojump.sh
+[ -f /run/current-system/sw/share/zsh/site-functions/autojump.zsh ] && source /run/current-system/sw/share/zsh/site-functions/autojump.zsh
 
 # Make Whalebrew work with local bin, rather than a global one which requres root
 export WHALEBREW_INSTALL_PATH="$HOME/bin"
@@ -114,6 +115,10 @@ if [ -f "$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site
 elif [ -f "$HOME/.local/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
   powerline_script="$HOME/.local/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
   source  $powerline_script
+
+# Installed on Nix-OS..
+elif [ -f "/run/current-system/sw/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
+  source "/run/current-system/sw/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
 fi
 
 # Enable Better Exceptions in python code
