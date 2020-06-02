@@ -1,13 +1,19 @@
 { pkgs, ...}:
 
-{
+let
+  python_version = pkgs.python38;
+  custom_pkgs = pkgs.callPackage ./pkgs/all.nix { inherit pkgs; python3=python_version; };
+in
 
+{
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
     alacritty
     bat
-    docker-compose
+    custom_pkgs.awscli
+    custom_pkgs.polybar-spotify
     discord
+    docker-compose
     firefox
     flameshot
     git-lfs
