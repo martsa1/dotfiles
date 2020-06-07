@@ -19,7 +19,7 @@ in
     custom_pkgs.polybar-spotify
     discord
     docker-compose
-    firefox
+    firefox-devedition-bin
     flameshot
     git-lfs
     gitAndTools.delta
