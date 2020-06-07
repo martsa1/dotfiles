@@ -1,0 +1,13 @@
+# vim: set filetype=yaml.ansile :
+---
+- hosts: all
+  vars:
+    user: "sam"
+  roles:
+    # - role: "bash"
+    - role: "dotfiles"
+    - role: "i3wm"
+    - role: "nvim"
+    - role: "python"
+    - role: "tmux"
+    - role: "zsh"

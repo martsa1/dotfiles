@@ -1,0 +1,7 @@
+---
+# defaults file for shell
+user: "{{ansible_user_id}}"
+personal_code_base_dir: "/home/{{user}}/code/personal"
+dotfiles_base_dir: "{{personal_code_base_dir}}/dotfiles"
+config_base_dir: "/home/{{user}}/.config"
+bashit_repo: "{{personal_code_base_dir}}/bash_it"

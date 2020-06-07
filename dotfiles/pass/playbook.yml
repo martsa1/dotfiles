@@ -1,0 +1,33 @@
+---
+
+# Play to install and configure rofi-pass
+
+- hosts: all
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: "Ensure dependencies are installed"
+      apt:
+        name: "{{ installs }}"
+        cache_valid_time: 3600
+        state: present
+      become: true
+
+    - name: "Clone Rofi-pass repo"
+      git:
+        repo: "https://github.com/carnager/rofi-pass.git"
+        dest: "{{personal_code_base_dir}}/rofi-pass"
+        accept_hostkey: yes
+        clone: yes
+        force: yes
+        recursive: yes
+        update: yes
+        version: 2.0.2
+
+    - name: "Ensure rofi-pass is on user path"
+      file:
+        src: "{{ personal_code_base_dir }}/rofi-pass/rofi-pass"
+        dest: "/home/{{ user }}/bin/rofi-pass"
+        state: link
+

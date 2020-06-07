@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  author: Sam Martin
+  description: Software Engineer, Environmentalist Technofile
+
+  license: MIT
+
+  min_ansible_version: 2.6
+
+  platforms:
+    - name: ArchLinux
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - 18.04
+
+  galaxy_tags:
+    - personal
+    - dotfiles
+
+dependencies:
+  - dotfiles

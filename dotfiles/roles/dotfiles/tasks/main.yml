@@ -1,0 +1,74 @@
+---
+
+# Primary tasks to setup the dotfiles repo
+#
+- name: "Ensure various groups exist"
+  group:
+    name: "{{item}}"
+    state: present
+  become: true
+  with_items:
+    - docker
+    - sudo
+
+- name: "Setup user"
+  user:
+    name: "{{user}}"
+    # shell: /usr/bin/zsh
+    groups:
+      - adm
+      - docker
+      - sudo
+    append: true
+    password: "$6$cXV2LAy2$FBObTVKl6pc3u35/82X.dC2shTzcQBmq7aiL3yB3HK.4bWR8.9jZ1NwDW8EV1q2iPrcYPBHWRoxTTDUbjbhnO0"
+    update_password: on_create
+  become: true
+
+- name: "Setup user's various directories"
+  file:
+    path: "/home/{{user}}/{{item}}"
+    state: directory
+    owner: "{{user}}"
+  become: true
+  become_user: "{{user}}"
+  with_items:
+    - ".config"
+    - ".local"
+    - ".ssh"
+    - "Downloads"
+    - "bin"
+
+- name: "Setup dotfiles base directory"
+  file:
+    path: "{{dotfiles_root_path}}"
+    state: directory
+    owner: "{{user}}"
+  become_user: "{{user}}"
+  become: true
+
+- name: "Ensure git is installed"
+  package:
+    name: "{{item}}"
+    state: present
+  become: true
+  with_items:
+    - "git"
+
+- name: "Check if dotfiles are present"
+  register: dotfiles_cloned
+  stat:
+    path: "{{dotfiles_root_path}}/{{dotfiles_base_name}}/.git/"
+
+- name: "Clone dotfiles repo"
+  git:
+    repo: "{{dotfiles_repo}}"
+    dest: "{{dotfiles_root_path}}/{{dotfiles_base_name}}"
+    accept_hostkey: "yes"
+    clone: "yes"
+    update: "yes"
+    # version: master
+  become: "true"
+  become_user: "{{user}}"
+  tags:
+    - skip_ansible_lint
+  when:  dotfiles_cloned.stat.isdir is not defined

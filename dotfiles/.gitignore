@@ -1,0 +1,9 @@
+*.log
+*.pyc
+.molecule
+.pytest_cache
+.vagrant
+__pycache__
+*.retry
+tags
+*mypy_cache*

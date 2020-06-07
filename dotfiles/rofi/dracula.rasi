@@ -1,0 +1,188 @@
+/* vim:ft=css
+ * ************************************************
+ * ROFI Color theme
+ * User: leofa
+ * Copyright: 2017 leofa
+ ***********************************************
+ * Old config:
+ * bindsym $mod+d exec rofi -show run -lines 5 -eh 1.2 -fuzzy -width 60 \
+ *   -padding 5 -opacity "90" -bw 1 -bc "#BD93F9" -bg "#282A36" -hlbg "#282A36" \
+ *   -fg "#8BE9FD"  -hlfg "#FF79C6" -font "Fura Mono Nerd Font 13"
+*/
+
+* {
+  color-black:                 #000000;
+  color-dark-grey:             #4D4D4D;
+  color-bright-red:            #FF5555;
+  color-red:                   #FF6E67;
+  color-bright-green:          #50FA7B;
+  color-green:                 #5AF78E;
+  color-bright-yellow:         #F1FA8C;
+  color-yellow:                #F4F99D;
+  color-bright-purple:         #BD93F9;
+  color-purple:                #CAA9FA;
+  color-bright-pink:           #FF79C6;
+  color-pink:                  #FF92D0;
+  color-bright-blue:           #8BE9FD;
+  color-blue:                  #9AEDFE;
+  color-bright-grey:           #BFBFBF;
+  color-grey:                  #E6E6E6;
+
+  color-foreground:            #F8F8F2;
+  color-background:            #282A3644;
+
+  foreground:                  @color-foreground;
+  background:                  @color-background;
+
+  background-color:            @color-background;
+  border-color:                @color-bright-purple;
+
+  lightbg:                     @color-purple;
+  lightfg:                     @color-grey;
+
+  separatorcolor:              @color-bright-green;
+
+  active-background:           @background;
+  active-foreground:           @color-foreground;
+
+  alternate-active-background: @background;
+  alternate-active-foreground: @color-purple;
+
+  alternate-normal-background: @background;
+  alternate-normal-foreground: @color-purple;
+
+  alternate-urgent-background: @lightbg;
+  alternate-urgent-foreground: @color-dark-grey;
+
+  normal-background:           @background;
+  normal-foreground:           @color-blue;
+
+  selected-active-background:  @color-bright-blue;
+  selected-active-foreground:  @color-dark-grey;
+
+  selected-normal-background:  @color-yellow;
+  selected-normal-foreground:  @color-dark-grey;
+
+  selected-urgent-background:  @color-dark-grey;
+  selected-urgent-foreground:  @background;
+
+  urgent-background:           @background;
+  urgent-foreground:           @color-bright-red;
+
+  spacing:                     2;
+}
+#window {
+    background-color: @background;
+    border:           1;
+    border-radius:    3;
+    padding:          5;
+    font: "Roboto 12";
+    transparency: "real";
+}
+#mainbox {
+    border:  0;
+    padding: 0;
+}
+#message {
+    border:       2px 0px 0px ;
+    border-color: @separatorcolor;
+    padding:      1px ;
+}
+#textbox {
+    text-color: @foreground;
+}
+#listview {
+    fixed-height: 0;
+    border:       1px 0px 0px ;
+    border-color: @separatorcolor;
+    spacing:      2px ;
+    scrollbar:    true;
+    padding:      3px 0px 0px ;
+}
+#element {
+    border:  0;
+    padding: 1px ;
+}
+#element.normal.normal {
+    background-color: @normal-background;
+    text-color:       @normal-foreground;
+}
+#element.normal.urgent {
+    background-color: @urgent-background;
+    text-color:       @urgent-foreground;
+}
+#element.normal.active {
+    background-color: @active-background;
+    text-color:       @active-foreground;
+}
+#element.selected.normal {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+#element.selected.urgent {
+    background-color: @selected-urgent-background;
+    text-color:       @selected-urgent-foreground;
+}
+#element.selected.active {
+    background-color: @selected-active-background;
+    text-color:       @selected-active-foreground;
+}
+#element.alternate.normal {
+    background-color: @alternate-normal-background;
+    text-color:       @alternate-normal-foreground;
+}
+#element.alternate.urgent {
+    background-color: @alternate-urgent-background;
+    text-color:       @alternate-urgent-foreground;
+}
+#element.alternate.active {
+    background-color: @alternate-active-background;
+    text-color:       @alternate-active-foreground;
+}
+#scrollbar {
+    width:        4px ;
+    border:       0;
+    handle-color: @border-color;
+    handle-width: 5px ;
+    padding:      0;
+}
+#mode-switcher {
+    border:       2px 0px 0px ;
+    border-color: @separatorcolor;
+}
+#button {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+#button.selected {
+    background-color: @selected-normal-background;
+    text-color:       @selected-normal-foreground;
+}
+#inputbar {
+    spacing:    0;
+    text-color: @normal-foreground;
+    padding:    1px ;
+}
+#case-indicator {
+    spacing:    0;
+    text-color: @normal-foreground;
+}
+#entry {
+    spacing:    0;
+    text-color: @color-foreground;
+    font: "Fura Mono Nerd Font 10";
+}
+#prompt {
+    spacing:    0;
+    text-color: @color-foreground;
+}
+#inputbar {
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+#textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em ;
+    text-color: @separatorcolor;
+    font: "Fura Mono Nerd Font 10";
+}

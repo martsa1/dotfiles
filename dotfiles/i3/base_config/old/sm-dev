@@ -1,0 +1,43 @@
+################################################################################
+####################### Config for sm-dev VM ###################################
+################################################################################
+
+#Ensure that monitors are appropriately setup
+exec xrandr --output VGA-1 --primary
+exec xrandr --output VGA-2 --auto --right-of VGA-1
+
+# Assign Workspaces to specific screens
+# Terminals
+workspace 1 output VGA-1
+workspace 2 output VGA-1
+# Browsers
+workspace 3 output VGA-2
+workspace 4 output VGA-2
+workspace 6 output VGA-2
+workspace 5 output VGA-2
+workspace 7 output VGA-2
+workspace 8 output VGA-2
+# Chat
+workspace 9 output VGA-2
+# Music
+workspace 10 output VGA-2
+
+# Ensure that my primary network connection is brought up
+exec nmcli connection up Wired connection 1
+
+# Top Bar to hold status information - May be updated to use Polybar in
+# future!
+bar {
+		 i3bar_command ~/code/personal/dotfiles/polybar/launch.py
+}
+
+exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg
+
+# Set Keyboard layout to US
+exec setxkbmap -layout us -option ctrl:nocaps
+
+# Keepmenu (Keepass for Rofi)
+bindsym $mod+p exec keepmenu
+
+# Auto-mount disks
+exec --no-startup-id udiskie --tray

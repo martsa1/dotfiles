@@ -1,0 +1,42 @@
+---
+
+# Play to install and configure i3wm
+
+- hosts: all
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: Symlink i3 config into place
+      file:
+        src: "{{dotfiles_base_dir}}/i3"
+        dest: "{{config_base_dir}}/i3"
+        state: link
+        force: yes
+
+    - name: Symlink XResources file
+      file:
+        src: "{{dotfiles_base_dir}}/xresources/Xresources"
+        dest: "/home/{{user}}/.Xresources"
+        state: link
+        force: yes
+
+    - name: Generate i3 config for the target host
+      template:
+        src: "{{dotfiles_base_dir}}/i3/base_config/config.j2"
+        dest: "{{config_base_dir}}/i3/config"
+        force: yes
+
+# TODO: Add installation of i3wm in a co-located playbook
+# TODO: Add a playbook called workstation at dotfiles root which installs
+#       everything i need for my nice workstation, including fonts, tools,
+#       map in any theming I want etc.
+# TODO: Add logic here to determine what host the play is running on, and
+#       compile the i3 config from machine specific and base configurations
+
+  roles:
+    - role: "dotfiles"
+    - role: "i3wm"
+
+
+# https://help.ubuntu.com/community/UbuntuStudio/UsbAudioDevices

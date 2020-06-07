@@ -1,0 +1,61 @@
+################################################################################
+######################## Config for sam-ub-desktop #############################
+################################################################################
+
+#Ensure that monitors are appropriately setup
+exec xrandr --output HDMI-1 --primary
+exec xrandr --output VGA-1 --auto --right-of HDMI-1
+
+# Assign Workspaces to specific screens
+# Terminals
+workspace 1 output HDMI-1
+workspace 2 output HDMI-1
+# Browsers
+workspace 3 output VGA-1
+workspace 4 output VGA-1
+workspace 6 output VGA-1
+workspace 5 output VGA-1
+workspace 7 output VGA-1
+workspace 8 output VGA-1
+# Chat
+workspace 9 output VGA-1
+# Music
+workspace 10 output VGA-1
+
+# Volume controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl \
+  set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl \
+  set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl \
+  set-sink-mute @DEFAULT_SINK@ toggle # mute sound
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+# I don't have back next keys curretly so I use home and mail...
+bindsym XF86Mail exec playerctl next
+bindsym XF86HomePage exec playerctl previous
+
+# Go to sleep!
+# bindsym XF86Sleep --release exec --no-startup-id "pm-suspend --quirk-dpms-on && /home/sam/.config/i3/scripts/lock.sh"
+bindsym XF86Sleep --release exec "sudo pm-suspend --quirk-dpms-on"
+
+# Ensure that my primary network connection is brought up
+exec nmcli connection up corpLan
+
+# Set a desktop background
+exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg
+
+# Launch Bluetooth Daemon
+exec --no-startup-id blueman-applet
+
+# Launch RescueTime
+exec --no-startup-id rescuetime
+
+# Use the keyboard calculator button to launch a calculator
+bindsym XF86Calculator exec "gnome-calculator"
+
+# Top Bar to hold status information - May be updated to use Polybar in
+# future!
+bar {
+		 i3bar_command ~/code/personal/dotfiles/polybar/launch.py
+}

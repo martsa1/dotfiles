@@ -1,0 +1,108 @@
+---
+# tasks file for shell
+# Play to install and configure bash_it, including symlinking together my aliases & extensions etc.
+- name: "Ensure bash and git installed"
+  package:
+    name: "{{item}}"
+    state: present
+  become: true
+  with_items:
+    - "git"
+    - "bash"
+
+- name: Symlink bash_it bashrc
+  file:
+    src: "{{dotfiles_base_dir}}/bash/bashrc"
+    dest: "/home/{{user}}/.bashrc"
+    state: link
+    force: true
+    owner: "{{user}}"
+    group: "{{user}}"
+
+- name: Symlink .profile
+  file:
+    src: "{{dotfiles_base_dir}}/xprofile"
+    dest: "/home/{{user}}/.profile"
+    state: link
+    force: true
+    owner: "{{user}}"
+    group: "{{user}}"
+
+- name: Clone bashit repo
+  git:
+    repo: "https://github.com/Bash-it/bash-it.git"
+    dest: "{{bashit_repo}}"
+    accept_hostkey: "yes"
+    version: master
+    clone: "yes"
+    update: "yes"
+  become: true
+  become_user: "{{user}}"
+
+- name: "Setup alias directories (Configures Bash-it functionality)"
+  file:
+    path: "{{bashit_repo}}/{{item}}"
+    state: "directory"
+  with_items:
+    - "plugins/enabled"
+    - "aliases/enabled"
+    - "completion/enabled"
+  become: true
+  become_user: "{{user}}"
+
+- name: Symlink bash_it plugins
+  file:
+    src: "{{bashit_repo}}/plugins/available/{{item[0]}}"
+    dest: "{{bashit_repo}}/plugins/enabled/{{item[1]}}"
+    state: link
+  with_items:
+    - [["autojump.plugin.bash", "250---autojump.plugin.bash"]]
+    - [["base.plugin.bash", "250---base.plugin.bash"]]
+    - [["dirs.plugin.bash", "250---dirs.plugin.bash"]]
+    - [["tmux.plugin.bash", "250---tmux.plugin.bash"]]
+    - [["virtualenv.plugin.bash", "250---virtualenv.plugin.bash"]]
+    - [["alias-completion.plugin.bash", "365---alias-completion.plugin.bash"]]
+  become: true
+  become_user: "{{user}}"
+
+- name: Symlink bash_it aliases
+  file:
+    src: "{{bashit_repo}}/aliases/available/{{item[0]}}"
+    dest: "{{bashit_repo}}/aliases/enabled/{{item[1]}}"
+    state: link
+  with_items:
+    - [["fuck.aliases.bash", "150---fuck.aliases.bash"]]
+    - [["general.aliases.bash", "150---general.aliases.bash"]]
+  become: true
+  become_user: "{{user}}"
+
+- name: Symlink bash_it completion
+  file:
+    src: "{{bashit_repo}}/completion/available/{{item[0]}}"
+    dest: "{{bashit_repo}}/completion/enabled/{{item[1]}}"
+    state: link
+  with_items:
+    - [["bash-it.completion.bash", "350---bash-it.completion.bash"]]
+    - [["defaults.completion.bash", "350---defaults.completion.bash"]]
+    - [["dirs.completion.bash", "350---dirs.completion.bash"]]
+    - [["docker-compose.completion.bash", "350---docker-compose.completion.bash"]]
+    - [["docker.completion.bash", "350---docker.completion.bash"]]
+    - [["git.completion.bash", "350---git.completion.bash"]]
+    - [["pip.completion.bash", "350---pip.completion.bash"]]
+    - [["pip3.completion.bash", "350---pip3.completion.bash"]]
+    - [["ssh.completion.bash", "350---ssh.completion.bash"]]
+    - [["system.completion.bash", "350---system.completion.bash"]]
+    - [["tmux.completion.bash", "350---tmux.completion.bash"]]
+  become: true
+  become_user: "{{user}}"
+
+- name: Symlink bash_it custom additions
+  file:
+    src: "{{item[0]}}"
+    dest: "{{item[1]}}"
+    state: link
+  with_items:
+    - [["{{dotfiles_base_dir}}/bash/bash_aliases.sh", "{{bashit_repo}}/aliases/custom.aliases.bash"]]
+    - [["{{dotfiles_base_dir}}/bash/bash_envs.sh", "{{bashit_repo}}/custom/custom_envs.bash"]]
+  become: true
+  become_user: "{{user}}"
