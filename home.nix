@@ -82,4 +82,15 @@ in
 
   # Enable FZF
   programs.fzf.enable = true;
+
+  # Enable and manage tmux via home-manager
+  programs.tmux = {
+    enable = true;
+    # extraConfig = readFile ./dotfiles/tmux/tmux.conf;
+  };
+
+  # File setup for various RC/Config files etc.
+  home.file = {
+    ".tmux.conf".source = ./dotfiles/tmux/tmux.conf;
+  };
 }
