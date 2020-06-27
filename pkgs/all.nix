@@ -2,6 +2,7 @@
 { pkgs, python3, ...}:
 
 {
-  polybar-spotify = pkgs.callPackage ./polybar-spotify { inherit pkgs; inherit python3; };
   awscli = pkgs.callPackage ./awscli { inherit pkgs; };
+  polybar-launcher = pkgs.callPackage ./polybar-launcher { inherit pkgs; inherit python3; };
+  polybar-spotify = pkgs.callPackage ./polybar-spotify { inherit pkgs; inherit python3; };
 }

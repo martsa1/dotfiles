@@ -16,6 +16,7 @@ in
     alacritty
     bat
     custom_pkgs.awscli
+    custom_pkgs.polybar-launcher
     custom_pkgs.polybar-spotify
     discord
     docker-compose
@@ -54,4 +55,22 @@ in
       source "$HOME/code/personal/dotfiles/zsh/zshrc"
     fi
   '';
+
+  # Polybar
+  services.polybar = {
+    enable = true;
+    config = ./dotfiles/polybar/config;
+    package = pkgs.polybarFull;
+    script = ''
+      export HOME=/home/sam
+      export DISPLAY=:0
+      export PATH=/run/wrappers/bin:$HOME/.nix-profile/bin:/etc/profiles/per-user/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin
+      IFS=$'\n'
+      for line in $(polybar-launcher --no-kill --echo-only)
+      do
+        eval "$line"
+      done
+      unset IFS
+    '';
+  };
 }
