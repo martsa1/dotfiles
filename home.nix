@@ -26,6 +26,7 @@ in
     gitAndTools.delta
     jq
     meld
+    pass
     playerctl
     pstree
     rofi
@@ -58,6 +59,8 @@ in
     '';
   };
 
+  # Setup notifications
+  services.dunst.enable = true;
 
   # Polybar
   services.polybar = {
