@@ -6,7 +6,9 @@
 
 zstyle ':completion:*' completer _expand _complete _ignored
 zstyle ':completion:*' max-errors 8
+zstyle ':completion:*' menu select
 zstyle :compinstall filename '/home/sam/.zshrc'
+fpath+=~/.zfunc
 
 autoload -Uz compinit
 fpath+=~/.config/zsh_completions
@@ -42,22 +44,22 @@ bindkey "^N" history-beginning-search-forward
 
 
 # Source aliases
-source ~/code/personal/dotfiles/dotfiles/zsh/aliases.zsh
+source "$HOME/.config/nixpkgs/dotfiles/zsh/aliases.zsh"
 
 # Source Environment settings
-source ~/code/personal/dotfiles/dotfiles/zsh/envs.zsh
+source "$HOME/.config/nixpkgs/dotfiles/zsh/envs.zsh"
 
 # Source Extra Key bindings
-source ~/code/personal/dotfiles/dotfiles/zsh/keys.zsh
+source "$HOME/.config/nixpkgs/dotfiles/zsh/keys.zsh"
 
 # Source SSH-Agent Management tooling
-source ~/code/personal/dotfiles/dotfiles/zsh/ssh_agent.zsh
+source "$HOME/.config/nixpkgs/dotfiles/zsh/ssh_agent.zsh"
 
 # Begin loading of zplug plugins etc.
-source ~/.config/zplug/init.zsh
+source "$HOME/.config/zplug/init.zsh"
 #
 # Source ZPlug definitions
-source ~/code/personal/dotfiles/dotfiles/zsh/zplug.zsh
+source "$HOME/.config/nixpkgs/dotfiles/zsh/zplug.zsh"
 
 # zplug check returns true if all packages are installed
 # Therefore, when it returns false, run zplug install
@@ -68,14 +70,3 @@ fi
 # MUST BE AT THE BOTTOM!!
 # Load all plugins
 zplug load
-
-
-# add a couple of commands to the auto-ignored commands list, so that we don't
-# get notified about them in zsh-autonotify
-AUTO_NOTIFY_IGNORE+=("pipenv shell")
-AUTO_NOTIFY_IGNORE+=("poetry shell")
-AUTO_NOTIFY_IGNORE+=("python -m poetry shell")
-
-
-zstyle ':completion:*' menu select
-fpath+=~/.zfunc

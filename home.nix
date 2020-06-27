@@ -34,6 +34,7 @@ in
     signal-desktop
     spotify
     universal-ctags
+    unstable_pkgs.zplug
     vifm
     xclip
     xfce.thunar
@@ -42,19 +43,21 @@ in
     xorg.xev
     xorg.xprop
     yubioath-desktop
-    unstable_pkgs.zplug
     # zsh
   ];
 
-  programs.zsh.enable = true;
-  # programs.zsh.zplug.enable = true;
+  programs.zsh = {
+    enable = true;
+    oh-my-zsh.enable = false;
 
-  # Ensure ZSH setup pulls in my dotfiles stuff...
-  programs.zsh.initExtra = ''
-    if [ -f "$HOME/code/personal/dotfiles/zsh/zshrc" ]; then
-      source "$HOME/code/personal/dotfiles/zsh/zshrc"
-    fi
-  '';
+    # Ensure ZSH setup pulls in my dotfiles stuff...
+    initExtra = ''
+      if [ -f "$HOME/.config/nixpkgs/dotfiles/zsh/zshrc" ]; then
+        source "$HOME/.config/nixpkgs/dotfiles/zsh/zshrc"
+      fi
+    '';
+  };
+
 
   # Polybar
   services.polybar = {
@@ -73,4 +76,7 @@ in
       unset IFS
     '';
   };
+
+  # Enable FZF
+  programs.fzf.enable = true;
 }
