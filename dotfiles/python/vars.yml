@@ -2,5 +2,5 @@
 # Variables used when setting up tools
 user: "sam"
 personal_code_base_dir: "/home/{{user}}/code/personal"
-dotfiles_base_dir: "{{personal_code_base_dir}}/dotfiles"
+dotfiles_base_dir: "{{personal_code_base_dir}}/dotfiles/dotfiles"
 python_bin_dir: "/home/{{user}}/.local/bin"

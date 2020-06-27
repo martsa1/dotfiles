@@ -163,7 +163,7 @@ label-urgent-padding = 2
 
 ; [module/spotify]
 ; type = custom/script
-; exec = $HOME/code/personal/dotfiles/polybar/modules/spotify.sh
+; exec = $HOME/code/personal/dotfiles/dotfiles/polybar/modules/spotify.sh
 ; exec-if = ps -u $USER | grep spotify
 
 ; label =  %output%

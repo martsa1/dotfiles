@@ -42,22 +42,22 @@ bindkey "^N" history-beginning-search-forward
 
 
 # Source aliases
-source ~/code/personal/dotfiles/zsh/aliases.zsh
+source ~/code/personal/dotfiles/dotfiles/zsh/aliases.zsh
 
 # Source Environment settings
-source ~/code/personal/dotfiles/zsh/envs.zsh
+source ~/code/personal/dotfiles/dotfiles/zsh/envs.zsh
 
 # Source Extra Key bindings
-source ~/code/personal/dotfiles/zsh/keys.zsh
+source ~/code/personal/dotfiles/dotfiles/zsh/keys.zsh
 
 # Source SSH-Agent Management tooling
-source ~/code/personal/dotfiles/zsh/ssh_agent.zsh
+source ~/code/personal/dotfiles/dotfiles/zsh/ssh_agent.zsh
 
 # Begin loading of zplug plugins etc.
 source ~/.config/zplug/init.zsh
 #
 # Source ZPlug definitions
-source ~/code/personal/dotfiles/zsh/zplug.zsh
+source ~/code/personal/dotfiles/dotfiles/zsh/zplug.zsh
 
 # zplug check returns true if all packages are installed
 # Therefore, when it returns false, run zplug install

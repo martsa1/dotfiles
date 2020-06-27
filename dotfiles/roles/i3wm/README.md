@@ -14,7 +14,7 @@ Role Variables
 Defaults that can be overridden:
  - user: "sam"
  - personal_code_base_dir: "/home/{{user}}/code/personal"
- - dotfiles_base_dir: "{{personal_code_base_dir}}/dotfiles"
+ - dotfiles_base_dir: "{{personal_code_base_dir}}/dotfiles/dotfiles"
  - config_base_dir: "/home/{{user}}/.config"
 
 Change the above settings to adjust where things are setup/installed to by default.

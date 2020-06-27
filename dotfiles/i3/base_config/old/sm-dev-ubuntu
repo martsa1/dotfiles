@@ -28,7 +28,7 @@ exec nmcli connection up Wired connection 1
 # Top Bar to hold status information - May be updated to use Polybar in
 # future!
 bar {
-		 i3bar_command ~/code/personal/dotfiles/polybar/launch.py
+		 i3bar_command ~/code/personal/dotfiles/dotfiles/polybar/launch.py
 }
 
 exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg

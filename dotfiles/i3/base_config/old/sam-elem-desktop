@@ -51,7 +51,7 @@ exec --no-startup-id rescuetime
 # Top Bar to hold status information - May be updated to use Polybar in
 # future!
 bar {
-		 i3bar_command ~/code/personal/dotfiles/polybar/launch.py
+		 i3bar_command ~/code/personal/dotfiles/dotfiles/polybar/launch.py
 }
 
 # Set the desktop background

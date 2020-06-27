@@ -109,13 +109,13 @@ export PATH=$PATH:~/.node/bin
 export PATH=$PATH:~/.local/bin
 
 # Ensure all the programs I use on a regular basis are installed
-if [ -f ~/code/personal/dotfiles/bash_installs.sh ]; then
-    . ~/code/personal/dotfiles/bash_installs.sh
+if [ -f ~/code/personal/dotfiles/dotfiles/bash_installs.sh ]; then
+    . ~/code/personal/dotfiles/dotfiles/bash_installs.sh
 fi
 
 # Alias definitions.
-if [ -f ~/code/personal/dotfiles/bash_aliases.sh ]; then
-    . ~/code/personal/dotfiles/bash_aliases.sh
+if [ -f ~/code/personal/dotfiles/dotfiles/bash_aliases.sh ]; then
+    . ~/code/personal/dotfiles/dotfiles/bash_aliases.sh
 fi
 
 

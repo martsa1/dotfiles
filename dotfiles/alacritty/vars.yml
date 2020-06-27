@@ -3,7 +3,7 @@
 user: "sam"
 repo_base_dir: "/home/{{user}}/code/personal/alacritty"
 fonts_base_dir: "/home/{{user}}/.local/share/fonts"
-dotfiles_base_dir: "/home/{{user}}/code/personal/dotfiles"
+dotfiles_base_dir: "/home/{{user}}/code/personal/dotfiles/dotfiles"
 config_base_dir: "/home/{{user}}/.config"
 user_bin: "/home/{{user}}/bin"
 alacritty_branch: "v0.4.2"

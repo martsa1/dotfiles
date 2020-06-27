@@ -1,6 +1,6 @@
 # Prompt for a password using Zenity
 
-export SUDO_ASKPASS="${HOME}/code/personal/dotfiles/i3/scripts/password_prompt.sh"
+export SUDO_ASKPASS="${HOME}/code/personal/dotfiles/dotfiles/i3/scripts/password_prompt.sh"
 # Editor Settings
 export EDITOR=nvim
 export SHELL=$(which zsh)
@@ -50,8 +50,8 @@ export HISTTIMEFORMAT="%d/%m/%y %T "
 # Put ZPLUG under ~/.config/zplug
 export ZPLUG_HOME="$HOME/.config/zplug"
 
-# Use ~/code/personal/dotfiles/zsh/zplug.zsh for plugin definitions etc.
-export ZPLUG_LOADFILE="$HOME/code/personal/dotfiles/zsh/zplug.zsh"
+# Use ~/code/personal/dotfiles/dotfiles/zsh/zplug.zsh for plugin definitions etc.
+export ZPLUG_LOADFILE="$HOME/code/personal/dotfiles/dotfiles/zsh/zplug.zsh"
 
 # Pull in FZF for shell usage.
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-config="polybar --config=$HOME/code/personal/dotfiles/polybar/config"
+config="polybar --config=$HOME/code/personal/dotfiles/dotfiles/polybar/config"
 
 primary="#BD93F9"
 secondary="#50FA7B"

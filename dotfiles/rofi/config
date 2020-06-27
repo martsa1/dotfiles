@@ -10,7 +10,7 @@ configuration {
   sidebar-mode: true;
   matching: "fuzzy";
   fullscreen: false;
-  theme: "/home/sam/code/personal/dotfiles/rofi/dracula.rasi";
+  theme: "/home/sam/code/personal/dotfiles/dotfiles/rofi/dracula.rasi";
   max-history-size: 100;
   /* fake-transparency: false; */
 }
