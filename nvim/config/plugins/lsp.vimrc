@@ -13,7 +13,8 @@ let g:LanguageClient_diagnosticsList = "Location"
 
 " Log to a file in /tmp
 let g:LanguageClient_loggingFile = "/tmp/lsp.log"
-let g:LanguageClient_loggingLevel = "DEBUG"
+" let g:LanguageClient_loggingLevel = "DEBUG"
+let g:LanguageClient_loggingLevel = "WARN"
 
 " waitOutputTimeout default is 10
 "let g:LanguageClient_waitOutputTimeout = 10
@@ -47,12 +48,17 @@ let g:LanguageClient_loggingLevel = "DEBUG"
 "    \ 'python': ['pyproject.toml', '.root', 'setup.py', '.git'],
 "    \ }
 
-let g:LanguageClient_serverCommands.python = ['pyls', '-vv', '--log-file', '/tmp/pyls.log']
+let g:LanguageClient_serverCommands.python = ['pyls', '--log-file', '/tmp/pyls.log']
+"
 " let g:LanguageClient_serverCommands.rust = ['rustup', 'run', 'nightly', 'rls']
 let g:LanguageClient_serverCommands.rust = ['rustup', 'run', 'stable', 'rls']
+
 let g:LanguageClient_serverCommands.sh = ['bash-language-server', 'start']
+
 let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-langserver']
 let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-langserver']
+
+let g:LanguageClient_serverCommands.cpp = ['clangd']
 
 
 " Maximum MessageType to show messages from window/logMessage notifications.
@@ -94,20 +100,20 @@ nnoremap <silent> <Leader>lim :call LanguageClient#textDocument_implementation()
 " Find all references to what is under the current cursor position
 nnoremap <silent> <Leader>lu :call LanguageClient#textDocument_references()<cr>
 " Go to definition under cursor -- (statically and dynamically typed languages)
-autocmd FileType javascript,python,rust,sh,typecript,javascript nnoremap <buffer>
+autocmd FileType python,rust,sh,typecript,javascript,cpp nnoremap <buffer>
   \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
 " Go to TYPE definition under cursor  -- (staticly typed languages)
-autocmd FileType javascript,python,rust,sh,typecript,javascript nnoremap <buffer>
+autocmd FileType python,rust,sh,typecript,javascript,cpp nnoremap <buffer>
   \ <leader>ltd :call LanguageClient_textDocument_definition()<cr>
 " Show docs for symbol under cursor
-autocmd FileType javascript,python,rust,sh,typecript,javascript nnoremap <buffer>
+autocmd FileType python,rust,sh,typecript,javascript,cpp nnoremap <buffer>
   \ <leader>lho :call LanguageClient_textDocument_hover()<cr>
 " Rename variable under cursor
-autocmd FileType javascript,python,rust,sh,typecript,javascript nnoremap <buffer>
+autocmd FileType python,rust,sh,typecript,javascript,cpp nnoremap <buffer>
   \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
 " List all symbols within the buffer
-autocmd FileType javascript,python,rust,sh,typecript,javascript nnoremap <buffer>
+autocmd FileType python,rust,sh,typecript,javascript,cpp nnoremap <buffer>
   \ <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
 " List all symbols under the cursor
-autocmd FileType javascript,python,rust,sh,typecript,javascript nnoremap <buffer>
+autocmd FileType python,rust,sh,typecript,javascript,cpp nnoremap <buffer>
   \ <leader>lR :call LanguageClient_textDocument_references()<cr>
