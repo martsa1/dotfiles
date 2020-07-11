@@ -107,7 +107,7 @@ pipenv () {
 
 # Setup the powerline daemon for use with tmux etc.
 powerline-daemon -q
-PYTHON_VERSION=$(python3 --version | sed -n 's/.*\(3\..\).*/\1/p')
+PYTHON_VERSION=$(pyenv global | sed -n 's/.*\(3\..\).*/\1/p')
 
 if [ -f "$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
   powerline_script="$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
@@ -164,3 +164,7 @@ rvm() {
 # Some tools seem to need this set
 export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 export SSL_CERT_DIR=/etc/ssl/certs
+
+if [ -e /home/sam/.nix-profile/etc/profile.d/nix.sh ]; then
+  . /home/sam/.nix-profile/etc/profile.d/nix.sh
+fi
