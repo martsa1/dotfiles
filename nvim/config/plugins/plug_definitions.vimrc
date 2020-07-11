@@ -21,6 +21,9 @@ Plug 'ctrlpvim/ctrlp.vim'
 " Dracular theme is a nice Dark Theme
 Plug 'dracula/vim'
 
+" BAse Terraform support.
+Plug 'hashivim/vim-terraform'
+
 " Lots of language file type highlighting
 Plug 'hoelzro/vim-polyglot'
 
@@ -36,6 +39,9 @@ Plug 'jlanzarotta/bufexplorer'
 
 " Vim RG integration
 Plug 'jremmen/vim-ripgrep'
+
+" Autocomplete support for terraform
+Plug 'juliosueiras/vim-terraform-completion'
 
 " (Optional) but needed if LanguageServer wants to display multiple
 " completion candidates
