@@ -45,9 +45,6 @@ set undoreload=1000
 set backupdir=~/.config/nvim/backup
 set directory=~/.config/nvim/backup
 
-set ruler		" show the cursor position all the time
-set cursorline
-
 set showcmd		" display incomplete commands
 
 if has('mouse')

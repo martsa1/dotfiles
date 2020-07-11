@@ -8,7 +8,7 @@
 if exists("$VAMPIRE")
   colorscheme dracula
   color dracula
-  set colorcolumn=100
+
 elseif exists("$DARKSUN")
 	set background=dark "(light|dark)
 	colorscheme solarized
@@ -34,6 +34,15 @@ set display+=lastline
 set laststatus=2 " always show status line
 set showtabline=2 " always show tabline
 set noshowmode " hide default mode text (e.g. INSERT) as airline already displays it
+
+" Always highlight the row and column of the cursor. - Set an end of line
+" marker at 100 chars.
+set colorcolumn=100
+set cursorline
+set cursorcolumn
+
+set ruler		" show the cursor position all the time
+set cursorline
 
 " Use 256 colours (Use this setting only if your terminal supports 256 colours)
 set t_Co=256
