@@ -71,6 +71,11 @@ assign [title="[aA]lacritty"] $workspace1
 # Music
 for_window [class="[sS]potify"] move window to workspace $workspace10
 
+# Make teams notifications floating
+for_window [window_type="notification"] floating enable
+for_window [title="Microsoft Teams Notification"] floating enable
+
+
 # Assign Workspaces to specific screens
 {% if ansible_hostname == "sm-fswbsk013" %}
 # Terminals
