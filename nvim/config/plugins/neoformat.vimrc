@@ -20,6 +20,14 @@ let g:neoformat_python_yapf = {
 let g:neoformat_enabled_python = ['yapf']
 " let g:neoformat_enabled_python = ['black']
 
-let g:neoformat_enabled_json = ['jq']
+let g:neoformat_json_pyjson = {
+    \ 'exe': 'python',
+    \ 'args': ['-m', 'json.tool'],
+    \ 'stdin': 1,
+    \ }
+" python -m json.tool
+let g:neoformat_enabled_json = ['pyjson']
 
-let g:neoformat_enabled_cpp = ['clang-format']
+let g:neoformat_enabled_clangformat = ['clang-format']
+
+let g:neoformat_enabled_cmakeformat = ['cmake_format']
