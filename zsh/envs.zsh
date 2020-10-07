@@ -100,7 +100,8 @@ poetry () {
 pipenv () {
   unset -f pipenv
   if [[ ! -n $VIRTUAL_ENV ]]; then
-    eval "$(command pipenv --completion)"
+    eval "$(command pyenv init -)"
+    eval "$(pipenv --completion)"
   fi
   pipenv $@
 }
@@ -132,7 +133,7 @@ export PATH="~/.cargo/bin:$PATH"
 # placeholder nvm shell function
 # On first use, it will set nvm up properly which will replace the `nvm`
 # shell function with the real one
-nvm() {
+function nvm() {
   if command -v nvm 1>/dev/null 2>&1; then
     export NVM_DIR="$HOME/.nvm"
     # shellcheck disable=SC1090
@@ -149,16 +150,28 @@ nvm() {
 }
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-rvm() {
-  if command -v rvm 1>/dev/null 2>&1; then
-    unset -f rvm
-    source /home/sam/.rvm/scripts/rvm
-    rvm "$@"
+export PATH="$PATH:$HOME/.rbenv/bin"
+function rbenv() {
+  if command -v rbenv 1>/dev/null 2>&1; then
+    unset -f rbenv
+    eval "$(rbenv init -)"
+    rbenv "$@"
   else
-    echo "RVM is not installed" >&2
+    echo "rbenv is not installed" >&2
     return 1
   fi
+}
+
+function ruby() {
+  unset -f ruby
+  eval "$(rbenv init -)"
+  ruby "$@"
+}
+
+function fpm() {
+  unset -f fpm
+  eval "$(rbenv init -)"
+  fpm "$@"
 }
 
 # Some tools seem to need this set
