@@ -25,6 +25,7 @@ in
     git-lfs
     gitAndTools.delta
     jq
+    lsd
     meld
     pass
     playerctl
