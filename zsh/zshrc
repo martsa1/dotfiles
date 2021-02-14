@@ -54,7 +54,13 @@ source ~/code/personal/dotfiles/zsh/keys.zsh
 source ~/code/personal/dotfiles/zsh/ssh_agent.zsh
 
 # Begin loading of zplug plugins etc.
-source ~/.config/zplug/init.zsh
+if [ -f "$HOME/.config/zplug/init.zsh" ]; then
+  source ~/.config/zplug/init.zsh
+fi
+
+if [ -f "$HOME/.nix-profile/init.zsh" ]; then
+  source ~/.nix-profile/init.zsh
+fi
 #
 # Source ZPlug definitions
 source ~/code/personal/dotfiles/zsh/zplug.zsh

@@ -175,9 +175,10 @@ function fpm() {
 }
 
 # Some tools seem to need this set
-export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
-export SSL_CERT_DIR=/etc/ssl/certs
+# export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+# export SSL_CERT_DIR=/etc/ssl/certs
 
-if [ -e /home/sam/.nix-profile/etc/profile.d/nix.sh ]; then
-  . /home/sam/.nix-profile/etc/profile.d/nix.sh
+# Setup home-manager session variables, if they exist.
+if [ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 fi
