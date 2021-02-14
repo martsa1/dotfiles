@@ -21,10 +21,19 @@ def kill_polybar():
     Terminates any instances of polybar using the `killall` command.
     '''
     try:
+        processes = check_output([
+            "ps",
+            "-elf",
+        ]).decode().strip().splitlines()
+
+        processes = (line for line in processes if "polybar " in line)
+
+        polybar_pids = [" ".join(proc.split()).split()[3] for proc in processes]
+
         check_call(
             [
-                'killall',
-                'polybar'
+                "kill",
+                *polybar_pids,
             ]
         )
 

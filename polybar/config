@@ -177,7 +177,8 @@ type = custom/script
 interval = 1
 format-prefix = " "
 format = <label>
-exec = $HOME/code/personal/polybar-spotify/spotify_status.py -f '{artist}: {song}'
+; exec = $HOME/code/personal/polybar-spotify/spotify_status.py -f '{artist}: {song}'
+exec = $HOME/.nix-profile/bin/polybar-spotify -f '{artist}: {song}'
 format-underline = #1db954
 
 click-left = playerctl --player=spotify play-pause
