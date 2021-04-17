@@ -61,6 +61,12 @@ if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
   source "${VIRTUAL_ENV}/bin/activate"
 fi
 
+if command -v pyenv 1>/dev/null 2>&1; then
+  local PYTHON_VERSION=$(pyenv global | sed -n 's/.*\(3\..\).*/\1/p')
+else
+  local PYTHON_VERSION=$($(which python) --version 2>/dev/null | sed -n 's/.*\(3\..\).*/\1/p')
+fi
+
 pyenv () {
   unset -f pyenv
   if [[ ! -n $VIRTUAL_ENV ]]; then
@@ -103,9 +109,10 @@ pipenv () {
   pipenv $@
 }
 
+
 # Setup the powerline daemon for use with tmux etc.
 powerline-daemon -q
-PYTHON_VERSION=$(pyenv global | sed -n 's/.*\(3\..\).*/\1/p')
+
 
 if [ -f "$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
   powerline_script="$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
@@ -146,7 +153,7 @@ function nvm() {
   fi
 }
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+# Add RBenv to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rbenv/bin"
 function rbenv() {
   if command -v rbenv 1>/dev/null 2>&1; then
