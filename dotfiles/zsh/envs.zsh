@@ -97,14 +97,15 @@ poetry () {
 pipenv () {
   unset -f pipenv
   if [[ ! -n $VIRTUAL_ENV ]]; then
-    eval "$(command pipenv --completion)"
+    eval "$(command pyenv init -)"
+    eval "$(pipenv --completion)"
   fi
   pipenv $@
 }
 
 # Setup the powerline daemon for use with tmux etc.
 powerline-daemon -q
-PYTHON_VERSION=$(python3 --version | sed -n 's/.*\(3\..\).*/\1/p')
+PYTHON_VERSION=$(pyenv global | sed -n 's/.*\(3\..\).*/\1/p')
 
 if [ -f "$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
   powerline_script="$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
@@ -129,7 +130,7 @@ export PATH="~/.cargo/bin:$PATH"
 # placeholder nvm shell function
 # On first use, it will set nvm up properly which will replace the `nvm`
 # shell function with the real one
-nvm() {
+function nvm() {
   if command -v nvm 1>/dev/null 2>&1; then
     export NVM_DIR="$HOME/.nvm"
     # shellcheck disable=SC1090
@@ -144,6 +145,36 @@ nvm() {
     return 1
   fi
 }
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rbenv/bin"
+function rbenv() {
+  if command -v rbenv 1>/dev/null 2>&1; then
+    unset -f rbenv
+    eval "$(rbenv init -)"
+    rbenv "$@"
+  else
+    echo "rbenv is not installed" >&2
+    return 1
+  fi
+}
+
+function ruby() {
+  unset -f ruby
+  eval "$(rbenv init -)"
+  ruby "$@"
+}
+
+function fpm() {
+  unset -f fpm
+  eval "$(rbenv init -)"
+  fpm "$@"
+}
+
+# Setup home-manager session variables, if they exist.
+if [ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+fi
 
 # add a couple of commands to the auto-ignored commands list, so that we don't
 # get notified about them in zsh-autonotify

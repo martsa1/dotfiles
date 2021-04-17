@@ -17,7 +17,7 @@ installs:
   - lxappearance
   - mate-polkit-bin
   - pavucontrol
-  - qt4-qtconfig
+  # - qt4-qtconfig
   - rofi
   - scrot
   - ubuntu-desktop  # TODO: Eventually it would be nice to drop this and build a more minimal environment.

@@ -164,6 +164,7 @@ label-urgent-padding = 2
 ; [module/spotify]
 ; type = custom/script
 ; exec = $HOME/code/personal/dotfiles/dotfiles/polybar/modules/spotify.sh
+; exec = $HOME/code/personal/dotfiles/polybar/modules/spotify.sh
 ; exec-if = ps -u $USER | grep spotify
 
 ; label =  %output%
@@ -177,7 +178,8 @@ type = custom/script
 interval = 1
 format-prefix = " "
 format = <label>
-exec = polybar-spotify -f '{artist}: {song}'
+; exec = $HOME/code/personal/polybar-spotify/spotify_status.py -f '{artist}: {song}'
+exec = $HOME/.nix-profile/bin/polybar-spotify -f '{artist}: {song}'
 format-underline = #1db954
 
 click-left = playerctl --player=spotify play-pause
