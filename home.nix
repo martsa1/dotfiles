@@ -15,6 +15,7 @@ in
   home.packages = with pkgs; [
     alacritty
     bat
+    bpytop
     #custom_pkgs.awscli
     custom_pkgs.i3-config
     custom_pkgs.polybar-launcher
@@ -36,6 +37,7 @@ in
     scrot
     signal-desktop
     spotify
+    tldr
     universal-ctags
     unstable_pkgs.zplug
     vifm
@@ -85,6 +87,14 @@ in
   # Enable FZF
   programs.fzf.enable = true;
 
+  # Enable GPGAgent
+  programs.gpg.enable = true;
+  services.gpg-agent ={
+    enable = true;
+    pinentryFlavor = "qt";
+    grabKeyboardAndMouse = true;
+  };
+
   # Enable and manage tmux via home-manager
   programs.tmux = {
     enable = true;
@@ -100,4 +110,8 @@ in
   xdg.configFile = {
     "i3/config".source = $custom_packages.i3-config/out/config;
   };
+
+  # Attempt to sort out x Session.
+  xsession.enable = true;
+  xsession.windowManager.command = "exec i3";
 }
