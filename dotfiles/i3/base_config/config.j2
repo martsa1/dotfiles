@@ -5,7 +5,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 ############################## System Appearance ###############################
-{{ lookup('template', 'colours.i3') }}
+{% include 'colours.i3' %}
 
 # Font for window titles. Will also be used by the bar unless a different
 # font is used in the bar {} block below.
@@ -19,7 +19,7 @@ bar {
 
 ################################################################################
 ############################### System Key Binds ###############################
-{{ lookup('template', 'keybinds.i3') }}
+{% include 'keybinds.i3' %}
 
 ################################################################################
 ############################## System Behaviour ################################
@@ -28,9 +28,9 @@ bar {
 # active workspace
 focus_on_window_activation urgent
 
-{{ lookup('template', 'workspace_setup.j2') }}
+{% include 'workspace_setup.j2' %}
 
 
 ################################################################################
 ############################## System Startup ##################################
-{{ lookup('template', 'base_config/startup.i3') }}
+{% include 'startup.i3' %}

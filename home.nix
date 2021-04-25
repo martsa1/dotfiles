@@ -15,7 +15,8 @@ in
   home.packages = with pkgs; [
     alacritty
     bat
-    custom_pkgs.awscli
+    #custom_pkgs.awscli
+    custom_pkgs.i3-config
     custom_pkgs.polybar-launcher
     custom_pkgs.polybar-spotify
     discord
@@ -93,5 +94,10 @@ in
   # File setup for various RC/Config files etc.
   home.file = {
     ".tmux.conf".source = ./dotfiles/tmux/tmux.conf;
+  };
+
+  # config file management
+  xdg.configFile = {
+    "i3/config".source = $custom_packages.i3-config/out/config;
   };
 }
