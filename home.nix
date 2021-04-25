@@ -108,7 +108,8 @@ in
 
   # config file management
   xdg.configFile = {
-    "i3/config".source = $custom_packages.i3-config/out/config;
+    "i3/config".source = "${custom_pkgs.i3-config}/config";
+    "i3/config".onChange = "i3-msg restart && systemctl --user restart polybar";
   };
 
   # Attempt to sort out x Session.
