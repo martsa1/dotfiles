@@ -128,5 +128,6 @@ in
 
   # Attempt to sort out x Session.
   xsession.enable = true;
-  xsession.windowManager.command = "exec i3";
+  xsession.windowManager.command = "i3";
+
 }
