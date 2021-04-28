@@ -16,7 +16,8 @@ def main() -> None:
     i3_config = environment.get_template("config.j2")
 
     user = environ.get("USERNAME", "sam")
-    rendered_config = i3_config.render(user=user)
+    ansible_hostname = environ.get("HOSTNAME", "samlaptop")
+    rendered_config = i3_config.render(user=user, ansible_hostname=ansible_hostname)
 
     print(rendered_config)
 

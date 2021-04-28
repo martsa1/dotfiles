@@ -29,15 +29,23 @@ exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg
 
 # Set Keyboard layout to US
 # TODO - Run a script to detect if I'm docked or not and choose layout accordingly.
+{% if ansible_hostname != "samlaptop" %}
 exec --no-startup-id setxkbmap -layout us -option ctrl:nocaps
+{% else %}
+exec --no-startup-id setxkbmap -layout gb -option ctrl:nocaps
+{% endif %}
 
 # Auto-mount disks
 exec --no-startup-id udiskie --tray & disown
-
 
 # Ensure that my primary network connection is brought up
 {% if ansible_hostname == "sm-fswbsk013" %}
 exec --no-startup-id nmcli connection up Ethernet
 {% elif ansible_hostname == "sam-elem-desktop" %}
 exec --no-startup-id nmcli connection up no2hp
+{% endif %}
+
+# Setup polybar
+{% if ansible_hostname == "samlaptop" %}
+exec -no-startup-id systemctl --user restart polybar
 {% endif %}
