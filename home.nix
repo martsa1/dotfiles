@@ -11,6 +11,12 @@ let
 in
 
 {
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
+    }))
+  ];
+
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
     alacritty
@@ -29,6 +35,7 @@ in
     jq
     lsd
     meld
+    neovim-nightly
     pass
     playerctl
     pstree
