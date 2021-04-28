@@ -51,16 +51,21 @@ in
     # zsh
   ];
 
-  programs.zsh = {
-    enable = true;
-    oh-my-zsh.enable = false;
+  programs = {
+    zsh = {
+      enable = true;
+      oh-my-zsh.enable = false;
 
-    # Ensure ZSH setup pulls in my dotfiles stuff...
-    initExtra = ''
-      if [ -f "$HOME/.config/nixpkgs/dotfiles/zsh/zshrc" ]; then
-        source "$HOME/.config/nixpkgs/dotfiles/zsh/zshrc"
-      fi
-    '';
+      # Ensure ZSH setup pulls in my dotfiles stuff...
+      initExtra = ''
+        if [ -f "$HOME/.config/nixpkgs/dotfiles/zsh/zshrc" ]; then
+          source "$HOME/.config/nixpkgs/dotfiles/zsh/zshrc"
+        fi
+      '';
+    };
+    alacritty = {
+      enable = true;
+    };
   };
 
   # Setup notifications
@@ -110,6 +115,8 @@ in
   xdg.configFile = {
     "i3/config".source = "${custom_pkgs.i3-config}/config";
     "i3/config".onChange = "i3-msg restart && systemctl --user restart polybar";
+
+    "alacritty/alacritty.yml".source = ./dotfiles/alacritty/alacritty.yml;
   };
 
   # Attempt to sort out x Session.
