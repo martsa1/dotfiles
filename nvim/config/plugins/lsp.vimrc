@@ -58,7 +58,10 @@ let g:LanguageClient_serverCommands.sh = ['bash-language-server', 'start']
 let g:LanguageClient_serverCommands.typescript = ['javascript-typescript-langserver']
 let g:LanguageClient_serverCommands.javascript = ['javascript-typescript-langserver']
 
-let g:LanguageClient_serverCommands.cpp = ['clangd']
+let g:LanguageClient_serverCommands.cpp = ['clangd', '--clang-tidy', '--completion-style=detailed', '--background-index', '--log=verbose']
+
+" Cmake Language server
+let g:LanguageClient_serverCommands.cmake = ['cmake-language-server']
 
 
 " Maximum MessageType to show messages from window/logMessage notifications.
@@ -100,20 +103,20 @@ nnoremap <silent> <Leader>lim :call LanguageClient#textDocument_implementation()
 " Find all references to what is under the current cursor position
 nnoremap <silent> <Leader>lu :call LanguageClient#textDocument_references()<cr>
 " Go to definition under cursor -- (statically and dynamically typed languages)
-autocmd FileType python,rust,sh,typecript,javascript,cpp nnoremap <buffer>
+autocmd FileType python,rust,sh,typecript,javascript,cpp,cmake nnoremap <buffer>
   \ <leader>ld :call LanguageClient_textDocument_definition()<cr>
 " Go to TYPE definition under cursor  -- (staticly typed languages)
-autocmd FileType python,rust,sh,typecript,javascript,cpp nnoremap <buffer>
+autocmd FileType python,rust,sh,typecript,javascript,cpp,cmake nnoremap <buffer>
   \ <leader>ltd :call LanguageClient_textDocument_definition()<cr>
 " Show docs for symbol under cursor
-autocmd FileType python,rust,sh,typecript,javascript,cpp nnoremap <buffer>
+autocmd FileType python,rust,sh,typecript,javascript,cpp,cmake nnoremap <buffer>
   \ <leader>lho :call LanguageClient_textDocument_hover()<cr>
 " Rename variable under cursor
-autocmd FileType python,rust,sh,typecript,javascript,cpp nnoremap <buffer>
+autocmd FileType python,rust,sh,typecript,javascript,cpp,cmake nnoremap <buffer>
   \ <leader>lr :call LanguageClient_textDocument_rename()<cr>
 " List all symbols within the buffer
-autocmd FileType python,rust,sh,typecript,javascript,cpp nnoremap <buffer>
+autocmd FileType python,rust,sh,typecript,javascript,cpp,cmake nnoremap <buffer>
   \ <leader>ls :call LanguageClient_textDocument_documentSymbol()<cr>
 " List all symbols under the cursor
-autocmd FileType python,rust,sh,typecript,javascript,cpp nnoremap <buffer>
+autocmd FileType python,rust,sh,typecript,javascript,cpp,cmake nnoremap <buffer>
   \ <leader>lR :call LanguageClient_textDocument_references()<cr>
