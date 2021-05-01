@@ -148,4 +148,6 @@ Plug 'Yggdroot/indentLine'
 " Go auto completion client
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 
+Plug 'neovim/nvim-lspconfig'
+
 call plug#end()
