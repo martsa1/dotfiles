@@ -271,7 +271,7 @@ Plug 'nvim-lua/telescope.nvim'
 
 
 " Context-aware syntax highlighting
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Javascript language support
 Plug 'pangloss/vim-javascript'
@@ -618,7 +618,7 @@ let g:neoformat_enabled_json = ['pyjson']
 
 let g:neoformat_enabled_clangformat = ['clang-format']
 
-let g:neoformat_enabled_cmakeformat = ['cmake_format']
+let g:neoformat_enabled_cmakeformat = ['cmake-format']
 
 " #################################################################################################
 " ####### NERDTree Settings #######################################################################
@@ -641,6 +641,17 @@ let g:NERDTreeSortOrder=['*', '\.swp$',  '\.bak$', '\~$', '\/$']
 
 " whether or not to show the nerdtree brackets around flags
 let g:webdevicons_conceal_nerdtree_brackets = 0
+
+
+" Add a Modeline function, appends modeline after last line in buffer.
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
+        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
+endfunction
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
 
 " #################################################################################################
 " ####### LSP Settings ############################################################################
@@ -708,6 +719,7 @@ require'lspconfig'.clangd.setup{on_attach=on_attach_wrapper}
 require'lspconfig'.cmake.setup{on_attach=on_attach_wrapper}
 require'lspconfig'.yamlls.setup{on_attach=on_attach_wrapper}
 require'lspconfig'.bashls.setup{on_attach=on_attach_wrapper}
+require'lspconfig'.rust_analyzer.setup{on_attach=on_attach_wrapper}
 EOF
 
 " Use completion-nvim in every buffer
@@ -779,4 +791,3 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, method, para
   end
 end
 EOF
-
