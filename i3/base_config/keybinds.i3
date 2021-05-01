@@ -17,6 +17,7 @@ bindsym $mod+Shift+q kill
 # Use Rofi as default launcher
 bindsym $mod+d exec rofi -show run
 bindsym $mod+Shift+d exec rofi -show ssh
+bindsym $mod+Ctrl+d exec rofi -show emoji -modi emoji
 
 # Launch a file browser
 # If Nautilus tries to launch a Desktop, try running:
