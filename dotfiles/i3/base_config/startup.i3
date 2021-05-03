@@ -5,8 +5,10 @@
 # Run the lxpolkit daemon
 exec --no-startup-id mate-polkit & disown
 
+{% if ansible_hostname != "samlaptop" %}
 # I want pretty GUI transitions and stuff!
 exec --no-startup-id compton -f & disown
+{% endif %}
 
 # # I also want to get a browser, terminal and music to start on login
 exec firefox-dev & disown
@@ -25,7 +27,11 @@ exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id xautolock -time 5 -locker ~/code/personal/dotfiles/dotfiles/i3/scripts/lock.sh
 
 # Set the desktop background
+{% if ansible_hostname != "samlaptop" %}
 exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg
+{% else %}
+exec --no-startup-id feh --bg-scale ~/.background-image
+{% endif %}
 
 # Set Keyboard layout to US
 # TODO - Run a script to detect if I'm docked or not and choose layout accordingly.
