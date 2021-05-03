@@ -1,5 +1,6 @@
 "setlocal foldmethod=syntax
 "autocmd!
+set tabstop=2
 set tabstop=4
 set expandtab
 set shiftwidth=4
