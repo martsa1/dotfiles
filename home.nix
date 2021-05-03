@@ -17,9 +17,13 @@ in
     }))
   ];
 
+  imports = [
+    # Enable and manage tmux via home-manager
+    ./dotfiles/tmux
+  ];
+
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
-    alacritty
     bat
     brightnessctl
     bpytop
@@ -37,7 +41,7 @@ in
     lsd
     meld
     mupdf
-    neovim-nightly
+    # neovim-nightly
     pass
     playerctl
     pstree
@@ -75,6 +79,12 @@ in
     alacritty = {
       enable = true;
     };
+    neovim = {
+      enable = true;
+      package = pkgs.neovim-nightly;
+      viAlias = false;
+      # extraConfig 
+    };
   };
 
   # Setup notifications
@@ -109,15 +119,9 @@ in
     grabKeyboardAndMouse = true;
   };
 
-  # Enable and manage tmux via home-manager
-  programs.tmux = {
-    enable = true;
-    # extraConfig = readFile ./dotfiles/tmux/tmux.conf;
-  };
-
   # File setup for various RC/Config files etc.
   home.file = {
-    ".tmux.conf".source = ./dotfiles/tmux/tmux.conf;
+    #".tmux.conf".source = ./dotfiles/tmux/tmux.conf;
     ".background-image".source = ./backgrounds/pexels-pixabay-220072.jpg;
   };
 
