@@ -21,6 +21,7 @@ in
   home.packages = with pkgs; [
     alacritty
     bat
+    brightnessctl
     bpytop
     #custom_pkgs.awscli
     custom_pkgs.i3-config
@@ -35,6 +36,7 @@ in
     jq
     lsd
     meld
+    mupdf
     neovim-nightly
     pass
     playerctl
@@ -116,6 +118,7 @@ in
   # File setup for various RC/Config files etc.
   home.file = {
     ".tmux.conf".source = ./dotfiles/tmux/tmux.conf;
+    ".background-image".source = ./backgrounds/pexels-pixabay-220072.jpg;
   };
 
   # config file management
