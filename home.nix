@@ -1,3 +1,4 @@
+# vim: set filetype=nix ts=2 sw=2 tw=0 et :
 { pkgs, ...}:
 
 let
@@ -41,7 +42,6 @@ in
     lsd
     meld
     mupdf
-    # neovim-nightly
     pass
     playerctl
     pstree
@@ -61,7 +61,6 @@ in
     xorg.xev
     xorg.xprop
     yubioath-desktop
-    # zsh
   ];
 
   programs = {
@@ -82,8 +81,8 @@ in
     neovim = {
       enable = true;
       package = pkgs.neovim-nightly;
+      extraPackages = [ pkgs.gcc ];
       viAlias = false;
-      # extraConfig 
     };
   };
 
@@ -131,10 +130,11 @@ in
     "i3/config".onChange = "i3-msg restart && systemctl --user restart polybar";
 
     "alacritty/alacritty.yml".source = ./dotfiles/alacritty/alacritty.yml;
+
+    "nvim/init.vim".source = ./nvim/config/standalone.vim;
   };
 
   # Attempt to sort out x Session.
   xsession.enable = true;
   xsession.windowManager.command = "i3";
-
 }
