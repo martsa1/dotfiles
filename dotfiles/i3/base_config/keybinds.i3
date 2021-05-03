@@ -21,7 +21,11 @@ bindsym $mod+Shift+d exec rofi -show ssh
 # Launch a file browser
 # If Nautilus tries to launch a Desktop, try running:
 # gsettings set org.gnome.desktop.background show-desktop-icons false
+{% if ansible_hostname != "samlaptop" %}
 bindsym $mod+n exec nautilus
+{% else %}
+bindsym $mod+n exec thunar
+{% endif %}
 
 # change focus
 bindsym $mod+h focus left
@@ -188,8 +192,8 @@ mode "Resize" {
 bindsym $mod+r mode "Resize"
 
 # Brightness controls
-bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl s 5%+
-bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl s 5%-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s 5%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 5%-
 
 # Volume controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl \
