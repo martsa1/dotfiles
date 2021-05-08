@@ -36,8 +36,6 @@ in
     docker-compose
     firefox-devedition-bin
     flameshot
-    git-lfs
-    gitAndTools.delta
     jq
     lsd
     meld
@@ -97,6 +95,30 @@ in
       package = pkgs.neovim-nightly;
       extraPackages = [ pkgs.gcc ];
       viAlias = false;
+    };
+
+
+    git = {
+      enable = true;
+
+      userName = "Sam Martin-Brown";
+      userEmail = "Nivekkas@gmail.com";
+
+      delta.enable = true;
+      delta.options = {
+        line-numbers = true;
+      };
+
+      signing.signByDefault = true;
+      signing.key = "61CB737879759A958B6B886626E45D5144EF59EA";
+
+      aliases = {
+        d = "diff";
+      };
+
+      ignores = [
+        "tags"
+      ];
     };
   };
 
