@@ -43,7 +43,6 @@ in
     meld
     mupdf
     pass
-    playerctl
     pstree
     scrot
     signal-desktop
@@ -102,7 +101,9 @@ in
   };
 
   # Setup notifications
-  services.dunst.enable = true;
+  services.dunst = {
+    enable = true;
+  };
 
   # Setup rofi
   programs.rofi = {
@@ -126,6 +127,9 @@ in
       sorting-method = "fzf";
     };
   };
+
+  # Playerctl support
+  services.playerctld.enable = true;
 
   # Polybar
   services.polybar = {
