@@ -29,6 +29,7 @@ in
     brightnessctl
     bpytop
     #custom_pkgs.awscli
+    custom_pkgs.dunst-dracula-theme
     custom_pkgs.i3-config
     custom_pkgs.polybar-launcher
     custom_pkgs.polybar-spotify
@@ -125,6 +126,11 @@ in
   # Setup notifications
   services.dunst = {
     enable = true;
+    iconTheme = {
+      package = pkgs.arc-icon-theme;
+      name = "Arc";
+    };
+
   };
 
   # Setup rofi
@@ -199,6 +205,8 @@ in
     "alacritty/alacritty.yml".source = ./dotfiles/alacritty/alacritty.yml;
 
     "nvim/init.vim".source = ./nvim/config/standalone.vim;
+
+    "dunst/dunstrc".source = "${custom_pkgs.dunst-dracula-theme}/dunstrc";
   };
 
   # Attempt to sort out x Session.
