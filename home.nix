@@ -45,8 +45,6 @@ in
     pass
     playerctl
     pstree
-    rofi
-    rofi-pass
     scrot
     signal-desktop
     spotify
@@ -105,6 +103,29 @@ in
 
   # Setup notifications
   services.dunst.enable = true;
+
+  # Setup rofi
+  programs.rofi = {
+    enable = true;
+    pass.enable = true;
+    #pass.extraConfig = '' '';
+
+    #font = "";
+    fullscreen = false;
+    lines = 15;
+    location = "center";
+    terminal = "${pkgs.alacritty}/bin/alacritty";
+    theme = ./dotfiles/rofi/dracula.rasi;
+    extraConfig = {
+      matching = "fuzzy";
+      max-history-size = 100;
+      modi = "window,run,ssh,keys";
+      show-icons = true;
+      sidebar-mode = true;
+      sort = true;
+      sorting-method = "fzf";
+    };
+  };
 
   # Polybar
   services.polybar = {
