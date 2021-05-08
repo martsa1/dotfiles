@@ -63,6 +63,23 @@ in
     yubioath-desktop
   ];
 
+  # Set system theme
+  gtk = {
+    iconTheme = {
+      package = pkgs.arc-icon-theme;
+      name = "Arc";
+    };
+
+    theme = {
+      package = pkgs.arc-theme;
+      name = "Arc-Dark";
+    };
+  };
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
+  };
+
   programs = {
     zsh = {
       enable = true;
@@ -125,9 +142,12 @@ in
   };
 
   # config file management
+  xdg.enable = true;
   xdg.configFile = {
     "i3/config".source = "${custom_pkgs.i3-config}/config";
     "i3/config".onChange = "i3-msg restart && systemctl --user restart polybar";
+
+    "gtk-3.0/settings.ini".source = ./dotfiles/gtk/settings.ini;
 
     "alacritty/alacritty.yml".source = ./dotfiles/alacritty/alacritty.yml;
 
