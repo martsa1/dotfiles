@@ -184,6 +184,14 @@ let g:python3_host_prog = '/home/sam/.python/neovim-py3/bin/python'
 " ################################################################################################
 " ####### PLUGINS ################################################################################
 " ################################################################################################
+
+" Ensure vim plug is available
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.config/nvim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.config/nvim/plugged')
 
 " Give git hints on current buffer line: Add, Modify, Remove within NerdTree
