@@ -35,6 +35,7 @@ in
     custom_pkgs.polybar-spotify
     discord
     docker-compose
+    dracula-theme
     firefox-devedition-bin
     flameshot
     jq
@@ -62,13 +63,14 @@ in
   # Set system theme
   gtk = {
     iconTheme = {
-      package = pkgs.arc-icon-theme;
-      name = "Arc";
+      package = pkgs.dracula-theme;
+      name = "Dracula";
     };
 
     theme = {
-      package = pkgs.arc-theme;
-      name = "Arc-Dark";
+      #package = pkgs.arc-theme;
+      package = pkgs.dracula-theme;
+      name = "Dracula";
     };
   };
   qt = {
