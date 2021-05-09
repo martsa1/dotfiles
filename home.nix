@@ -26,9 +26,8 @@ in
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
     bat
-    brightnessctl
     bpytop
-    #custom_pkgs.awscli
+    brightnessctl
     custom_pkgs.dunst-dracula-theme
     custom_pkgs.i3-config
     custom_pkgs.polybar-launcher
@@ -38,6 +37,7 @@ in
     dracula-theme
     firefox-devedition-bin
     flameshot
+    gnome3.zenity
     jq
     lsd
     meld

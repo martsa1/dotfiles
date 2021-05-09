@@ -79,8 +79,13 @@ bindsym $mod+a focus parent
 bindsym $mod+z focus child
 
 # Rename a workspace
+{% if ansible_hostname != "samlaptop" %}
 bindsym $mod+Shift+backslash exec \
   '/home/{{ user }}/.config/i3/scripts/rename_workspace.py'
+{% else %}
+bindsym $mod+Shift+backslash exec \
+  '/home/{{ user }}/.config/nixpkgs/dotfiles/i3/scripts/rename_workspace.py'
+{% endif %}
 
 # switch to workspace
 bindsym $mod+1 workspace number 1
