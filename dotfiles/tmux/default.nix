@@ -36,6 +36,11 @@ programs.tmux = {
 
       # reload config file
       bind r source-file ~/.tmux.conf
+
+
+      # Make windows with changes easier to notice
+      set-window-option -g window-status-bell-style "reverse"
+      set-window-option -g window-status-activity-style "bold"
     '';
 
 
