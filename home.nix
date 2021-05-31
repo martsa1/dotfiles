@@ -208,6 +208,8 @@ in
     "alacritty/alacritty.yml".source = ./dotfiles/alacritty/alacritty.yml;
 
     "nvim/init.vim".source = ./nvim/config/standalone.vim;
+    "nvim/after".source = ./nvim/after;
+    "nvim/after".recursive = true;
 
     "dunst/dunstrc".source = "${custom_pkgs.dunst-dracula-theme}/dunstrc";
   };
