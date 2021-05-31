@@ -42,6 +42,7 @@ in
     lsd
     meld
     mupdf
+    okular
     pass
     pstree
     scrot
