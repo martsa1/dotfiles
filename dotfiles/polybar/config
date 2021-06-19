@@ -336,7 +336,7 @@ format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 label-discharging = %percentage%% - %time%
 
-format-full-prefix = " "
+format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
@@ -357,12 +357,12 @@ animation-charging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
-thermal-zone = 0
+thermal-zone = 3
 # hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input
 hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input
-warn-temperature = 60
+warn-temperature = 80
 
-format =  <ramp> <label>
+format = <ramp> <label>
 format-underline = ${colors.color6}
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${colors.color1}
@@ -371,9 +371,12 @@ label = %temperature%
 label-warn = %temperature%
 label-warn-foreground = ${colors.secondary}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+ramp-5 = 
 ramp-foreground = ${colors.foreground-alt}
 
 [module/powermenu]
