@@ -697,10 +697,10 @@ local on_attach_wrapper = function(client)
 end
 
 
-require'lspconfig'.pyls.setup{
+require'lspconfig'.pylsp.setup{
   on_attach=on_attach_wrapper,
   settings = {
-    pyls = {
+    pylsp = {
       plugins = {
         configurationSources = { "flake8" },
         flake8 = {
@@ -715,7 +715,7 @@ require'lspconfig'.pyls.setup{
         pylint =  {
           enabled = true
         },
-        pyls_mypy = {
+        pylsp_mypy = {
           enabled = true,
           live_mode = true
         }
@@ -743,18 +743,6 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
-
-function! LSClients()
-  :lua print(vim.inspect(vim.lsp.buf_get_clients()))
-endfunction
-com! LSClients call LSClients()
-
-function! LSRestart()
-  :lua vim.lsp.stop_client(vim.lsp.get_active_clients())
-  :edit
-endfunction
-com! LSRestart call LSRestart()
-
 
 " Use Treesitter grammar for code folding
 set foldmethod=expr
@@ -796,7 +784,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, method, para
   bufnr = bufnr or vim.uri_to_bufnr(uri)
 
   if bufnr == vim.api.nvim_get_current_buf() then
-    vim.lsp.diagnostic.set_loclist { open_loclist = false }
+    vim.lsp.diagnostic.set_loclist { open = false }
   end
 end
 EOF
