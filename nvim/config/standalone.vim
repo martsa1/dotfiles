@@ -729,6 +729,7 @@ require'lspconfig'.cmake.setup{on_attach=on_attach_wrapper}
 require'lspconfig'.yamlls.setup{on_attach=on_attach_wrapper}
 require'lspconfig'.bashls.setup{on_attach=on_attach_wrapper}
 require'lspconfig'.rust_analyzer.setup{on_attach=on_attach_wrapper}
+require'lspconfig'.rnix.setup{on_attach=on_attach_wrapper}
 EOF
 
 " Use completion-nvim in every buffer
