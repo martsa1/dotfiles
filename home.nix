@@ -45,6 +45,7 @@ in
     okular
     pass
     pstree
+    rnix-lsp
     scrot
     signal-desktop
     spotify
