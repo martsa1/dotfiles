@@ -745,6 +745,13 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
+" UNCOMMENT THIS FOR DEBUGGING LSPs.
+" lua << EOF
+" vim.lsp.set_log_level("debug")
+" -- run the below command:
+" -- :lua vim.cmd('e'..vim.lsp.get_log_path())
+" EOF
+
 " Use Treesitter grammar for code folding
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
