@@ -230,3 +230,9 @@ bindsym $mod+shift+w exec rofi -show window
 # Rofi Calculator
 bindsym $mod+c exec rofi -show calc -modi calc -no-show-match -no-sort
 
+#####################################################
+# Move to scratchpad
+bindsym $mod+shift+minus move scratchpad
+
+# Toggle show scratchpad
+bindsym $mod+minus scratchpad show
