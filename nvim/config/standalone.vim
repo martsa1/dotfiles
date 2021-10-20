@@ -622,7 +622,8 @@ let g:neoformat_json_pyjson = {
     \ 'stdin': 1,
     \ }
 " python -m json.tool
-let g:neoformat_enabled_json = ['pyjson']
+"let g:neoformat_enabled_json = ['pyjson']
+let g:neoformat_enabled_json = ['jq']
 
 let g:neoformat_enabled_clangformat = ['clang-format']
 
@@ -784,15 +785,16 @@ diagHandler = diagHandler or vim.lsp.with(
 
 -- Bind the above handler, but also update the location list
 vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, method, params, client_id, bufnr, config)
-  local uri = params.uri
-
   --   diagHandler(err, method, params, client_id, bufnr, config)
   pcall(diagHandler, err, method, params, client_id, bufnr, config)
 
-  bufnr = bufnr or vim.uri_to_bufnr(uri)
+  if(params.uri ~= nil) then
+    local uri = params.uri
+    bufnr = bufnr or vim.uri_to_bufnr(uri)
 
-  if bufnr == vim.api.nvim_get_current_buf() then
-    vim.lsp.diagnostic.set_loclist { open = false }
+    if bufnr == vim.api.nvim_get_current_buf() then
+      vim.lsp.diagnostic.set_loclist { open = false }
+    end
   end
 end
 EOF
