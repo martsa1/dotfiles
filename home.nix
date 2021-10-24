@@ -32,6 +32,7 @@ in
     custom_pkgs.i3-config
     custom_pkgs.polybar-launcher
     custom_pkgs.polybar-spotify
+    custom_pkgs.rofi-dracula-theme
     discord
     docker-compose
     dracula-theme
@@ -145,8 +146,6 @@ in
     #pass.extraConfig = '' '';
 
     #font = "";
-    fullscreen = false;
-    lines = 15;
     location = "center";
     terminal = "${pkgs.alacritty}/bin/alacritty";
     theme = ./dotfiles/rofi/dracula.rasi;
