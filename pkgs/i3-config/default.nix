@@ -23,6 +23,6 @@ in
 
       installPhase = ''
         mkdir -p $out
-	python3 $src/render_config.py > $out/config
+	      python3 $src/render_config.py > $out/config
       '';
   }
