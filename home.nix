@@ -36,20 +36,25 @@ in
     discord
     docker-compose
     dracula-theme
+    file
     firefox-devedition-bin
     flameshot
     gnome3.zenity
+    gthumb
     jq
     lsd
     meld
     mupdf
     okular
     pass
+    prusa-slicer
     pstree
+    python39Packages.ipython
     rnix-lsp
     scrot
     signal-desktop
     spotify
+    teams
     tldr
     universal-ctags
     unstable_pkgs.zplug
@@ -61,6 +66,12 @@ in
     xorg.xev
     xorg.xprop
     yubioath-desktop
+
+    # Youtube stuff
+    youtube-dl
+    tartube
+    ffmpeg
+    vlc
   ];
 
   # Set system theme
