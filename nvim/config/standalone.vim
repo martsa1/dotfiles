@@ -176,10 +176,14 @@ set inccommand=split
 " endif
 
 " Need to dynamically set this up depending on system?
-let g:python_host_prog = '/home/sam/.python/neovim-py2/bin/python'
-let g:python3_host_prog = '/home/sam/.python/neovim-py3/bin/python'
-" let g:python_host_prog = '/usr/local/src/pyenvs/py2/neovim/bin/python'
-" let g:python3_host_prog = '/usr/local/src/pyenvs/py3/neovim/bin/python'
+if has('unix')
+  let g:python_host_prog = $HOME . '/.python/neovim-py2/bin/python'
+  let g:python3_host_prog = $HOME .'/.python/neovim-py3/bin/python'
+endif
+if has('macunix')
+  "let g:python_host_prog = $HOME . '/.local/neovim-py2/bin/python'
+  let g:python3_host_prog = $HOME . '/.local/neovim_py_venv/bin/python'
+endif
 
 " ################################################################################################
 " ####### PLUGINS ################################################################################
