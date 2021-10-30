@@ -20,6 +20,8 @@
 
   # Setup any mac specific programs here...
   programs = {
+    # Enable GPG - no agent is supported on mac (guess it uses keychain instead?)
+    gpg.enable = true;
   };
 
   # File setup for various RC/Config files etc.
