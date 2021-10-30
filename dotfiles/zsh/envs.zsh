@@ -114,9 +114,14 @@ pipenv () {
 powerline-daemon -q
 
 
-if [ -f "$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
+# Variable 'powerline_config_path' set in home-manager config, rather than here.
+if [ -f "$powerline_config_path" ]; then
+  source "$powerline_config_path"
+
+elif [ -f "$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
   powerline_script="$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
   source  $powerline_script
+
 elif [ -f "$HOME/.local/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
   powerline_script="$HOME/.local/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
   source  $powerline_script
