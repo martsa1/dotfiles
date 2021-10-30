@@ -84,7 +84,9 @@ source "$HOME/.config/nixpkgs/dotfiles/zsh/zplug.zsh"
 # zplug check returns true if all packages are installed
 # Therefore, when it returns false, run zplug install
 if ! zplug check; then
-    zplug install
+    echo "Not all zplug plugins are installed, but auto-install is currently disabled."
+    echo "run 'zplug install' to install them."
+    #zplug install
 fi
 
 # MUST BE AT THE BOTTOM!!
