@@ -14,7 +14,21 @@ autoload -Uz compinit
 fpath+=~/.config/zsh_completions
 fpath+=~/.zsh/completion
 
-if [ $(date +'%s') != $(stat -c '%Y' ${ZDOTDIR:-$HOME}/.zcompdump) ]; then
+if [ $(uname) = "Linux" ];then
+  if [ $(date +'%s') != $(stat -c '%Y' ${ZDOTDIR:-$HOME}/.zcompdump) ]; then
+    let fresh=1
+  else
+    let fresh=0
+  fi
+else
+  if [ $(date +'%s') != $(stat -f '%m' ${ZDOTDIR:-$HOME}/.zcompdump) ]; then
+    let fresh=1
+  else
+    let fresh=0
+  fi
+fi
+
+if [ fresh = 1 ]; then
   compinit
 else
   compinit -C
