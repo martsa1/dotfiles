@@ -8,7 +8,7 @@ let
   ) {};
 
   python_version = pkgs.python38;
-  custom_pkgs = pkgs.callPackage ./pkgs/all.nix { inherit pkgs; python3=python_version; };
+  custom_pkgs = pkgs.callPackage ../../pkgs/all.nix { inherit pkgs; python3=python_version; };
 in
 
 {
@@ -23,12 +23,11 @@ in
     ../common
 
     # Enable and manage tmux via home-manager
-    ./dotfiles/tmux
+    ../../dotfiles/tmux
   ];
 
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
-    bat
     bpytop  # Not in common because its broken on mac.
     brightnessctl
     custom_pkgs.dunst-dracula-theme
@@ -37,31 +36,18 @@ in
     custom_pkgs.polybar-spotify
     custom_pkgs.rofi-dracula-theme
     discord
-    docker-compose
     dracula-theme  # Not in common!
-    file
     firefox-devedition-bin
     flameshot
     gnome3.zenity
     gthumb
-    jq
-    lsd
-    meld
     mupdf
     okular
-    pass
     prusa-slicer
-    pstree
-    python39Packages.ipython
-    rnix-lsp
     scrot
     signal-desktop
     spotify
     teams
-    tldr
-    universal-ctags
-    unstable_pkgs.zplug
-    vifm
     xclip
     xfce.thunar
     xfce.thunar-archive-plugin
@@ -96,51 +82,6 @@ in
   };
 
   programs = {
-    zsh = {
-      enable = true;
-      oh-my-zsh.enable = false;
-
-      # Ensure ZSH setup pulls in my dotfiles stuff...
-      initExtra = ''
-        if [ -f "$HOME/.config/nixpkgs/dotfiles/zsh/zshrc" ]; then
-          source "$HOME/.config/nixpkgs/dotfiles/zsh/zshrc"
-        fi
-      '';
-    };
-    alacritty = {
-      enable = true;
-    };
-    neovim = {
-      enable = true;
-      package = pkgs.neovim-nightly;
-      extraPackages = [ pkgs.gcc ];
-      viAlias = false;
-      extraConfig = builtins.readFile ../../nvim/init.vim;
-    };
-
-
-    git = {
-      enable = true;
-
-      userName = "Sam Martin-Brown";
-      userEmail = "Nivekkas@gmail.com";
-
-      delta.enable = true;
-      delta.options = {
-        line-numbers = true;
-      };
-
-      signing.signByDefault = true;
-      signing.key = "61CB737879759A958B6B886626E45D5144EF59EA";
-
-      aliases = {
-        d = "diff";
-      };
-
-      ignores = [
-        "tags"
-      ];
-    };
   };
 
   # Setup notifications
@@ -162,7 +103,7 @@ in
     #font = "";
     location = "center";
     terminal = "${pkgs.alacritty}/bin/alacritty";
-    theme = ./dotfiles/rofi/dracula.rasi;
+    theme = ../../dotfiles/rofi/dracula.rasi;
     extraConfig = {
       matching = "fuzzy";
       max-history-size = 100;
@@ -180,7 +121,7 @@ in
   # Polybar
   services.polybar = {
     enable = true;
-    config = ./dotfiles/polybar/config;
+    config = ../../dotfiles/polybar/config;
     package = pkgs.polybarFull;
     script = ''
       export HOME=/home/sam
@@ -195,9 +136,6 @@ in
     '';
   };
 
-  # Enable FZF
-  programs.fzf.enable = true;
-
   # Enable GPGAgent
   programs.gpg.enable = true;
   services.gpg-agent ={
@@ -208,8 +146,8 @@ in
 
   # File setup for various RC/Config files etc.
   home.file = {
-    #".tmux.conf".source = ./dotfiles/tmux/tmux.conf;
-    ".background-image".source = ./backgrounds/pexels-pixabay-220072.jpg;
+    #".tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
+    ".background-image".source = ../../backgrounds/pexels-pixabay-220072.jpg;
   };
 
   # config file management
@@ -218,13 +156,7 @@ in
     "i3/config".source = "${custom_pkgs.i3-config}/config";
     "i3/config".onChange = "i3-msg restart && systemctl --user restart polybar";
 
-    "gtk-3.0/settings.ini".source = ./dotfiles/gtk/settings.ini;
-
-    "alacritty/alacritty.yml".source = ./dotfiles/alacritty/alacritty.yml;
-
-    "nvim/init.vim".source = ../../nvim/config/standalone.vim;
-    "nvim/after".source = ../../nvim/after;
-    "nvim/after".recursive = true;
+    "gtk-3.0/settings.ini".source = ../../dotfiles/gtk/settings.ini;
 
     "dunst/dunstrc".source = "${custom_pkgs.dunst-dracula-theme}/dunstrc";
   };
