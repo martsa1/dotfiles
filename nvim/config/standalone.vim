@@ -213,7 +213,8 @@ Plug 'cespare/vim-toml'
 
 " Dracular theme is a nice Dark Theme
 Plug 'dracula/vim'
-" BAse Terraform support.
+
+" Base Terraform support.
 Plug 'hashivim/vim-terraform'
 
 " Lots of language file type highlighting
@@ -345,7 +346,7 @@ Plug 'neovim/nvim-lspconfig'
 call plug#end()
 
 " ################################################
-" ############# Coloursheme settings #############
+" ############# Colourscheme settings ############
 " ################################################
 
 "Setup the colourscheme - Default to Dracula Theme
@@ -384,7 +385,7 @@ set t_Co=256
 
 
 " ################################################
-" ############### General key maps #'#############
+" ############### General key maps ###############
 " ################################################
 
 " Disable Ex-mode because it's a pile of shit
