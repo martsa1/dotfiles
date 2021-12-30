@@ -798,7 +798,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, method, para
     bufnr = bufnr or vim.uri_to_bufnr(uri)
 
     if bufnr == vim.api.nvim_get_current_buf() then
-      vim.lsp.diagnostic.set_loclist { open = false }
+      vim.lsp.diagnostic.setloclist { open = false }
     end
   end
 end
