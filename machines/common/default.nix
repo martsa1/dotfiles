@@ -100,6 +100,13 @@ in
       ignores = [
         "tags"
       ];
+
+      extraConfig = {
+        init = {
+          defaultBranch = "main";
+        };
+      };
+
     };
   };
 
