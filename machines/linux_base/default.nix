@@ -143,6 +143,15 @@ in
     grabKeyboardAndMouse = true;
   };
 
+  # Udiskie daemon
+  services.udiskie = {
+    enable = true;
+    tray = "always";
+  };
+
+  # Power Alert daemon
+  services.poweralertd.enable = true;
+
   # File setup for various RC/Config files etc.
   home.file = {
     #".tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
