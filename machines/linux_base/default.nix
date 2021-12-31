@@ -1,14 +1,13 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
-{ pkgs, ...}:
+{ config, pkgs, ...}:
 
 let
-  # unstable_pkgs = import <nixpkgs-unstable> {};
-  unstable_pkgs = import (
-    fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz
-  ) {};
-
   python_version = pkgs.python38;
-  custom_pkgs = pkgs.callPackage ../../pkgs/all.nix { inherit pkgs; python3=python_version; };
+  custom_pkgs = pkgs.callPackage ../../pkgs/all.nix {
+    inherit config;
+    inherit pkgs;
+    python3=python_version;
+  };
 in
 
 {

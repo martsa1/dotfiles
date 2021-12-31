@@ -3,8 +3,13 @@
 
 from pathlib import Path
 from os import environ
+import sys
 
 from jinja2 import Environment, FileSystemLoader
+
+def print_(msg: str) -> None:
+    render_prefix = "render_i3_config:"
+    print(f"{render_prefix} {msg}", file=sys.stderr, flush=True)
 
 
 def main() -> None:
@@ -16,7 +21,9 @@ def main() -> None:
     i3_config = environment.get_template("config.j2")
 
     user = environ.get("USERNAME", "sam")
+    print_(f"Username: {user}")
     ansible_hostname = environ.get("HOSTNAME", "samlaptop")
+    print_(f"Hostname: {ansible_hostname}")
     rendered_config = i3_config.render(user=user, ansible_hostname=ansible_hostname)
 
     print(rendered_config)
