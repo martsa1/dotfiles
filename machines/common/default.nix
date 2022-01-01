@@ -108,10 +108,14 @@ in
       };
 
     };
-  };
 
   # Enable FZF
-  programs.fzf.enable = true;
+    fzf.enable = true;
+
+    # Let home-manager manage itself.
+    home-manager.enable = true;
+  };
+
 
   # config file management
   xdg.enable = true;
