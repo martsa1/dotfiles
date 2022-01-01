@@ -109,7 +109,7 @@ in
 
     };
 
-  # Enable FZF
+    # Enable FZF
     fzf.enable = true;
 
     # Let home-manager manage itself.
