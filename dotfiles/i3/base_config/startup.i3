@@ -5,7 +5,7 @@
 # Run the lxpolkit daemon
 exec --no-startup-id mate-polkit & disown
 
-{% if ansible_hostname != "samlaptop" %}
+{% if ansible_hostname != "sam_laptop" %}
 # I want pretty GUI transitions and stuff!
 exec --no-startup-id compton -f & disown
 {% endif %}
@@ -27,7 +27,7 @@ exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id xautolock -time 5 -locker ~/code/personal/dotfiles/dotfiles/i3/scripts/lock.sh
 
 # Set the desktop background
-{% if ansible_hostname != "samlaptop" %}
+{% if ansible_hostname != "sam_laptop" %}
 exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg
 {% else %}
 exec --no-startup-id feh --bg-scale ~/.background-image
@@ -52,6 +52,6 @@ exec --no-startup-id nmcli connection up no2hp
 {% endif %}
 
 # Setup polybar
-{% if ansible_hostname == "samlaptop" %}
+{% if ansible_hostname == "sam_laptop" %}
 exec -no-startup-id systemctl --user restart polybar
 {% endif %}

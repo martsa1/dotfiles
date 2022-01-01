@@ -21,7 +21,7 @@ bindsym $mod+Shift+d exec rofi -show ssh
 # Launch a file browser
 # If Nautilus tries to launch a Desktop, try running:
 # gsettings set org.gnome.desktop.background show-desktop-icons false
-{% if ansible_hostname != "samlaptop" %}
+{% if ansible_hostname != "sam_laptop" %}
 bindsym $mod+n exec nautilus
 {% else %}
 bindsym $mod+n exec thunar
@@ -79,7 +79,7 @@ bindsym $mod+a focus parent
 bindsym $mod+z focus child
 
 # Rename a workspace
-{% if ansible_hostname != "samlaptop" %}
+{% if ansible_hostname != "sam_laptop" %}
 bindsym $mod+Shift+backslash exec \
   '/home/{{ user }}/.config/i3/scripts/rename_workspace.py'
 {% else %}
