@@ -70,7 +70,7 @@ fi
 pyenv () {
   unset -f pyenv
   if [[ ! -n $VIRTUAL_ENV ]]; then
-    eval "$(command pyenv init -)"
+    eval "$(command pyenv init --path)"
   fi
   pyenv $@
 }
@@ -78,7 +78,7 @@ pyenv () {
 pip () {
   unset -f pip
   if [[ ! -n $VIRTUAL_ENV ]]; then
-    eval "$(command pyenv init -)"
+    eval "$(command pyenv init --path)"
   fi
   pip $@
 }
@@ -86,7 +86,7 @@ pip () {
 python () {
   unset -f python
   if [[ ! -n $VIRTUAL_ENV ]]; then
-    eval "$(command pyenv init -)"
+    eval "$(command pyenv init --path)"
   fi
   python $@
 }
@@ -94,7 +94,7 @@ python () {
 poetry () {
   unset -f poetry
   if [[ ! -n $VIRTUAL_ENV ]]; then
-    eval "$(command pyenv init -)"
+    eval "$(command pyenv init --path)"
   fi
   poetry $@
 }
@@ -103,7 +103,7 @@ poetry () {
 pipenv () {
   unset -f pipenv
   if [[ ! -n $VIRTUAL_ENV ]]; then
-    eval "$(command pyenv init -)"
+    eval "$(command pyenv init --path)"
     eval "$(pipenv --completion)"
   fi
   pipenv $@
