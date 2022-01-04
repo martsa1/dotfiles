@@ -1,14 +1,13 @@
 {
   pkgs ? import <nixpkgs> {},
-  python3 ? pkgs.python38,
-  hostName ? {nixos = import <nixpkgs/nixos> {};}.nixos.config.networking.hostName,
+  python3 ? pkgs.python39,
   ...
 }:
 
 let
   # We need these during the config jinja rendering stage
   py_deps = python3.withPackages (ps: [ ps.jinja2 ]);
-  #hostname = config.environment.etc.hostname.text;
+  hostname = builtins.replaceStrings ["\n"] [""] (builtins.readFile /etc/hostname);
 in
   pkgs.stdenv.mkDerivation {
       pname = "sm-i3-configuration";
@@ -23,7 +22,8 @@ in
 
       installPhase = ''
         mkdir -p $out
-        export HOSTNAME="${hostName}"
+        export HOSTNAME="${hostname}"
+        echo "i3-hostname set to: '${hostname}'"
 	      python3 $src/render_config.py > $out/config
       '';
   }

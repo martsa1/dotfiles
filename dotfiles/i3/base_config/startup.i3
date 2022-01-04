@@ -24,7 +24,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id gnome-settings-daemon
 
 # Lock on timeout
-exec --no-startup-id xautolock -time 5 -locker ~/code/personal/dotfiles/dotfiles/i3/scripts/lock.sh
+exec --no-startup-id xautolock -time 5 -locker ~/code/personal/dotfiles/i3/scripts/lock.sh
 
 # Set the desktop background
 {% if ansible_hostname != "sam_laptop" %}
