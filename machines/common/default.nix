@@ -128,6 +128,15 @@ in
 
     "powerline".source = ../../dotfiles/powerline;
   };
+
+  # Enable Lorri.
+  services.lorri.enable = true;
+
+  # Enable direnv
+  programs.direnv = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 }
 
 
