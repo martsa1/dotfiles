@@ -59,7 +59,7 @@ in
     youtube-dl
     tartube
     ffmpeg
-    vlc
+    #vlc  # Seemingly broken on Ubuntu under home-manager...?
   ];
 
   # Set system theme
