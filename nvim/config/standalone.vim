@@ -736,6 +736,9 @@ require'lspconfig'.yamlls.setup{on_attach=on_attach_wrapper}
 require'lspconfig'.bashls.setup{on_attach=on_attach_wrapper}
 require'lspconfig'.rust_analyzer.setup{on_attach=on_attach_wrapper}
 require'lspconfig'.rnix.setup{on_attach=on_attach_wrapper}
+
+-- For debugging:
+--vim.lsp.set_log_level("debug")
 EOF
 
 " Use completion-nvim in every buffer
