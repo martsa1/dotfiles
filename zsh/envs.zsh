@@ -178,6 +178,12 @@ function fpm() {
 # export CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 # export SSL_CERT_DIR=/etc/ssl/certs
 
+# Source Nix profile settings, if nix is available
+nix_profile="$HOME/.nix-profile/etc/profile.d/nix.sh"
+if [ -f "$nix_profile" ]; then
+ . "$nix_profile"
+fi
+
 # Setup home-manager session variables, if they exist.
 if [ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
 . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
