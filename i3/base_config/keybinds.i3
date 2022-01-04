@@ -202,15 +202,15 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl \
 bindsym XF86AudioMute exec --no-startup-id pactl \
   set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioPlay exec playerctl -p spotify play-pause
+bindsym XF86AudioPause exec playerctl -p spotify play-pause
 
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl -p spotify next
+bindsym XF86AudioPrev exec playerctl -p spotify previous
 
 # incase we have media keys but not play/pause
-bindsym XF86Mail exec playerctl next
-bindsym XF86HomePage exec playerctl previous
+bindsym XF86Mail exec playerctl -p spotify next
+bindsym XF86HomePage exec playerctl -p spotify previous
 
 # Go to sleep!
 bindsym XF86Sleep --release exec "systemctl suspend"
