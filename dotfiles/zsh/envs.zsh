@@ -1,5 +1,15 @@
-# Prompt for a password using Zenity
+# If we're not on NixOS, we should set NIX_PATH, see https://github.com/NixOS/nix/issues/2033
+if [ ! -z NIX_PATH ]; then
+  export NIX_PATH="$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH"
+fi
 
+# Setup home-manager session variables, if they exist.
+if [ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+fi
+
+
+# Prompt for a password using Zenity
 export SUDO_ASKPASS="${HOME}/.config/nixpkgs/dotfiles/i3/scripts/password_prompt.sh"
 # Editor Settings
 export EDITOR=nvim
@@ -182,11 +192,6 @@ function fpm() {
   eval "$(rbenv init -)"
   fpm "$@"
 }
-
-# Setup home-manager session variables, if they exist.
-if [ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
-. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-fi
 
 # add a couple of commands to the auto-ignored commands list, so that we don't
 # get notified about them in zsh-autonotify
