@@ -294,7 +294,7 @@ format-underline = #0a6cf5
 label = %date% %time%
 
 [module/volume]
-type = internal/volume
+type = internal/pulseaudio
 
 format-volume = <label-volume> <bar-volume>
 label-volume = 

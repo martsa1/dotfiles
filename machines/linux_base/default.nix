@@ -53,6 +53,7 @@ in
     xfce.thunar-volman
     xorg.xev
     xorg.xprop
+    xorg.xrandr
     yubioath-desktop
 
     # Youtube stuff
@@ -121,8 +122,11 @@ in
   services.polybar = {
     enable = true;
     config = ../../dotfiles/polybar/config;
-    package = pkgs.polybarFull;
+    package = pkgs.polybarFull.override {
+      i3Support = true;
+    };
     script = ''
+      set -ex
       export HOME=/home/sam
       export DISPLAY=:0
       export PATH=/run/wrappers/bin:$HOME/.nix-profile/bin:/etc/profiles/per-user/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin
