@@ -188,3 +188,10 @@ fi
 if [ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
 . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 fi
+
+
+# FZF as installed via apt
+if [ -f "/usr/share/doc/fzf/examples/key-bindings.zsh" ]; then
+  source /usr/share/doc/fzf/examples/key-bindings.zsh
+  source /usr/share/doc/fzf/examples/completion.zsh
+fi
