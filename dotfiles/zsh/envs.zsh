@@ -61,7 +61,12 @@ export ZPLUG_HOME="$HOME/.config/zplug"
 export ZPLUG_LOADFILE="$HOME/.config/nixpkgs/dotfiles/zsh/zplug.zsh"
 
 # Use FZF if its available
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
+if [ -f "$HOME/.nix-profile/share/fzf/key-bindings.zsh" ]; then
+  source "$HOME/.nix-profile/share/fzf/key-bindings.zsh"
+  source "$HOME/.nix-profile/share/fzf/key-bindings.zsh"
+fi
+
 
 # Setup environment variables needed for pyenv
 export PYENV_ROOT="$HOME/.config/pyenv"
