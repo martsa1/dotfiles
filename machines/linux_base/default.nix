@@ -1,12 +1,12 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 
 let
   python_version = pkgs.python38;
   custom_pkgs = pkgs.callPackage ../../pkgs/all.nix {
     inherit config;
     inherit pkgs;
-    python3=python_version;
+    python3 = python_version;
   };
 in
 
@@ -27,7 +27,7 @@ in
 
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
-    bpytop  # Not in common because its broken on mac.
+    bpytop # Not in common because its broken on mac.
     brightnessctl
     custom_pkgs.dunst-dracula-theme
     custom_pkgs.i3-config
@@ -35,7 +35,7 @@ in
     custom_pkgs.polybar-spotify
     custom_pkgs.rofi-dracula-theme
     discord
-    dracula-theme  # Not in common!
+    dracula-theme # Not in common!
     firefox-devedition-bin
     flameshot
     gnome3.zenity
@@ -65,24 +65,53 @@ in
 
   # Set system theme
   gtk = {
+    enable = true;
     iconTheme = {
-      package = pkgs.dracula-theme;
-      name = "Dracula";
+      #package = pkgs.dracula-theme;
+      #name = "Dracula";
+      package = pkgs.arc-icon-theme;
+      name = "Arc";
     };
 
     theme = {
       #package = pkgs.arc-theme;
+      #name = "Arc-Dark";
       package = pkgs.dracula-theme;
       name = "Dracula";
     };
+
+    gtk2.extraConfig = ''
+      gtk-cursor-theme-name="Dracula-cursors"
+      gtk-cursor-theme-size=0
+      gtk-button-images=0
+      gtk-menu-images=0
+      gtk-enable-event-sounds=1
+      gtk-enable-input-feedback-sounds=1
+      gtk-xft-antialias=1
+      gtk-xft-hinting=1
+      gtk-xft-hintstyle="hintslight"
+      gtk-xft-rgba="rgb"
+    '';
+
+    gtk3.extraConfig = {
+      gtk-button-images = 0;
+      gtk-cursor-theme-name = "Dracula-cursors";
+      gtk-enable-event-sounds = 1;
+      gtk-enable-input-feedback-sounds = 1;
+      gtk-menu-images = 0;
+      gtk-xft-antialias = 1;
+      gtk-xft-hinting = 1;
+      gtk-xft-hintstyle = "hintslight";
+      gtk-xft-rgba = "rgb";
+    };
   };
+
   qt = {
     enable = true;
     platformTheme = "gtk";
   };
 
-  programs = {
-  };
+  programs = { };
 
   # Setup notifications
   services.dunst = {
@@ -141,7 +170,7 @@ in
 
   # Enable GPGAgent
   programs.gpg.enable = true;
-  services.gpg-agent ={
+  services.gpg-agent = {
     enable = true;
     pinentryFlavor = "qt";
     grabKeyboardAndMouse = true;
