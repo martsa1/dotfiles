@@ -64,7 +64,7 @@ export ZPLUG_LOADFILE="$HOME/.config/nixpkgs/dotfiles/zsh/zplug.zsh"
 [ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 if [ -f "$HOME/.nix-profile/share/fzf/key-bindings.zsh" ]; then
   source "$HOME/.nix-profile/share/fzf/key-bindings.zsh"
-  source "$HOME/.nix-profile/share/fzf/key-bindings.zsh"
+  source "$HOME/.nix-profile/share/fzf/completion.zsh"
 fi
 
 
