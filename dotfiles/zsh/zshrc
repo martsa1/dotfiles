@@ -1,6 +1,9 @@
 #!/usr/bin/zsh
 # This file is called by all interactive shells (i.e. anything except scripts etc.)
 
+# Try to ignore system-wide settings, so that these can be authoritative.
+setopt no_global_rcs
+
 # # Profiling ZSH
 # zmodload zsh/zprof
 
@@ -37,7 +40,7 @@ fi
 HISTFILE=~/.histfile
 HISTSIZE=100000
 SAVEHIST=100000
-setopt appendhistory autocd extendedglob notify
+setopt APPENDHISTORY autocd extendedglob notify
 bindkey -v
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
 setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
@@ -50,7 +53,7 @@ setopt HIST_VERIFY               # Don't execute immediately upon history expans
 
 # Allow ZSH to treat # characters like comments when used on the command line.
 # For some reason, this isn't default behaviour.
-setopt interactivecomments
+setopt INTERACTIVECOMMENTS
 
 # Allow vim-like autocompletion of history
 bindkey "^P" history-beginning-search-backward
@@ -89,10 +92,6 @@ if ! zplug check; then
     #zplug install
 fi
 
-# MUST BE AT THE BOTTOM!!
-# Load all plugins
-zplug load
-
 # add a couple of commands to the auto-ignored commands list, so that we don't
 # get notified about them in zsh-autonotify
 AUTO_NOTIFY_IGNORE+=("pipenv shell")
@@ -108,3 +107,8 @@ then
   source "$HOME/.zshrc_work"
 fi
 
+# MUST BE AT THE BOTTOM!!
+# Load all plugins
+zplug load
+# If Job Control seems broken, check for an old zplug lock file under ~/.config/zplug/log/job/
+# See https://github.com/zplug/zplug/issues/322#issuecomment-274557883

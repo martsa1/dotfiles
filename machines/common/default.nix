@@ -57,6 +57,12 @@ in
       enable = true;
       oh-my-zsh.enable = false;
 
+      # Try to avoid relying on random system-wide settings...
+      initExtraFirst = ''
+        setopt NO_GLOBAL_RCS
+        setopt ZLE
+      '';
+
       # Ensure ZSH setup pulls in my dotfiles stuff...
       initExtra = ''
         export powerline_config_path="${pkgs.python39Packages.powerline.outPath}/share/zsh/powerline.zsh"
@@ -110,7 +116,10 @@ in
     };
 
     # Enable FZF
-    fzf.enable = true;
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
 
     # Let home-manager manage itself.
     home-manager.enable = true;
