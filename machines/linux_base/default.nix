@@ -54,6 +54,7 @@ in
     xfce.thunar
     xfce.thunar-archive-plugin
     xfce.thunar-volman
+    xfce.xfconf
     xorg.xev
     xorg.xprop
     xorg.xrandr
