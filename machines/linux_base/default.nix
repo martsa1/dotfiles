@@ -40,11 +40,14 @@ in
     flameshot
     gnome3.zenity
     gthumb
+    i3
     mupdf
     okular
     prusa-slicer
+    rofimoji
     scrot
     signal-desktop
+    slack
     spotify
     teams
     xclip
@@ -127,7 +130,7 @@ in
   programs.rofi = {
     enable = true;
     pass.enable = true;
-    #pass.extraConfig = '' '';
+    pass.extraConfig = builtins.readFile ../../dotfiles/rofi/rofi-pass-config;
 
     #font = "";
     location = "center";
@@ -142,6 +145,8 @@ in
       sort = true;
       sorting-method = "fzf";
     };
+    plugins = [ pkgs.rofi-calc ];
+    # Emoji support handled via rofimoji
   };
 
   # Playerctl support
@@ -200,6 +205,8 @@ in
     "gtk-3.0/settings.ini".source = ../../dotfiles/gtk/settings.ini;
 
     "dunst/dunstrc".source = "${custom_pkgs.dunst-dracula-theme}/dunstrc";
+
+    "rofimoji.rc".text = "files = [emojis, latin-1_supplement]";
   };
 
   # Attempt to sort out x Session.

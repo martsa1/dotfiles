@@ -16,8 +16,22 @@ bindsym $mod+Shift+q kill
 
 # Use Rofi as default launcher
 bindsym $mod+d exec rofi -show run
+
+# Rofi to open SSH connections
 bindsym $mod+Shift+d exec rofi -show ssh
-bindsym $mod+Ctrl+d exec rofi -show emoji -modi emoji
+
+# Rofi Emoji picker
+#bindsym $mod+Ctrl+d exec rofi -show emoji -modi emoji
+bindsym $mod+Ctrl+d exec rofimoji
+
+# Rofipass (Pass with Rofi)
+bindsym $mod+shift+p exec rofi-pass
+
+# Rofi Window switcher
+bindsym $mod+shift+w exec rofi -show window
+
+# Rofi Calculator
+bindsym $mod+c exec rofi -show calc -modi calc -no-show-match -no-sort
 
 # Launch a file browser
 # If Nautilus tries to launch a Desktop, try running:
@@ -230,14 +244,6 @@ bindsym XF86Calculator exec "gnome-calculator"
 # Keepmenu (Keepass for Rofi)
 bindsym $mod+p exec keepmenu
 
-# Rofipass (Pass with Rofi)
-bindsym $mod+shift+p exec rofi-pass
-
-# Rofi Window switcher
-bindsym $mod+shift+w exec rofi -show window
-
-# Rofi Calculator
-bindsym $mod+c exec rofi -show calc -modi calc -no-show-match -no-sort
 
 #####################################################
 # Move to scratchpad
