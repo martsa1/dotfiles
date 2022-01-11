@@ -115,8 +115,6 @@ in
     platformTheme = "gtk";
   };
 
-  programs = { };
-
   # Setup notifications
   services.dunst = {
     enable = true;
@@ -202,8 +200,6 @@ in
   xdg.configFile = {
     "i3/config".source = "${custom_pkgs.i3-config}/config";
     "i3/config".onChange = "i3-msg restart && systemctl --user restart polybar";
-
-    "gtk-3.0/settings.ini".source = ../../dotfiles/gtk/settings.ini;
 
     "dunst/dunstrc".source = "${custom_pkgs.dunst-dracula-theme}/dunstrc";
 
