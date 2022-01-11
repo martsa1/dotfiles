@@ -88,7 +88,6 @@ inherit= bar/secondary
 
 tray-position = right
 tray-padding = 2
-tray-transparent = false
 tray-background = ${colors.background}
 
 modules-right = filesystem backlight-acpi volume xkeyboard memory cpu wlan eth battery temperature date
@@ -176,7 +175,7 @@ label-urgent-padding = 2
 [module/spotify]
 type = custom/script
 interval = 1
-format-prefix = " "
+format-prefix = " "
 format = <label>
 ; exec = $HOME/code/personal/polybar-spotify/spotify_status.py -f '{artist}: {song}'
 exec = $HOME/.nix-profile/bin/polybar-spotify -f '{artist}: {song}'
@@ -252,7 +251,7 @@ format-disconnected =
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-ramp-signal-0 = 
+ramp-signal-0 = 
 ramp-signal-1 = 
 ramp-signal-2 = 
 ramp-signal-3 = 
