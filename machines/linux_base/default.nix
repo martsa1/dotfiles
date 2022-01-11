@@ -2,7 +2,7 @@
 { config, pkgs, ... }:
 
 let
-  python_version = pkgs.python38;
+  python_version = pkgs.python39;
   custom_pkgs = pkgs.callPackage ../../pkgs/all.nix {
     inherit config;
     inherit pkgs;
