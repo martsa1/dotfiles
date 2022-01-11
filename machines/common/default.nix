@@ -32,6 +32,7 @@ in
     bat
     custom_pkgs.rofi-dracula-theme
     docker-compose
+    fd
     file
     jq
     lsd
@@ -43,9 +44,9 @@ in
     rnix-lsp
     tldr
     universal-ctags
-    zplug
-    # unstable_pkgs.zplug
     vifm
+    yaml-language-server
+    zplug
 
     # Youtube stuff
     youtube-dl
@@ -83,6 +84,7 @@ in
       extraPackages = [ pkgs.gcc ];
       viAlias = false;
       extraConfig = builtins.readFile ../../nvim/init.vim;
+      #link-lstdcpp = true;
     };
 
     git = {
