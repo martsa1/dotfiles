@@ -1,5 +1,40 @@
 # Installation
 
+## Linux
+Setup Nix (Ignore this step if running NixOS):
+```
+```
+
+Pull in dotfiles:
+```
+nix-shell -p git
+mkdir -p ~/.config
+git clone --recursive https://github.com/ABitMoreDepth/dotfiles.git ~/.config/nixpkgs
+```
+
+Link the relevant machine to `home.nix`:
+```
+ln -s ~/.config/nixpkgs/machines/<system>/default.nix ~/.config/nixpkgs/home.nix
+
+```
+
+Pull in home-manager channel
+```
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
+# May need to add this to current shell (or re-login):
+export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+```
+TODO: Pretty sure something somewhere said channels are deprecated...
+
+Build initial home-manager generation:
+```
+nix-shell '<home-manager>' -A install
+```
+
+At this point, `home-manager` should be available in path, as usual.
+
+
 ## Darwin
 Setup Nix with:
 ```
