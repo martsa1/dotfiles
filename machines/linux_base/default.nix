@@ -8,6 +8,7 @@ let
     inherit pkgs;
     python3 = python_version;
   };
+
 in
 
 {
@@ -170,6 +171,12 @@ in
       done
       unset IFS
     '';
+  };
+
+
+  # autorandr
+  programs.autorandr = {
+    enable = true;
   };
 
   # Enable GPGAgent
