@@ -1,8 +1,11 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
     ./linux_base
+  ];
+  home.packages = with pkgs; [
+    remmina
   ];
 
   # Seemingly needed for work machine to find all ZSH aliases, see here for more:
