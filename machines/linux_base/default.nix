@@ -211,6 +211,10 @@ in
   home.file = {
     #".tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
     ".background-image".source = ../../backgrounds/pexels-pixabay-220072.jpg;
+
+    ".themes/Dracula".source = "${pkgs.dracula-theme.outPath}/share/themes/Dracula";
+    ".icons/Dracula-cursors".source = "${pkgs.dracula-theme.outPath}/share/icons/Dracula-cursors";
+    ".icons/Dracula".source = "${custom_pkgs.gtk-dracula-icons}/Dracula";
   };
 
   # config file management
