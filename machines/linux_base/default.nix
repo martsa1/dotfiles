@@ -160,16 +160,27 @@ in
       i3Support = true;
     };
     script = ''
-      set -ex
+      set -x
+
       export HOME=/home/sam
       export DISPLAY=:0
-      export PATH=/run/wrappers/bin:$HOME/.nix-profile/bin:/etc/profiles/per-user/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin
-      IFS=$'\n'
-      for line in $(polybar-launcher --no-kill --echo-only)
-      do
-        eval "$line"
+      # export PATH=$HOME/.nix-profile/bin
+
+      . /home/sam/.nix-profile/etc/profile.d/hm-session-vars.sh
+      export PATH="${pkgs.ripgrep.outPath}/bin:$PATH"
+      export PATH="${pkgs.xorg.xrandr.outPath}/bin:$PATH"
+      export PATH="${pkgs.coreutils.outPath}/bin:$PATH"
+
+      echo $PATH
+      xrandr_out=$(xrandr)
+      secondaries=$(echo "$xrandr_out" | rg connected | rg -v 'disconnected|primary' | cut -d ' ' -f 1)
+      primary=$(echo "$xrandr_out" | rg 'connected.*primary' | cut -f 1 -d ' ')
+
+      for mon in $secondaries; do
+        MONITOR=$mon polybar --config="$HOME/.config/polybar/config" --reload secondary &
       done
-      unset IFS
+
+      MONITOR=$primary polybar --config="$HOME/.config/polybar/config" --reload primary &
     '';
   };
 
@@ -183,7 +194,7 @@ in
   programs.gpg.enable = true;
   services.gpg-agent = {
     enable = true;
-    pinentryFlavor = "qt";
+    #pinentryFlavor = "qt";
     grabKeyboardAndMouse = true;
   };
 

@@ -41,6 +41,7 @@ in
     pstree
     python39Packages.ipython
     python39Packages.powerline
+    ripgrep
     rnix-lsp
     tldr
     universal-ctags
