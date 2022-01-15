@@ -61,11 +61,6 @@ in
     xorg.xrandr
     yubioath-desktop
 
-    # Youtube stuff
-    youtube-dl
-    tartube
-    ffmpeg
-    #vlc  # Seemingly broken on Ubuntu under home-manager...?
   ];
 
   # Set system theme
