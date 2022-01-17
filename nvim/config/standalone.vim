@@ -207,6 +207,10 @@ Plug 'cespare/vim-toml'
 " Dracular theme is a nice Dark Theme
 Plug 'dracula/vim'
 
+" Diagnostics (linters etc.) plugin
+Plug 'folke/trouble.nvim'
+Plug 'folke/lsp-colors.nvim'
+
 " Base Terraform support.
 Plug 'hashivim/vim-terraform'
 
@@ -219,6 +223,9 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+
+" Icons set used by folke/trouble.
+Plug 'kyazdani42/nvim-web-devicons'
 
 " Markdown Previewer
 Plug 'JamshedVesuna/vim-markdown-preview'
@@ -334,7 +341,7 @@ call plug#end()
 " ############# Colourscheme settings ############
 " ################################################
 
-"Setup the colourscheme - Default to Dracula Theme
+" Setup the colourscheme - Default to Dracula Theme
 colorscheme dracula
 color dracula
 
@@ -771,9 +778,9 @@ EOF
 " Tresitter configuration for more awesome highlighting.
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = "maintained",  -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
-    enable = true,              -- false will disable the whole extension
+    enable = true,  -- false will disable the whole extension
   },
 }
 EOF
@@ -797,37 +804,41 @@ nnoremap <Leader>tk  <cmd>lua require('telescope.builtin').keymaps{}<CR>
 
 " Configure LSP Diagnostics
 lua<<EOF
--- Source: https://www.reddit.com/r/backtickbot/comments/jua6d9/httpsredditcomrneovimcommentsjt9tqmnew_builtin/
--- Function to handle the diagnostics themselves
-diagHandler = diagHandler or vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    -- Enable virtual text
-    virtual_text = {
-      spacing = 2,
-      prefix = ' ',
-    },
+-- Built-in nvim diagostics config.
+vim.diagnostic.config({
+  -- Enable virtual text
+  virtual_text = {
+    spacing = 2,
+    prefix = ' ',
+  },
 
-    -- Enable signs
-    signs = true,
+  -- Enable signs
+  signs = true,
 
-    -- Disable underlining - its confusing!
-    underline = false,
+  -- Disable underlining - its confusing!
+  underline = false,
+})
 
-  }
+require("trouble").setup {
+  -- Notes here: https://github.com/folke/trouble.nvim
+}
+
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
+  {silent = true, noremap = true}
 )
-
--- Bind the above handler, but also update the location list
-vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, method, params, client_id, bufnr, config)
-  --   diagHandler(err, method, params, client_id, bufnr, config)
-  pcall(diagHandler, err, method, params, client_id, bufnr, config)
-
-  if(params.uri ~= nil) then
-    local uri = params.uri
-    bufnr = bufnr or vim.uri_to_bufnr(uri)
-
-    if bufnr == vim.api.nvim_get_current_buf() then
-      vim.lsp.diagnostic.setloclist { open = false }
-    end
-  end
-end
+vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>",
+  {silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>",
+  {silent = true, noremap = true}
+)
 EOF
