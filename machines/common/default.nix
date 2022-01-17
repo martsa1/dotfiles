@@ -31,11 +31,13 @@ in
   home.packages = with pkgs; [
     bat
     custom_pkgs.rofi-dracula-theme
+    direnv
     docker-compose
     fd
     file
     jq
     lsd
+    luaformatter
     meld
     pass
     pstree
@@ -48,10 +50,6 @@ in
     vifm
     yaml-language-server
     zplug
-
-    # Youtube stuff
-    youtube-dl
-    ffmpeg
   ];
 
   programs = {
