@@ -156,9 +156,6 @@ augroup filetype_html
   autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown :syntax match markdownIgnore "_"
 augroup END
 
-set completeopt=longest,menuone
-set completeopt-=preview
-
 " Make things like substitute commands act incrementally, and provide
 " offscreen operations in a preview window.  Command acts exactly the same,
 " but shows you what will happen live.
@@ -207,10 +204,6 @@ Plug 'ap/vim-css-color'
 " Vim TOML Syntax Highlighting
 Plug 'cespare/vim-toml'
 
-" Possibly replaced by telescope, below
-"" Fuzzy file finder
-"Plug 'ctrlpvim/ctrlp.vim'
-
 " Dracular theme is a nice Dark Theme
 Plug 'dracula/vim'
 
@@ -219,6 +212,13 @@ Plug 'hashivim/vim-terraform'
 
 " Lots of language file type highlighting
 Plug 'hoelzro/vim-polyglot'
+
+" Completion stuff...
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 
 " Markdown Previewer
 Plug 'JamshedVesuna/vim-markdown-preview'
@@ -229,10 +229,9 @@ Plug 'jremmen/vim-ripgrep'
 " Autocomplete support for terraform
 Plug 'juliosueiras/vim-terraform-completion'
 
-" (Optional) but needed if LanguageServer wants to display multiple
-" completion candidates
-" Plug 'junegunn/fzf', {'do': './install --all'}
-" Plug 'junegunn/fzf'
+" For luasnip users.
+ Plug 'L3MON4D3/LuaSnip'
+ Plug 'saadparwaiz1/cmp_luasnip'
 
 " Add support for Typescript syntax
 Plug 'leafgarland/typescript-vim'
@@ -264,24 +263,13 @@ Plug 'nelstrom/vim-visual-star-search'
 "Async builder for Neovim
 Plug 'neomake/neomake'
 
-" Possibly replaced by TreeSitter...
-"" Symantic python highlighting
-"Plug 'numirias/semshi'
-
-" Lua based LSP autocompletion
-"Plug 'nvim-lua/completion-nvim', { 'commit': '3b6774ed1' }
-Plug 'nvim-lua/completion-nvim'
-
-" Lua based LSP Diagnostics plugin
-" NOTE - This is built in on the very latest nightlies.  Keeping for use on
-" older nvim's.
-"Plug 'nvim-lua/diagnostic-nvim'
+" LSP configurations
+Plug 'neovim/nvim-lspconfig'
 
 " Fancy, lua-based ctrl-p replacement
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-lua/telescope.nvim'
-
 
 " Context-aware syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -294,6 +282,9 @@ Plug 'pearofducks/ansible-vim'
 
 " Add support for i3 config files
 Plug 'PotatoesMaster/i3-vim-syntax'
+
+" Snippets collection
+Plug 'rafamadriz/friendly-snippets'
 
 " Quickfix helpers
 Plug 'romainl/vim-qf'
@@ -313,9 +304,6 @@ Plug 'scrooloose/nerdcommenter'
 " File tree within vim
 Plug 'scrooloose/nerdtree'
 
-" " Async support for nvim calling out to python process
-" Plug 'Shougo/deoplete.nvim'
-
 " Source code folding pluggin
 Plug 'tmhedberg/SimpylFold'
 
@@ -331,7 +319,7 @@ Plug 'tpope/vim-surround'
 " powerline is fucked up, use vim-airline instead
 Plug 'vim-airline/vim-airline'
 
-" System-d syntax highlighting for systemd unit files
+" Systemd syntax highlighting for systemd unit files
 Plug 'wgwoods/vim-systemd-syntax'
 
 " Give git hints on files/dirs regarding: Add, Modify, Remove within NerdTree
@@ -339,9 +327,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Visually display indentation
 Plug 'Yggdroot/indentLine'
-
-" LSP configurations
-Plug 'neovim/nvim-lspconfig'
 
 call plug#end()
 
@@ -676,7 +661,7 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 " ####### LSP Settings ############################################################################
 " #################################################################################################
 " Set completeopt to have a better completion experience
-set completeopt=menuone,noinsert,noselect
+set completeopt=menu,menuone,noselect
 
 " LSP Bindings
 nnoremap <Leader>ldf   <cmd>lua vim.lsp.buf.definition()<CR>
@@ -691,25 +676,61 @@ nnoremap <Leader>lds   <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <Leader>lws   <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <Leader>lnf   <cmd>lua vim.lsp.buf.formatting()<CR>
 
-" LSP Completion
-" Use LSP omni-completion in Python files.
-autocmd Filetype python  setlocal omnifunc=v:lua.vim.lsp.omnifunc
-autocmd Filetype cpp     setlocal omnifunc=v:lua.vim.lsp.omnifunc
-autocmd Filetype c       setlocal omnifunc=v:lua.vim.lsp.omnifunc
-autocmd Filetype cmake   setlocal omnifunc=v:lua.vim.lsp.omnifunc
-autocmd Filetype yaml    setlocal omnifunc=v:lua.vim.lsp.omnifunc
-autocmd Filetype sh      setlocal omnifunc=v:lua.vim.lsp.omnifunc
-
-" Enable several LSP's
+" Enable several LSP's & Completion settings
 lua <<EOF
--- Wrapper on attach function to call both diagnostic and completion attach functions.
-local on_attach_wrapper = function(client)
-  require'completion'.on_attach(client)
-end
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
 
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      end,
+    },
+    mapping = {
+      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Setup lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 require'lspconfig'.pylsp.setup{
-  on_attach=on_attach_wrapper,
+  capabilities = capabilities,
   settings = {
     pylsp = {
       plugins = {
@@ -735,19 +756,17 @@ require'lspconfig'.pylsp.setup{
   }
 }
 
-require'lspconfig'.clangd.setup{on_attach=on_attach_wrapper}
-require'lspconfig'.cmake.setup{on_attach=on_attach_wrapper}
-require'lspconfig'.yamlls.setup{on_attach=on_attach_wrapper}
-require'lspconfig'.bashls.setup{on_attach=on_attach_wrapper}
-require'lspconfig'.rust_analyzer.setup{on_attach=on_attach_wrapper}
-require'lspconfig'.rnix.setup{on_attach=on_attach_wrapper}
+require'lspconfig'.clangd.setup{capabilities = capabilities}
+require'lspconfig'.cmake.setup{capabilities = capabilities}
+require'lspconfig'.yamlls.setup{capabilities = capabilities}
+require'lspconfig'.bashls.setup{capabilities = capabilities}
+require'lspconfig'.rust_analyzer.setup{capabilities = capabilities}
+require'lspconfig'.rnix.setup{capabilities = capabilities}
 
--- For debugging:
---vim.lsp.set_log_level("debug")
+-- Snippets setup
+-- Imports VSCode style snippets (friendly-snippets plugin)
+require("luasnip.loaders.from_vscode").load()
 EOF
-
-" Use completion-nvim in every buffer
-"autocmd BufEnter * lua require'completion'.on_attach()
 
 " Tresitter configuration for more awesome highlighting.
 lua <<EOF
@@ -774,6 +793,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 nnoremap <c-p>       <cmd>lua require'telescope.builtin'.find_files{}<CR>
 nnoremap <Leader>rg  <cmd>lua require'telescope.builtin'.live_grep{}<CR>
 nnoremap <Leader>ts  <cmd>lua require'telescope.builtin'.treesitter{}<CR>
+nnoremap <Leader>tk  <cmd>lua require('telescope.builtin').keymaps{}<CR>
 
 " Configure LSP Diagnostics
 lua<<EOF
