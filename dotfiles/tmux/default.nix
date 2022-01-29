@@ -4,7 +4,7 @@
 {
 programs.tmux = {
     enable = true;
-    terminal = "alacritty";
+    terminal = "\${TERM}";
     aggressiveResize = true;
     baseIndex = 1;
     clock24 = true;
@@ -40,7 +40,7 @@ programs.tmux = {
       bind-key "c" new-window -c "#{pane_current_path}"
 
       # reload config file
-      bind r source-file ~/.tmux.conf
+      bind r source-file ~/.config/tmux/tmux.conf
 
       # Make windows with changes easier to notice
       set-window-option -g window-status-bell-style "reverse"
