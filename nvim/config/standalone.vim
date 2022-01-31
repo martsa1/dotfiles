@@ -668,7 +668,7 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 " ####### LSP Settings ############################################################################
 " #################################################################################################
 " Set completeopt to have a better completion experience
-set completeopt=menu,menuone,noselect
+set completeopt=menu,menuone,noinsert,noselect
 
 " LSP Bindings
 nnoremap <Leader>ldf   <cmd>lua vim.lsp.buf.definition()<CR>
@@ -704,7 +704,7 @@ lua <<EOF
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
       }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      ['<CR>'] = cmp.mapping.confirm({ select = false }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     },
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
