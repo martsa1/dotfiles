@@ -229,5 +229,8 @@ in
   # Attempt to sort out x Session.
   xsession.enable = true;
   xsession.windowManager.command = "i3";
+
+  # Enable Lorri.
+  services.lorri.enable = true;
 }
 
