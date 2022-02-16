@@ -29,7 +29,6 @@ in
 
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
-    bat
     custom_pkgs.rofi-dracula-theme
     direnv
     docker-compose
@@ -143,6 +142,14 @@ in
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
+  };
+
+  # Enable bat and theme it with dracula
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "Dracula";
+    };
   };
 }
 
