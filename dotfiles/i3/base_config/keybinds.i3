@@ -182,9 +182,9 @@ bindsym --release Print exec --no-startup-id \
 bindsym --release $mod+Print exec --no-startup-id \
   "flameshot screen -p ~/Pictures/screenshots"
 
-# Selectable area to capture
+# Selectable area to capture to clipboard
 bindsym --release $mod+Shift+Print exec --no-startup-id \
-  "flameshot gui -p ~/Pictures/screenshots"
+  "flameshot gui --clipboard"
 
 # resize window (you can also use the mouse for that)
 mode "Resize" {
