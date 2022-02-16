@@ -1,8 +1,8 @@
 /* vim: set filetype=nix ts=2 sw=2 tw=0 et :*/
-{ pkgs, ...}:
+{ pkgs, ... }:
 
 {
-programs.tmux = {
+  programs.tmux = {
     enable = true;
     terminal = "\${TERM}";
     aggressiveResize = true;
@@ -15,6 +15,9 @@ programs.tmux = {
       # Force Tmux to use 24bit colour
       set-option -sa terminal-overrides ",alacritty*:Tc"
 
+      # Allow contents of pane to be preserved when interactive tool is used.
+      set-option alternate-screen on
+
       # Let nvim use 'undercurls' correctly:
       set -as terminal-overrides ',*:Smulx=\E[4::%p1%dm'
       # underscore colours - needs tmux-3.0
@@ -22,6 +25,7 @@ programs.tmux = {
 
       # Make Tmux highlight activity in other panes by defualt
       setw -g monitor-activity on
+
       # Allow swapping panes around
       bind-key -r "<" swap-window -t -1
       bind-key -r ">" swap-window -t +1
@@ -54,17 +58,20 @@ programs.tmux = {
       #onedark-theme
       {
         plugin = dracula;
-        extraConfig= ''
-        # available plugins: battery, cpu-usage, git, gpu-usage, ram-usage, network, network-bandwidth, weather, time
-        set -g @dracula-plugins "battery cpu-usage ram-usage time"
+        extraConfig = ''
+          # Options available here:
+          # https://github.com/dracula/tmux
+          set -g @dracula-plugins "battery cpu-usage ram-usage time"
 
-        set -g @dracula-show-powerline true
-        set -g @dracula-show-flags true
-        set -g @dracula-show-left-icon session
+          set -g @dracula-cpu-display-load true
 
-        set -g @dracula-day-month true
-        set -g @dracula-show-timezone false
-        set -g @dracula-military-time true
+          set -g @dracula-show-powerline true
+          set -g @dracula-show-flags true
+          set -g @dracula-show-left-icon session
+
+          set -g @dracula-day-month true
+          set -g @dracula-show-timezone false
+          set -g @dracula-military-time true
         '';
       }
     ];
