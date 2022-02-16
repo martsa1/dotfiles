@@ -220,9 +220,6 @@ in
     ".themes/Dracula".source = "${pkgs.dracula-theme.outPath}/share/themes/Dracula";
     ".icons/Dracula-cursors".source = "${pkgs.dracula-theme.outPath}/share/icons/Dracula-cursors";
     ".icons/Dracula".source = "${custom_pkgs.gtk-dracula-icons}/Dracula";
-
-    # Direnv rc for extra layouts
-    ".direnvrc".source = ../../dotfiles/direnvrc;
   };
 
   # config file management

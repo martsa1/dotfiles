@@ -138,6 +138,11 @@ in
     "powerline".source = ../../dotfiles/powerline;
   };
 
+  home.file = {
+    # Direnv rc for extra layouts
+    ".direnvrc".source = ../../dotfiles/direnvrc;
+  };
+
   # Enable direnv
   programs.direnv = {
     enable = true;
