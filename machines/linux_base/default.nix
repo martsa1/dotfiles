@@ -9,13 +9,20 @@ let
     python3 = python_version;
   };
 
+  nvim_nightly = import (
+    builtins.fetchTarball https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz
+  );
+
+  moz_overlay = import (
+    builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz
+  );
+
 in
 
 {
   nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-    }))
+    nvim_nightly
+    moz_overlay
   ];
 
   imports = [
@@ -38,12 +45,12 @@ in
     discord
     dracula-theme # Not in common!
     firefox-devedition-bin
-    flameshot
     gnome3.zenity
     gthumb
     i3
     mupdf
     okular
+    pavucontrol
     prusa-slicer
     rofimoji
     scrot
@@ -201,6 +208,9 @@ in
 
   # Power Alert daemon
   services.poweralertd.enable = true;
+
+  # Screen clipping
+  services.flameshot.enable = true;
 
   # File setup for various RC/Config files etc.
   home.file = {
