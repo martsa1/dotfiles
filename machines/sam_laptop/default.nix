@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./linux_base
+    ../linux_base
   ];
 
   home.packages = with pkgs; [
