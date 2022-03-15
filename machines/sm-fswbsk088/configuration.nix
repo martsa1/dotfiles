@@ -208,12 +208,12 @@
     vSync = true;
   };
 
-  # Mounted file-systems  (Uses NFSv4)
-  fileSystems."/media/Multimedia" = {
-    device = "nas.home:Multimedia";
-    fsType = "nfs4";
-    options = [ "rsize=1048576" "wsize=1048576" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
-  };
+  ## Mounted file-systems  (Uses NFSv4)
+  #fileSystems."/media/Multimedia" = {
+  #  device = "nas.home:Multimedia";
+  #  fsType = "nfs4";
+  #  options = [ "rsize=1048576" "wsize=1048576" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
+  #};
 
   # Thumbnail service
   services.tumbler.enable = true;
