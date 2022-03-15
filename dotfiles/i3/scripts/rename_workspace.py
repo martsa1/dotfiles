@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 ''' Small script to dynamically update the name of an i3wm workspace
 '''
 

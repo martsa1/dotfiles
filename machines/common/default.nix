@@ -35,13 +35,16 @@ in
     fd
     feh
     file
+    imagemagick
     jq
     libnotify
     lsd
     luaformatter
     meld
     pass
+    playerctl
     pstree
+    python39
     python39Packages.ipython
     python39Packages.powerline
     ripgrep
