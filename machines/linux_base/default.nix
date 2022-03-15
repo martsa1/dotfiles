@@ -67,7 +67,6 @@ in
     xorg.xprop
     xorg.xrandr
     yubioath-desktop
-
   ];
 
   # Set system theme
@@ -111,6 +110,10 @@ in
       gtk-xft-hintstyle = "hintslight";
       gtk-xft-rgba = "rgb";
     };
+  };
+  xsession.pointerCursor = {
+    package = pkgs.dracula-theme;
+    name = "Dracula-cursors";
   };
 
   qt = {
@@ -226,7 +229,7 @@ in
   xdg.enable = true;
   xdg.configFile = {
     "i3/config".source = "${custom_pkgs.i3-config}/config";
-    "i3/config".onChange = "i3-msg restart && systemctl --user restart polybar";
+    "i3/config".onChange = "${pkgs.i3}/bin/i3-msg -s /run/user/1000/i3/ipc-socket.* restart && systemctl --user restart polybar";
 
     "dunst/dunstrc".source = "${custom_pkgs.dunst-dracula-theme}/dunstrc";
 

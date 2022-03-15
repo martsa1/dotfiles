@@ -33,8 +33,10 @@ in
     direnv
     docker-compose
     fd
+    feh
     file
     jq
+    libnotify
     lsd
     luaformatter
     meld
@@ -157,5 +159,3 @@ in
     };
   };
 }
-
-
