@@ -51,6 +51,7 @@ in
     mupdf
     okular
     pavucontrol
+    peek
     prusa-slicer
     rofimoji
     scrot
