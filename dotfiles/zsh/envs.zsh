@@ -48,7 +48,7 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 #stty stop ^J
 
 # Start Autojump - quicker directory navigation
-[ -f /usr/share/autojump/autojump.zsh ] && source /usr/share/autojump/autojump.sh
+[ -f /usr/share/autojump/autojump.zsh ] && source /usr/share/autojump/autojump.zsh
 [ -f /run/current-system/sw/share/zsh/site-functions/autojump.zsh ] && source /run/current-system/sw/share/zsh/site-functions/autojump.zsh
 
 # Put a timestamp into my bash history
