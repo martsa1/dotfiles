@@ -412,6 +412,9 @@ nnoremap <Leader>mls :marks<CR>
 "" List registers
 nnoremap <Leader>rls :reg<CR>
 
+" Remap markdown preview as we want Ctrl+p for other things...
+let vim_markdown_preview_hotkey='<C-S-p>'
+
 
 "" build tags - expand this to an async call for use within vim
 "ctags -R --fields=+l --exclude=build,dist --languages=python -f ./tags $(python -c "import os, sys; print(' '.join('{}'.format(d) for d in sys.path if os.path.isdir(d)))") $(pwd)
@@ -744,6 +747,9 @@ require'lspconfig'.pylsp.setup{
         configurationSources = { "flake8" },
         flake8 = {
           enabled = true
+        },
+        jedi_completion = {
+          eager = true  -- Attempts to eagerly resolve documentation and detail.
         },
         pycodestyle = {
           enabled = false
