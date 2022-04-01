@@ -65,4 +65,10 @@ in
     #"nvim/plugged/nvim-treesitter/parser/json.so".source = "${pkgs.tree-sitter-grammars.tree-sitter-json.outPath}/parser";
     #"nvim/plugged/nvim-treesitter/parser/yaml.so".source = "${pkgs.tree-sitter-grammars.tree-sitter-yaml.outPath}/parser";
   };
+
+  # Enable syncthing
+  services.syncthing = {
+    enable = true;
+    tray.enable = true;
+  };
 }
