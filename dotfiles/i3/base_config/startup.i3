@@ -53,7 +53,7 @@ exec --no-startup-id setxkbmap -layout us -option ctrl:nocaps
 # Set Keyboard layout to GB by nixOS, no action needed here.
 {% endif %}
 
-{% if ansible_hostname == "behemoth" %}
+{% if ansible_hostname not in ("sam_laptop", "sm-fswbsk088", "sm-fswbsk013") %}
 # Auto-mount disks
 exec --no-startup-id udiskie --tray & disown
 {% endif %}
