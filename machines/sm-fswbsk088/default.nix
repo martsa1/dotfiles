@@ -21,9 +21,9 @@
     enable = true;
     hooks = {
       postswitch = {
-        "reload-polybar" = "${pkgs.systemd}/bin/systemctl --user restart polybar";
-        "notify-i3" = "${pkgs.i3}/bin/i3-msg -s /run/user/1000/i3/ipc-socket.* restart";
+        "notify-i3" = "${pkgs.i3}/bin/i3-msg -s /run/user/1000/i3/ipc-socket.* restart && ${pkgs.systemd}/bin/systemctl --user restart polybar";
         "change-background" = "${pkgs.feh}/bin/feh --bg-scale ~/.background-image";
+        "notify-user" = "${pkgs.libnotify}/bin/notify-send -i display 'Display profile changed:' $AUTORANDR_CURRENT_PROFILE";
        # "change-dpi" = ''
        #   case "$AUTORANDR_CURRENT_PROFILE" in
        #     default)
