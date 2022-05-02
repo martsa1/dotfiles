@@ -71,4 +71,11 @@
       };
     };
   };
+
+
+  # Setup syncthing to pull over old machines stuff.
+  services.syncthing = {
+    enable = true;
+    tray.enable = true;
+  };
 }
