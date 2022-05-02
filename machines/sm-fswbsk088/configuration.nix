@@ -103,7 +103,7 @@
   # Setup autorandr to manage display configs.
   services.autorandr = {
     enable = true;
-    defaultTarget = "internal";
+    defaultTarget = "default";
   };
 
 
