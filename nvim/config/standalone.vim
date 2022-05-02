@@ -11,6 +11,14 @@ set hlsearch
 
 set number
 
+" Ensure vim plug is available
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.config/nvim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  echom "Vim-Plug not found, attempting to install."
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
@@ -185,13 +193,6 @@ endif
 " ################################################################################################
 " ####### PLUGINS ################################################################################
 " ################################################################################################
-
-" Ensure vim plug is available
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.config/nvim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
 
 call plug#begin('~/.config/nvim/plugged')
 
