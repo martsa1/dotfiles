@@ -219,10 +219,12 @@ Plug 'hashivim/vim-terraform'
 Plug 'hoelzro/vim-polyglot'
 
 " Completion stuff...
-Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/nvim-cmp'
 
 " Icons set used by folke/trouble.
@@ -709,6 +711,8 @@ lua <<EOF
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
+      { name = 'cmp-nvim-lsp-signature-help' },
+      { name = 'nvim_lua' },
     }, {
       { name = 'buffer' },
     })
