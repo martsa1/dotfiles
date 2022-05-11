@@ -703,7 +703,6 @@ lua <<EOF
       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
       ['<C-e>'] = cmp.mapping({
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
@@ -740,46 +739,46 @@ lua <<EOF
   -- Setup lspconfig.
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-require'lspconfig'.pylsp.setup{
-  capabilities = capabilities,
-  settings = {
-    pylsp = {
-      plugins = {
-        configurationSources = { "flake8" },
-        flake8 = {
-          enabled = true
-        },
-        jedi_completion = {
-          eager = true  -- Attempts to eagerly resolve documentation and detail.
-        },
-        pycodestyle = {
-          enabled = false
-        },
-        pyflakes = {
-          enabled = true
-        },
-        pylint =  {
-          enabled = true
-        },
-        pylsp_mypy = {
-          enabled = true,
-          live_mode = true
+  require'lspconfig'.pylsp.setup{
+    capabilities = capabilities,
+    settings = {
+      pylsp = {
+        plugins = {
+          configurationSources = { "flake8" },
+          flake8 = {
+            enabled = true
+          },
+          jedi_completion = {
+            eager = true  -- Attempts to eagerly resolve documentation and detail.
+          },
+          pycodestyle = {
+            enabled = false
+          },
+          pyflakes = {
+            enabled = true
+          },
+          pylint =  {
+            enabled = true
+          },
+          pylsp_mypy = {
+            enabled = true,
+            live_mode = true
+          }
         }
       }
     }
   }
-}
 
-require'lspconfig'.clangd.setup{capabilities = capabilities}
-require'lspconfig'.cmake.setup{capabilities = capabilities}
-require'lspconfig'.yamlls.setup{capabilities = capabilities}
-require'lspconfig'.bashls.setup{capabilities = capabilities}
-require'lspconfig'.rust_analyzer.setup{capabilities = capabilities}
-require'lspconfig'.rnix.setup{capabilities = capabilities}
+  require'lspconfig'.clangd.setup{capabilities = capabilities}
+  require'lspconfig'.cmake.setup{capabilities = capabilities}
+  require'lspconfig'.yamlls.setup{capabilities = capabilities}
+  require'lspconfig'.bashls.setup{capabilities = capabilities}
+  require'lspconfig'.rust_analyzer.setup{capabilities = capabilities}
+  require'lspconfig'.rnix.setup{capabilities = capabilities}
 
--- Snippets setup
--- Imports VSCode style snippets (friendly-snippets plugin)
-require("luasnip.loaders.from_vscode").load()
+  -- Snippets setup
+  -- Imports VSCode style snippets (friendly-snippets plugin)
+  require("luasnip.loaders.from_vscode").load()
 EOF
 
 " Tresitter configuration for more awesome highlighting.
