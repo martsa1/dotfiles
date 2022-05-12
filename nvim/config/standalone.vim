@@ -687,7 +687,7 @@ nnoremap <Leader>ls    <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <Leader>lr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <Leader>lds   <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <Leader>lws   <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <Leader>lnf   <cmd>lua vim.lsp.buf.formatting()<CR>
+nnoremap <Leader>lnf   <cmd>lua vim.lsp.buf.format()<CR>
 
 " Enable several LSP's & Completion settings
 lua <<EOF
