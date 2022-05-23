@@ -1,4 +1,4 @@
 [submodule "nvim"]
 	path = nvim
-	url = https://bitbucket.org/abitmoredepth/nvim.git
+	url = git@bitbucket.org:abitmoredepth/nvim.git
 	branch = feature/builtin-lsp
