@@ -23,6 +23,7 @@
     gnome3.zenity
     gthumb
     i3
+    killall
     mupdf
     okular
     pavucontrol
@@ -41,6 +42,7 @@
     xfce.thunar-volman
     xfce.xfconf
     xorg.xev
+    xorg.xkill
     xorg.xprop
     xorg.xrandr
     yubioath-desktop
@@ -91,9 +93,11 @@
       gtk-xft-rgba = "rgb";
     };
   };
-  xsession.pointerCursor = {
+  home.pointerCursor = {
     package = pkgs.dracula-theme;
     name = "Dracula-cursors";
+    x11.enable = true;
+    gtk.enable = true;
   };
 
   qt = {
@@ -223,4 +227,3 @@
   # Enable Lorri.
   services.lorri.enable = true;
 }
-
