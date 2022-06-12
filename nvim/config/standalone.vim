@@ -293,6 +293,9 @@ Plug 'pearofducks/ansible-vim'
 " Add support for i3 config files
 Plug 'PotatoesMaster/i3-vim-syntax'
 
+" Clangd LSP extensions support.
+Plug 'p00f/clangd_extensions.nvim'
+
 " Snippets collection
 Plug 'rafamadriz/friendly-snippets'
 
@@ -800,7 +803,14 @@ lua <<EOF
     }
   }
 
-  lspconfig.clangd.setup{capabilities = capabilities}
+  -- Commented lspconfig for clangd as its called internally by clangd-extensions.
+  -- lspconfig.clangd.setup{capabilities = capabilities}
+  require("clangd_extensions").setup {
+    server = {
+      capabilities = capabilities
+    }
+  }
+
   lspconfig.cmake.setup{capabilities = capabilities}
   lspconfig.yamlls.setup{capabilities = capabilities}
   lspconfig.bashls.setup{capabilities = capabilities}
