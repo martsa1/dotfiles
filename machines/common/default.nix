@@ -35,12 +35,14 @@ in
     fd
     feh
     file
+    font-awesome
     imagemagick
     jq
     libnotify
     lsd
     luaformatter
     meld
+    nerdfonts
     pass
     playerctl
     pstree
@@ -88,6 +90,7 @@ in
       viAlias = false;
       extraConfig = builtins.readFile ../../nvim/init.vim;
       #link-lstdcpp = true;
+      # https://github.com/NixOS/nixpkgs/pull/147658
     };
 
     git = {
