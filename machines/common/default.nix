@@ -139,6 +139,8 @@ in
     "nvim/init.vim".source = ../../nvim/config/standalone.vim;
     "nvim/after".source = ../../nvim/after;
     "nvim/after".recursive = true;
+    "nvim/snippets".source = ../../nvim/snippets;
+    "nvim/snippets".recursive = true;
 
     "powerline".source = ../../dotfiles/powerline;
   };
