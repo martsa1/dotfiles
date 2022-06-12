@@ -70,6 +70,9 @@ in
     yubioath-desktop
   ];
 
+  # Support fontconfig
+  fonts.fontconfig.enable = true;
+
   # Set system theme
   gtk = {
     enable = true;
