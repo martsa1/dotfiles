@@ -691,8 +691,13 @@ nnoremap <Leader>lnf   <cmd>lua vim.lsp.buf.format()<CR>
 
 " Enable several LSP's & Completion settings
 lua <<EOF
+  local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+  end
   -- Setup nvim-cmp.
-  local cmp = require'cmp'
+  local cmp = require("cmp")
+  local luasnip = require("luasnip")
 
   cmp.setup({
     snippet = {
@@ -702,11 +707,36 @@ lua <<EOF
       end,
     },
     mapping = cmp.mapping.preset.insert({
+      -- Completion keybinds
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
       ['<C-Space>'] = cmp.mapping.complete(),
       ['<C-e>'] = cmp.mapping.abort(),
       ['<CR>'] = cmp.mapping.confirm({ select = false }), -- select = false only accepts manually selected options.
+
+      -- Lusnip keybinds
+      ["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          fallback()
+        end
+      end, { "i", "s" }),
+
+      ["<S-Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        else
+          fallback()
+        end
+      end, { "i", "s" }),
+
     }),
     sources = cmp.config.sources({
       { name = 'nvim_lsp' },
@@ -739,7 +769,8 @@ lua <<EOF
   -- Setup lspconfig.
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-  require'lspconfig'.pylsp.setup{
+  local lspconfig = require("lspconfig")
+  lspconfig.pylsp.setup{
     capabilities = capabilities,
     settings = {
       pylsp = {
@@ -769,16 +800,18 @@ lua <<EOF
     }
   }
 
-  require'lspconfig'.clangd.setup{capabilities = capabilities}
-  require'lspconfig'.cmake.setup{capabilities = capabilities}
-  require'lspconfig'.yamlls.setup{capabilities = capabilities}
-  require'lspconfig'.bashls.setup{capabilities = capabilities}
-  require'lspconfig'.rust_analyzer.setup{capabilities = capabilities}
-  require'lspconfig'.rnix.setup{capabilities = capabilities}
+  lspconfig.clangd.setup{capabilities = capabilities}
+  lspconfig.cmake.setup{capabilities = capabilities}
+  lspconfig.yamlls.setup{capabilities = capabilities}
+  lspconfig.bashls.setup{capabilities = capabilities}
+  lspconfig.rust_analyzer.setup{capabilities = capabilities}
+  lspconfig.rnix.setup{capabilities = capabilities}
 
   -- Snippets setup
   -- Imports VSCode style snippets (friendly-snippets plugin)
-  require("luasnip.loaders.from_vscode").load()
+  local vscode_snippet_loader = require("luasnip.loaders.from_vscode")
+  vscode_snippet_loader.lazy_load()
+  vscode_snippet_loader.lazy_load({ paths = { "./snippets" } }) -- Personal snippets.
 EOF
 
 " Tresitter configuration for more awesome highlighting.
