@@ -1,7 +1,27 @@
 /* vim: set filetype=nix ts=2 sw=2 tw=0 et :*/
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
-{
+let
+  dracula_head = pkgs.tmuxPlugins.mkTmuxPlugin rec {
+    pluginName = "dracula";
+    version = "5b282b043f760bd27b6d8c32b10d111f618b4c21";
+    src = pkgs.fetchFromGitHub {
+      owner = "dracula";
+      repo = "tmux";
+      rev = "${version}";
+      sha256 = "sha256-Dhpj2NaIZO+IPsChr1uqKIR6Zv8F2QReEdU/RIVZHAc=";
+    };
+    meta = with lib; {
+      homepage = "https://draculatheme.com/tmux";
+      description = "A feature packed Dracula theme for tmux!";
+      license = licenses.mit;
+      platforms = platforms.unix;
+      maintainers = with maintainers; [ ethancedwards8 ];
+    };
+  };
+
+  in
+  {
   programs.tmux = {
     enable = true;
     terminal = "\${TERM}";
@@ -57,7 +77,7 @@
       resurrect
       #onedark-theme
       {
-        plugin = dracula;
+        plugin = dracula_head;
         extraConfig = ''
           # Options available here:
           # https://github.com/dracula/tmux
@@ -76,4 +96,4 @@
       }
     ];
   };
-}
+  }
