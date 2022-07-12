@@ -20,9 +20,9 @@ in
     glPkgs.nixGLIntel
     #alacritty
 
-    openconnect
-
     python3Packages.poetry
+
+    vagrant
   ];
 
   # Seemingly needed for work machine to find all ZSH aliases, see here for more:
