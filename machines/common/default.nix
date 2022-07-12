@@ -42,7 +42,7 @@ in
     lsd
     luaformatter
     meld
-    nerdfonts
+    (nerdfonts.override {fonts = [ "FiraCode" "FiraMono" "Noto" ];})
     pass
     playerctl
     pstree
