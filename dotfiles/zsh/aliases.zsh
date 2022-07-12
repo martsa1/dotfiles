@@ -81,3 +81,6 @@ nv () {
 
 # I use this one so much now that I'm doing a lot with poetry...
 alias pshell='python -m poetry shell'
+
+# convenience for using the clipboard from terminal...
+alias to_clip='xclip -sel clipboard'
