@@ -46,6 +46,22 @@ let
       # Make Tmux highlight activity in other panes by defualt
       setw -g monitor-activity on
 
+      # move between splits
+      # check prefix ? for binds and this overlaped with below
+      # caused j to only jump once when using multiple times
+      unbind -T prefix J
+      # Now i can keep jumping with only one prefix use on down (j)
+      bind -r -T prefix h select-pane -L
+      bind -r -T prefix l select-pane -R
+      bind -r -T prefix k select-pane -U
+      bind -r -T prefix j select-pane -D
+
+      # resize splits
+      bind -r -T prefix M-h resize-pane -L 5
+      bind -r -T prefix M-l resize-pane -R 5
+      bind -r -T prefix M-k resize-pane -U 5
+      bind -r -T prefix M-j resize-pane -D 5
+
       # Allow swapping panes around
       bind-key -r "<" swap-window -t -1
       bind-key -r ">" swap-window -t +1
