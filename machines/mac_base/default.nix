@@ -27,8 +27,10 @@
   # File setup for various RC/Config files etc.
   home.file = {
     #".tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
-    ".background-image".source = ../../backgrounds/pexels-pixabay-220072.jpg;
     ".terminfo/61".source = pkgs.alacritty.terminfo.outPath + "/share/terminfo/61";
     ".terminfo/a".source = pkgs.alacritty.terminfo.outPath + "/share/terminfo/a";
   };
+
+  # Setup core details for home-manager
+  home.stateVersion = "22.05";
 }
