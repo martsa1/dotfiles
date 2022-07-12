@@ -82,47 +82,49 @@ else
   local PYTHON_VERSION=$($(which python) --version 2>/dev/null | sed -n 's/.*\(3\..\).*/\1/p')
 fi
 
-pyenv () {
-  unset -f pyenv
-  if [[ ! -n $VIRTUAL_ENV ]]; then
-    eval "$(command pyenv init --path)"
-  fi
-  pyenv $@
-}
+eval "$(command pyenv init --path)"
 
-pip () {
-  unset -f pip
-  if [[ ! -n $VIRTUAL_ENV ]]; then
-    eval "$(command pyenv init --path)"
-  fi
-  pip $@
-}
+#pyenv () {
+#  unset -f pyenv
+#  if [[ ! -n $VIRTUAL_ENV ]]; then
+#    eval "$(command pyenv init --path)"
+#  fi
+#  pyenv $@
+#}
 
-python () {
-  unset -f python
-  if [[ ! -n $VIRTUAL_ENV ]]; then
-    eval "$(command pyenv init --path)"
-  fi
-  python $@
-}
+#pip () {
+#  unset -f pip
+#  if [[ ! -n $VIRTUAL_ENV ]]; then
+#    eval "$(command pyenv init --path)"
+#  fi
+#  pip $@
+#}
 
-poetry () {
-  unset -f poetry
-  if [[ ! -n $VIRTUAL_ENV ]]; then
-    eval "$(command pyenv init --path)"
-  fi
-  poetry $@
-}
+#python () {
+#  unset -f python
+#  if [[ ! -n $VIRTUAL_ENV ]]; then
+#    eval "$(command pyenv init --path)"
+#  fi
+#  python $@
+#}
 
-# Enable Pipenv Completions
-pipenv () {
-  unset -f pipenv
-  if [[ ! -n $VIRTUAL_ENV ]]; then
-    eval "$(command pyenv init --path)"
-    eval "$(pipenv --completion)"
-  fi
-  pipenv $@
-}
+#poetry () {
+#  unset -f poetry
+#  if [[ ! -n $VIRTUAL_ENV ]]; then
+#    eval "$(command pyenv init --path)"
+#  fi
+#  poetry $@
+#}
+
+## Enable Pipenv Completions
+#pipenv () {
+#  unset -f pipenv
+#  if [[ ! -n $VIRTUAL_ENV ]]; then
+#    eval "$(command pyenv init --path)"
+#    eval "$(pipenv --completion)"
+#  fi
+#  pipenv $@
+#}
 
 
 # Setup the powerline daemon for use with tmux etc.
