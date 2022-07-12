@@ -44,6 +44,7 @@ in
     custom_pkgs.rofi-dracula-theme
     discord
     dracula-theme # Not in common!
+    feh
     firefox-devedition-bin
     gnome3.zenity
     gthumb
@@ -52,6 +53,7 @@ in
     okular
     pavucontrol
     peek
+    playerctl
     prusa-slicer
     rofimoji
     scrot
