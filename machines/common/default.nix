@@ -77,6 +77,13 @@ in
           source "$HOME/.config/nixpkgs/dotfiles/zsh/zshrc"
         fi
       '';
+
+      envExtra = ''
+        if [[ -o login ]]; then
+        else
+          source "$HOME/.config/nixpkgs/dotfiles/zsh/envs.zsh"
+        fi
+      '';
     };
 
     alacritty = {
