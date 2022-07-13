@@ -69,7 +69,8 @@ fi
 
 
 # Setup environment variables needed for pyenv
-export PYENV_ROOT="$HOME/.config/pyenv"
+#export PYENV_ROOT="$HOME/.config/pyenv"
+export PYENV_ROOT="$HOME/code/personal/pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
@@ -205,3 +206,6 @@ function fpm() {
 AUTO_NOTIFY_IGNORE+=("pipenv shell")
 AUTO_NOTIFY_IGNORE+=("poetry shell")
 AUTO_NOTIFY_IGNORE+=("python -m poetry shell")
+
+# gpg-agent wants this set:
+export GPG_TTY=$(tty)
