@@ -10,7 +10,8 @@ setopt no_global_rcs
 zstyle ':completion:*' completer _expand _complete _ignored
 zstyle ':completion:*' max-errors 8
 zstyle ':completion:*' menu select
-zstyle :compinstall filename '/home/sam/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
+
 fpath+=~/.zfunc
 
 autoload -Uz compinit
@@ -37,7 +38,7 @@ else
   compinit -C
 fi
 
-HISTFILE=~/.histfile
+HISTFILE="$HOME/.histfile"
 HISTSIZE=100000
 SAVEHIST=100000
 setopt APPENDHISTORY autocd extendedglob notify
