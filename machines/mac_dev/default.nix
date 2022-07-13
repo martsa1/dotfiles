@@ -10,6 +10,7 @@
   home.packages = with pkgs; [
     # TODO - setup Firefox via NUR or flakes using: https://github.com/toonn/nix-config/blob/master/darwin/apps/firefox/default.nix
     # NOTE: Instructions related to NUR: https://github.com/nix-community/NUR#how-to-use
+    python3Packages.poetry
   ];
 
   # Setup core details for home-manager
