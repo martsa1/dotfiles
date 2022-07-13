@@ -69,8 +69,7 @@ fi
 
 
 # Setup environment variables needed for pyenv
-#export PYENV_ROOT="$HOME/.config/pyenv"
-export PYENV_ROOT="$HOME/code/personal/pyenv"
+export PYENV_ROOT="$HOME/.config/pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
