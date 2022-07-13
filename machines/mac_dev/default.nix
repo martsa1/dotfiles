@@ -16,4 +16,15 @@
   # Setup core details for home-manager
   home.username = "test";
   home.homeDirectory = "/Users/test";
+
+  home.file = {
+    # Attempt to configure the GPG agent...
+    ".gnupg/gpg-agent.conf" = {
+      text = ''
+        allow-loopback-pinentry
+        pinentry-program "${pkgs.pinentry-curses}/bin/pinentry-curses"
+      '';
+    };
+  };
+
 }
