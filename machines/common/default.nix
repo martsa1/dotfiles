@@ -107,6 +107,7 @@ in
       delta.enable = true;
       delta.options = {
         line-numbers = true;
+        syntax-theme = "Dracula";
       };
 
       signing.signByDefault = true;
