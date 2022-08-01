@@ -151,10 +151,6 @@ fi
 # Enable Better Exceptions in python code
 export BETTER_EXCEPTIONS=1
 
-# AddCargo to PATH for work with rust
-export PATH="~/.cargo/bin:$PATH"
-
-
 # NVM settings
 # placeholder nvm shell function
 # On first use, it will set nvm up properly which will replace the `nvm`
@@ -199,12 +195,6 @@ function fpm() {
   eval "$(rbenv init -)"
   fpm "$@"
 }
-
-# add a couple of commands to the auto-ignored commands list, so that we don't
-# get notified about them in zsh-autonotify
-AUTO_NOTIFY_IGNORE+=("pipenv shell")
-AUTO_NOTIFY_IGNORE+=("poetry shell")
-AUTO_NOTIFY_IGNORE+=("python -m poetry shell")
 
 # gpg-agent wants this set:
 export GPG_TTY=$(tty)
