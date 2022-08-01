@@ -127,25 +127,28 @@ eval "$(command pyenv init --path)"
 #}
 
 
-# Setup the powerline daemon for use with tmux etc.
-powerline-daemon -q
+# Only initialise powerline stuff for interactive shells, skip this for scripts etc.
+if [[ -o interactive ]]; then
+  # Setup the powerline daemon for use with tmux etc.
+  powerline-daemon -q
 
 
-# Variable 'powerline_config_path' set in home-manager config, rather than here.
-if [ -f "$powerline_config_path" ]; then
-  source "$powerline_config_path"
+  # Variable 'powerline_config_path' set in home-manager config, rather than here.
+  if [ -f "$powerline_config_path" ]; then
+    source "$powerline_config_path"
 
-elif [ -f "$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
-  powerline_script="$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
-  source  $powerline_script
+  elif [ -f "$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
+    powerline_script="$HOME/.local/pipx/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
+    source  $powerline_script
 
-elif [ -f "$HOME/.local/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
-  powerline_script="$HOME/.local/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
-  source  $powerline_script
+  elif [ -f "$HOME/.local/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
+    powerline_script="$HOME/.local/venvs/powerline-status/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
+    source  $powerline_script
 
-# Installed on Nix-OS..
-elif [ -f "/run/current-system/sw/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
-  source "/run/current-system/sw/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
+  # Installed on Nix-OS..
+  elif [ -f "/run/current-system/sw/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh" ]; then
+    source "/run/current-system/sw/lib/python$PYTHON_VERSION/site-packages/powerline/bindings/zsh/powerline.zsh"
+  fi
 fi
 
 # Enable Better Exceptions in python code
