@@ -15,23 +15,23 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # Use Rofi as default launcher
-bindsym $mod+d exec rofi -show run
+bindsym --release $mod+d exec "zsh -c 'rofi -show run'"
 
 # Rofi to open SSH connections
-bindsym $mod+Shift+d exec rofi -show ssh
+bindsym --release $mod+Shift+d exec "zsh -c 'rofi -show ssh'"
 
 # Rofi Emoji picker
 #bindsym $mod+Ctrl+d exec rofi -show emoji -modi emoji
-bindsym $mod+Ctrl+d exec rofimoji
+bindsym --release $mod+Ctrl+d exec "zsh -c rofimoji"
 
 # Rofipass (Pass with Rofi)
-bindsym $mod+shift+p exec rofi-pass
+bindsym --release $mod+shift+p exec "zsh -c rofi-pass"
 
 # Rofi Window switcher
-bindsym $mod+shift+w exec rofi -show window
+bindsym --release $mod+shift+w exec "zsh -c 'rofi -show window'"
 
 # Rofi Calculator
-bindsym $mod+c exec rofi -show calc -modi calc -no-show-match -no-sort
+bindsym --release $mod+c exec "zsh -c 'rofi -show calc -modi calc -no-show-match -no-sort'"
 
 # Launch a file browser
 # If Nautilus tries to launch a Desktop, try running:
