@@ -180,15 +180,15 @@ bindsym $mod+Shift+x exec /home/{{ user }}/.config/nixpkgs/dotfiles/i3/scripts/l
 
 # Screenshot utility
 bindsym --release Print exec --no-startup-id \
-  "flameshot launcher -p ~/Pictures/screenshots"
+  "zsh -c 'flameshot full -p ~/Pictures/screenshots'"
 
 # Capture the current screen
 bindsym --release $mod+Print exec --no-startup-id \
-  "flameshot screen -p ~/Pictures/screenshots"
+  "zsh -c 'flameshot screen -p ~/Pictures/screenshots'"
 
 # Selectable area to capture to clipboard
 bindsym --release $mod+Shift+Print exec --no-startup-id \
-  "flameshot gui --clipboard"
+  "zsh -c 'flameshot gui --clipboard'"
 
 # resize window (you can also use the mouse for that)
 mode "Resize" {
