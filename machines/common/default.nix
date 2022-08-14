@@ -2,24 +2,23 @@
 { config, pkgs, ...}:
 
 let
-  # unstable_pkgs = import <nixpkgs-unstable> {};
-  unstable_pkgs = import (
-    fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz
-  ) {};
+  nvim_nightly = import (
+    builtins.fetchTarball https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz
+  );
 
-  python_version = pkgs.python39;
-  custom_pkgs = pkgs.callPackage ../../pkgs/all.nix {
-    inherit config;
-    inherit pkgs;
-    python3=python_version;
-  };
+  moz_overlay = import (
+    builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz
+  );
+
+  custom_pkgs = import (../../overlay.nix);
+
 in
 
 {
   nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-    }))
+    nvim_nightly
+    # moz_overlay
+    custom_pkgs
   ];
 
   imports = [
@@ -29,7 +28,7 @@ in
 
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
-    custom_pkgs.rofi-dracula-theme
+    rofi-dracula-theme
     direnv
     docker-compose
     fd
