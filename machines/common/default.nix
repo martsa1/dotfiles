@@ -1,5 +1,5 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 
 let
   nvim_nightly = import (
@@ -21,6 +21,7 @@ in
     custom_pkgs
   ];
 
+
   imports = [
     # Enable and manage tmux via home-manager
     ../../dotfiles/tmux
@@ -40,7 +41,7 @@ in
     lsd
     luaformatter
     meld
-    (nerdfonts.override {fonts = [ "FiraCode" "FiraMono" "Noto" ];})
+    (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "Noto" ]; })
     pass
     pstree
     python39
