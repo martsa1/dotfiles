@@ -1,36 +1,10 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
 { config, pkgs, ... }:
 
-let
-  python_version = pkgs.python39;
-  custom_pkgs = pkgs.callPackage ../../pkgs/all.nix {
-    inherit config;
-    inherit pkgs;
-    python3 = python_version;
-  };
-
-  nvim_nightly = import (
-    builtins.fetchTarball https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz
-  );
-
-  moz_overlay = import (
-    builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz
-  );
-
-in
-
 {
-  nixpkgs.overlays = [
-    nvim_nightly
-    moz_overlay
-  ];
-
   imports = [
     # Pull in common setup.
     ../common
-
-    # Enable and manage tmux via home-manager
-    ../../dotfiles/tmux
   ];
 
   # Various packages I want my user to have access to
