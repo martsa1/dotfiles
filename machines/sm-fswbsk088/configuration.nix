@@ -30,6 +30,9 @@
     };
   };
 
+  # Set time zone.
+  time.timeZone = "Europe/London";
+
   # Enable TRIM for SSD maintenance
   services.fstrim.enable = true;
 
