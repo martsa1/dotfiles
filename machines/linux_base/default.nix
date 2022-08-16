@@ -166,10 +166,10 @@
       primary=$(echo "$xrandr_out" | rg 'connected.*primary' | cut -f 1 -d ' ')
 
       for mon in $secondaries; do
-        MONITOR=$mon polybar --config="$HOME/.config/polybar/config" --reload secondary &
+        MONITOR=$mon polybar --config="$HOME/.config/polybar/config.ini" --reload secondary &
       done
 
-      MONITOR=$primary polybar --config="$HOME/.config/polybar/config" --reload primary &
+      MONITOR=$primary polybar --config="$HOME/.config/polybar/config.ini" --reload primary &
     '';
   };
 
