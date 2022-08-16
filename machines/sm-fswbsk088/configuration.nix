@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
 
       # Pull home-manager package
@@ -25,8 +26,8 @@
       root = {
         device = "/dev/nvme0n1p1";
         preLVM = true;
-			};
-		};
+      };
+    };
   };
 
   # Enable TRIM for SSD maintenance
