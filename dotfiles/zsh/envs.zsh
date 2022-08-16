@@ -78,11 +78,11 @@ fi
 
 if command -v pyenv 1>/dev/null 2>&1; then
   local PYTHON_VERSION=$(pyenv global | sed -n 's/.*\(3\..\).*/\1/p')
+  eval "$(command pyenv init --path)"
 else
   local PYTHON_VERSION=$($(which python) --version 2>/dev/null | sed -n 's/.*\(3\..\).*/\1/p')
 fi
 
-eval "$(command pyenv init --path)"
 
 #pyenv () {
 #  unset -f pyenv
