@@ -173,7 +173,7 @@
     xkbOptions = "ctrl:nocaps";
 
     # Enable Intel Proprietary Drivers.
-    #videoDrivers = [ "intel" ];
+    videoDrivers = [ "intel" ];
 
     # Enable touchpad support.
     synaptics.enable = false;
@@ -236,7 +236,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sam = {
     createHome = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "kvm" "libvirtd" "network" "networkmanager" "wheel" ]; # Enable ‘sudo’ for the user.
     group = "users";
     home = "/home/sam";
     isNormalUser = true;
@@ -328,6 +328,12 @@
   # Thumbnail service
   services.tumbler.enable = true;
 
+  # Enable Tailscale
+  services.tailscale = {
+    enable = true;
+  };
+
+
   # Enable docker daemon
   #virtualisation.docker.enable = true;
 
@@ -364,6 +370,10 @@
       automatic = true;
       dates = [ "weekly" ];
     };
+
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
   };
 
   # This value determines the NixOS release from which the default
