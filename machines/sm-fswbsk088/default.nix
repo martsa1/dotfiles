@@ -7,6 +7,11 @@
 
   home.packages = with pkgs; [
     ffmpeg
+    globalprotect-openconnect
+    openconnect
+    remmina
+    #rustdesk  - Seems broken at the moment.
+    virt-manager
     vlc
   ];
 
