@@ -33,6 +33,7 @@ in
     direnv
     docker-compose
     fd
+    feh
     file
     font-awesome
     imagemagick
@@ -43,6 +44,7 @@ in
     meld
     (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "Noto" ]; })
     pass
+    playerctl
     pstree
     python39
     python39Packages.ipython
