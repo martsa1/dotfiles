@@ -249,6 +249,7 @@
     alacritty
     firefox
     neovim
+    #opensnitch-ui
     wget
   ];
 
@@ -317,6 +318,20 @@
     fadeDelta = 10;
     vSync = true;
   };
+
+  # Setup Application firewall
+  #services.opensnitch = {
+  #  enable = true;
+
+  #  settings = {
+  #    DefaultAction = "deny";
+  #    DefaultDuration = "once";
+  #    Firewall = "nftables";
+  #    InterceptUnknown = true;
+  #    LogLevel = 1;
+  #    ProcMonitorMethod = "ebpf";
+  #  };
+  #};
 
   ## Mounted file-systems  (Uses NFSv4)
   #fileSystems."/media/Multimedia" = {
