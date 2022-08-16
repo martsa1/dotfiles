@@ -32,20 +32,126 @@
   # Enable TRIM for SSD maintenance
   services.fstrim.enable = true;
 
-  # networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
-  programs.nm-applet.enable = true;  # Enable the nm-applet for NetworkManager
+  # Configure networking stuff
+  networking = {
+    # networking.hostName = "nixos"; # Define your hostname.
+    hostName = "sm-fswbsk088"; # Define hostname.
 
-  networking.hostName = "sm-fswbsk088"; # Define your hostname.
+    # Try to use networkd and NetworkManager at the same time.
+    useDHCP = false;
+    useNetworkd = true;
 
-  # Set your time zone.
-  time.timeZone = "Europe/London";
+    # Pick only one of the below networking options.
+    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    networkmanager = {
+      enable = true; # Easiest to use and most distros use this by default.
+      dns = "systemd-resolved"; # TODO - See if we can/should still use systemd-based DNS.
+    };
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+    # Configure network proxy if necessary
+    # proxy.default = "http://user:password@proxy:port/";
+    # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+    # Open ports in the firewall.
+    # firewall.allowedTCPPorts = [ ... ];
+    # firewall.allowedUDPPorts = [ ... ];
+    firewall.enable = true;
+
+    # For now, just disable ipv6...
+    enableIPv6 = false;
+  };
+  programs.nm-applet.enable = true; # Enable nm-applet for NetworkManager
+
+  services.resolved = {
+    enable = true;
+    dnssec = "allow-downgrade";
+    domains = [ "home" ];
+
+    # Specifying this blocks use of compile-time defaults in
+    # systemd-resolved...
+    fallbackDns = [ "" ];
+  };
+
+  # See more at man systemd.network
+  #systemd.network.network = {
+  #  DHCP = "yes";
+  #};
+  systemd.network.networks =
+    {
+      # Config for all useful interfaces
+      "40-wired" = {
+        enable = true;
+        name = "en*";
+        dhcpV4Config.RouteMetric = 1024; # Better be explicit
+
+        networkConfig = {
+          DNSDefaultRoute = "yes";
+          DefaultRouteOnDevice = "yes";
+          DHCP = "yes";
+          DNSSEC = "yes";
+          DNSOverTLS = "yes";
+          #DNS = [ "1.1.1.1" "1.0.0.1" ];
+        };
+      };
+      # Seems to conflict somewhat with NetworkManager...
+      #"40-wireless" = {
+      #  enable = true;
+      #  name = "wl*";
+      #  networkConfig = {
+      #    DHCP = "yes";
+      #    DNSDefaultRoute = "yes";
+      #    DefaultRouteOnDevice = "yes";
+      #  };
+      #  dhcpV4Config.RouteMetric = 2048; # Prefer wired
+      #  dhcpV4Config = {
+      #    #Anonymize = "yes";
+      #    UseDNS = "yes";
+      #    UseDomains = "route";
+      #    UseHostname = "no";
+      #    UseMTU = "yes";
+      #    UseNTP = "yes";
+      #    UseRoutes = "yes";
+      #  };
+      #};
+      "globalprotect" = {
+        enable = true;
+        name = "globalprotect";
+        DHCP = "no";
+
+        domains = [
+          "gtn"
+          "f-secure.com"
+          "fi.f-secure.com"
+          "sp.fscdc.net"
+          "mwrinfosecurity.com"
+          "fsxt.net"
+          "fsapi.com"
+        ];
+        matchConfig = {
+          Name = "globalprotect";
+        };
+
+        linkConfig = {
+          Unmanaged = "no";
+        };
+
+        networkConfig = {
+          Description = "F-Secure GlobalProtect";
+          DNSDefaultRoute = "no";
+          DefaultRouteOnDevice = "no";
+        };
+
+        dhcpV4Config = {
+          #Anonymize = "yes";
+          UseDNS = "yes";
+          UseDomains = "route";
+          UseHostname = "no";
+          UseMTU = "yes";
+          UseNTP = "yes";
+          UseRoutes = "yes";
+        };
+      };
+    };
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
@@ -238,12 +344,6 @@
       '';
     };
   };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = true;
 
   # Various options for the nix package management tooling
   nix = {
