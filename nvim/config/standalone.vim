@@ -360,6 +360,9 @@ endif
 " ########## General Appearance settings #########
 " ################################################
 
+" In case we're inside a gui, set the font and size to fira-code.
+set guifont=FiraCode\ Nerd\ Font\ Mono:h10
+
 " Setup the status/command line
 set cmdheight=1
 set display+=lastline
