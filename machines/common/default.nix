@@ -46,9 +46,9 @@ in
     pass
     playerctl
     pstree
-    python39
-    python39Packages.ipython
-    python39Packages.powerline
+    python3
+    python3Packages.ipython
+    python3Packages.powerline
     ripgrep
     rnix-lsp
     tldr
