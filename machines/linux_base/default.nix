@@ -11,11 +11,6 @@
   home.packages = with pkgs; [
     bpytop # Not in common because its broken on mac.
     brightnessctl
-    custom_pkgs.dunst-dracula-theme
-    custom_pkgs.i3-config
-    custom_pkgs.polybar-launcher
-    custom_pkgs.polybar-spotify
-    custom_pkgs.rofi-dracula-theme
     discord
     dracula-theme # Not in common!
     feh
@@ -46,6 +41,14 @@
     xorg.xprop
     xorg.xrandr
     yubioath-desktop
+
+    # My packages:
+    dunst-dracula-theme
+    i3-config
+    polybar-launcher
+    polybar-spotify
+    rofi-dracula-theme
+
   ];
 
   # Support fontconfig
@@ -206,16 +209,16 @@
 
     ".themes/Dracula".source = "${pkgs.dracula-theme.outPath}/share/themes/Dracula";
     ".icons/Dracula-cursors".source = "${pkgs.dracula-theme.outPath}/share/icons/Dracula-cursors";
-    ".icons/Dracula".source = "${custom_pkgs.gtk-dracula-icons}/Dracula";
+    ".icons/Dracula".source = "${pkgs.gtk-dracula-icons}/Dracula";
   };
 
   # config file management
   xdg.enable = true;
   xdg.configFile = {
-    "i3/config".source = "${custom_pkgs.i3-config}/config";
+    "i3/config".source = "${pkgs.i3-config}/config";
     "i3/config".onChange = "${pkgs.i3}/bin/i3-msg -s /run/user/1000/i3/ipc-socket.* restart && systemctl --user restart polybar";
 
-    "dunst/dunstrc".source = "${custom_pkgs.dunst-dracula-theme}/dunstrc";
+    "dunst/dunstrc".source = "${pkgs.dunst-dracula-theme}/dunstrc";
 
     "rofimoji.rc".text = "files = [emojis, latin-1_supplement]";
   };
