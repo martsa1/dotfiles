@@ -20,6 +20,8 @@ in
     glPkgs.nixGLIntel
     #alacritty
 
+    postman
+
     python3Packages.poetry
 
     vagrant
