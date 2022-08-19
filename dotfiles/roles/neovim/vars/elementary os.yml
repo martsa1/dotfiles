@@ -1,0 +1,13 @@
+---
+depends:
+  - "exuberant-ctags"
+  - "git"
+  - "neovim"
+  - "ruby"
+  - "ruby-dev"
+  - "software-properties-common"
+
+env:
+  LC_ALL: "C.UTF-8"
+  LANG: "C.UTF-8"
+  PATH: "/home/{{user}}/.local/bin:{{ansible_env.PATH}}"

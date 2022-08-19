@@ -1,0 +1,9 @@
+---
+# Variables used in the installation of Neovim and its configuration
+config_base_dir: "/home/{{user}}/.config"
+nvim_repo: "https://bitbucket.org/abitmoredepth/nvim.git"
+personal_code_base_dir: "{{user_home}}/code/personal"
+sys_global_pyenv_prefix: "pyenvs"
+system_global_path: "/usr/local/src"
+user: "{{ansible_user_id}}"
+user_home: "/home/{{user}}"

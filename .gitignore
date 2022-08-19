@@ -1,9 +1,6 @@
-*.log
-*.pyc
-.molecule
-.pytest_cache
-.vagrant
-__pycache__
-*.retry
-tags
-*mypy_cache*
+# Ignore per-system symlink to base home.nix target.
+home.nix
+
+# Ignore build outputs from performing a nix-build or `nix build` command
+result
+result-*

@@ -1,0 +1,16 @@
+---
+# Variables used when building and installing i3wm.  Adjust as needed
+user: "sam"
+personal_code_base_dir: "/home/{{user}}/code/personal"
+dotfiles_base_dir: "{{personal_code_base_dir}}/dotfiles/dotfiles"
+config_base_dir: "/home/{{user}}/.config"
+installs:
+  - bash
+  - gawk
+  - pass
+  - pass-extension-otp
+  - pwgen
+  - rofi
+  - sed
+  - sed
+  - xdotool

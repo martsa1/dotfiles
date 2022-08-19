@@ -1,6 +1,0 @@
----
-# Variables used when building and installing Kitty from source.  Adjust as needed
-user: "sam"
-personal_code_base_dir: "/home/{{user}}/code/personal"
-dotfiles_base_dir: "{{personal_code_base_dir}}/dotfiles"
-config_base_dir: "/home/{{user}}/.config"

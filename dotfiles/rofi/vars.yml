@@ -1,0 +1,7 @@
+---
+# Variables used when building and installing Rofi from source.  Adjust as needed
+user: "sam"
+repo_base_dir: "/home/{{user}}/code/personal/rofi"
+dotfiles_base_dir: "/home/{{user}}/code/personal/dotfiles/dotfiles"
+config_base_dir: "/home/{{user}}/.config"
+user_bin: "/home/{{user}}/bin"

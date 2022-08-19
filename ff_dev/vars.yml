@@ -1,9 +1,0 @@
----
-# Variables used when building and installing Rofi from source.  Adjust as needed
-user: "sam"
-install_base: "/opt"
-install_dir: "{{ install_base }}/firefox-dev"
-install_target: "/usr/local/bin/firefox-dev"
-download_url: "https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=en-US"
-repo_dir: "/home/{{ user }}/code/personal/dotfiles/ff_dev/"
-desktop_target: "/usr/share/applications/firefox-developer.desktop"

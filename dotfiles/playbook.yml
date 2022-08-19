@@ -1,0 +1,7 @@
+---
+
+# Play to install my various configuration files as symlinks back to this repository
+
+- import_playbook: bash/playbook.yml
+- import_playbook: i3/playbook.yml
+

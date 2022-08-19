@@ -1,0 +1,115 @@
+#!/usr/bin/zsh
+# This file is called by all interactive shells (i.e. anything except scripts etc.)
+
+# Try to ignore system-wide settings, so that these can be authoritative.
+setopt no_global_rcs
+
+# # Profiling ZSH
+# zmodload zsh/zprof
+
+zstyle ':completion:*' completer _expand _complete _ignored
+zstyle ':completion:*' max-errors 8
+zstyle ':completion:*' menu select
+zstyle :compinstall filename "$HOME/.zshrc"
+
+fpath+=~/.zfunc
+
+autoload -Uz compinit
+fpath+=~/.config/zsh_completions
+fpath+=~/.zsh/completion
+
+if [ $(uname) = "Linux" ];then
+  if [ $(date +'%s') != $(stat -c '%Y' ${ZDOTDIR:-$HOME}/.zcompdump) ]; then
+    let fresh=1
+  else
+    let fresh=0
+  fi
+else
+  if [ $(date +'%s') != $(stat -f '%m' ${ZDOTDIR:-$HOME}/.zcompdump) ]; then
+    let fresh=1
+  else
+    let fresh=0
+  fi
+fi
+
+if [ fresh = 1 ]; then
+  compinit
+else
+  compinit -C
+fi
+
+HISTFILE="$HOME/.histfile"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt APPENDHISTORY autocd extendedglob notify
+bindkey -v
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+
+# Allow ZSH to treat # characters like comments when used on the command line.
+# For some reason, this isn't default behaviour.
+setopt INTERACTIVECOMMENTS
+
+# Allow vim-like autocompletion of history
+bindkey "^P" history-beginning-search-backward
+bindkey "^N" history-beginning-search-forward
+
+
+# Source aliases
+source "$HOME/.config/nixpkgs/dotfiles/zsh/aliases.zsh"
+
+# Source Environment settings
+source "$HOME/.config/nixpkgs/dotfiles/zsh/envs.zsh"
+
+# Source Extra Key bindings
+source "$HOME/.config/nixpkgs/dotfiles/zsh/keys.zsh"
+
+# Source SSH-Agent Management tooling
+source "$HOME/.config/nixpkgs/dotfiles/zsh/ssh_agent.zsh"
+
+# Begin loading of zplug plugins etc.
+if [ -f "$HOME/.config/zplug/init.zsh" ]; then
+  source "$HOME/.config/zplug/init.zsh"
+fi
+
+if [ -f "$HOME/.nix-profile/init.zsh" ]; then
+  source "$HOME/.nix-profile/init.zsh"
+fi
+#
+# Source ZPlug definitions
+source "$HOME/.config/nixpkgs/dotfiles/zsh/zplug.zsh"
+
+# zplug check returns true if all packages are installed
+# Therefore, when it returns false, run zplug install
+if ! zplug check; then
+    echo "Not all zplug plugins are installed, but auto-install is currently disabled."
+    echo "run 'zplug install' to install them."
+    #zplug install
+fi
+
+# add a couple of commands to the auto-ignored commands list, so that we don't
+# get notified about them in zsh-autonotify
+AUTO_NOTIFY_IGNORE+=("pipenv shell")
+AUTO_NOTIFY_IGNORE+=("poetry shell")
+AUTO_NOTIFY_IGNORE+=("python -m poetry shell")
+
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
+
+# Source any work specific stuff, if there are settings present.
+if [ -f "$HOME/.zshrc_work" ];
+then
+  source "$HOME/.zshrc_work"
+fi
+
+# MUST BE AT THE BOTTOM!!
+# Load all plugins
+zplug load
+# If Job Control seems broken, check for an old zplug lock file under ~/.config/zplug/log/job/
+# See https://github.com/zplug/zplug/issues/322#issuecomment-274557883

@@ -1,0 +1,31 @@
+# Include default inputrc for system default familiarity
+$include /etc/inputrc
+
+
+#############################
+### Completion settings   ###
+#############################
+
+# Make completion case-insensitive
+set completion-ignore-case On
+# This one makes hypens and underscores be treated equally in completion
+set completion-map-case On
+
+# Simplifies Tab completion
+set completion-prefix-display-length 2
+set menu-complete-display-prefix On
+set page-completions Off
+
+set visible-stats On
+
+# These lines make completion appear on the first <TAB>
+set show-all-if-ambiguous On
+set show-all-if-unmodified On
+
+# Editor mode settings
+set editing-mode vi
+set show-mode-in-prompt On
+
+set keymap vi-insert
+"\e.":yank-last-arg
+"\et":transpose-words

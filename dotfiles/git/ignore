@@ -1,0 +1,9 @@
+*.egg-info/
+*.mypy_cache/
+.*.swp
+.atom-build.json
+.ctagsignore
+tags
+.vim/
+.vscode/
+.clangd/

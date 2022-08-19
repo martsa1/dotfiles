@@ -1,0 +1,35 @@
+################################################################################
+######################## Config for sam-ub-desktop #############################
+################################################################################
+
+#Ensure that monitors are appropriately setup
+exec xrandr --output eDP1 --primary
+exec xrandr --output DP2 --off
+
+# Assign Workspaces to specific screens
+# Terminals
+workspace 1 output eDP1
+workspace 2 output eDP1
+# Browsers
+workspace 3 output eDP1
+workspace 4 output eDP1
+workspace 6 output eDP1
+workspace 5 output eDP1
+workspace 7 output eDP1
+workspace 8 output eDP1
+# Chat
+workspace 9 output eDP1
+# Music
+workspace 10 output eDP1
+
+# Set Keyboard layout to UK
+exec setxkbmap -layout gb
+
+# Launch RescueTime
+exec --no-startup-id rescuetime
+
+# Top Bar to hold status information - May be updated to use Polybar in
+# future!
+bar {
+		 i3bar_command ~/code/personal/dotfiles/dotfiles/polybar/launch.py
+}
