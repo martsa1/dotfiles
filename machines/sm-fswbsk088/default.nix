@@ -7,7 +7,9 @@
 
   home.packages = with pkgs; [
     ffmpeg
+    font-manager
     globalprotect-openconnect
+    neovide
     openconnect
     remmina
     #rustdesk  - Seems broken at the moment.
