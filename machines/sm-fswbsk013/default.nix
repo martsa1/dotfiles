@@ -27,6 +27,16 @@ in
     vagrant
   ];
 
+  # Set a state version (determines various stateful bits and pieces. Should
+  # try to update from time to time (Stuff may break)
+  home.stateVersion = "22.05";
+
+  # Username/homedir to reference in various bits of home manager - no default
+  # provided as of stateVersion > 20.09.
+  home.username = "sam";
+  home.homeDirectory = "/home/sam";
+
+
   # Seemingly needed for work machine to find all ZSH aliases, see here for more:
   # https://github.com/nix-community/home-manager/issues/2562#issuecomment-1009381061
   programs.zsh.initExtraBeforeCompInit = ''
