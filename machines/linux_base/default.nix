@@ -129,9 +129,10 @@
     terminal = "${pkgs.alacritty}/bin/alacritty";
     theme = ../../dotfiles/rofi/dracula.rasi;
     extraConfig = {
+      combi-modes = "drun,run";
       matching = "fuzzy";
       max-history-size = 100;
-      modi = "window,run,ssh,keys";
+      modi = "window,run,drun,ssh,keys";
       show-icons = true;
       sidebar-mode = true;
       sort = true;

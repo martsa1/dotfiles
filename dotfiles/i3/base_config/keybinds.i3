@@ -15,7 +15,7 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # Use Rofi as default launcher
-bindsym --release $mod+d exec "zsh -c 'rofi -show run'"
+bindsym --release $mod+d exec "zsh -c 'rofi -show combi'"
 
 # Rofi to open SSH connections
 bindsym --release $mod+Shift+d exec "zsh -c 'rofi -show ssh'"
