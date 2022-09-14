@@ -14,7 +14,7 @@
   environment.darwinConfig = "$HOME/.config/nixpkgs/machines/mac_base/configuration_catalina.nix";
 
   # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = false;
+  services.nix-daemon.enable = true;
   nix.package = pkgs.nix;
 
   # Create /etc/bashrc that loads the nix-darwin environment.

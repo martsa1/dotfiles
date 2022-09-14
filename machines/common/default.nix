@@ -44,7 +44,6 @@ in
     meld
     (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "Noto" ]; })
     pass
-    playerctl
     pstree
     python3
     python3Packages.ipython
@@ -71,7 +70,7 @@ in
 
       # Ensure ZSH setup pulls in my dotfiles stuff...
       initExtra = ''
-        export powerline_config_path="${pkgs.python39Packages.powerline.outPath}/share/zsh/powerline.zsh"
+        export powerline_config_path="${pkgs.python3Packages.powerline.outPath}/share/zsh/powerline.zsh"
 
         if [ -f "$HOME/.config/nixpkgs/dotfiles/zsh/zshrc" ]; then
           source "$HOME/.config/nixpkgs/dotfiles/zsh/zshrc"
