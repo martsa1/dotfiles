@@ -95,8 +95,6 @@ in
       extraPackages = [ pkgs.gcc ];
       viAlias = false;
       extraConfig = builtins.readFile ../../nvim/init.vim;
-      #link-lstdcpp = true;
-      # https://github.com/NixOS/nixpkgs/pull/147658
     };
 
     git = {
@@ -146,7 +144,7 @@ in
   xdg.configFile = {
     "alacritty/alacritty.yml".source = ../../dotfiles/alacritty/alacritty.yml;
 
-    "nvim/init.vim".source = ../../nvim/config/standalone.vim;
+    #"nvim/init.vim".source = ../../nvim/config/standalone.vim;
     "nvim/after".source = ../../nvim/after;
     "nvim/after".recursive = true;
     "nvim/snippets".source = ../../nvim/snippets;

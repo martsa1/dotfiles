@@ -9,13 +9,13 @@
 
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
-    bpytop # Not in common because its broken on mac.
+    btop # Not in common because its broken on mac.
     brightnessctl
     discord
     dracula-theme # Not in common!
     feh
     firefox-devedition-bin
-    gnome3.zenity
+    gnome.zenity
     gthumb
     i3
     killall

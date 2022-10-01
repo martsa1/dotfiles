@@ -25,6 +25,8 @@ in
     python3Packages.poetry
 
     vagrant
+
+    kdiff3
   ];
 
   # Set a state version (determines various stateful bits and pieces. Should
