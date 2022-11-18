@@ -63,8 +63,8 @@ let
       bind -r -T prefix M-j resize-pane -D 5
 
       # Allow swapping panes around
-      bind-key -r "<" swap-window -t -1
-      bind-key -r ">" swap-window -t +1
+      bind-key -r "<" swap-window -d -t -1
+      bind-key -r ">" swap-window -d -t +1
 
       # Jump to last used window
       bind-key "C-^" last-window
