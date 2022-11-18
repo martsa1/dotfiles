@@ -20,6 +20,7 @@ in
     glPkgs.nixGLIntel
     #alacritty
 
+    podman
     postman
 
     python3Packages.poetry
@@ -37,6 +38,10 @@ in
   # provided as of stateVersion > 20.09.
   home.username = "sam";
   home.homeDirectory = "/home/sam";
+
+  home.shellAliases = {
+    docker = "podman";
+  };
 
 
   # Seemingly needed for work machine to find all ZSH aliases, see here for more:
