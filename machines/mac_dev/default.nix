@@ -13,6 +13,8 @@
     clang-tools
     python3Packages.poetry
     universal-ctags
+    ncdu
+    ninja
   ];
 
   # Setup core details for home-manager

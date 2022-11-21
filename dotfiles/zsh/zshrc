@@ -103,8 +103,7 @@ zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
 # Source any work specific stuff, if there are settings present.
-if [ -f "$HOME/.zshrc_work" ];
-then
+if [ -f "$HOME/.zshrc_work" ]; then
   source "$HOME/.zshrc_work"
 fi
 
