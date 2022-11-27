@@ -34,7 +34,10 @@
   xdg.enable = true;
 
   # Enable Lorri.
-  services.lorri.enable = true;
+  services.lorri = {
+    enable = true;
+    enableNotifications = true;
+  };
 }
 
 
