@@ -238,5 +238,8 @@
   xsession.windowManager.command = "i3";
 
   # Enable Lorri.
-  services.lorri.enable = true;
+  services.lorri = {
+    enable = true;
+    enableNotifications = true;
+  };
 }
