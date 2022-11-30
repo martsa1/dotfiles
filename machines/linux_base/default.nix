@@ -30,7 +30,7 @@
     signal-desktop
     slack
     spotify
-    teams
+    # teams
     xclip
     xfce.thunar
     xfce.thunar-archive-plugin
