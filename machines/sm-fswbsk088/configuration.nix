@@ -320,6 +320,7 @@
     fade = true;
     fadeDelta = 10;
     vSync = true;
+    backend = "glx";
   };
 
   # Setup Application firewall
