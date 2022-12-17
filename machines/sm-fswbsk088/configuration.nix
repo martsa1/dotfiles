@@ -265,7 +265,7 @@
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [
-      nerdfonts
+      (nerdfonts.override {fonts = ["FiraCode" "FiraMono" "Noto"];})
       fira-mono
       fira-code
       fira
