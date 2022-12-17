@@ -64,6 +64,7 @@
     # firewall.allowedUDPPorts = [ ... ];
     firewall = {
       enable = true;
+      checkReversePath = "loose"; # Needed by tailscale
     };
 
     # For now, just disable ipv6...
