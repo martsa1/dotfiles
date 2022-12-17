@@ -1,19 +1,22 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
 
-      # Pull home-manager package
-      #"${builtins.fetchTarball https://github.com/nix-community/home-manager/archive/master.tar.gz}/nixos"
-      #<home-manager/nixos>  # Ensure the channel is added, for this to work...
-    ];
+    # Pull home-manager package
+    #"${builtins.fetchTarball https://github.com/nix-community/home-manager/archive/master.tar.gz}/nixos"
+    #<home-manager/nixos>  # Ensure the channel is added, for this to work...
+
+    # Steam config.
+    ./steam.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -59,7 +62,9 @@
     # Open ports in the firewall.
     # firewall.allowedTCPPorts = [ ... ];
     # firewall.allowedUDPPorts = [ ... ];
-    firewall.enable = true;
+    firewall = {
+      enable = true;
+    };
 
     # For now, just disable ipv6...
     enableIPv6 = false;
@@ -69,93 +74,92 @@
   services.resolved = {
     enable = true;
     dnssec = "allow-downgrade";
-    domains = [ "home" ];
+    domains = ["home"];
 
     # Specifying this blocks use of compile-time defaults in
     # systemd-resolved...
-    fallbackDns = [ "" ];
+    fallbackDns = [""];
   };
 
   # See more at man systemd.network
   #systemd.network.network = {
   #  DHCP = "yes";
   #};
-  systemd.network.networks =
-    {
-      # Config for all useful interfaces
-      "40-wired" = {
-        enable = true;
-        name = "en*";
-        dhcpV4Config.RouteMetric = 1024; # Better be explicit
+  systemd.network.networks = {
+    # Config for all useful interfaces
+    #"40-wired" = {
+    #  enable = true;
+    #  name = "en*";
+    #  dhcpV4Config.RouteMetric = 1024; # Better be explicit
 
-        networkConfig = {
-          DNSDefaultRoute = "yes";
-          DefaultRouteOnDevice = "yes";
-          DHCP = "yes";
-          DNSSEC = "yes";
-          DNSOverTLS = "yes";
-          #DNS = [ "1.1.1.1" "1.0.0.1" ];
-        };
+    #  networkConfig = {
+    #    DNSDefaultRoute = "yes";
+    #    DefaultRouteOnDevice = "yes";
+    #    DHCP = "yes";
+    #    DNSSEC = "yes";
+    #    DNSOverTLS = "yes";
+    #    #DNS = [ "1.1.1.1" "1.0.0.1" ];
+    #  };
+    #};
+    # Seems to conflict somewhat with NetworkManager...
+    #"40-wireless" = {
+    #  enable = true;
+    #  name = "wl*";
+    #  networkConfig = {
+    #    DHCP = "yes";
+    #    DNSDefaultRoute = "yes";
+    #    DefaultRouteOnDevice = "yes";
+    #  };
+    #  dhcpV4Config.RouteMetric = 2048; # Prefer wired
+    #  dhcpV4Config = {
+    #    #Anonymize = "yes";
+    #    UseDNS = "yes";
+    #    UseDomains = "route";
+    #    UseHostname = "no";
+    #    UseMTU = "yes";
+    #    UseNTP = "yes";
+    #    UseRoutes = "yes";
+    #  };
+    #};
+    "globalprotect" = {
+      enable = true;
+      name = "globalprotect";
+      DHCP = "no";
+
+      domains = [
+        "gtn"
+        "f-secure.com"
+        "fi.f-secure.com"
+        "sp.fscdc.net"
+        "mwrinfosecurity.com"
+        "fsxt.net"
+        "fsapi.com"
+      ];
+      matchConfig = {
+        Name = "globalprotect";
       };
-      # Seems to conflict somewhat with NetworkManager...
-      #"40-wireless" = {
-      #  enable = true;
-      #  name = "wl*";
-      #  networkConfig = {
-      #    DHCP = "yes";
-      #    DNSDefaultRoute = "yes";
-      #    DefaultRouteOnDevice = "yes";
-      #  };
-      #  dhcpV4Config.RouteMetric = 2048; # Prefer wired
-      #  dhcpV4Config = {
-      #    #Anonymize = "yes";
-      #    UseDNS = "yes";
-      #    UseDomains = "route";
-      #    UseHostname = "no";
-      #    UseMTU = "yes";
-      #    UseNTP = "yes";
-      #    UseRoutes = "yes";
-      #  };
-      #};
-      "globalprotect" = {
-        enable = true;
-        name = "globalprotect";
-        DHCP = "no";
 
-        domains = [
-          "gtn"
-          "f-secure.com"
-          "fi.f-secure.com"
-          "sp.fscdc.net"
-          "mwrinfosecurity.com"
-          "fsxt.net"
-          "fsapi.com"
-        ];
-        matchConfig = {
-          Name = "globalprotect";
-        };
+      linkConfig = {
+        Unmanaged = "no";
+      };
 
-        linkConfig = {
-          Unmanaged = "no";
-        };
+      networkConfig = {
+        Description = "F-Secure GlobalProtect";
+        DNSDefaultRoute = "no";
+        DefaultRouteOnDevice = "no";
+      };
 
-        networkConfig = {
-          Description = "F-Secure GlobalProtect";
-          DNSDefaultRoute = "no";
-          DefaultRouteOnDevice = "no";
-        };
-
-        dhcpV4Config = {
-          #Anonymize = "yes";
-          UseDNS = "yes";
-          UseDomains = "route";
-          UseHostname = "no";
-          UseMTU = "yes";
-          UseNTP = "yes";
-          UseRoutes = "yes";
-        };
+      dhcpV4Config = {
+        #Anonymize = "yes";
+        UseDNS = "yes";
+        UseDomains = "route";
+        UseHostname = "no";
+        UseMTU = "yes";
+        UseNTP = "yes";
+        UseRoutes = "yes";
       };
     };
+  };
 
   # Select internationalisation properties.
   # i18n.defaultLocale = "en_US.UTF-8";
@@ -173,7 +177,7 @@
     xkbOptions = "ctrl:nocaps";
 
     # Enable Intel Proprietary Drivers.
-    videoDrivers = [ "intel" ];
+    videoDrivers = ["intel"];
 
     # Enable touchpad support.
     synaptics.enable = false;
@@ -205,7 +209,6 @@
       };
       startx.enable = false;
       # ly.enable = true;
-
     };
     desktopManager.wallpaper.mode = "scale";
   };
@@ -216,13 +219,12 @@
     defaultTarget = "default";
   };
 
-
   security.sudo.extraConfig = "Defaults pwfeedback";
 
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-    drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
+    drivers = [pkgs.gutenprint pkgs.gutenprintBin];
   };
 
   # Enable sound.
@@ -236,7 +238,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sam = {
     createHome = true;
-    extraGroups = [ "kvm" "libvirtd" "network" "networkmanager" "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = ["kvm" "libvirtd" "network" "networkmanager" "wheel"]; # Enable ‘sudo’ for the user.
     group = "users";
     home = "/home/sam";
     isNormalUser = true;
@@ -348,13 +350,11 @@
     enable = true;
   };
 
-
   # Enable docker daemon
   #virtualisation.docker.enable = true;
 
   # Allow non-free packages
   nixpkgs.config.allowUnfree = true;
-
 
   # Setup virtualisation via KVM + Libvirt.
   virtualisation.libvirtd.enable = true;
@@ -383,7 +383,7 @@
 
     optimise = {
       automatic = true;
-      dates = [ "weekly" ];
+      dates = ["weekly"];
     };
 
     extraOptions = ''
@@ -403,4 +403,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 }
-
