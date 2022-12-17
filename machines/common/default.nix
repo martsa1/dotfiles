@@ -1,7 +1,9 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
-{ config, pkgs, ... }:
-
-let
+{
+  config,
+  pkgs,
+  ...
+}: let
   nvim_nightly = import (
     builtins.fetchTarball https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz
   );
@@ -10,17 +12,13 @@ let
     builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz
   );
 
-  custom_pkgs = import (../../overlay.nix);
-
-in
-
-{
+  custom_pkgs = import ../../overlay.nix;
+in {
   nixpkgs.overlays = [
     nvim_nightly
     # moz_overlay
     custom_pkgs
   ];
-
 
   imports = [
     # Enable and manage tmux via home-manager
@@ -42,7 +40,7 @@ in
     lsd
     luaformatter
     meld
-    (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "Noto" ]; })
+    (nerdfonts.override {fonts = ["FiraCode" "FiraMono" "Noto"];})
     pass
     pstree
     python3
@@ -92,7 +90,7 @@ in
     neovim = {
       enable = true;
       package = pkgs.neovim-nightly;
-      extraPackages = [ pkgs.gcc ];
+      extraPackages = [pkgs.gcc];
       viAlias = false;
       extraConfig = builtins.readFile ../../nvim/init.vim;
     };
@@ -125,7 +123,6 @@ in
           defaultBranch = "main";
         };
       };
-
     };
 
     # Enable FZF
@@ -137,7 +134,6 @@ in
     # Let home-manager manage itself.
     home-manager.enable = true;
   };
-
 
   # config file management
   xdg.enable = true;
