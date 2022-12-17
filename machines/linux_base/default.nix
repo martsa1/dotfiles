@@ -191,6 +191,14 @@
     grabKeyboardAndMouse = true;
   };
 
+  # Setup z-lua
+  programs.z-lua = {
+    enable = true;
+    enableBashIntegration = false;
+    enableZshIntegration = true;
+    enableFishIntegration = false;
+  };
+
   # Udiskie daemon
   services.udiskie = {
     enable = true;
