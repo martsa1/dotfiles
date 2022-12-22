@@ -28,6 +28,8 @@ in
     vagrant
 
     kdiff3
+
+    spotify-tui
   ];
 
   # Set a state version (determines various stateful bits and pieces. Should
@@ -89,5 +91,17 @@ in
   services.syncthing = {
     enable = true;
     tray.enable = true;
+  };
+
+  services.spotifyd = {
+    enable = true;
+    settings = {
+      global = {
+        username = "11162549442";
+        password_cmd = "pass personal/spotify.com | grep password | cut -d ' ' -f 2";
+        device_type = "computer";
+        backend = "pulseaudio";
+      };
+    };
   };
 }
