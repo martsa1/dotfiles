@@ -122,6 +122,10 @@ in {
         init = {
           defaultBranch = "main";
         };
+
+        "mergetool \"nvim\"" = {
+          cmd = "nvim -f \"$BASE\"\"$LOCAL\"\"$REMOTE\"\"$MERGED\" ";
+        };
       };
     };
 
