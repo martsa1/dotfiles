@@ -302,8 +302,9 @@ Plug 'rafamadriz/friendly-snippets'
 " Quickfix helpers
 Plug 'romainl/vim-qf'
 
-" Add the base rust syntax highlighting plugin
-Plug 'rust-lang/rust.vim'
+" Hopefully deprecated in favour of treesitter + LSP...
+" " Add the base rust syntax highlighting plugin
+"Plug 'rust-lang/rust.vim'
 
 " Dev Icons in NERDTree...
 Plug 'ryanoasis/vim-devicons'
@@ -316,6 +317,9 @@ Plug 'scrooloose/nerdcommenter'
 
 " File tree within vim
 Plug 'scrooloose/nerdtree'
+
+" Rust specific LSP extensions
+Plug 'simrat39/rust-tools.nvim'
 
 " Source code folding pluggin
 Plug 'tmhedberg/SimpylFold'
@@ -814,10 +818,25 @@ lua <<EOF
     }
   }
 
+  -- Setup rust-tools, which provides some extensions beyond the base lsp-config for rust-analyzer
+  local rt = require("rust-tools")
+  rt.setup({
+    server = {
+      -- on_attach = function(_, bufnr)
+      -- Hover actions
+      -- vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      -- vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+      -- end
+    },
+    capabilities = capabilities
+  })
+  -- Hopefully not needed when using rust-tools above
+  -- lspconfig.rust_analyzer.setup{capabilities = capabilities}
+
   lspconfig.cmake.setup{capabilities = capabilities}
   lspconfig.yamlls.setup{capabilities = capabilities}
   lspconfig.bashls.setup{capabilities = capabilities}
-  lspconfig.rust_analyzer.setup{capabilities = capabilities}
   lspconfig.rnix.setup{capabilities = capabilities}
   lspconfig.terraformls.setup{capabilities = capabilities}
 
