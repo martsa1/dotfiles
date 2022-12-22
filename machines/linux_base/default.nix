@@ -40,7 +40,8 @@
     xorg.xkill
     xorg.xprop
     xorg.xrandr
-    yubioath-desktop
+    #yubioath-desktop
+    yubikey-manager
 
     # My packages:
     dunst-dracula-theme
