@@ -35,6 +35,10 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Seems to be not a nixos thing, but a fault in using NetworkManager, see
+  # https://github.com/NixOS/nixpkgs/issues/180175
+  systemd.services.NetworkManager-wait-online.enable = false;
+
   # Set your time zone.
   time.timeZone = "Europe/London";
 
