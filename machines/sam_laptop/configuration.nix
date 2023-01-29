@@ -18,6 +18,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Add home lan rootCA
+  security.pki = {
+    certificateFiles = [
+      ../../certs/home-lan-rootCA.pem
+    ];
+  };
+
   # Enable TRIM for SSD maintenance
   services.fstrim.enable = true;
 

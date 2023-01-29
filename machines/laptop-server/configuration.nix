@@ -18,6 +18,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+  # Add home lan rootCA
+  security.pki = {
+    certificateFiles = [
+      ../../certs/home-lan-rootCA.pem
+    ];
+  };
+
   # Configure not to suspend when the lid is closed
   services.logind = {
     lidSwitch = "ignore";
