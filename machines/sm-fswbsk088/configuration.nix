@@ -33,6 +33,13 @@
     };
   };
 
+  # Add home lan rootCA
+  security.pki = {
+    certificateFiles = [
+      ../../certs/home-lan-rootCA.pem
+    ];
+  };
+
   # Set time zone.
   time.timeZone = "Europe/London";
 
