@@ -11,6 +11,7 @@
 
       ./baby-buddy.nix
       ./home-assistant.nix
+      ./step-ca.nix
     ];
 
   # Bootloader.
@@ -107,6 +108,7 @@
     podman = {
       enable = true;
       dockerCompat = true;
+      defaultNetwork.dnsname.enable = true;
     };
     oci-containers = {
       backend = "podman";
