@@ -20,7 +20,6 @@
       "/var/step-ca/:/home/step"
     ];
     extraOptions = [
-      #"--userns=keep-id"
       "--hostuser=step"
     ];
   };

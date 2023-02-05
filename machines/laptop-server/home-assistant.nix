@@ -1,18 +1,6 @@
 { ... }:
 {
   virtualisation.oci-containers.containers.home-assistant = {
-    #services:
-    #  homeassistant:
-    #    container_name: homeassistant
-    #    image: "ghcr.io/home-assistant/home-assistant:stable"
-    #    volumes:
-    #      - /PATH_TO_YOUR_CONFIG:/config
-    #      - /etc/localtime:/etc/localtime:ro
-    #    restart: unless-stopped
-    #    privileged: true
-    #    network_mode: host
-
-    #image = "ghcr.io/home-assistant/home-assistant:stable";
     image = "ghcr.io/home-assistant/home-assistant:stable";
     autoStart = true;
     #environment = {
@@ -27,6 +15,11 @@
     extraOptions = [
       "--network=host"
       "--device=/dev/ttyACM0"
+
+      "--label=traefik.http.routers.home-assistant.rule=Host(`ha.home`, `ha.abitmoredepth.com`)"
+      "--label=traefik.http.routers.home-assistant.tls=true"
+      "--label=traefik.http.routers.home-assistant.tls.certresolver=internal"
+      "--label=traefik.http.services.home-assistant.loadbalancer.server.port=8123"
     ];
   };
 }

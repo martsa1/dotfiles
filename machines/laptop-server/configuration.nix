@@ -12,6 +12,7 @@
       ./baby-buddy.nix
       ./home-assistant.nix
       ./step-ca.nix
+      ./traefik.nix
     ];
 
   # Bootloader.
