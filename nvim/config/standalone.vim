@@ -839,7 +839,7 @@ lua <<EOF
   lspconfig.bashls.setup{capabilities = capabilities}
   lspconfig.rnix.setup{capabilities = capabilities}
   lspconfig.terraformls.setup{capabilities = capabilities}
-  lspconfig.zls.setp{capabilities = capabilities}
+  lspconfig.zls.setup{capabilities = capabilities}
 
   -- Snippets setup
   -- Imports VSCode style snippets (friendly-snippets plugin)
