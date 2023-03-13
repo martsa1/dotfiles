@@ -1,8 +1,5 @@
--- Adjust leader and provide a keybind to get to ,'s original function
--- map Leader
-let mapleader = " "
--- keep backward f search, remapping it to ,;
--- nnoremap <Leader>; ,
+-- map Leader to space
+vim.g.mapleader = ' '
 
 syntax on
 syntax enable
@@ -219,7 +216,8 @@ Plug 'folke/neodev.nvim'
 Plug 'hashivim/vim-terraform'
 
 -- Lots of language file type highlighting
-Plug 'hoelzro/vim-polyglot'
+-- TODO: Can this be removed now that I heavily use treesitter for highlighting?
+-- Plug 'hoelzro/vim-polyglot'
 
 -- Completion stuff...
 Plug 'hrsh7th/cmp-buffer'
