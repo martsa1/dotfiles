@@ -212,6 +212,9 @@ Plug 'dracula/vim'
 Plug 'folke/trouble.nvim'
 Plug 'folke/lsp-colors.nvim'
 
+" Vim config LSP magic
+Plug 'folke/neodev.nvim'
+
 " Base Terraform support.
 Plug 'hashivim/vim-terraform'
 
@@ -776,6 +779,9 @@ lua <<EOF
     })
   })
 
+  -- IMPORTANT: neodev Lua-LSP setup must be called before lspconfig.
+  require("neodev").setup()
+
   -- Setup lspconfig.
   local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -840,6 +846,18 @@ lua <<EOF
   lspconfig.rnix.setup{capabilities = capabilities}
   lspconfig.terraformls.setup{capabilities = capabilities}
   lspconfig.zls.setup{capabilities = capabilities}
+
+  -- Setup lua_ls and enable call snippets for neovim config
+  lspconfig.lua_ls.setup({
+    settings = {
+      Lua = {
+        completion = {
+          callSnippet = "Replace"
+        }
+      }
+    },
+    capabilities = capabilities
+  })
 
   -- Snippets setup
   -- Imports VSCode style snippets (friendly-snippets plugin)
