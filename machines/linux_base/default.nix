@@ -19,6 +19,7 @@
     gthumb
     i3
     killall
+    lua-language-server
     mupdf
     okular
     pavucontrol
