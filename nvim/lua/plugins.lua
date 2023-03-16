@@ -1,6 +1,5 @@
 -- Sourced from packer homepage, bootstrap packer then use it to manage plugins.
 -- See https://github.com/wbthomason/packer.nvim for details.
-
 local ensure_packer = function()
     local fn = vim.fn
     local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -14,6 +13,41 @@ end
 
 local packer_bootstrap = ensure_packer()
 
+-- API guidance from packer repo for reference
+--use {
+--  'myusername/example',        -- The plugin location string
+--  -- The following keys are all optional
+--  disable = boolean,           -- Mark a plugin as inactive
+--  as = string,                 -- Specifies an alias under which to install the plugin
+--  installer = function,        -- Specifies custom installer. See "custom installers" below.
+--  updater = function,          -- Specifies custom updater. See "custom installers" below.
+--  after = string or list,      -- Specifies plugins to load before this plugin. See "sequencing" below
+--  rtp = string,                -- Specifies a subdirectory of the plugin to add to runtimepath.
+--  opt = boolean,               -- Manually marks a plugin as optional.
+--  bufread = boolean,           -- Manually specifying if a plugin needs BufRead after being loaded
+--  branch = string,             -- Specifies a git branch to use
+--  tag = string,                -- Specifies a git tag to use. Supports '*' for "latest tag"
+--  commit = string,             -- Specifies a git commit to use
+--  lock = boolean,              -- Skip updating this plugin in updates/syncs. Still cleans.
+--  run = string, function, or table, -- Post-update/install hook. See "update/install hooks".
+--  requires = string or list,   -- Specifies plugin dependencies. See "dependencies".
+--  rocks = string or list,      -- Specifies Luarocks dependencies for the plugin
+--  config = string or function, -- Specifies code to run after this plugin is loaded.
+--  -- The setup key implies opt = true
+--  setup = string or function,  -- Specifies code to run before this plugin is loaded. The code is ran even if
+--                               -- the plugin is waiting for other conditions (ft, cond...) to be met.
+--  -- The following keys all imply lazy-loading and imply opt = true
+--  cmd = string or list,        -- Specifies commands which load this plugin. Can be an autocmd pattern.
+--  ft = string or list,         -- Specifies filetypes which load this plugin.
+--  keys = string or list,       -- Specifies maps which load this plugin. See "Keybindings".
+--  event = string or list,      -- Specifies autocommand events which load this plugin.
+--  fn = string or list          -- Specifies functions which load this plugin.
+--  cond = string, function, or list of strings/functions,   -- Specifies a conditional test to load this plugin
+--  module = string or list      -- Specifies Lua module names for require. When requiring a string which starts
+--                               -- with one of these module names, the plugin will be loaded.
+--  module_pattern = string/list -- Specifies Lua pattern of Lua module names for require. When
+--                               -- requiring a string which matches one of these patterns, the plugin will be loaded.
+--}
 return require("packer").startup(
     function(use)
         -- Use Packer to manage itself
@@ -26,10 +60,10 @@ return require("packer").startup(
         use "ap/vim-css-color"
 
         -- Vim TOML Syntax Highlighting
-        use "cespare/vim-toml"
+        use {"cespare/vim-toml", ft = "toml"}
 
         -- Jenkinsfile linter integration
-        use "ckipp01/nvim-jenkinsfile-linter"
+        use {"ckipp01/nvim-jenkinsfile-linter", ft = "Jenkinsfile"}
 
         -- Dracular theme is a nice Dark Theme
         use "dracula/vim"
@@ -39,10 +73,10 @@ return require("packer").startup(
         use "folke/lsp-colors.nvim"
 
         -- Neovim LSP config
-        use "folke/neodev.nvim"
+        use {"folke/neodev.nvim", ft = "lua"}
 
         -- Base Terraform support.
-        use "hashivim/vim-terraform"
+        use {"hashivim/vim-terraform", ft = "terraform"}
 
         -- Completion stuff...
         use "hrsh7th/cmp-buffer"
@@ -56,6 +90,7 @@ return require("packer").startup(
         -- Icons set used by folke/trouble.
         use "kyazdani42/nvim-web-devicons"
 
+        -- TODO: This one can be loaded when calling its function, in essence...
         -- Markdown Previewer
         use "JamshedVesuna/vim-markdown-preview"
 
@@ -63,20 +98,20 @@ return require("packer").startup(
         use "jremmen/vim-ripgrep"
 
         -- Autocomplete support for terraform
-        use "juliosueiras/vim-terraform-completion"
+        use {"juliosueiras/vim-terraform-completion", ft = "terraform"}
 
         -- For luasnip users.
         use "L3MON4D3/LuaSnip"
         use "saadparwaiz1/cmp_luasnip"
 
         -- Support for typescript language syntax
-        use "leafgarland/typescript-vim"
+        use {"leafgarland/typescript-vim", ft = "javascript,javascriptreact,jsx,typescript,typescriptreact"}
 
         -- Support for the Jinja Templating language
-        use "lepture/vim-jinja"
+        use {"lepture/vim-jinja", ft = "jinja,jinja2"}
 
         -- Most comprehensive tagging plugin for vim?
-        use {"ludovicchabant/vim-gutentags", disabled=true}
+        --use {"ludovicchabant/vim-gutentags", disable = true}
         -- NOTE: this is/was disabled in work config.
 
         -- Highlight yank regions
@@ -86,13 +121,13 @@ return require("packer").startup(
         use "majutsushi/tagbar"
 
         -- Basic Jenkinsfile syntax highlighting etc.
-        use "martinda/Jenkinsfile-vim-syntax"
+        use {"martinda/Jenkinsfile-vim-syntax", ft = "Jenkinsfile"}
 
         -- Groovy syntax support
-        use "modille/groovy.vim"
+        use {"modille/groovy.vim", ft = "groovy"}
 
         -- JSX plugin
-        use "mxw/vim-jsx"
+        use {"mxw/vim-jsx", ft = "jsx"}
 
         -- Adds support for using * and # keys with visual selection searching
         use "nelstrom/vim-visual-star-search"
@@ -110,10 +145,10 @@ return require("packer").startup(
         use {"nvim-treesitter/playground", run = ":TSInstall query"}
 
         -- Javascript language support
-        use "pangloss/vim-javascript"
+        use {"pangloss/vim-javascript", ft = "javascript,typescript"}
 
         -- Ansible File support in vim
-        use "pearofducks/ansible-vim"
+        use {"pearofducks/ansible-vim", ft = "ansible"}
 
         -- Add support for i3 config files
         use "PotatoesMaster/i3-vim-syntax"
@@ -146,7 +181,7 @@ return require("packer").startup(
         use "tmhedberg/SimpylFold"
 
         -- Add support for the Gherkin file type
-        use "tpope/vim-cucumber"
+        use {"tpope/vim-cucumber", ft = "cucumber"}
 
         -- Git functionaility within vim for git (status|diff|bisect|....others]
         use "tpope/vim-fugitive"
@@ -158,7 +193,7 @@ return require("packer").startup(
         use "vim-airline/vim-airline"
 
         -- Systemd syntax highlighting for systemd unit files
-        use "wgwoods/vim-systemd-syntax"
+        use {"wgwoods/vim-systemd-syntax", ft = "systemd"}
 
         -- Give git hints on files/dirs regarding: Add, Modify, Remove within NerdTree
         use "Xuyuanp/nerdtree-git-plugin"
