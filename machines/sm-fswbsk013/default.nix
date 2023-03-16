@@ -12,9 +12,12 @@ in
   ];
 
   home.packages = with pkgs; [
+    clang-tools  # C++ stuff for work...
+
     remmina
-    #evolutionWithPlugins
-    #evolution
+    #evolutionWithPlugins  # Can't use this outside of actual nixos it seems...
+    duplicity
+    deja-dup
 
     #glPkgs.auto.nixGLDefault
     glPkgs.nixGLIntel
@@ -28,8 +31,12 @@ in
     vagrant
 
     kdiff3
+    #yubioath-flutter
 
-    spotify-tui
+    #spotify-tui
+
+    #nodejs # no getting away from node...
+    nodejs_latest # no getting away from node...
   ];
 
   # Set a state version (determines various stateful bits and pieces. Should
@@ -40,6 +47,9 @@ in
   # provided as of stateVersion > 20.09.
   home.username = "sam";
   home.homeDirectory = "/home/sam";
+
+  # Attempt to ensure home-manager uses latest available nix version
+  nix.package = pkgs.nix;
 
   home.shellAliases = {
     docker = "podman";
@@ -93,15 +103,26 @@ in
     tray.enable = true;
   };
 
-  services.spotifyd = {
-    enable = true;
-    settings = {
-      global = {
-        username = "11162549442";
-        password_cmd = "pass personal/spotify.com | grep password | cut -d ' ' -f 2";
-        device_type = "computer";
-        backend = "pulseaudio";
-      };
-    };
-  };
+  # Doesn't seem to work when not on nixos...
+  ## setup picom compositor
+  #services.picom = {
+  #  enable = true;
+  #  #backend = "glx";
+  #  fade = true;
+  #  fadeDelta = 10;
+  #  activeOpacity = 1;
+  #  inactiveOpacity = 0.95;
+  #};
+
+  #services.spotifyd = {
+  #  enable = true;
+  #  settings = {
+  #    global = {
+  #      username = "11162549442";
+  #      password_cmd = "pass personal/spotify.com | grep password | cut -d ' ' -f 2";
+  #      device_type = "computer";
+  #      backend = "pulseaudio";
+  #    };
+  #  };
+  #};
 }
