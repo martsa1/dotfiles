@@ -29,15 +29,6 @@ vim.opt.timeoutlen =2000
 -- like tagbar
 vim.opt.updatetime=50
 
--- TODO: Not sure this does anything anymore
-vim.cmd([[
-if has("vms")
-  set nobackup "do not keep a backup file, use versions instead
-else
-  set backup "keep a backup file
-endif
-]])
-
 -- PReserve undo-history per buffer
 vim.opt.undodir=vim.fs.normalize("~/.config/nvim/undodir")
 vim.opt.undofile = true
@@ -95,14 +86,6 @@ vim.opt.tabstop=4
 vim.opt.ttimeout = true
 vim.opt.ttimeoutlen=100
 
--- TODO: A - do I actually still need this, b. move it to lua-powered autocommand.
--- detect .md as markdown instead of modula-2
-vim.cmd([[
-augroup filetype_html
-  autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-augroup END
-]])
-
 -- Unix as standard file type
 vim.opt.ffs={'unix' ,'dos','mac'}
 
@@ -112,9 +95,6 @@ vim.opt.fileencoding='utf-8'
 vim.opt.scrolloff=5 -- lines above/below cursor to keep visible
 vim.opt.sidescrolloff=5 -- horizontal columns to keep visible either side of the cursor
 
--- TODO: Not sure this setting is meant to be generally set.
---vim.opt.lazyredraw = true
-
 vim.opt.listchars="tab:>\\ ,trail:-,extends:>,precedes:<,nbsp:+"
 
 vim.opt.autoread = true
@@ -122,35 +102,14 @@ vim.opt.autoread = true
 vim.opt.history=1000
 vim.opt.tabpagemax=50
 
--- Look into whether I should customise ShaDa
--- Look into whether I need to tweak default sessionoptions
+-- TODO: Look into whether I should customise ShaDa
+-- TODO: Look into whether I need to tweak default sessionoptions
 
 -- buffer settings
--- TODO: This is default in nvim, could remove
-vim.opt.hid = true -- buffer becomes hidden when abandoned
-
--- stop highlighting of underscores in markdown files
--- TODO: Do I actually need this in the treesitter era..?
-vim.cmd([[
-augroup filetype_html
-  autocmd BufNewFile,BufRead,BufEnter *.md,*.markdown :syntax match markdownIgnore "_"
-augroup END
-]])
 
 -- Make things like substitute commands act incrementally, and provide offscreen operations
 -- in a preview window.  Command acts exactly the same, but shows you what will happen live.
 vim.opt.inccommand='split'
-
--- TODO: Do I actually make any use of neomake nowadays?  Perhaps it can go...
--- "Lint files with neomake
--- -- When writing a buffer, reading a bufer, and on normal mode changes (after 750ms).
---   call neomake#configure#automake({
---   \ 'TextChanged': {},
---   \ 'InsertLeave': {},
---   \ 'BufWritePost': {'delay': 0},
---   \ 'BufWinEnter': {'delay': 0},
---   \ }, 750)
--- endif
 
 -- ################################################################################################
 -- ####### PLUGINS ################################################################################
@@ -181,10 +140,6 @@ Plug 'folke/neodev.nvim'
 
 "-- Base Terraform support.
 Plug 'hashivim/vim-terraform'
-
-"-- Lots of language file type highlighting
-"-- TODO: Can this be removed now that I heavily use treesitter for highlighting?
-"-- Plug 'hoelzro/vim-polyglot'
 
 "-- Completion stuff...
 Plug 'hrsh7th/cmp-buffer'
@@ -238,9 +193,6 @@ Plug 'mxw/vim-jsx'
 "-- Adds support for using * and # keys with visual selection searching
 Plug 'nelstrom/vim-visual-star-search'
 
-"-- Async builder for Neovim
-Plug 'neomake/neomake'
-
 "-- LSP configurations
 Plug 'neovim/nvim-lspconfig'
 
@@ -269,10 +221,6 @@ Plug 'rafamadriz/friendly-snippets'
 
 "-- Quickfix helpers
 Plug 'romainl/vim-qf'
-
-"-- Hopefully deprecated in favour of treesitter + LSP...
-"-- Add the base rust syntax highlighting plugin
-"-- Plug 'rust-lang/rust.vim'
 
 "-- Dev Icons in NERDTree...
 Plug 'ryanoasis/vim-devicons'
@@ -337,9 +285,6 @@ vim.opt.guifont= 'FiraCode Nerd Font Mono:h10'
 
 -- general config
 vim.opt.showtabline=2 -- always show tabline
--- TODO: is this setting actually needed?
--- TODO: Airline could very well be replaced
-vim.opt.showmode  = false -- hide default mode text (e.g. INSERT) as airline already displays it
 
 -- Always highlight the row and column of the cursor. - Set an end of line
 -- marker at 100 chars.
@@ -355,9 +300,6 @@ vim.opt.ruler = true		-- show the cursor position all the time
 -- ################################################
 
 -- TODO: Look into which-key or similar to make this a bit more ergonomic
-
--- Disable Ex-mode because it's a pile of shit
---vim.keymap.del('n', 'Q')
 
 -- copy absolute file path to system clipboard
 vim.keymap.set(
@@ -441,7 +383,7 @@ vim.keymap.set('n', '<Leader>rn', ':set relativenumber!<CR>')
 vim.keymap.set('n', '<F2>', ':set invpaste paste?<CR>')
 vim.opt.showmode = true
 
--- Location List - mostly used with linters and neomake
+-- Location List - mostly used with linters
 vim.keymap.set('n', '<Leader>lo', ':lopen<CR>')
 vim.keymap.set('n', '<Leader>lc', ':lclose<CR>')
 vim.keymap.set('n', '<Leader>ll', ':ll<CR>')
@@ -449,7 +391,7 @@ vim.keymap.set('n', '<Leader>ln', ':lnext<CR>')
 vim.keymap.set('n', '<Leader>lp', ':lprev<CR>')
 vim.keymap.set('n', '<Leader>lw', ':lexpr []<CR>') -- Clear location list (w for wipe)
 
--- Preview Window - mostly used with linters and neomake
+-- Preview Window - mostly used with linters
 vim.keymap.set('n', '<Leader>pc', ':pclose<CR>')
 
 -- Quick fix window is apparently vim wide (shared with all buffers).
@@ -510,26 +452,11 @@ let g:airline_symbols.linenr = '||'
 let g:airline_symbols.readonly = ''
 "
 " disable unused extensions (performance)
-"let g:airline#extensions#ctrlp#color_template = 'insert'
 let g:airline#extensions#bufferline#enabled = 1
 let g:airline#extensions#ctrlspace#enabled  = 1
 let g:airline#extensions#tagbar#enabled     = 1
 let g:airline#extensions#whitespace#enabled = 1
 ]])
-
--- ##################################################################################################
--- ###### Ctrl-P Settings ###########################################################################
--- ##################################################################################################
-
--- TODO: I think I can drop this and the Ctrl-p plugin as I prefer telescope for this nowadays.
--- let g:ctrlp_prompt_mappings={'PrtClearCache()':['<Leader><F5>']}
--- let g:ctrlp_prompt_mappings={'PrtdeleteEnt()':['<Leader><F7>']}
--- let g:ctrlp_match_window='bottom,order:btt,min:2,max:25'
--- -- ctrlp_open_multiple_files option default seems to be vertical split even though it was never set.
--- -- Now multiple files are open as seperate buffers in seperate windows.
--- let g:ctrlp_open_multiple_files = 'i'
--- -- Allow ctrlp to display hidden files
--- let g:ctrlp_show_hidden = 1
 
 vim.opt.wildmenu = true -- enhanced autocomplete
 vim.opt.wildignore="*.so,*.swp,*.zip,*node_modules*,*.jpg,*.png,*.svg,*.ttf,*.woff,*.woff3,*.eot,*public/css/*,*public/js*"
@@ -588,17 +515,26 @@ vim.cmd("let g:NERDTreeSortOrder=['*', '\\.swp$',  '\\.bak$', '\\~$', '\\/$']")
 vim.go.webdevicons_conceal_nerdtree_brackets = 0
 
 
--- Add a Modeline function, appends modeline after last line in buffer.
--- TODO: This can be a pure-lua function bound directly to the keymap.
-vim.cmd([[
-function! AppendModeline()
-  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
-        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
-  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
-  call append(line("$"), l:modeline)
-endfunction
-nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
-]])
+-- Keybind that prepends modeline to first line in buffer.
+vim.keymap.set(
+    'n',
+    '<Leader>ml',
+    function()
+        local expandtab_set
+        if vim.bo.expandtab then
+            expandtab_set = 'et'
+        else
+            expandtab_set = 'noet'
+        end
+        local modeline = string.format(
+            "vim: set ts=%d sw=%d tw=%d filetype=%s %s :",
+            vim.bo.tabstop, vim.bo.shiftwidth, vim.bo.textwidth, vim.bo.filetype, expandtab_set
+        )
+        modeline = string.format(vim.bo.commentstring, modeline)
+        vim.fn.append(0, modeline)
+        -- TODO, this keymap seems to require hitting Esc for it to complete, would be nice to fix that.
+    end
+)
 
 
 -- #################################################################################################
