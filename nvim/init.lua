@@ -52,7 +52,7 @@ if vim.fn.has("autocmd") then
   augroup vimrcEx
     au!
 
-    "For all text files set 'textwidth' to 100 characters.
+    " For all text files set 'textwidth' to 100 characters.
     autocmd FileType text setlocal textwidth=100
 
     "-- Trim whitespace onsave
@@ -128,6 +128,9 @@ Plug 'ap/vim-css-color'
 "-- Vim TOML Syntax Highlighting
 Plug 'cespare/vim-toml'
 
+"-- Jenkinsfile linter integration
+Plug 'ckipp01/nvim-jenkinsfile-linter'
+
 "-- Dracular theme is a nice Dark Theme
 Plug 'dracula/vim'
 
@@ -166,23 +169,24 @@ Plug 'juliosueiras/vim-terraform-completion'
  Plug 'L3MON4D3/LuaSnip'
  Plug 'saadparwaiz1/cmp_luasnip'
 
-"-- Add support for Typescript syntax
-Plug 'leafgarland/typescript-vim'
-
 "-- Support for typescript language syntax
 Plug 'leafgarland/typescript-vim'
 
-"-- Support for the Jinja Templating language
+" Support for the Jinja Templating language
 Plug 'lepture/vim-jinja'
 
 "-- Most comprehensive tagging plugin for vim?
 Plug 'ludovicchabant/vim-gutentags'
+" NOTE: this is/was disabled in work config.
 
 "-- Highlight yank regions
 Plug 'machakann/vim-highlightedyank'
 
 "-- source tree listing/menu containing definitions
 Plug 'majutsushi/tagbar'
+
+" Basic Jenkinsfile syntax highlighting etc.
+Plug 'martinda/Jenkinsfile-vim-syntax'
 
 "-- Groovy syntax support
 Plug 'modille/groovy.vim'
@@ -203,6 +207,7 @@ Plug 'nvim-lua/telescope.nvim'
 
 "-- Context-aware syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground', {'do': ':TSInstall query'}
 
 "-- Javascript language support
 Plug 'pangloss/vim-javascript'
@@ -556,6 +561,7 @@ vim.keymap.set('n', '<Leader>lds',   vim.lsp.buf.document_symbol)
 vim.keymap.set('n', '<Leader>lws',   vim.lsp.buf.workspace_symbol)
 vim.keymap.set('n', '<Leader>lnf',   vim.lsp.buf.format)
 
+
 -- Enable several LSP's & Completion settings
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -686,6 +692,9 @@ lspconfig.pylsp.setup{
 require("clangd_extensions").setup {
   server = {
     capabilities = capabilities
+  },
+  extensions = {
+    autoSetHints = true;
   }
 }
 
@@ -710,6 +719,7 @@ lspconfig.yamlls.setup{capabilities = capabilities}
 lspconfig.bashls.setup{capabilities = capabilities}
 lspconfig.rnix.setup{capabilities = capabilities}
 lspconfig.terraformls.setup{capabilities = capabilities}
+lspconfig.cucumber_language_server.setup{capabilities = capabilities}
 lspconfig.zls.setup{capabilities = capabilities}
 
 -- Setup lua_ls and enable call snippets for neovim config
@@ -736,6 +746,15 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",  -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {
     enable = true,  -- false will disable the whole extension
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn", -- set to `false` to disable one of the mappings
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
   },
 }
 
@@ -795,3 +814,15 @@ vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>",
 vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>",
   {silent = true, noremap = true}
 )
+
+-- Configure jenkinsfile linter integration
+if os.getenv("JENKINS_USER_ID") then
+  vim.api.nvim_set_keymap("n", "<leader>lf", "",
+    {
+      silent = true,
+      noremap = true,
+      callback = require("jenkinsfile_linter").validate,
+      desc = "Lint Jenkinsfile using Jenkins API",
+    }
+  )
+end
