@@ -41,6 +41,7 @@ in {
     luaformatter
     meld
     (nerdfonts.override {fonts = ["FiraCode" "FiraMono" "Noto"];})
+    nodePackages.lua-fmt  # TODO: ONly nvim should really need this.
     pass
     pstree
     python3
@@ -92,7 +93,8 @@ in {
       package = pkgs.neovim-nightly;
       extraPackages = [pkgs.gcc];
       viAlias = false;
-      extraConfig = builtins.readFile ../../nvim/init.vim;
+      #extraConfig = builtins.readFile ../../nvim/init.vim;
+      extraLuaConfig = builtins.readFile ../../nvim/init.lua;
     };
 
     git = {
