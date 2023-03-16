@@ -27,6 +27,7 @@
     #prusa-slicer
     rofimoji
     scrot
+    shellcheck
     signal-desktop
     slack
     spotify
@@ -181,6 +182,9 @@
 
   # autorandr
   programs.autorandr = {
+    enable = true;
+  };
+  services.autorandr = {
     enable = true;
   };
 
