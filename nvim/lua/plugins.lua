@@ -63,7 +63,7 @@ return require("packer").startup(
         use {"cespare/vim-toml", ft = "toml"}
 
         -- Jenkinsfile linter integration
-        use {"ckipp01/nvim-jenkinsfile-linter", ft = "Jenkinsfile"}
+        use {"ckipp01/nvim-jenkinsfile-linter"}
 
         -- Dracular theme is a nice Dark Theme
         use "dracula/vim"
@@ -73,7 +73,7 @@ return require("packer").startup(
         use "folke/lsp-colors.nvim"
 
         -- Neovim LSP config
-        use {"folke/neodev.nvim", ft = "lua"}
+        use {"folke/neodev.nvim"}
 
         -- Base Terraform support.
         use {"hashivim/vim-terraform", ft = "terraform"}
