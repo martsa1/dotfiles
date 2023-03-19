@@ -59,6 +59,9 @@ require("packer").startup(
         -- Give git hints on current buffer line: Add, Modify, Remove within NerdTree
         use "airblade/vim-gitgutter"
 
+        -- Nice bufferline
+        use {'akinsho/bufferline.nvim', requires = 'nvim-tree/nvim-web-devicons'}
+
         -- Add colour highlighting for colours in NVim
         use "ap/vim-css-color"
 

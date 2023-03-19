@@ -26,6 +26,7 @@ vim.opt.guifont = "FiraCode Nerd Font Mono:h10"
 
 -- general config
 vim.opt.showtabline = 2 -- always show tabline
+require("bufferline").setup{}
 
 -- Always highlight the row and column of the cursor. - Set an end of line
 -- marker at 100 chars.
