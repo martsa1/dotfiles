@@ -1,3 +1,6 @@
+-- TODO: Perhaps we should actually move straight to Lazy, not even packer!
+--
+--
 -- Sourced from packer homepage, bootstrap packer then use it to manage plugins.
 -- See https://github.com/wbthomason/packer.nvim for details.
 local ensure_packer = function()
@@ -48,7 +51,7 @@ local packer_bootstrap = ensure_packer()
 --  module_pattern = string/list -- Specifies Lua pattern of Lua module names for require. When
 --                               -- requiring a string which matches one of these patterns, the plugin will be loaded.
 --}
-return require("packer").startup(
+require("packer").startup(
     function(use)
         -- Use Packer to manage itself
         use "wbthomason/packer.nvim"
@@ -72,8 +75,8 @@ return require("packer").startup(
         use "folke/trouble.nvim"
         use "folke/lsp-colors.nvim"
 
-        -- TODO: Maybe look at an explicit TODO highliter:
-        -- folke/todo-comments.nvim
+        -- Make TODO comments more visible.
+        use "folke/todo-comments.nvim"
 
         -- Neovim LSP config
         use {"folke/neodev.nvim"}
@@ -191,12 +194,13 @@ return require("packer").startup(
         use "simrat39/rust-tools.nvim"
 
         -- Source code folding pluggin
-        use "tmhedberg/SimpylFold"
+        -- TODO: Should be redundant in the treesitter era.
+        --use "tmhedberg/SimpylFold"
 
         -- Add support for the Gherkin file type
         use {"tpope/vim-cucumber", ft = "cucumber"}
 
-        -- Git functionaility within vim for git (status|diff|bisect|....others]
+        -- Git functionaility within vim for git (status|diff|bisect|....others])
         use "tpope/vim-fugitive"
 
         -- Adds support for surround text with characters of your choosing
@@ -218,3 +222,38 @@ return require("packer").startup(
         end
     end
 )
+
+-- TODO: All of the plugin config here should probably be lazy-loaded wherever possible (see move to Lazy.nvim!)
+
+-- Tresitter configuration for more awesome highlighting.
+require("nvim-treesitter.configs").setup {
+    ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    highlight = {
+        enable = true -- false will disable the whole extension
+    },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "gnn", -- set to `false` to disable one of the mappings
+            node_incremental = "grn",
+            scope_incremental = "grc",
+            node_decremental = "grm"
+        }
+    }
+}
+
+require("trouble").setup({})
+
+-- Configure jenkinsfile linter integration
+-- TODO: This should be lazy-configured on opening a Jenkinsfile only.
+if os.getenv("JENKINS_USER_ID") then
+    vim.keymap.set(
+        "n",
+        "<leader>lf",
+        "",
+        {
+            callback = require("jenkinsfile_linter").validate,
+            desc = "Lint Jenkinsfile using Jenkins API"
+        }
+    )
+end
