@@ -149,6 +149,8 @@ in {
     #"nvim/init.vim".source = ../../nvim/config/standalone.vim;
     "nvim/after".source = ../../nvim/after;
     "nvim/after".recursive = true;
+    "nvim/lua".source = ../../nvim/lua;
+    "nvim/lua".recursive = true;
     "nvim/snippets".source = ../../nvim/snippets;
     "nvim/snippets".recursive = true;
 
