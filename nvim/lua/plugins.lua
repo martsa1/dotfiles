@@ -72,6 +72,9 @@ return require("packer").startup(
         use "folke/trouble.nvim"
         use "folke/lsp-colors.nvim"
 
+        -- TODO: Maybe look at an explicit TODO highliter:
+        -- folke/todo-comments.nvim
+
         -- Neovim LSP config
         use {"folke/neodev.nvim"}
 
@@ -140,10 +143,18 @@ return require("packer").startup(
         use "nvim-lua/plenary.nvim"
         use "nvim-lua/telescope.nvim"
 
+        -- Successor to airline
+        use {
+            "nvim-lualine/lualine.nvim",
+            requires = {
+                {"kyazdani42/nvim-web-devicons"},
+                {"arkav/lualine-lsp-progress"}
+            }
+        }
+
         -- Context-aware syntax highlighting
         use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
         use {"nvim-treesitter/playground", run = ":TSInstall query"}
-
         -- Javascript language support
         use {"pangloss/vim-javascript", ft = "javascript,typescript"}
 
@@ -169,9 +180,11 @@ return require("packer").startup(
         use "sbdchd/neoformat"
 
         -- Epic Comment management
+        -- TODO: Possibly replace with numToStr/Comment.nvim
         use "scrooloose/nerdcommenter"
 
         -- File tree within vim
+        -- TODO: Possibly replace with nvim-tree/nvim-tree.lua
         use "scrooloose/nerdtree"
 
         -- Rust specific LSP extensions
@@ -188,9 +201,6 @@ return require("packer").startup(
 
         -- Adds support for surround text with characters of your choosing
         use "tpope/vim-surround"
-
-        -- powerline is fucked up, use vim-airline instead
-        use "vim-airline/vim-airline"
 
         -- Systemd syntax highlighting for systemd unit files
         use {"wgwoods/vim-systemd-syntax", ft = "systemd"}

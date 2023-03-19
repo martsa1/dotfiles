@@ -123,7 +123,13 @@ vim.opt.inccommand='split'
 -- ################################################
 
 -- Setup the colourscheme - Default to Dracula Theme
-vim.cmd.colorscheme('dracula')
+vim.cmd.colorscheme("dracula")
+
+-- ##################################################################################################
+-- ######## Statusline settings ########################################################################
+-- ##################################################################################################
+require("statusline")
+-- ##################################################################################################
 
 -- If we are in a TrueColour terminal, use true colours
 if vim.fn.has("termguicolors") then
