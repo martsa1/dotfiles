@@ -105,16 +105,18 @@ vim.diagnostic.config(
 -- Settings to tweak the NERDTree configuration.
 -- TODO: IIRC there's a nice lua successor to nerdtree.
 
-vim.go.NERDTreeQuitOnOpen = 3 -- Close the window after opening a file.
-vim.go.NERDTreeShowLineNumbers = 1 -- Show Line Numbers in the NERDTree window
-vim.go.NERDTreeNaturalSort = 1 -- Sort using natural numbers, i.e. 1.txt, 2.txt, 10.txt
+vim.cmd([[
+let g:NERDTreeQuitOnOpen = 3 "-- Close the window after opening a file.
+let g:NERDTreeShowLineNumbers = 1 "-- Show Line Numbers in the NERDTree window
+let g:NERDTreeNaturalSort = 1 "-- Sort using natural numbers, i.e. 1.txt, 2.txt, 10.txt
+
+"-- whether or not to show the nerdtree brackets around flags
+let g:webdevicons_conceal_nerdtree_brackets = 0
+]])
 
 -- Try putting dirs after files in NERDTree view
 -- See :h NERDTreeSortOrder for more info
 vim.cmd("let g:NERDTreeSortOrder=['*', '\\.swp$',  '\\.bak$', '\\~$', '\\/$']")
-
--- whether or not to show the nerdtree brackets around flags
-vim.go.webdevicons_conceal_nerdtree_brackets = 0
 
 -- #################################################################################################
 -- ####### LSP Settings ############################################################################
