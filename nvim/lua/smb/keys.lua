@@ -23,7 +23,7 @@ vim.keymap.set("n", "<Leader>k", "gk")
 
 -- buffer keys
 -- List buffers
-vim.keymap.set("n", "<Leader>ls", ":ls<CR>")
+vim.keymap.set("n", "<Leader>bls", ":ls<CR>")
 vim.keymap.set("n", "<Leader>bb", ":b#<CR>")
 vim.keymap.set("n", "<Leader>bn", ":bn<CR>")
 vim.keymap.set("n", "<Leader>bp", ":bp<CR>")
@@ -144,6 +144,7 @@ vim.keymap.set("n", "<c-p>", builtin.find_files, {})
 vim.keymap.set("n", "<Leader>rg", builtin.live_grep, {})
 vim.keymap.set("n", "<Leader>ts", builtin.treesitter, {})
 vim.keymap.set("n", "<Leader>tk", builtin.keymaps, {})
+vim.keymap.set("n", "<Leader>tb", builtin.buffers, {})
 
 vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", {})
 vim.keymap.set("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", {})
