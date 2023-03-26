@@ -84,6 +84,11 @@ in {
       '';
     };
 
+    starship = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     alacritty = {
       enable = true;
     };
@@ -154,7 +159,8 @@ in {
     "nvim/snippets".source = ../../nvim/snippets;
     "nvim/snippets".recursive = true;
 
-    "powerline".source = ../../dotfiles/powerline;
+    #"powerline".source = ../../dotfiles/powerline;
+    "starship.toml".source = ../../dotfiles/starship/starship.toml;
   };
 
   home.file = {

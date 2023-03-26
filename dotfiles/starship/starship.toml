@@ -1,0 +1,189 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$os\
+$username\
+$directory\
+$jobs\
+$git_branch\
+$git_status\
+$git_metrics\
+$c\
+$elixir\
+$elm\
+$golang\
+$haskell\
+$java\
+$julia\
+$nim\
+$nodejs\
+$python\
+$rust\
+$scala\
+$docker_context\
+$time\
+$line_break\
+$status$character """
+
+right_format = """$cmd_duration"""
+
+# Disable the blank line at the start of the prompt
+add_newline = false
+
+palette = 'dracula'
+
+# Dracula theme colours: https://github.com/dracula/dracula-theme
+# Palette		   Hex
+[palettes.dracula]
+background =	 '#282a36'
+current_line = '#44475a'
+selection =		 '#44475a'
+foreground =	 '#f8f8f2'
+comment =		   '#6272a4'
+cyan =			   '#8be9fd'
+green =			   '#50fa7b'
+orange =		   '#ffb86c'
+pink =			   '#ff79c6'
+purple =		   '#bd93f9'
+red =			     '#ff5555'
+yellow =		   '#f1fa8c'
+
+[cmd_duration]
+format = '[$duration]($style)'
+style = 'fg:bold yellow'
+
+# You can also replace your username with a neat symbol like   or disable this
+# and use the os module below
+[username]
+show_always = true
+style_user = "bg:green fg:background"
+style_root = "bg:orange"
+format = '[ $user [](fg:green bg:current_line)]($style)'
+disabled = false
+
+# An alternative to the username module which displays a symbol that
+# represents the current operating system
+[os]
+style = "bg:#9A348E"
+disabled = true # Disabled by default
+
+[directory]
+#style = "bg:#DA627D"
+style = "bg:#44475a"
+format = "[[](fg:current_line bg:current_line)$path]($style)"
+truncation_length = 4
+truncation_symbol = "…/"
+truncate_to_repo = true
+
+# Here is how you can shorten some long paths by text replacement
+# similar to mapped_locations in Oh My Posh:
+[directory.substitutions]
+"Documents" = " "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+# Keep in mind that the order matters. For example:
+# "Important Documents" = "  "
+# will not be replaced, because "Documents" was already substituted before.
+# So either put "Important Documents" before "Documents" or use the substituted version:
+# "Important  " = "  "
+
+[c]
+symbol = " "
+detect_extensions = ['c', 'cpp', 'h', 'hpp', 'tpp']
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+[docker_context]
+symbol = " "
+style = "bg:#06969A"
+format = '[ $symbol $context ]($style) $path'
+
+[elixir]
+symbol = " "
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+[elm]
+symbol = " "
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+[git_branch]
+symbol = ""
+style = "bg:purple fg:foreground"
+format = '[[](fg:current_line bg:purple) $symbol $branch]($style)[](bg:purple fg:purple)'
+
+[git_status]
+style = "bg:purple fg:foreground"
+format = '[$all_status$ahead_behind]($style)[](bg:purple fg:purple)'
+
+[git_metrics]
+disabled = false
+added_style = "bg:purple fg:bold green"
+deleted_style = "bg:purple fg:bold red"
+format = '([+$added ]($added_style))([-$deleted]($deleted_style))[](fg:purple bg:current_line)'
+
+[golang]
+symbol = " "
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+[haskell]
+symbol = " "
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+[java]
+symbol = " "
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+[julia]
+symbol = " "
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+[nim]
+symbol = " "
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+[python]
+symbol = "🐍 "
+style = "bg:cyan fg:selection"
+#format = '[ $symbol ($version) ]($style)'
+format = '[](fg:current_line bg:cyan)[${symbol}(${version} )(\($virtualenv\) )[](fg:cyan bg:current_line)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+[scala]
+symbol = " "
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+[jobs]
+format = "[$symbol$number]($style) "
+style = "bg:yellow fg:current_line"
+number_threshold = 2
+symbol_threshold = 1
+
+[status]
+disabled = false
+format = '[$symbol$status]($style) '
+pipestatus = true
+
+[time]
+disabled = false
+time_format = "%d.%m %T" # Hour:Minute Format
+style = "bg:selection"
+format = '[ $time [](fg:current_line bg:background)]($style)'

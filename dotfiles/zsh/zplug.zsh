@@ -7,10 +7,10 @@ zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug "supercrabtree/k"
 
 # Add a shitload of completions for far more than I can think of...
-zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-completions", defer:2
 
 # Add support for pip completion
-zplug "srijanshetty/zsh-pip-completion"
+zplug "srijanshetty/zsh-pip-completion", defer:2
 
 # ZSH Syntax Highlighting
 # TODO - zdharma's repo seems AWOL?!
@@ -18,4 +18,4 @@ zplug "srijanshetty/zsh-pip-completion"
 zplug "kutsan/fast-syntax-highlighting", defer:2
 
 # ZPlug auto notify
-zplug "MichaelAquilina/zsh-auto-notify"
+zplug "MichaelAquilina/zsh-auto-notify", defer:2
