@@ -160,7 +160,7 @@ format = '[ $symbol ($version) ]($style)'
 symbol = "🐍 "
 style = "bg:cyan fg:selection"
 #format = '[ $symbol ($version) ]($style)'
-format = '[](fg:current_line bg:cyan)[${symbol}(${version} )(\($virtualenv\) )[](fg:cyan bg:current_line)]($style)'
+format = '[](fg:current_line bg:cyan) [${symbol}(${version} )(\($virtualenv\) )[](fg:cyan bg:current_line)]($style)'
 
 [rust]
 symbol = ""
@@ -173,8 +173,8 @@ style = "bg:#86BBD8"
 format = '[ $symbol ($version) ]($style)'
 
 [jobs]
-format = "[$symbol$number]($style) "
-style = "bg:yellow fg:current_line"
+format = "[](fg:current_line bg:current_line)[ $symbol$number]($style)"
+style = "bg:current_line fg:bold orange"
 number_threshold = 2
 symbol_threshold = 1
 
