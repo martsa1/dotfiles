@@ -161,3 +161,20 @@ vim.keymap.set("n", "<leader>nf", ":Neoformat<CR>")
 
 -- Setup leader n f keybind on visual mode to format the selection
 vim.keymap.set("v", "<leader>nf", ":Neoformat<CR>")
+
+
+-- Dabble with treesitter stuff...
+vim.keymap.set("n", "<leader>te", function()
+    -- Plagiarised from https://neovim.discourse.group/t/check-if-treesitter-is-enabled-in-the-current-buffer/902/5
+    -- source: https://neovim.discourse.group/t/check-if-treesitter-is-enabled-in-the-current-buffer/902/4?u=srithon
+    local buf = vim.api.nvim_get_current_buf()
+    local highlighter = require("vim.treesitter.highlighter")
+    if highlighter.active[buf] then
+        -- treesitter highlighting is enabled
+        vim.cmd [[TSHighlightCapturesUnderCursor]]
+        vim.notify("Treesitter highlighting is enabled for this buffer")
+    else
+        vim.notify("Treesitter highlighting is disabled for this buffer")
+    end
+end
+)
