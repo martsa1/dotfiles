@@ -153,7 +153,9 @@ let g:neoformat_enabled_cmakeformat = ['cmake-format']
 )
 
 -- Remap markdown preview as we want Ctrl+p for other things...
-vim.o.vim_markdown_preview_hotkey = "<C-S-p>"
+vim.cmd([[
+let vim_markdown_preview_hotkey = "<C-S-p>"
+]])
 
 -- Tweak Gutentags behaviour
 vim.go.gutentags_cache_dir = "/tmp/gutentags"
