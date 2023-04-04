@@ -11,6 +11,7 @@
     globalprotect-openconnect
     neovide
     openconnect
+    poetry
     remmina
     #rustdesk  - Seems broken at the moment.
     virt-manager

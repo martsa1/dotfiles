@@ -81,7 +81,8 @@
 
   services.resolved = {
     enable = true;
-    dnssec = "allow-downgrade";
+    #dnssec = "allow-downgrade";
+    dnssec = "false";
     domains = ["home"];
 
     # Specifying this blocks use of compile-time defaults in

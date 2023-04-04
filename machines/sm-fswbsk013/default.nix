@@ -26,7 +26,7 @@ in
     podman
     postman
 
-    python3Packages.poetry
+    poetry
 
     vagrant
 

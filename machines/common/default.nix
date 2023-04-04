@@ -41,6 +41,7 @@ in {
     luaformatter
     meld
     (nerdfonts.override {fonts = ["FiraCode" "FiraMono" "Noto"];})
+    nodePackages.lua-fmt  # TODO: ONly nvim should really need this.
     pass
     pstree
     python3
@@ -83,6 +84,11 @@ in {
       '';
     };
 
+    starship = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     alacritty = {
       enable = true;
     };
@@ -92,7 +98,8 @@ in {
       package = pkgs.neovim-nightly;
       extraPackages = [pkgs.gcc];
       viAlias = false;
-      extraConfig = builtins.readFile ../../nvim/init.vim;
+      #extraConfig = builtins.readFile ../../nvim/init.vim;
+      extraLuaConfig = builtins.readFile ../../nvim/init.lua;
     };
 
     git = {
@@ -147,10 +154,13 @@ in {
     #"nvim/init.vim".source = ../../nvim/config/standalone.vim;
     "nvim/after".source = ../../nvim/after;
     "nvim/after".recursive = true;
+    "nvim/lua".source = ../../nvim/lua;
+    "nvim/lua".recursive = true;
     "nvim/snippets".source = ../../nvim/snippets;
     "nvim/snippets".recursive = true;
 
-    "powerline".source = ../../dotfiles/powerline;
+    #"powerline".source = ../../dotfiles/powerline;
+    "starship.toml".source = ../../dotfiles/starship/starship.toml;
   };
 
   home.file = {
