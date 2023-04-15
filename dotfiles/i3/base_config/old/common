@@ -291,8 +291,10 @@ for_window [class="[sS]potify"] move window to workspace $workspace10
 # Run the lxpolkit daemon
 exec --no-startup-id mate-polkit & disown
 
+{% if ansible_hostname != "fswbsk088" %}
 # I want pretty GUI transitions and stuff!
 exec --no-startup-id compton -f
+{% endif %}
 
 # # I also want to get synergy, chrome & a terminal to start on login
 # I also want to get vivaldi & a terminal to start on login

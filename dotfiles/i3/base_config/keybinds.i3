@@ -9,7 +9,11 @@ set $mod Mod4
 floating_modifier $mod
 
 # start a terminal
+{% if ansible_hostname == "fswbsk088" %}
+bindsym $mod+Return exec nixGLIntel alacritty
+{% else %}
 bindsym $mod+Return exec alacritty
+{% endif %}
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -36,7 +40,7 @@ bindsym --release $mod+c exec "zsh -c 'rofi -show calc -modi calc -no-show-match
 # Launch a file browser
 # If Nautilus tries to launch a Desktop, try running:
 # gsettings set org.gnome.desktop.background show-desktop-icons false
-{% if ansible_hostname not in ("sam_laptop", "sm-fswbsk088") %}
+{% if ansible_hostname not in ("sam_laptop", "fswbsk088") %}
 bindsym $mod+n exec nautilus
 {% else %}
 bindsym $mod+n exec thunar
@@ -99,7 +103,7 @@ bindsym $mod+Shift+backslash exec \
   '/home/{{ user }}/.config/i3/scripts/rename_workspace.py'
 {% else %}
 bindsym $mod+Shift+backslash exec \
-  '/home/{{ user }}/.config/nixpkgs/dotfiles/i3/scripts/rename_workspace.py'
+  '/home/{{ user }}/.config/home-manager/dotfiles/i3/scripts/rename_workspace.py'
 {% endif %}
 
 # switch to workspace
@@ -175,7 +179,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m \
 {% if ansible_hostname not in ("sam_laptop", "sm-fswbsk088") %}
 bindsym $mod+Shift+x exec /home/{{ user }}/.config/i3/scripts/lock.sh
 {% else %}
-bindsym $mod+Shift+x exec /home/{{ user }}/.config/nixpkgs/dotfiles/i3/scripts/lock.sh
+bindsym $mod+Shift+x exec /home/{{ user }}/.config/home-manager/dotfiles/i3/scripts/lock.sh
 {% endif %}
 
 # Screenshot utility

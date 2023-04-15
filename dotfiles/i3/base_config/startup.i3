@@ -7,7 +7,7 @@
 exec --no-startup-id mate-polkit & disown
 {% endif %}
 
-{% if ansible_hostname not in ("sam_laptop", "sm-fswbsk088") %}
+{% if ansible_hostname not in ("sam_laptop", "fswbsk088") %}
 # I want pretty GUI transitions and stuff!
 exec --no-startup-id compton -f & disown
 {% endif %}
