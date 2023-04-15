@@ -8,6 +8,7 @@ import logging
 import os
 import re
 import signal
+import shlex
 import subprocess
 import sys
 from pathlib import Path
@@ -113,15 +114,13 @@ def launch_polybars(list_of_monitors, echo_only=False):
 
             bar_config = ("primary" if monitor["is_primary"] else "secondary")
 
-            LOG.debug("Launching Polybar instance '%s'", monitor)
+            LOG.debug("Launching Polybar instance '%s', primary: '%s'", monitor, bar_config)
             if not echo_only:
+                cmd = f"polybar --config={polybar_config_location} --reload {bar_config}"
+
+                LOG.debug("polybar command: '%s'", cmd)
                 subprocess.Popen(
-                    [
-                        "polybar",
-                        f"--config={polybar_config_location}",
-                        "--reload",
-                        f"{bar_config}",
-                    ],
+                    shlex.split(cmd),
                     env=polybar_env,
 
                     # So that we don't get shite pumped to the terminal, send
