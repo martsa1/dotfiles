@@ -69,17 +69,15 @@ in {
 
       # Ensure ZSH setup pulls in my dotfiles stuff...
       initExtra = ''
-        export powerline_config_path="${pkgs.python3Packages.powerline.outPath}/share/zsh/powerline.zsh"
-
-        if [ -f "$HOME/.config/nixpkgs/dotfiles/zsh/zshrc" ]; then
-          source "$HOME/.config/nixpkgs/dotfiles/zsh/zshrc"
+        if [ -f "$HOME/.config/home-manager/dotfiles/zsh/zshrc" ]; then
+          source "$HOME/.config/home-manager/dotfiles/zsh/zshrc"
         fi
       '';
 
       envExtra = ''
         if [[ -o login ]]; then
         else
-          source "$HOME/.config/nixpkgs/dotfiles/zsh/envs.zsh"
+          source "$HOME/.config/home-manager/dotfiles/zsh/envs.zsh"
         fi
       '';
     };
