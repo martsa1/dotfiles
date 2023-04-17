@@ -49,6 +49,9 @@ in {
     python3Packages.powerline
     ripgrep
     rnix-lsp
+    roboto
+    roboto-mono
+    source-code-pro
     tldr
     universal-ctags
     vifm
