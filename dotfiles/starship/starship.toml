@@ -5,6 +5,7 @@
 format = """
 $os\
 $username\
+$hostname\
 $directory\
 $jobs\
 $git_branch\
@@ -62,6 +63,9 @@ style_user = "bg:green fg:background"
 style_root = "bg:orange"
 format = '[ $user [](fg:green bg:current_line)]($style)'
 disabled = false
+
+[hostname]
+
 
 # An alternative to the username module which displays a symbol that
 # represents the current operating system
