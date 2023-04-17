@@ -20,6 +20,7 @@ in
     glPkgs.nixGLIntel
     globalprotect-openconnect
     i3lock
+    iputils
     kdiff3
     less
     neovide
@@ -34,6 +35,7 @@ in
     virt-manager
     vlc
     xdg-utils
+    xdotool
   ];
 
   # Set a state version (determines various stateful bits and pieces. Should
@@ -90,5 +92,9 @@ in
     enable = true;
     fade = true;
     fadeDelta = 8;
+  };
+
+  xdg.configFile = {
+    "i3/scripts".source = ../../dotfiles/i3/scripts;
   };
 }
