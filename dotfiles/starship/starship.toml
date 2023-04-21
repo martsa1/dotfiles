@@ -35,6 +35,8 @@ add_newline = false
 
 palette = 'dracula'
 
+command_timeout = 850
+
 # Dracula theme colours: https://github.com/dracula/dracula-theme
 [palettes.dracula]
 # Palette			Hex
