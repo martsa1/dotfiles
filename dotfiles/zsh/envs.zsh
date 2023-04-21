@@ -12,7 +12,7 @@ fi
 # Prompt for a password using Zenity
 export SUDO_ASKPASS="${HOME}/.config/home-manager/dotfiles/i3/scripts/password_prompt.sh"
 # Editor Settings
-export EDITOR=nvim
+export EDITOR=$(which nvim)
 export SHELL=$(which zsh)
 #Sets nvim's default colourscheme to Dracula
 export VAMPIRE=1
