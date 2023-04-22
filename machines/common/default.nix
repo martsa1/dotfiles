@@ -150,6 +150,7 @@ in {
   # config file management
   xdg.enable = true;
   xdg.configFile = {
+    "nix/nix.conf".source = ../../nix.conf;
     "alacritty/alacritty.yml".source = ../../dotfiles/alacritty/alacritty.yml;
 
     #"nvim/init.vim".source = ../../nvim/config/standalone.vim;
