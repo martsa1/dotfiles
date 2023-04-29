@@ -4,7 +4,7 @@
 let
   dracula_head = pkgs.tmuxPlugins.mkTmuxPlugin rec {
     pluginName = "dracula";
-    version = "5b282b043f760bd27b6d8c32b10d111f618b4c21";
+    version = "b346d1030696620154309f71d5b14bc657294a98";
     src = pkgs.fetchFromGitHub {
       owner = "dracula";
       repo = "tmux";
@@ -34,6 +34,7 @@ let
     extraConfig = ''
       # Force Tmux to use 24bit colour
       set-option -sa terminal-overrides ",alacritty*:Tc"
+      set -as terminal-features ",gnome*:RGB"
 
       # Allow contents of pane to be preserved when interactive tool is used.
       set-option alternate-screen on
