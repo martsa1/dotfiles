@@ -159,7 +159,13 @@ require("packer").startup(
         }
 
         -- Context-aware syntax highlighting
-        use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+        use {
+            "nvim-treesitter/nvim-treesitter",
+            run = function()
+                local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+                ts_update()
+            end,
+        }
         use {"nvim-treesitter/playground", run = ":TSInstall query"}
         -- Javascript language support
         use {"pangloss/vim-javascript", ft = "javascript,typescript"}
