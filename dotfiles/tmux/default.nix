@@ -4,12 +4,12 @@
 let
   dracula_head = pkgs.tmuxPlugins.mkTmuxPlugin rec {
     pluginName = "dracula";
-    version = "b346d1030696620154309f71d5b14bc657294a98";
+    version = "e8598158df58415e9413dddd34c9f818335443d0";
     src = pkgs.fetchFromGitHub {
       owner = "dracula";
       repo = "tmux";
       rev = "${version}";
-      sha256 = "sha256-Dhpj2NaIZO+IPsChr1uqKIR6Zv8F2QReEdU/RIVZHAc=";
+      sha256 = "sha256-b11lTY560GtDq3H0BtSvrbkjajCd8mqdeujVALcnsTg=";
     };
     meta = with lib; {
       homepage = "https://draculatheme.com/tmux";
