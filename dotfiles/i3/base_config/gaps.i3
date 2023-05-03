@@ -1,8 +1,11 @@
 # vim: set ts=2 sw=2 tw=0 filetype=i3config et :
 
 # Dabble with smart-borders
+#smart_borders no_gaps
 smart_borders no_gaps
 hide_edge_borders smart_no_gaps
+default_border pixel
+default_floating_border none
 
 # Gaps config
 # TODO: Try making this configurable using a "gaps-mode" or similar: https://i3wm.org/docs/userguide.html#changing_gaps

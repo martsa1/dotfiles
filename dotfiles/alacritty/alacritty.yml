@@ -77,6 +77,11 @@ window:
   # The value `0.0` is completely transparent and `1.0` is opaque.
   opacity: 0.8
 
+  # Put a little padding around the edge of the terminal
+  padding:
+    x: 3
+    y: 3
+
 cursor:
   # Cursor style
   style:

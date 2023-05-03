@@ -12,10 +12,10 @@
 font pango: "Fura Mono Nerd Font" 10 #, FontAwesome 10
 
 # Top Bar to hold status information
-bar {
-		 # i3bar_command ~/code/personal/dotfiles/polybar/launch.py
-		 i3bar_command systemctl --user start polybar
-}
+# bar {
+# 		 i3bar_command systemctl --user start polybar
+#      N.B. this is now handled via systemd, needn't be duplicated here.
+# }
 
 ################################################################################
 ############################## Gaps Config #####################################
