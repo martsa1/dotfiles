@@ -42,7 +42,8 @@ in {
     luaformatter
     meld
     (nerdfonts.override {fonts = ["FiraCode" "FiraMono" "Noto"];})
-    nodePackages.lua-fmt  # TODO: ONly nvim should really need this.
+    nodePackages.lua-fmt  # TODO: Only nvim should really need this...
+    nodePackages.bash-language-server  # TODO: Only nvim should really need this...
     pass
     pstree
     python3
