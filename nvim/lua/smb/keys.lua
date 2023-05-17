@@ -125,6 +125,9 @@ vim.keymap.set(
     end
 )
 
+-- Add binding to show diagnostics in a floating pane
+vim.keymap.set("n", "<Leader>x", vim.diagnostic.open_float)
+
 -- LSP Bindings
 vim.keymap.set("n", "<Leader>ldf", vim.lsp.buf.definition)
 vim.keymap.set("n", "<Leader>ldc", vim.lsp.buf.declaration)

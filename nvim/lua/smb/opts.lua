@@ -95,7 +95,7 @@ vim.diagnostic.config(
         signs = true,
         -- Disable underlining - its confusing!
         underline = false,
-        severity_sort = true
+        severity_sort = false
     }
 )
 
