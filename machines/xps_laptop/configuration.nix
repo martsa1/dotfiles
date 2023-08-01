@@ -39,7 +39,7 @@
   # Enable TRIM for SSD maintenance
   services.fstrim.enable = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "xps-laptop"; # Define your hostname.
   programs.nm-applet.enable = true; # Enable the nm-applet for NetworkManager
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -181,7 +181,9 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    forwardX11 = true;
+    settings = {
+	x11Forwarding = true;
+	};
     allowSFTP = true;
   };
 
@@ -245,7 +247,9 @@
   };
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+   networking.firewall.allowedTCPPorts = [
+     8000
+   ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

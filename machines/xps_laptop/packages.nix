@@ -35,7 +35,7 @@
     pinentry-qt
     playerctl
     polkit
-    python37
+    python3
     #python37Packages.powerline
     powerline
     ripgrep

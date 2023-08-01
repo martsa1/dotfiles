@@ -30,7 +30,7 @@
   programs.kitty = {
     enable = true;
     font = {
-      name = "Fura Mono Nerd Font";
+      name = "Fira Mono Nerd Font";
       package = pkgs.nerdfonts;
       size = 9;
     };
