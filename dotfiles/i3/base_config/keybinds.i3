@@ -40,7 +40,7 @@ bindsym --release $mod+c exec "zsh -c 'rofi -show calc -modi calc -no-show-match
 # Launch a file browser
 # If Nautilus tries to launch a Desktop, try running:
 # gsettings set org.gnome.desktop.background show-desktop-icons false
-{% if ansible_hostname not in ("sam_laptop", "fswbsk088") %}
+{% if ansible_hostname in ("fswbsk088") %}
 bindsym $mod+n exec nautilus
 {% else %}
 bindsym $mod+n exec thunar
@@ -98,13 +98,8 @@ bindsym $mod+a focus parent
 bindsym $mod+z focus child
 
 # Rename a workspace
-{% if ansible_hostname not in ("sam_laptop", "sm-fswbsk088") %}
-bindsym $mod+Shift+backslash exec \
-  '/home/{{ user }}/.config/i3/scripts/rename_workspace.py'
-{% else %}
 bindsym $mod+Shift+backslash exec \
   '/home/{{ user }}/.config/home-manager/dotfiles/i3/scripts/rename_workspace.py'
-{% endif %}
 
 # switch to workspace
 bindsym $mod+1 workspace number 1
@@ -176,11 +171,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m \
   'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Lock the session
-{% if ansible_hostname not in ("sam_laptop", "sm-fswbsk088") %}
-bindsym $mod+Shift+x exec /home/{{ user }}/.config/i3/scripts/lock.sh
-{% else %}
-bindsym $mod+Shift+x exec /home/{{ user }}/.config/home-manager/dotfiles/i3/scripts/lock.sh
-{% endif %}
+bindsym $mod+Shift+x exec "/home/{{ user }}/.config/home-manager/dotfiles/i3/scripts/lock.sh"
 
 # Screenshot utility
 bindsym --release Print exec --no-startup-id \
