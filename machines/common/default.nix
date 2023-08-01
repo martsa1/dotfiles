@@ -65,6 +65,7 @@ in {
     zsh = {
       enable = true;
       oh-my-zsh.enable = false;
+      zplug.enable = true;
 
       # Try to avoid relying on random system-wide settings...
       initExtraFirst = ''
