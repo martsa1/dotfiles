@@ -11,31 +11,43 @@ in
   home.packages = with pkgs; [
     #evolutionWithPlugins  # Can't use this outside of actual nixos it seems...
     arandr
-    clang-tools  # C++ stuff for work...
+    awscli2
+    clang-tools_16 # C++ stuff for work...
+    cmake-language-server
     deja-dup
     duplicity
     ffmpeg
     font-manager
-    google-chrome
     glPkgs.nixGLIntel
     globalprotect-openconnect
+    google-chrome
     i3lock
+    imv
     iputils
     kdiff3
     less
+    miller
     neovide
+    ninja
+    nodePackages.typescript-language-server
     nodejs_latest # no getting away from node...
+    obsidian
     openconnect
     podman
     poetry
     postman
     remmina
     remmina
+    rsync
+    rustup
+    tree
     vagrant
     virt-manager
     vlc
+    yq
     xdg-utils
     xdotool
+    #xq  - Bundled with yq??
   ];
 
   # Set a state version (determines various stateful bits and pieces. Should
