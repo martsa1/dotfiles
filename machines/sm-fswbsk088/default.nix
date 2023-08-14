@@ -21,6 +21,7 @@ in
     glPkgs.nixGLIntel
     globalprotect-openconnect
     google-chrome
+    gp-saml-gui
     i3lock
     imv
     iputils
