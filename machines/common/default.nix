@@ -98,7 +98,7 @@ in {
 
     neovim = {
       enable = true;
-      package = pkgs.neovim-nightly;
+      #package = pkgs.neovim-nightly;
       extraPackages = [pkgs.gcc];
       viAlias = false;
       #extraConfig = builtins.readFile ../../nvim/init.vim;
@@ -118,7 +118,9 @@ in {
       };
 
       signing.signByDefault = true;
-      signing.key = "61CB737879759A958B6B886626E45D5144EF59EA";
+      # Setting this option might override default signing key selection...?
+      #signing.key = "61CB737879759A958B6B886626E45D5144EF59EA";
+      signing.key = null;
 
       aliases = {
         d = "diff";
