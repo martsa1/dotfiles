@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  glPkgs = import (<nixgl>) {};
+  glPkgs = import (<nixgl>) { };
 in
 {
   imports = [
@@ -60,6 +60,8 @@ in
   home.username = "sam";
   home.homeDirectory = "/home/sam";
 
+  # Support fontconfig
+  fonts.fontconfig.enable = true;
 
   # Set keyboard layout to gb, disable pesky capslock.
   home.keyboard = {
@@ -74,38 +76,70 @@ in
     docker = "podman";
   };
 
-  # Setup autorandr profiles
-  programs.autorandr = {
-    enable = true;
-    hooks = {
-      postswitch = {
-        "notify-i3" = "${pkgs.i3}/bin/i3-msg -s /run/user/1000/i3/ipc-socket.* restart && ${pkgs.systemd}/bin/systemctl --user restart polybar";
-        "change-background" = "${pkgs.feh}/bin/feh --bg-scale ~/.background-image";
-        "notify-user" = "${pkgs.libnotify}/bin/notify-send -i display 'Display profile changed:' $AUTORANDR_CURRENT_PROFILE";
+  programs = {
+    # Setup autorandr profiles
+    autorandr = {
+      enable = true;
+      hooks = {
+        postswitch = {
+          "notify-i3" = "${pkgs.i3}/bin/i3-msg -s /run/user/1000/i3/ipc-socket.* restart && ${pkgs.systemd}/bin/systemctl --user restart polybar.service";
+          "bounce-picom" = "${pkgs.systemd}/bin/systemctl --user restart picom.service";
+          "change-background" = "${pkgs.feh}/bin/feh --bg-scale ~/.background-image";
+          "notify-user" = "${pkgs.libnotify}/bin/notify-send -i display 'Display profile changed:' $AUTORANDR_CURRENT_PROFILE";
+        };
       };
+    };
+
+    # Certain programs are started with `/bin/bash program`, which means if I only have ZSH setup,
+    # these programs won't have the correct sessionVariables present
+    bash.enable = true;
+
+    # Machine specific overrides to that in common
+    git = {
+      userName = "Sam Martin-Brown";
+      userEmail = pkgs.lib.mkForce "sam.martin@withsecure.com";
+
+      signing.signByDefault = true;
+      # Setting this option might override default signing key selection...?
+      #signing.key = "61CB737879759A958B6B886626E45D5144EF59EA";
+      signing.key = null;
+    };
+
+    ssh = {
+      enable = true;
+      includes = [ "$HOME/.ssh/config_work" ];
+    };
+
+    # Seemingly needed for work machine to find all ZSH aliases, see here for more:
+    # https://github.com/nix-community/home-manager/issues/2562#issuecomment-1009381061
+    zsh = {
+      initExtraBeforeCompInit = ''
+        fpath+=("${config.home.profileDirectory}"/share/zsh/site-functions "${config.home.profileDirectory}"/share/zsh/$ZSH_VERSION/functions "${config.home.profileDirectory}"/share/zsh/vendor-completions)
+      '';
+      initExtra = "setopt monitor";
     };
   };
 
-  # Setup syncthing to pull over old machines stuff.
-  services.syncthing = {
-    enable = true;
-    tray.enable = true;
-  };
+  services = {
+    picom = {
+      enable = true;
+      fade = true;
+      fadeDelta = 8;
+    };
 
-  # Seemingly needed for work machine to find all ZSH aliases, see here for more:
-  # https://github.com/nix-community/home-manager/issues/2562#issuecomment-1009381061
-  programs.zsh.initExtraBeforeCompInit = ''
-    fpath+=("${config.home.profileDirectory}"/share/zsh/site-functions "${config.home.profileDirectory}"/share/zsh/$ZSH_VERSION/functions "${config.home.profileDirectory}"/share/zsh/vendor-completions)
-  '';
+    ssh-agent = {
+      enable = true;
+    };
+
+    # Setup syncthing to pull over old machines stuff.
+    syncthing = {
+      enable = false;
+      tray.enable = true;
+    };
+  };
 
   # Do magic when not on NixOS
   targets.genericLinux.enable = true;
-
-  services.picom = {
-    enable = true;
-    fade = true;
-    fadeDelta = 8;
-  };
 
   xdg.configFile = {
     "i3/scripts".source = ../../dotfiles/i3/scripts;
