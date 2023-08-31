@@ -99,7 +99,6 @@ in {
 
     neovim = {
       enable = true;
-      package = pkgs.neovim-nightly;
       extraPackages = [pkgs.gcc];
       viAlias = false;
       #extraConfig = builtins.readFile ../../nvim/init.vim;
