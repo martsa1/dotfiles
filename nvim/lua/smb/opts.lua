@@ -126,7 +126,7 @@ vim.opt.completeopt = "menu,menuone,noinsert,noselect"
 
 -- TODO: yapf_config_path should be buffer-local and set as a function to search upwards
 --       from buffer path to home directory...
-vim.go.yapf_config_path = vim.fs.normalize("~/.style.yapf")
+-- vim.go.yapf_config_path = vim.fs.normalize("~/.style.yapf")
 
 -- TODO: I wonder if there's a nicer, lua-native successor to neoformat..
 vim.cmd(
@@ -158,5 +158,5 @@ let vim_markdown_preview_hotkey = "<C-S-p>"
 ]])
 
 -- Tweak Gutentags behaviour
-vim.go.gutentags_cache_dir = "/tmp/gutentags"
-vim.go.gutentags_ctags_tagfile = "tags"
+-- vim.go.gutentags_cache_dir = "/tmp/gutentags"
+-- vim.go.gutentags_ctags_tagfile = "tags"
