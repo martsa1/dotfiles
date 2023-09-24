@@ -134,7 +134,12 @@ in
     # Setup syncthing to pull over old machines stuff.
     syncthing = {
       enable = false;
-      tray.enable = true;
+      tray.enable = false;
+    };
+
+    # Udiskie for easy external disk usage...
+    udiskie = {
+      enable = true;
     };
   };
 
