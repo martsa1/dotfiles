@@ -54,7 +54,7 @@ cmp.setup(
                         end
                     end,
                     {"i", "s"}
-                )
+                ),
             }
         ),
         sources = cmp.config.sources(
@@ -67,7 +67,19 @@ cmp.setup(
             {
                 {name = "buffer"}
             }
-        )
+        ),
+        sorting = {
+            comparators = {
+                cmp.config.compare.offset,
+                cmp.config.compare.exact,
+                cmp.config.compare.recently_used,
+                require("clangd_extensions.cmp_scores"),
+                cmp.config.compare.kind,
+                cmp.config.compare.sort_text,
+                cmp.config.compare.length,
+                cmp.config.compare.order,
+            },
+        },
     }
 )
 
@@ -132,7 +144,8 @@ lspconfig.pylsp.setup {
                     enabled = true
                 },
                 jedi_completion = {
-                    eager = true -- Attempts to eagerly resolve documentation and detail.
+                    eager = true, -- Attempts to eagerly resolve documentation and detail.
+                    --rename = false
                 },
                 pycodestyle = {
                     enabled = false
@@ -146,22 +159,29 @@ lspconfig.pylsp.setup {
                 pylsp_mypy = {
                     enabled = true,
                     live_mode = true
-                }
+                },
+                --rope_autoimport = {
+                --    enabled = false,
+                --},
+                --rope_completion = {
+                --    enabled = true
+                --},
             }
         }
     }
 }
 
 -- Commented lspconfig for clangd as its called internally by clangd-extensions.
--- lspconfig.clangd.setup{capabilities = capabilities}
+lspconfig.clangd.setup {capabilities = capabilities}
 require("clangd_extensions").setup {
-    server = {
-        capabilities = capabilities
-    },
+    capabilities = capabilities,
     extensions = {
         autoSetHints = true
     }
 }
+local clang_inlay_hints  = require("clangd_extensions.inlay_hints");
+clang_inlay_hints.setup_autocmd()
+clang_inlay_hints.set_inlay_hints()
 
 -- Setup rust-tools, which provides some extensions beyond the base lsp-config for rust-analyzer
 local rt = require("rust-tools")
