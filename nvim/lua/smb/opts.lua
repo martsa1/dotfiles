@@ -124,19 +124,19 @@ vim.cmd("let g:NERDTreeSortOrder=['*', '\\.swp$',  '\\.bak$', '\\~$', '\\/$']")
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = "menu,menuone,noinsert,noselect"
 
--- TODO: yapf_config_path should be buffer-local and set as a function to search upwards
---       from buffer path to home directory...
--- vim.go.yapf_config_path = vim.fs.normalize("~/.style.yapf")
-
 -- TODO: I wonder if there's a nicer, lua-native successor to neoformat..
 vim.cmd(
     [[
-let g:neoformat_python_yapf = {
-    \ 'exe': 'yapf',
-    \ 'stdin': 1,
-    \ }
 
-let g:neoformat_enabled_python = ['yapf']
+"  TODO: yapf_config_path should be buffer-local and set as a function to search upwards
+"        from buffer path to home directory...
+"let g:yapf_config_path = vim.fs.normalize("~/.style.yapf")
+"let g:neoformat_python_yapf = {
+"    \ 'exe': 'yapf',
+"    \ 'stdin': 1,
+"    \ }
+
+let g:neoformat_enabled_python = ['yapf', 'isort']
 "let g:neoformat_enabled_python = ['black']
 
 let g:neoformat_json_pyjson = {

@@ -141,6 +141,9 @@ vim.keymap.set("n", "<Leader>lds", vim.lsp.buf.document_symbol)
 vim.keymap.set("n", "<Leader>lws", vim.lsp.buf.workspace_symbol)
 vim.keymap.set("n", "<Leader>lnf", vim.lsp.buf.format)
 
+vim.keymap.set("v", "<Leader>la", vim.lsp.buf.code_action)
+vim.keymap.set("v", "<Leader>lr", vim.lsp.buf.rename)
+
 -- Telescope bindings:
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<c-p>", builtin.find_files, {})
