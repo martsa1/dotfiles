@@ -226,6 +226,8 @@ lspconfig.lua_ls.setup(
     }
 )
 
+lspconfig.tsserver.setup {capabilities = capabilities}
+
 -- Snippets setup
 -- Imports VSCode style snippets (friendly-snippets plugin)
 local vscode_snippet_loader = require("luasnip.loaders.from_vscode")
