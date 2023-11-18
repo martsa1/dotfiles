@@ -16,7 +16,7 @@ set fileencoding=utf-8
 "  autocmd FileType python setlocal completeopt-=preview
 "augroup End
 
-set colorcolumn=100
+"set colorcolumn=100
 "highlight ColorColumn ctermbg=0 guibg=0
 
 "" IndentLine Plugin Settings

@@ -33,10 +33,10 @@ require("bufferline").setup({
 })
 
 -- Always highlight the row and column of the cursor. - Set an end of line
--- marker at 100 chars.
-vim.opt.colorcolumn = "100"
+-- marker at either editorconfig max line length, or 100 chars.
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.cursorcolumn = true
+vim.opt.colorcolumn = {"+1"}
 
 vim.opt.ruler = true -- show the cursor position all the time
