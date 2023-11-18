@@ -171,6 +171,16 @@ lspconfig.pylsp.setup {
     }
 }
 
+lspconfig.ruff_lsp.setup{
+    capabilities = capabilities,
+    init_options = {
+        settings = {
+            -- Any extra CLI arguments for `ruff` go here.
+            args = {},
+        }
+    }
+}
+
 -- Commented lspconfig for clangd as its called internally by clangd-extensions.
 lspconfig.clangd.setup {capabilities = capabilities}
 require("clangd_extensions").setup {
