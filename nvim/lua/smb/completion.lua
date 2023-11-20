@@ -205,12 +205,37 @@ rt.setup(
 -- lspconfig.rust_analyzer.setup{capabilities = capabilities}
 
 lspconfig.cmake.setup {capabilities = capabilities}
-lspconfig.yamlls.setup {capabilities = capabilities}
 lspconfig.bashls.setup {capabilities = capabilities}
 lspconfig.rnix.setup {capabilities = capabilities}
 lspconfig.terraformls.setup {capabilities = capabilities}
 lspconfig.cucumber_language_server.setup {capabilities = capabilities}
+lspconfig.graphql.setup {capabilities = capabilities}
 lspconfig.zls.setup {capabilities = capabilities}
+
+-- JSON and Yaml LSP setup to use SchemaStore
+local schemastore = require("schemastore")
+lspconfig.jsonls.setup {
+    capabilities = capabilities,
+    settings  = {
+        json = {
+            schemas = schemastore.json.schemas(),
+            validate = { enable = true },
+        }
+    }
+}
+
+lspconfig.yamlls.setup {
+    capabilities = capabilities,
+    settings = {
+        schemastore = {
+            -- Disable built-in in favour of schemastore plugin.
+            enable = false,
+            -- Avoid spurious type error
+            url = ""
+        },
+        schemas = schemastore.yaml.schemas(),
+    }
+}
 
 -- Setup lua_ls and enable call snippets for neovim config
 lspconfig.lua_ls.setup(

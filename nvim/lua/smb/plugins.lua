@@ -143,6 +143,7 @@ require("packer").startup(
 
         -- LSP configurations
         use "neovim/nvim-lspconfig"
+        use "b0o/schemastore.nvim" -- Adds access to schemastore catalog
 
         -- Fancy, lua-based ctrl-p replacement
         use "nvim-lua/popup.nvim"
