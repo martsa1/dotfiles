@@ -1,8 +1,4 @@
-{
-  pkgs ? import <nixpkgs> {}
-}:
-
-let
+{pkgs ? import <nixpkgs> {}}: let
   commit = "0518e14618a659b22f20a4e2f0462a853477637e";
   hash = "09qpj38ka231y1xi0yawzv4ws396iy5icdjng9848kpz34x6b9ay";
 in

@@ -1,7 +1,11 @@
-/* vim: set filetype=nix ts=2 sw=2 tw=0 et :*/
-{ pkgs, lib, ... }:
-
-let
+/*
+vim: set filetype=nix ts=2 sw=2 tw=0 et :
+*/
+{
+  pkgs,
+  lib,
+  ...
+}: let
   dracula_head = pkgs.tmuxPlugins.mkTmuxPlugin rec {
     pluginName = "dracula";
     version = "e8598158df58415e9413dddd34c9f818335443d0";
@@ -16,12 +20,10 @@ let
       description = "A feature packed Dracula theme for tmux!";
       license = licenses.mit;
       platforms = platforms.unix;
-      maintainers = with maintainers; [ ethancedwards8 ];
+      maintainers = with maintainers; [ethancedwards8];
     };
   };
-
-  in
-  {
+in {
   programs.tmux = {
     enable = true;
     terminal = "\${TERM}";
@@ -113,4 +115,4 @@ let
       }
     ];
   };
-  }
+}

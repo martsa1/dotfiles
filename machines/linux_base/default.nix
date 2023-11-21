@@ -1,7 +1,9 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     # Pull in common setup.
     ../common
@@ -30,7 +32,7 @@
     scrot
     shellcheck
     signal-desktop
-    slack
+    #slack
     spotify
     # teams
     xclip
@@ -51,7 +53,6 @@
     polybar-launcher
     polybar-spotify
     rofi-dracula-theme
-
   ];
 
   # Support fontconfig
@@ -118,7 +119,6 @@
       package = pkgs.arc-icon-theme;
       name = "Arc";
     };
-
   };
 
   # Setup rofi
@@ -141,7 +141,7 @@
       sort = true;
       sorting-method = "fzf";
     };
-    plugins = [ pkgs.rofi-calc ];
+    plugins = [pkgs.rofi-calc];
     # Emoji support handled via rofimoji
   };
 
@@ -179,7 +179,6 @@
       MONITOR=$primary polybar --config="$HOME/.config/polybar/config.ini" --reload primary &
     '';
   };
-
 
   # autorandr
   programs.autorandr = {

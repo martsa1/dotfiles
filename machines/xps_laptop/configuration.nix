@@ -96,7 +96,6 @@
         greeters.tiny.enable = false;
         # background = /home/sam/.config/home-manager/backgrounds/pexels-kelly-lacy-2538504.jpg;
         background = ../../backgrounds/pexels-kelly-lacy-2538504.jpg;
-
       };
       startx.enable = false;
       # ly.enable = true;
@@ -183,7 +182,7 @@
     enable = true;
     settings = {
       X11Forwarding = true;
-	};
+    };
     allowSFTP = true;
   };
 
@@ -247,9 +246,9 @@
   };
 
   # Open ports in the firewall.
-   networking.firewall.allowedTCPPorts = [
-     8000
-   ];
+  networking.firewall.allowedTCPPorts = [
+    8000
+  ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

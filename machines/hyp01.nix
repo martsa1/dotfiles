@@ -1,9 +1,6 @@
-{pkgs, ...}:
-
-let
+{pkgs, ...}: let
   #python_env = pkgs.python3.withPackages
-in
-{
+in {
   imports = [
     ../machines/mac_base
   ];
@@ -42,5 +39,4 @@ in
     "nvim/plugged/nvim-treesitter/parser/vue.so".source = "${pkgs.tree-sitter-grammars.tree-sitter-vue.outPath}/parser";
     "nvim/plugged/nvim-treesitter/parser/yaml.so".source = "${pkgs.tree-sitter-grammars.tree-sitter-yaml.outPath}/parser";
   };
-
 }

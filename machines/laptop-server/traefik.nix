@@ -1,9 +1,6 @@
-{ ... }:
-
-let
+{...}: let
   traefik_config = ./traefik.yaml;
-in
-{
+in {
   virtualisation.oci-containers.containers.traefik = {
     image = "docker.io/traefik";
     autoStart = true;
@@ -32,4 +29,3 @@ in
     ];
   };
 }
-

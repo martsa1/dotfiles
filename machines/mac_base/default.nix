@@ -1,7 +1,5 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
-{ pkgs, ...}:
-
-{
+{pkgs, ...}: {
   imports = [
     ../common
   ];

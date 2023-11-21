@@ -10,32 +10,35 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
-    {
-      homeConfigurations.sam = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+  outputs = {
+    nixpkgs,
+    home-manager,
+    ...
+  }: {
+    homeConfigurations.sam = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
 
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
+      # Specify your home configuration modules here, for example,
+      # the path to your home.nix.
 
-        # TODO: Make this work for multiple machines
-        modules = [ ./machines/xps_laptop/default.nix ];
+      # TODO: Make this work for multiple machines
+      modules = [./machines/xps_laptop/default.nix];
 
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
-      };
-
-      homeConfigurations."sam.martin" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-
-        # TODO: Make this work for multiple machines
-        modules = [ ./machines/mac_dev/default.nix ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
-      };
+      # Optionally use extraSpecialArgs
+      # to pass through arguments to home.nix
     };
+
+    homeConfigurations."sam.martin" = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+
+      # Specify your home configuration modules here, for example,
+      # the path to your home.nix.
+
+      # TODO: Make this work for multiple machines
+      modules = [./machines/mac_dev/default.nix];
+
+      # Optionally use extraSpecialArgs
+      # to pass through arguments to home.nix
+    };
+  };
 }

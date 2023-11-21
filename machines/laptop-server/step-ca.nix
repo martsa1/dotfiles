@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   # Define a user to run this container as.
   users.users.step = {
     createHome = false;
@@ -24,4 +23,3 @@
     ];
   };
 }
-
