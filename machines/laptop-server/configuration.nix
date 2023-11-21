@@ -21,6 +21,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+  # Use modern kernel
+  #boot.kernelPackages = pkgs.linuxKernel.packages.<some_version>
+
   # Add home lan rootCA
   security.pki = {
     certificateFiles = [
