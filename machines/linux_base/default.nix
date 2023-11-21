@@ -62,10 +62,10 @@
   gtk = {
     enable = true;
     iconTheme = {
-      #package = pkgs.dracula-theme;
-      #name = "Dracula";
-      package = pkgs.arc-icon-theme;
-      name = "Arc";
+      package = pkgs.dracula-theme;
+      name = "dracula";
+      #package = pkgs.arc-icon-theme;
+      #name = "Arc";
     };
 
     theme = {
