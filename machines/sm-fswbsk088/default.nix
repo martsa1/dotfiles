@@ -1,9 +1,10 @@
-{ config, pkgs, ... }:
-
-let
-  glPkgs = import (<nixgl>) { };
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+  glPkgs = import <nixgl> {};
+in {
   imports = [
     ../linux_base
   ];
@@ -31,20 +32,24 @@ in
     neovide
     ninja
     nodePackages.typescript-language-server
-    nodejs_latest # no getting away from node...
+    #nodejs_latest # no getting away from node...
+    nodejs_18 # no getting away from node...
     obsidian
     openconnect
     podman
     poetry
-    postman
+    #postman
     remmina
     remmina
     rsync
+    ruff
+    ruff-lsp
     rustup
     tree
     vagrant
     virt-manager
     vlc
+    vscode
     yq
     xdg-utils
     xdotool
@@ -66,7 +71,7 @@ in
   # Set keyboard layout to gb, disable pesky capslock.
   home.keyboard = {
     layout = "gb";
-    options = [ "ctrl:nocaps" ];
+    options = ["ctrl:nocaps"];
   };
 
   # Attempt to ensure home-manager uses latest available nix version
@@ -83,9 +88,9 @@ in
       hooks = {
         postswitch = {
           "notify-i3" = "${pkgs.i3}/bin/i3-msg -s /run/user/1000/i3/ipc-socket.* restart && ${pkgs.systemd}/bin/systemctl --user restart polybar.service";
-          "bounce-picom" = "${pkgs.systemd}/bin/systemctl --user restart picom.service";
           "change-background" = "${pkgs.feh}/bin/feh --bg-scale ~/.background-image";
           "notify-user" = "${pkgs.libnotify}/bin/notify-send -i display 'Display profile changed:' $AUTORANDR_CURRENT_PROFILE";
+          "bounce-picom" = "${pkgs.systemd}/bin/systemctl --user restart picom.service";
         };
       };
     };
@@ -107,7 +112,7 @@ in
 
     ssh = {
       enable = true;
-      includes = [ "$HOME/.ssh/config_work" ];
+      includes = ["$HOME/.ssh/config_work"];
     };
 
     # Seemingly needed for work machine to find all ZSH aliases, see here for more:
