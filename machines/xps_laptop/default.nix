@@ -12,6 +12,7 @@
   home.stateVersion = "22.05";
 
   home.packages = with pkgs; [
+    yubioath-flutter
     youtube-dl
     tartube
     ffmpeg

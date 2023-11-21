@@ -11,7 +11,6 @@
     arc-icon-theme
     arc-theme
     autojump
-    compton
     curl
     fd
     feh

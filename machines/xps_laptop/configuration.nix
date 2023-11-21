@@ -182,7 +182,7 @@
   services.openssh = {
     enable = true;
     settings = {
-	x11Forwarding = true;
+      X11Forwarding = true;
 	};
     allowSFTP = true;
   };
