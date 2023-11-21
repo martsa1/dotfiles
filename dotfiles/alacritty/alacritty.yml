@@ -10,15 +10,15 @@ scrolling:
 # Font configuration
 font:
   normal:
-    family: "Fura Mono Nerd Font"
+    family: "Fira Mono Nerd Font"
     style: regular
 
   bold:
-    family: "Fura Mono Nerd Font"
+    family: "Fira Mono Nerd Font"
     style: bold
 
   italic:
-    family: "Fura Mono Nerd Font"
+    family: "Fira Mono Nerd Font"
     style: italic
 
   # Point size

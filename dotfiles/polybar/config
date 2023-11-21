@@ -68,7 +68,7 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 =  "Fura Mono Nerd Font:size=9"
+font-0 =  "Fira Mono Nerd Font:size=9"
 
 modules-left = i3
 modules-center = spotify

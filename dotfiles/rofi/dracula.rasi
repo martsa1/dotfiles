@@ -8,7 +8,7 @@
  * Old config:
  * bindsym $mod+d exec rofi -show run -lines 5 -eh 1.2 -fuzzy -width 60 \
  *   -padding 5 -opacity "90" -bw 1 -bc "#BD93F9" -bg "#282A36" -hlbg "#282A36" \
- *   -fg "#8BE9FD"  -hlfg "#FF79C6" -font "Fura Mono Nerd Font 13"
+ *   -fg "#8BE9FD"  -hlfg "#FF79C6" -font "Fira Mono Nerd Font 13"
 */
 
 * {
@@ -175,7 +175,7 @@ case-indicator {
 entry {
     spacing:    0;
     text-color: @color-foreground;
-    font: "Fura Mono Nerd Font 10";
+    font: "FiraMono Nerd Font 10";
 }
 prompt {
     spacing:    0;
@@ -189,5 +189,5 @@ textbox-prompt-colon {
     str:        ":";
     margin:     0px 0.3em 0em 0em ;
     text-color: @separatorcolor;
-    font: "Fura Mono Nerd Font 10";
+    font: "FiraMono Nerd Font 10";
 }
