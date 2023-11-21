@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   virtualisation.oci-containers.containers.baby-buddy = {
     image = "lscr.io/linuxserver/babybuddy";
     autoStart = true;

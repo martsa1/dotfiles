@@ -1,22 +1,20 @@
 {
   pkgs ? import <nixpkgs> {},
-  python3 ? pkgs.python38
+  python3 ? pkgs.python38,
 }:
-
 pkgs.stdenv.mkDerivation {
-    pname = "polybar-launcher";
-    version = "1.0.0";
+  pname = "polybar-launcher";
+  version = "1.0.0";
 
-    src = ../../dotfiles/polybar;
+  src = ../../dotfiles/polybar;
 
-    propagatedBuildInputs = [
-      python3
-      pkgs.xorg.xrandr
-    ];
+  propagatedBuildInputs = [
+    python3
+    pkgs.xorg.xrandr
+  ];
 
-    installPhase = ''
-      mkdir -p $out/bin
-      cp $src/launch.py $out/bin/polybar-launcher
-    '';
-  }
-
+  installPhase = ''
+    mkdir -p $out/bin
+    cp $src/launch.py $out/bin/polybar-launcher
+  '';
+}

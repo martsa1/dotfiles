@@ -1,7 +1,5 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
-{ pkgs, ...}:
-
-{
+{pkgs, ...}: {
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
       url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;

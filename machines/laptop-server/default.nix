@@ -1,8 +1,9 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
-{ config, pkgs, ... }:
-
 {
-
+  config,
+  pkgs,
+  ...
+}: {
   home.username = "sam";
   home.homeDirectory = "/home/sam";
   home.stateVersion = "22.05";
@@ -39,5 +40,3 @@
     enableNotifications = true;
   };
 }
-
-

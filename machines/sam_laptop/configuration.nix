@@ -1,15 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./packages.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./packages.nix
+  ];
 
   # Default to 5.11 kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -30,7 +31,7 @@
 
   networking.hostName = "sam_laptop"; # Define your hostname.
   networking.networkmanager.enable = true; # Use NetworkManager
-  programs.nm-applet.enable = true;  # Enable the nm-applet for NetworkManager
+  programs.nm-applet.enable = true; # Enable the nm-applet for NetworkManager
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
@@ -62,8 +63,7 @@
     xkbOptions = "ctrl:nocaps";
 
     # Enable Intel Proprietary Drivers.
-    videoDrivers = [ "intel" ];
-
+    videoDrivers = ["intel"];
 
     # Enable touchpad support.
     synaptics.enable = false;
@@ -95,7 +95,6 @@
       };
       startx.enable = false;
       # ly.enable = true;
-
     };
     desktopManager.wallpaper.mode = "scale";
   };
@@ -105,7 +104,7 @@
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-    drivers = [ pkgs.gutenprint pkgs.gutenprintBin ];
+    drivers = [pkgs.gutenprint pkgs.gutenprintBin];
   };
 
   # Enable sound.
@@ -143,14 +142,13 @@
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [
-      (nerdfonts.override {fonts = [ "FiraCode" "FiraMono" "Noto" ];})
+      (nerdfonts.override {fonts = ["FiraCode" "FiraMono" "Noto"];})
       fira-mono
       fira-code
       fira
       noto-fonts
     ];
   };
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -205,7 +203,7 @@
   fileSystems."/media/Multimedia" = {
     device = "nas.home:Multimedia";
     fsType = "nfs4";
-    options = [ "rsize=1048576" "wsize=1048576" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600" ];
+    options = ["rsize=1048576" "wsize=1048576" "x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
   };
 
   # Thumbnail service
@@ -216,7 +214,6 @@
 
   # Allow non-free packages
   nixpkgs.config.allowUnfree = true;
-
 
   # Setup virtualisation via KVM + Libvirt.
   virtualisation.libvirtd.enable = true;
@@ -238,7 +235,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-
   # Various options for the nix package management tooling
   nix = {
     # Configure NixOS to automatically collect garbage packages etc.
@@ -252,7 +248,7 @@
 
     optimise = {
       automatic = true;
-      dates = [ "weekly" ];
+      dates = ["weekly"];
     };
   };
 
@@ -263,6 +259,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "21.03"; # Did you read the comment?
-
 }
-

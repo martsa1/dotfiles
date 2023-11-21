@@ -1,19 +1,20 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
 
-      ./baby-buddy.nix
-      ./home-assistant.nix
-      ./step-ca.nix
-      ./traefik.nix
-    ];
+    ./baby-buddy.nix
+    ./home-assistant.nix
+    ./step-ca.nix
+    ./traefik.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -67,7 +68,7 @@
   users.users.sam = {
     createHome = true;
     description = "Sam";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     group = "users";
     home = "/home/sam";
     isNormalUser = true;
@@ -80,8 +81,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
     neovim
     tmux
   ];
@@ -114,7 +115,6 @@
     oci-containers = {
       backend = "podman";
     };
-
   };
 
   # Enable Tailscale
@@ -123,16 +123,15 @@
   };
 
   # Open ports in the firewall.
-   networking.firewall.allowedTCPPorts = [
+  networking.firewall.allowedTCPPorts = [
     8123
-   ];
+  ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall = {
     enable = true;
-    checkReversePath = "loose";  # Needed by tailscale
+    checkReversePath = "loose"; # Needed by tailscale
   };
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -141,5 +140,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
-
 }

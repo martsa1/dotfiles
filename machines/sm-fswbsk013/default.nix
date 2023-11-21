@@ -1,18 +1,19 @@
-{ config, pkgs, ... }:
-
-let
-  glPkgs = import (<nixgl>) {};
+{
+  config,
+  pkgs,
+  ...
+}: let
+  glPkgs = import <nixgl> {};
   #unstable_pkgs = import (
   #  fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz
   #) {};
-in
-{
+in {
   imports = [
     ../linux_base
   ];
 
   home.packages = with pkgs; [
-    clang-tools  # C++ stuff for work...
+    clang-tools # C++ stuff for work...
 
     remmina
     #evolutionWithPlugins  # Can't use this outside of actual nixos it seems...
@@ -55,7 +56,6 @@ in
     docker = "podman";
   };
 
-
   # Seemingly needed for work machine to find all ZSH aliases, see here for more:
   # https://github.com/nix-community/home-manager/issues/2562#issuecomment-1009381061
   programs.zsh.initExtraBeforeCompInit = ''
@@ -68,7 +68,7 @@ in
   # Set keyboard layout to gb, disable pesky capslock.
   home.keyboard = {
     layout = "us";
-    options = [ "ctrl:nocaps" ];
+    options = ["ctrl:nocaps"];
     # To manually swap back to UK layout:
     # setxkbmap gb -option ctrl:nocaps (or run keyboard-gb)
   };
@@ -87,7 +87,6 @@ in
 
     # If treesitter stuff needs rebuilding, it can be done safely inside a nix-shell:
     # nix-shell -p neovim gcc coreutils git cacert --pure
-
 
     #"nvim/plugged/nvim-treesitter/parser/python.so".source = #"${pkgs.tree-sitter-grammars.tree-sitter-python.outPath}/parser";
     #"nvim/plugged/nvim-treesitter/parser/lua.so".source = "${pkgs.tree-sitter-grammars.tree-sitter-lua.outPath}/parser";
