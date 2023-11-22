@@ -1,6 +1,12 @@
 ---
+global:
+  # Send anonymous usage data
+  sendAnonymousUsage: true
+
 providers:
   docker: {}
+  file:
+    directory: /etc/traefik/dynamic
 
 entryPoints:
   web:
@@ -29,6 +35,8 @@ certificatesResolvers:
       email: sammartin@hey.com
       caServer: https://laptop-server.home:8443/acme/acme/directory
       storage: /acme.json
+      certificatesDuration: 24
+      #tlsChallenge: {}
 
       httpChallenge:
         entryPoint: web
