@@ -45,7 +45,7 @@ exec --no-startup-id feh --bg-scale ~/Pictures/desktop.jpg
 #exec --no-startup-id feh --bg-scale ~/.background-image
 {% endif %}
 
-{% if ansible_hostname not in ("sam_laptop", "sm-fswbsk088") %}
+{% if ansible_hostname in ("sm-fswbsk088") %}
 # TODO - Run a script to detect if I'm docked or not and choose layout accordingly.
 # Set Keyboard layout to US
 exec --no-startup-id setxkbmap -layout us -option ctrl:nocaps
@@ -53,7 +53,7 @@ exec --no-startup-id setxkbmap -layout us -option ctrl:nocaps
 # Set Keyboard layout to GB by nixOS, no action needed here.
 {% endif %}
 
-{% if ansible_hostname not in ("sam_laptop", "sm-fswbsk088", "sm-fswbsk013") %}
+{% if ansible_hostname in ("sm-fswbsk088") %}
 # Auto-mount disks
 exec --no-startup-id udiskie --tray & disown
 {% endif %}

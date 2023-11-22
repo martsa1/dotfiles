@@ -11,6 +11,7 @@
     curl
     fd
     feh
+    # firefox
     git
     gitg
     gnupg
@@ -30,7 +31,8 @@
     pinentry-qt
     playerctl
     polkit
-    python37
+    python3
+    #python37Packages.powerline
     powerline
     ripgrep
     tmux
@@ -40,8 +42,12 @@
     virt-manager
     wget
     xorg.xkill
+    # zenity
     zip
     zlib
     zsh
+    # (neovim.override {
+    #   vimAlias = true;
+    # })
   ];
 }

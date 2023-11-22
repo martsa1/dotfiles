@@ -209,7 +209,7 @@ type = internal/backlight
 card = intel_backlight
 enable-scroll = true
 format = <label> <bar>
-label = 
+label = 󰍹
 
 [module/cpu]
 type = internal/cpu
@@ -231,7 +231,7 @@ ramp-coreload-7 = █
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = "󰍛 "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
 label = %percentage_used%%
@@ -251,11 +251,11 @@ format-disconnected =
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
+ramp-signal-0 = 󰤯
+ramp-signal-1 = 󰤟
+ramp-signal-2 = 󰤢
+ramp-signal-3 = 󰤥
+ramp-signal-4 = 󰤨
 ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]

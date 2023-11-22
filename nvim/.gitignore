@@ -1,0 +1,7 @@
+**/tags
+**/*vimsession
+
+autoload/**
+backup/**
+plugged/**
+undodir/**

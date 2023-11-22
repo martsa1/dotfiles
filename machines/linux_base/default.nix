@@ -238,6 +238,7 @@
   # config file management
   xdg.enable = true;
   xdg.configFile = {
+    "nixpkgs/config.nix".source = ../../config.nix;
     "i3/config".source = "${pkgs.i3-config}/config";
     "i3/config".onChange = "${pkgs.i3}/bin/i3-msg -s /run/user/1000/i3/ipc-socket.* restart && systemctl --user restart polybar";
 

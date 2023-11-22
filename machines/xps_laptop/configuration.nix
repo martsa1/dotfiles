@@ -12,12 +12,13 @@
     ./packages.nix
   ];
 
-  # Default to 5.11 kernel
+  # Default to latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # Use the systemd-boot EFI boot loader.
+  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   # Add home lan rootCA
   security.pki = {
@@ -26,44 +27,46 @@
     ];
   };
 
+  # Setup keyfile
+  boot.initrd.secrets = {
+    "/crypto_keyfile.bin" = null;
+  };
+
+  # Enable swap on luks
+  boot.initrd.luks.devices."luks-44387a08-414f-4699-9086-b8a4a3972a7f".device = "/dev/disk/by-uuid/44387a08-414f-4699-9086-b8a4a3972a7f";
+  boot.initrd.luks.devices."luks-44387a08-414f-4699-9086-b8a4a3972a7f".keyFile = "/crypto_keyfile.bin";
+
   # Enable TRIM for SSD maintenance
   services.fstrim.enable = true;
 
-  networking.hostName = "sam_laptop"; # Define your hostname.
-  networking.networkmanager.enable = true; # Use NetworkManager
+  networking.hostName = "xps-laptop"; # Define your hostname.
   programs.nm-applet.enable = true; # Enable the nm-applet for NetworkManager
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Set your time zone.
-  time.timeZone = "Europe/London";
-
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  networking.interfaces.enp0s25.useDHCP = true;
-  networking.interfaces.wlo1.useDHCP = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  # };
+  # Enable networking
+  networking.networkmanager.enable = true;
 
-  # Setup X11
+  # Set your time zone.
+  time.timeZone = "Europe/London";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_GB.utf8";
+  console = {
+    keyMap = "uk";
+  };
+
+  # Enable the X11 windowing system.
   services.xserver = {
-    # Enable the X11 windowing system.
     enable = true;
     layout = "gb";
     xkbOptions = "ctrl:nocaps";
 
     # Enable Intel Proprietary Drivers.
-    videoDrivers = ["intel"];
+    # videoDrivers = [ "intel" ];
 
     # Enable touchpad support.
     synaptics.enable = false;
@@ -91,7 +94,8 @@
         greeters.pantheon.enable = false;
         greeters.mini.enable = false;
         greeters.tiny.enable = false;
-        background = /home/sam/.config/nixpkgs/backgrounds/pexels-kelly-lacy-2538504.jpg;
+        # background = /home/sam/.config/home-manager/backgrounds/pexels-kelly-lacy-2538504.jpg;
+        background = ../../backgrounds/pexels-kelly-lacy-2538504.jpg;
       };
       startx.enable = false;
       # ly.enable = true;
@@ -107,31 +111,44 @@
     drivers = [pkgs.gutenprint pkgs.gutenprintBin];
   };
 
-  # Enable sound.
+  # Enable sound with pipewire.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
-  #hardware.pulseaudio = {
-  #  enable = true;
-  #  systemWide = false;
-  #};
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
+  };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sam = {
     isNormalUser = true;
+    description = "Sam Martin-Brown";
     extraGroups = [
       "libvirtd"
       "wheel"
       "networkmanager"
-    ]; # Enable ‘sudo’ for the user.
+    ];
     shell = pkgs.zsh;
   };
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  # environment.systemPackages = with pkgs; [
-  #   wget vim
-  #   firefox
-  # ];
+  # environment.systemPackages = [] # See packages.nix imported at top;
 
   # Enable ZSH.
   programs.zsh = {
@@ -141,7 +158,7 @@
   # Setup Fonts.
   fonts = {
     fontDir.enable = true;
-    packages = with pkgs; [
+    fonts = with pkgs; [
       (nerdfonts.override {fonts = ["FiraCode" "FiraMono" "Noto"];})
       fira-mono
       fira-code
@@ -163,7 +180,9 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    forwardX11 = true;
+    settings = {
+      X11Forwarding = true;
+    };
     allowSFTP = true;
   };
 
@@ -212,9 +231,6 @@
   # Enable docker daemon
   #virtualisation.docker.enable = true;
 
-  # Allow non-free packages
-  nixpkgs.config.allowUnfree = true;
-
   # Setup virtualisation via KVM + Libvirt.
   virtualisation.libvirtd.enable = true;
   # Tweak KVM settings for macOS guests
@@ -230,7 +246,9 @@
   };
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [
+    8000
+  ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -250,6 +268,11 @@
       automatic = true;
       dates = ["weekly"];
     };
+
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
   };
 
   # This value determines the NixOS release from which the default
@@ -258,5 +281,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.03"; # Did you read the comment?
+  system.stateVersion = "22.05"; # Did you read the comment?
 }

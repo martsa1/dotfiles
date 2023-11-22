@@ -1,0 +1,9 @@
+{
+  "Pathlib Import": {
+    "prefix": "impath",
+    "body": [
+      "from pathlib import Path$0"
+    ],
+    "description": "Import Path from pathlib."
+  }
+}
