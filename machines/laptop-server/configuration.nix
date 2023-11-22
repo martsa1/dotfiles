@@ -68,14 +68,18 @@
   console.keyMap = "uk";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.sam = {
-    createHome = true;
-    description = "Sam";
-    extraGroups = ["networkmanager" "wheel" "docker"];
-    group = "users";
-    home = "/home/sam";
-    isNormalUser = true;
-    shell = pkgs.zsh;
+  users = {
+    users = {
+      sam = {
+        createHome = true;
+        description = "Sam";
+        extraGroups = ["networkmanager" "wheel" "docker"];
+        group = "users";
+        home = "/home/sam";
+        isNormalUser = true;
+        shell = pkgs.zsh;
+      };
+    };
   };
 
   # Allow unfree packages
@@ -113,7 +117,6 @@
     podman = {
       enable = true;
       dockerCompat = true;
-      defaultNetwork.dnsname.enable = true;
     };
     oci-containers = {
       backend = "podman";

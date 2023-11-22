@@ -1,5 +1,6 @@
 {...}: let
   traefik_config = ./traefik.yaml;
+  traefik_dynamic = ./traefik_dynamic.yaml;
 in {
   virtualisation.oci-containers.containers.traefik = {
     image = "docker.io/traefik";
@@ -16,6 +17,7 @@ in {
     volumes = [
       "/var/run/podman/podman.sock:/var/run/docker.sock:ro"
       "${traefik_config}:/etc/traefik/traefik.yaml"
+      "${traefik_dynamic}:/etc/traefik/dynamic/dynamic.yaml"
       "/var/step-ca/rootCA.crt:/var/rootCA.crt"
     ];
 

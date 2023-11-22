@@ -6,6 +6,9 @@
     isSystemUser = true;
     group = "step";
   };
+  users.groups = {
+      step = {};
+    };
 
   # Define the container
   virtualisation.oci-containers.containers.step-ca = {

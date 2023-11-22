@@ -1,0 +1,8 @@
+tls:
+  stores:
+    default:
+      defaultGeneratedCert:
+        resolver: internal
+        #domain:
+        #  main: laptop-server.home
+
