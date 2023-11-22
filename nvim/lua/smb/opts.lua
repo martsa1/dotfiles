@@ -127,15 +127,6 @@ vim.opt.completeopt = "menu,menuone,noinsert,noselect"
 -- TODO: I wonder if there's a nicer, lua-native successor to neoformat..
 vim.cmd(
     [[
-
-"  TODO: yapf_config_path should be buffer-local and set as a function to search upwards
-"        from buffer path to home directory...
-"let g:yapf_config_path = vim.fs.normalize("~/.style.yapf")
-"let g:neoformat_python_yapf = {
-"    \ 'exe': 'yapf',
-"    \ 'stdin': 1,
-"    \ }
-
 let g:neoformat_enabled_python = ['yapf', 'isort']
 "let g:neoformat_enabled_python = ['black']
 
