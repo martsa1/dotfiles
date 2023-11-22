@@ -42,6 +42,7 @@ in {
     luaformatter
     meld
     (nerdfonts.override {fonts = ["FiraCode" "FiraMono" "Noto"];})
+    nil
     nodePackages.lua-fmt # TODO: Only nvim should really need this...
     nodePackages.bash-language-server # TODO: Only nvim should really need this...
     pass
@@ -50,7 +51,6 @@ in {
     python3Packages.ipython
     python3Packages.powerline
     ripgrep
-    rnix-lsp
     roboto
     roboto-mono
     source-code-pro

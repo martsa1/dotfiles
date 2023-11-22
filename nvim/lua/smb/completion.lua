@@ -206,7 +206,7 @@ rt.setup(
 
 lspconfig.cmake.setup {capabilities = capabilities}
 lspconfig.bashls.setup {capabilities = capabilities}
-lspconfig.rnix.setup {capabilities = capabilities}
+lspconfig.nil_ls.setup {capabilities = capabilities}
 lspconfig.terraformls.setup {capabilities = capabilities}
 lspconfig.cucumber_language_server.setup {capabilities = capabilities}
 lspconfig.graphql.setup {capabilities = capabilities}
