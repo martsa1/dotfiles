@@ -13,9 +13,7 @@ zplug "zsh-users/zsh-completions", defer:2
 zplug "srijanshetty/zsh-pip-completion", defer:2
 
 # ZSH Syntax Highlighting
-# TODO - zdharma's repo seems AWOL?!
-#zplug "zdharma/fast-syntax-highlighting", defer:2
-zplug "kutsan/fast-syntax-highlighting", defer:2
+zplug "zdharma-continuum/fast-syntax-highlighting", defer:2
 
 # ZPlug auto notify
 zplug "MichaelAquilina/zsh-auto-notify", defer:2
