@@ -7,13 +7,9 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-ansible = "*"
-molecule = "*"
-docker-py = "*"
 
 [tool.poetry.dev-dependencies]
 ipython = "*"
-ansible-lint = "*"
 ipdb = "*"
 python-language-server = {version = "*", extras = ["all"]}
 ruff = "*"

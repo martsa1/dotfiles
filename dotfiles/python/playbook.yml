@@ -1,7 +1,0 @@
----
-
-- hosts: all
-  vars:
-    user: "sam"
-  roles:
-    - role: "python"
