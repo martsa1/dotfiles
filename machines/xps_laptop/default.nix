@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   imports = [
     ../linux_base
   ];
@@ -10,12 +10,12 @@
   home.stateVersion = "22.05";
 
   home.packages = with pkgs; [
-    yubioath-flutter
-    youtube-dl
-    tartube
     ffmpeg
-    vlc
     steam
+    tartube
+    vlc
+    youtube-dl
+    yubioath-flutter
   ];
 
   # Set keyboard layout to gb, disable pesky capslock.
@@ -24,24 +24,35 @@
     options = ["ctrl:nocaps"];
   };
 
-  # Fiddle with kitty...
-  programs.kitty = {
-    enable = true;
-    font = {
-      name = "Fira Mono Nerd Font";
-      package = pkgs.nerdfonts;
-      size = 9;
+  programs = {
+    git = {
+      userName = "Sam Martin-Brown";
+      userEmail = lib.mkForce "Nivekkas@gmail.com";
+
+      signing.signByDefault = true;
+      # Setting this option might override default signing key selection...?
+      signing.key = lib.mkForce "61CB737879759A958B6B886626E45D5144EF59EA";
     };
-    settings = {
-      # https://sw.kovidgoyal.net/kitty/conf/
-      scrollback_lines = 10000;
 
-      enable_audio_bell = false;
-      visual_bell_duration = "0.2";
+    # Fiddle with kitty...
+    kitty = {
+      enable = true;
+      font = {
+        name = "Fira Mono Nerd Font";
+        package = pkgs.nerdfonts;
+        size = 9;
+      };
+      settings = {
+        # https://sw.kovidgoyal.net/kitty/conf/
+        scrollback_lines = 10000;
 
-      background_opacity = "0.8";
-      background = "#282a36";
-      foreground = "#f8f8f2";
+        enable_audio_bell = false;
+        visual_bell_duration = "0.2";
+
+        background_opacity = "0.8";
+        background = "#282a36";
+        foreground = "#f8f8f2";
+      };
     };
   };
 }

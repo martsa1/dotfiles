@@ -7,8 +7,8 @@
     group = "step";
   };
   users.groups = {
-      step = {};
-    };
+    step = {};
+  };
 
   # Define the container
   virtualisation.oci-containers.containers.step-ca = {
