@@ -6,6 +6,7 @@
   # We need these during the config jinja rendering stage
   py_deps = python3.withPackages (ps: [ps.jinja2]);
   hostname = builtins.replaceStrings ["\n"] [""] (builtins.readFile /etc/hostname);
+  pactl = "${pkgs.pulseaudio.outPath}/bin/pactl";
 in
   pkgs.stdenv.mkDerivation {
     pname = "sm-i3-configuration";
@@ -19,9 +20,10 @@ in
     buildInputs = [py_deps];
 
     installPhase = ''
-       mkdir -p $out
-       export HOSTNAME="${hostname}"
-       echo "i3-hostname set to: '${hostname}'"
+      mkdir -p $out
+      export HOSTNAME="${hostname}"
+      export PACTL="${pactl}"
+      echo "i3-hostname set to: '${hostname}'"
       python3 $src/render_config.py > $out/config
     '';
   }

@@ -24,7 +24,9 @@ def main() -> None:
     print_(f"Username: {user}")
     ansible_hostname = environ.get("HOSTNAME", "samlaptop")
     print_(f"Hostname: {ansible_hostname}")
-    rendered_config = i3_config.render(user=user, ansible_hostname=ansible_hostname)
+    pactl = environ.get("PACTL")
+    print_(f"{pactl=}")
+    rendered_config = i3_config.render(user=user, ansible_hostname=ansible_hostname, pactl=pactl)
 
     print(rendered_config)
 
