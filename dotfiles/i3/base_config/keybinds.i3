@@ -40,11 +40,7 @@ bindsym --release $mod+c exec "zsh -c 'rofi -show calc -modi calc -no-show-match
 # Launch a file browser
 # If Nautilus tries to launch a Desktop, try running:
 # gsettings set org.gnome.desktop.background show-desktop-icons false
-{% if ansible_hostname in ("fswbsk088") %}
-bindsym $mod+n exec nautilus
-{% else %}
 bindsym $mod+n exec thunar
-{% endif %}
 
 # change focus
 bindsym $mod+h focus left
