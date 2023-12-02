@@ -4,6 +4,7 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    #nixpkgs.url = "github:nixos/nixpkgs/master";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,7 +27,7 @@
     homeConfigurations = {
       "sam@fswbsk088" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [./machines/fswbsk088/default.nix];
+        modules = [./machines/sm-fswbsk088/default.nix];
       };
 
       "sam@xps-laptop" = home-manager.lib.homeManagerConfiguration {
