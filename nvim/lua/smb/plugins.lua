@@ -119,6 +119,9 @@ require("packer").startup(
         -- Support for the Jinja Templating language
         use {"lepture/vim-jinja", ft = "jinja,jinja2"}
 
+        -- Visually display indentation
+        use "lukas-reineke/indent-blankline.nvim"
+
         -- Most comprehensive tagging plugin for vim?
         --use {"ludovicchabant/vim-gutentags", disable = true}
         -- NOTE: this is/was disabled in work config.
@@ -222,9 +225,6 @@ require("packer").startup(
         -- Give git hints on files/dirs regarding: Add, Modify, Remove within NerdTree
         use "Xuyuanp/nerdtree-git-plugin"
 
-        -- Visually display indentation
-        use "Yggdroot/indentLine"
-
         -- Automatically set up configuration after cloning packer.nvim
         -- Keep this at the end of plugin setup.
         if packer_bootstrap then
@@ -267,3 +267,6 @@ if os.getenv("JENKINS_USER_ID") then
         }
     )
 end
+
+-- Configure intentline stuff
+require("ibl").setup()

@@ -9,6 +9,3 @@ set encoding=utf-8
 set fileencoding=utf-8
 
 set colorcolumn=100
-
-"" IndentLine Plugin Settings
-let g:indentLine_color_term=22
