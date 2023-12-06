@@ -122,6 +122,9 @@ require("packer").startup(
         -- Visually display indentation
         use "lukas-reineke/indent-blankline.nvim"
 
+        -- Use treesitter to figure out the correct comment string even for embedded sub-languages
+        use "JoosepAlviste/nvim-ts-context-commentstring"
+
         -- Most comprehensive tagging plugin for vim?
         --use {"ludovicchabant/vim-gutentags", disable = true}
         -- NOTE: this is/was disabled in work config.
@@ -196,8 +199,12 @@ require("packer").startup(
         use "sbdchd/neoformat"
 
         -- Epic Comment management
-        -- TODO: Possibly replace with numToStr/Comment.nvim
-        use "scrooloose/nerdcommenter"
+        use {
+            'numToStr/Comment.nvim',
+            config = function()
+                require('Comment').setup()
+            end
+        }
 
         -- File tree within vim
         -- TODO: Possibly replace with nvim-tree/nvim-tree.lua
