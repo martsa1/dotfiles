@@ -312,6 +312,7 @@ lspconfig.lua_ls.setup(
 )
 
 lspconfig.tsserver.setup {capabilities = capabilities}
+lspconfig.eslint.setup {capabilities = capabilities}
 
 -- Snippets setup
 -- Imports VSCode style snippets (friendly-snippets plugin)
