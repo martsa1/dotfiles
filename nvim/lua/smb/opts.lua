@@ -77,8 +77,10 @@ vim.opt.inccommand = "split"
 
 -- Use Treesitter grammar for code folding
 -- TODO: Only set treesitter-based folding in buffers for which treesitter is in use.
-vim.opt_local.foldmethod = "expr"
-vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+-- uncomment to default to all folds open:
+--vim.wo.foldenable = false
 
 -- Configure LSP Diagnostics
 -- Built-in nvim diagostics config.
