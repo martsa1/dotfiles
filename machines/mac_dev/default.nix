@@ -13,6 +13,7 @@
     universal-ctags
     #ncdu
     ninja
+    pkg-config
   ];
 
   # Setup core details for home-manager
