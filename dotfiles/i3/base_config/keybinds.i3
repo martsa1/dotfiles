@@ -35,7 +35,7 @@ bindsym --release $mod+shift+p exec "zsh -c rofi-pass"
 bindsym --release $mod+shift+w exec "zsh -c 'rofi -show window'"
 
 # Rofi Calculator
-bindsym --release $mod+c exec "zsh -c 'rofi -show calc -modi calc -no-show-match -no-sort'"
+bindsym --release $mod+c exec zsh -c 'rofi -show calc -modi calc -no-show-match -no-sort -calc-command "echo -n '{result}' | xclip -sel clipboard"'
 
 # Launch a file browser
 # If Nautilus tries to launch a Desktop, try running:
