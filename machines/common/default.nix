@@ -2,28 +2,16 @@
 {
   config,
   pkgs,
+  outputs,
   ...
 }: let
-  nvim_nightly = import (
-    builtins.fetchTarball https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz
-  );
-
-  moz_overlay = import (
-    builtins.fetchTarball https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz
-  );
-
-  custom_pkgs = import ../../overlay.nix;
 in {
-  nixpkgs.overlays = [
-    nvim_nightly
-    # moz_overlay
-    custom_pkgs
-  ];
-
   imports = [
     # Enable and manage tmux via home-manager
     ../../dotfiles/tmux
   ];
+
+  nixpkgs.overlays = outputs.overlays ;
 
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
