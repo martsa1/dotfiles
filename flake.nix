@@ -3,20 +3,44 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    #nixpkgs.url = "github:nixos/nixpkgs/master";
+
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
   outputs = {
+    self,
     nixpkgs,
     home-manager,
+    flake-utils,
     ...
-  }: {
+  } @ inputs: let
+    inherit (self) outputs;
+    lib = nixpkgs.lib // home-manager.lib;
+  in {
+    overlays = [
+      inputs.neovim-nightly-overlay.overlay
+
+      (final: prev: {
+        dunst-dracula-theme = prev.callPackage ./pkgs/dunst-dracula-theme {};
+        gtk-dracula-icons = prev.callPackage ./pkgs/gtk-dracula-icons {};
+        i3-config = prev.callPackage ./pkgs/i3-config {};
+        polybar-launcher = prev.callPackage ./pkgs/polybar-launcher {};
+        polybar-spotify = prev.callPackage ./pkgs/polybar-spotify {};
+        rofi-dracula-theme = prev.callPackage ./pkgs/rofi-dracula-theme {};
+      })
+    ];
+
     # inside a home-manager.lib.homeManagerConfiguration:
     #  # Specify your home configuration modules here, for example,
     #  # the path to your home.nix.
@@ -29,16 +53,25 @@
       "sam@fswbsk088" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
         modules = [./machines/sm-fswbsk088/default.nix];
+        extraSpecialArgs = {inherit inputs outputs;};
       };
 
-      "sam@xps-laptop" = home-manager.lib.homeManagerConfiguration {
+      "sam@laptop-server" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [./machines/xps_laptop/default.nix];
+        modules = [./machines/laptop-server/default.nix];
+        extraSpecialArgs = {inherit inputs outputs;};
       };
 
       "sam.martin@dev-mac" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         modules = [./machines/mac_dev/default.nix];
+        extraSpecialArgs = {inherit inputs outputs;};
+      };
+
+      "sam@xps-laptop" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [./machines/xps_laptop/default.nix];
+        extraSpecialArgs = {inherit inputs outputs;};
       };
     };
   };
