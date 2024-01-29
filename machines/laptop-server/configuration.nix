@@ -10,7 +10,9 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
+    # Various containers.
     ./baby-buddy.nix
+    ./gitea.nix
     ./home-assistant.nix
     ./step-ca.nix
     ./traefik.nix
