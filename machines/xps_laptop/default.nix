@@ -55,5 +55,18 @@
         foreground = "#f8f8f2";
       };
     };
+
+    gpg = {
+      enable = true;
+    };
+  };
+
+  services = {
+    gpg-agent = {
+      enable = true;
+      # Prefer to set this based off the runtime pinentry...?
+      # I'd really prefer a GUI pop-up when local, but a curses one when remote?
+      pinentryFlavor = "qt";
+    };
   };
 }
