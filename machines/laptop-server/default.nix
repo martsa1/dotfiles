@@ -1,7 +1,10 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
 {
+  #inputs,
+  lib,
   config,
   pkgs,
+  outputs,
   ...
 }: {
   home.username = "sam";
@@ -18,7 +21,7 @@
 
   programs.git = {
     # Setting this option might override default signing key selection...?
-    signing.key = pkgs.lib.mkForce "61CB737879759A958B6B886626E45D5144EF59EA";
+    signing.key = lib.mkForce "61CB737879759A958B6B886626E45D5144EF59EA";
   };
 
   # Various packages I want my user to have access to
