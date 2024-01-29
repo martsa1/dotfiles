@@ -11,6 +11,7 @@
 
   home.packages = with pkgs; [
     ffmpeg
+    prusa-slicer
     steam
     tartube
     vlc
