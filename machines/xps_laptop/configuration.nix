@@ -185,6 +185,11 @@
     allowSFTP = true;
   };
 
+  # Enable Tailscale
+  services.tailscale = {
+    enable = true;
+  };
+
   # Setup access to yubikey
   services.udev.packages = [
     pkgs.yubikey-personalization
