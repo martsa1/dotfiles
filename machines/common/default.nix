@@ -31,6 +31,7 @@ in {
     meld
     (nerdfonts.override {fonts = ["FiraCode" "FiraMono" "Noto"];})
     nil
+    nixd
     nodePackages.lua-fmt # TODO: Only nvim should really need this...
     nodePackages.bash-language-server # TODO: Only nvim should really need this...
     pass
