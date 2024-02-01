@@ -1,10 +1,16 @@
-{pkgs, ...}: {
+{pkgs, ...}: rec {
   imports = [
     ../linux_base
   ];
 
   home.username = "sam";
   home.homeDirectory = "/home/sam";
+
+  smi3config = {
+    enable = true;
+    hostname = "xps-laptop";
+    username = home.username;
+  };
 
   # Setup core details for home-manager
   home.stateVersion = "22.05";

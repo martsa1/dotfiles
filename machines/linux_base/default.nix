@@ -7,6 +7,7 @@
   imports = [
     # Pull in common setup.
     ../common
+    ../../modules/i3-config.nix
   ];
 
   # Various packages I want my user to have access to
@@ -49,7 +50,7 @@
 
     # My packages:
     dunst-dracula-theme
-    i3-config
+    # i3-config
     polybar-launcher
     polybar-spotify
     rofi-dracula-theme
@@ -242,8 +243,8 @@
   xdg.enable = true;
   xdg.configFile = {
     "nixpkgs/config.nix".source = ../../config.nix;
-    "i3/config".source = "${pkgs.i3-config}/config";
-    "i3/config".onChange = "${pkgs.i3}/bin/i3-msg -s /run/user/1000/i3/ipc-socket.* restart && systemctl --user restart polybar";
+    # "i3/config".source = "${pkgs.i3-config}/config";
+    # "i3/config".onChange = "${pkgs.i3}/bin/i3-msg -s /run/user/1000/i3/ipc-socket.* restart && systemctl --user restart polybar";
 
     "dunst/dunstrc".source = "${pkgs.dunst-dracula-theme}/dunstrc";
 

@@ -4,7 +4,7 @@
   ...
 }: let
   glPkgs = import <nixgl> {};
-in {
+in rec {
   imports = [
     ../linux_base
   ];
@@ -64,6 +64,12 @@ in {
   # provided as of stateVersion > 20.09.
   home.username = "sam";
   home.homeDirectory = "/home/sam";
+
+  smi3config = {
+    enable = true;
+    hostname = "xps-laptop";
+    username = home.username;
+  };
 
   # Support fontconfig
   fonts.fontconfig.enable = true;
