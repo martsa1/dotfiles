@@ -235,6 +235,9 @@
     ".icons/Dracula".source = "${pkgs.gtk-dracula-icons}/Dracula";
   };
 
+  # Ensure home-manager honours nixpkgs config
+  nixpkgs.config = import ../../config.nix;
+
   # config file management
   xdg.enable = true;
   xdg.configFile = {
