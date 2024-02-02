@@ -19,6 +19,7 @@ in rec {
     duplicity
     ffmpeg
     font-manager
+    gitg
     glPkgs.nixGLIntel
     globalprotect-openconnect
     google-chrome
@@ -31,6 +32,7 @@ in rec {
     miller
     neovide
     ninja
+    nix-output-monitor
     nodePackages.typescript-language-server
     #nodejs_latest # no getting away from node...
     nodejs_18 # no getting away from node...
