@@ -39,7 +39,8 @@ in {
       "/etc/localtime:/etc/localtime:ro"
     ];
     labels = {
-      "traefik.http.routers.gitea.rule" = "Host(`git.home`, `git.abitmoredepth.com`)";
+      #"traefik.http.routers.gitea.rule" = "Host(`git.home`, `git.abitmoredepth.com`)";
+      "traefik.http.routers.gitea.rule" = "Host(`git.home`)";
       "traefik.http.routers.gitea.tls" = "true";
       "traefik.http.routers.gitea.tls.certresolver" = "internal";
       "traefik.http.services.gitea.loadbalancer.server.port" = "3000";
