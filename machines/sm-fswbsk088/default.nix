@@ -120,7 +120,7 @@ in rec {
 
     ssh = {
       enable = true;
-      includes = ["$HOME/.ssh/config_work"];
+      includes = ["config_work"];
     };
 
     # Seemingly needed for work machine to find all ZSH aliases, see here for more:
