@@ -164,6 +164,10 @@ in {
     ".direnvrc".source = ../../dotfiles/direnvrc;
   };
 
+  home.language = {
+    base = "en-gb";
+  };
+
   # Enable direnv
   programs.direnv = {
     enable = true;
