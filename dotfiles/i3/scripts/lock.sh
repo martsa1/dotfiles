@@ -1,7 +1,20 @@
 #!/usr/bin/env bash
+
+set -exu
+
+
+if [ -e /etc/NIXOS ]; then
+    locktool=i3lock
+else
+    locktool=/usr/bin/i3lock
+fi
+
 scrot /tmp/screen.png
 convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png
-[[ -f $1 ]] && convert /tmp/screen.png $1 -gravity center -composite -matte /tmp/screen.png
+if [[ -n "${1-}" ]] && [[ -f $1 ]]; then
+    convert /tmp/screen.png "$1" -gravity center -composite -matte /tmp/screen.png
+fi
+
 playerctl pause
-i3lock -f -e -b -i /tmp/screen.png
+$locktool -f -e -b -i /tmp/screen.png
 rm -rf /tmp/screen.png
