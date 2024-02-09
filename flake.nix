@@ -16,6 +16,11 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixgl = {
+      url = "github:guibou/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -23,13 +28,14 @@
     nixpkgs,
     home-manager,
     flake-utils,
+    nixgl,
     ...
   } @ inputs: let
     inherit (self) outputs;
-    lib = nixpkgs.lib // home-manager.lib;
   in {
     overlays = [
       inputs.neovim-nightly-overlay.overlay
+      inputs.nixgl.overlay
 
       (final: prev: {
         dunst-dracula-theme = prev.callPackage ./pkgs/dunst-dracula-theme {};

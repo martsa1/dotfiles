@@ -2,9 +2,7 @@
   config,
   pkgs,
   ...
-}: let
-  glPkgs = import <nixgl> {};
-in rec {
+}: rec {
   imports = [
     ../linux_base
   ];
@@ -20,7 +18,7 @@ in rec {
     ffmpeg
     font-manager
     gitg
-    glPkgs.nixGLIntel
+    nixgl.nixGLIntel
     globalprotect-openconnect
     google-chrome
     gp-saml-gui
@@ -69,7 +67,7 @@ in rec {
 
   smi3config = {
     enable = true;
-    hostname = "xps-laptop";
+    hostname = "fswbsk088";
     username = home.username;
   };
 
@@ -89,7 +87,6 @@ in rec {
     allowUnfree = true;
     permittedInsecurePackages = pkgs.lib.optional (pkgs.obsidian.version == "1.5.3") "electron-25.9.0";
   };
-
 
   home.shellAliases = {
     docker = "podman";
