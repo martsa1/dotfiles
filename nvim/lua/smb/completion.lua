@@ -182,16 +182,34 @@ lspconfig.ruff_lsp.setup{
 }
 
 -- Commented lspconfig for clangd as its called internally by clangd-extensions.
-lspconfig.clangd.setup {capabilities = capabilities}
 require("clangd_extensions").setup {
     capabilities = capabilities,
-    extensions = {
-        autoSetHints = true
+    inlay_hints = {
+        -- Put hints at the end of the line, not inline
+        inline = false,
     }
 }
-local clang_inlay_hints  = require("clangd_extensions.inlay_hints");
-clang_inlay_hints.setup_autocmd()
-clang_inlay_hints.set_inlay_hints()
+
+lspconfig.clangd.setup {
+    capabilities = capabilities,
+    cmd = {
+        "clangd",
+        "--background-index",
+        "--completion-style=detailed",
+        "--header-insertion=iwyu",
+        "--header-insertion-decorators",
+    },
+    on_attach = function(_client, bufnr)
+        local clang_inlay_hints  = require("clangd_extensions.inlay_hints");
+        clang_inlay_hints.setup_autocmd()
+        clang_inlay_hints.set_inlay_hints()
+
+        -- for clangd enabled buffers only, add a keybind to swap header/impl.
+        vim.keymap.set("n", "gh", "<cmd>ClangdSwitchSourceHeader<CR>",
+            { silent = true, desc = "Switch between header and source" }
+        )
+    end
+}
 
 -- Setup rust-tools, which provides some extensions beyond the base lsp-config for rust-analyzer
 local rt = require("rust-tools")
