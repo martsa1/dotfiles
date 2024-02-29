@@ -169,7 +169,7 @@ require("packer").startup(
         use {
             "nvim-treesitter/nvim-treesitter",
             run = function()
-                local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+                local ts_update = require('nvim-treesitter.install').update({ with_sync = false })
                 ts_update()
             end,
         }
@@ -211,6 +211,8 @@ require("packer").startup(
         use "scrooloose/nerdtree"
 
         -- Rust specific LSP extensions
+        -- DEPRECATED: should switch to: https://github.com/mrcjkb/rustaceanvim
+        -- alternative looks more faff to integrate though...
         use "simrat39/rust-tools.nvim"
 
         -- Source code folding pluggin
