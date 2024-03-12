@@ -154,7 +154,7 @@ lspconfig.pylsp.setup {
                     enabled = true
                 },
                 pylint = {
-                    enabled = true
+                    enabled = false
                 },
                 pylsp_mypy = {
                     enabled = true,
