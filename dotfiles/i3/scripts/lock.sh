@@ -15,6 +15,7 @@ if [[ -n "${1-}" ]] && [[ -f $1 ]]; then
     convert /tmp/screen.png "$1" -gravity center -composite -matte /tmp/screen.png
 fi
 
-playerctl pause
+echo "locking"
+playerctl pause || true
 $locktool -f -e -b -i /tmp/screen.png
 rm -rf /tmp/screen.png
