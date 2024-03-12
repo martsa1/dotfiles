@@ -230,6 +230,10 @@ bindsym XF86AudioPrev exec playerctl -p spotify previous
 bindsym XF86Mail exec playerctl -p spotify next
 bindsym XF86HomePage exec playerctl -p spotify previous
 
+# Mute mic inputs using the "XF86Tools" key...
+bindsym XF86Tools --release exec \
+  '/home/{{ user }}/.config/home-manager/dotfiles/i3/scripts/input_mute.py'
+
 # Go to sleep!
 bindsym XF86Sleep --release exec "systemctl suspend"
 
