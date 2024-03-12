@@ -32,7 +32,7 @@ in {
     clock24 = true;
     escapeTime = 10;
     keyMode = "vi";
-    historyLimit = 10000;
+    historyLimit = 50000;
     extraConfig = ''
       # Force Tmux to use 24bit colour
       set-option -sa terminal-overrides ",alacritty*:Tc"
