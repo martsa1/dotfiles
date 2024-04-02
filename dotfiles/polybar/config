@@ -238,7 +238,7 @@ label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = wlp2s0
+interface = wlp0s20f3
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
@@ -260,7 +260,7 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = enx58ef68b4571
+interface = enxa029199d3992
 interval = 3.0
 
 format-connected-underline = #55aa55
@@ -335,7 +335,7 @@ format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 label-discharging = %percentage%% - %time%
 
-format-full-prefix = " "
+format-full-prefix = "  "
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
@@ -357,8 +357,7 @@ animation-charging-framerate = 750
 [module/temperature]
 type = internal/temperature
 thermal-zone = 3
-# hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input
 warn-temperature = 80
 
 format = <ramp> <label>
@@ -366,8 +365,8 @@ format-underline = ${colors.color6}
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${colors.color1}
 
-label = %temperature%
-label-warn = %temperature%
+label = %temperature-c%
+label-warn = %temperature-c%
 label-warn-foreground = ${colors.secondary}
 
 ramp-0 = 
