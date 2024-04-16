@@ -76,7 +76,11 @@ for_window [class="[sS]potify"] move window to workspace $workspace10
 for_window [window_type="notification"] floating enable
 for_window [title="Microsoft Teams Notification"] floating enable
 for_window [title="Microsoft Teams Notification"] no_focus
+for_window [title="Microsoft Teams"] move window to workspace $workspace9
 
+
+# Make evolution calendar notifications floating
+for_window [class="evolution-alarm-notify"] floating enable
 
 # Assign Workspaces to specific screens
 {% if ansible_hostname == "sm-fswbsk013" %}
