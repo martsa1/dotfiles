@@ -165,4 +165,13 @@
   xdg.configFile = {
     "i3/scripts".source = ../../dotfiles/i3/scripts;
   };
+
+  # File setup for various RC/Config files etc.
+  home.file = {
+    #".tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
+    "bin/docker" = {
+      executable = true;
+      source = "${pkgs.podman}/bin/podman";
+    };
+  };
 }
