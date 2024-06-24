@@ -21,6 +21,11 @@
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    pulseaudio-listener = {
+      url = "github:martsa1/pulseaudio-source-listener";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -29,6 +34,7 @@
     home-manager,
     flake-utils,
     nixgl,
+    pulseaudio-listener,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -42,6 +48,7 @@
         gtk-dracula-icons = prev.callPackage ./pkgs/gtk-dracula-icons {};
         i3-config = prev.callPackage ./pkgs/i3-config {};
         polybar-launcher = prev.callPackage ./pkgs/polybar-launcher {};
+        polybar-mute = prev.callPackage ./pkgs/polybar-mute {};
         polybar-spotify = prev.callPackage ./pkgs/polybar-spotify {};
         rofi-dracula-theme = prev.callPackage ./pkgs/rofi-dracula-theme {};
       })

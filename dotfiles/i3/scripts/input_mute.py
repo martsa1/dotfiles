@@ -129,8 +129,8 @@ def main() -> None:
     for source in get_sources():
         res = toggle_mute(source)
 
-    if res is not None:
-        sp.run(["notify-send", "Muted" if res else "Unmuted"], check=False)
+    # if res is not None:
+        # sp.run(["notify-send", "Muted" if res else "Unmuted"], check=False)
 
 
 if __name__ == "__main__":

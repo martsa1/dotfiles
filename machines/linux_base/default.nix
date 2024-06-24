@@ -1,7 +1,7 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
 {
-  config,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
@@ -53,6 +53,7 @@
     # i3-config
     polybar-launcher
     polybar-spotify
+    inputs.pulseaudio-listener.packages.${pkgs.system}.default
     rofi-dracula-theme
   ];
 
