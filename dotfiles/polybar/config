@@ -72,7 +72,7 @@ font-0 =  "Fira Mono Nerd Font:size=9"
 
 modules-left = i3
 modules-center = spotify
-modules-right = filesystem backlight-acpi volume xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = filesystem backlight-acpi volume mic-mute xkeyboard memory cpu wlan eth battery temperature date powermenu
 
 ;wm-restack = i3
 ;override-redirect = true
@@ -86,12 +86,14 @@ cursor-scroll = ns-resize
 [bar/primary]
 inherit= bar/secondary
 
-tray-position = right
-tray-padding = 2
+modules-right = filesystem backlight-acpi volume mic-mute xkeyboard memory cpu wlan eth battery temperature date tray
+
+[module/tray]
+type = internal/tray
+# tray-position = right
+tray-padding = 4px
+tray-spacing = 2px
 tray-background = ${colors.background}
-
-modules-right = filesystem backlight-acpi volume xkeyboard memory cpu wlan eth battery temperature date
-
 
 [module/xwindow]
 type = internal/xwindow
@@ -408,6 +410,17 @@ type = custom/script
 ; exec = /home/sam/bin/za-dev-toggle.sh
 click-left = /home/sam/bin/za-dev-toggle.sh
 tail = false
+
+
+[module/mic-mute]
+type = custom/script
+exec = pulseaudio-sink-listener --mute-text '      ' --unmute-text '%{B#FF5555}%{o#FF5555}%{+o}%{u#FF5555}%{+u}      ' --no-src-text '' 2>/dev/null
+tail = true
+
+format = <label>
+label-alignment = center
+
+click-left = /home/sam/.config/home-manager/dotfiles/i3/scripts/input_mute.py
 
 [settings]
 screenchange-reload = true
