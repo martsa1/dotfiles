@@ -4,6 +4,7 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     flake-utils = {
       url = "github:numtide/flake-utils";
@@ -40,7 +41,7 @@
     inherit (self) outputs;
   in {
     overlays = [
-      inputs.neovim-nightly-overlay.overlay
+      # inputs.neovim-nightly-overlay.overlays.default
       inputs.nixgl.overlay
 
       (final: prev: {
