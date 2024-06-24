@@ -1,6 +1,6 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
 {
-  config,
+  inputs,
   pkgs,
   outputs,
   ...
@@ -88,7 +88,7 @@ in {
 
     neovim = {
       enable = true;
-      #package = pkgs.neovim-nightly;
+      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
       extraPackages = [pkgs.gcc];
       viAlias = false;
       #extraConfig = builtins.readFile ../../nvim/init.vim;
