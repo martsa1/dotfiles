@@ -1,21 +1,20 @@
 {
   pkgs ? import <nixpkgs> {},
-  python3 ? pkgs.python38,
+  python3 ? pkgs.python3,
 }:
 pkgs.stdenv.mkDerivation {
-  pname = "polybar-launcher";
+  pname = "polybar-mute";
   version = "1.0.0";
 
-  src = ../../dotfiles/polybar;
+  src = ../../dotfiles/i3/scripts;
 
   propagatedBuildInputs = [
     python3
-    pkgs.xorg.xrandr
-    pkgs.polybar-mute
+    pkgs.pulseaudio
   ];
 
   installPhase = ''
     mkdir -p $out/bin
-    cp $src/launch.py $out/bin/polybar-launcher
+    cp $src/input_mute.py $out/bin/polybar-mute
   '';
 }

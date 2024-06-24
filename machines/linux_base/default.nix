@@ -52,6 +52,7 @@
     dunst-dracula-theme
     # i3-config
     polybar-launcher
+    polybar-mute
     polybar-spotify
     inputs.pulseaudio-listener.packages.${pkgs.system}.default
     rofi-dracula-theme

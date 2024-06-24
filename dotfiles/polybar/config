@@ -420,7 +420,7 @@ tail = true
 format = <label>
 label-alignment = center
 
-click-left = /home/sam/.config/home-manager/dotfiles/i3/scripts/input_mute.py
+click-left = polybar-mute
 
 [settings]
 screenchange-reload = true
