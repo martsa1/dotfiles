@@ -124,6 +124,15 @@
     ssh = {
       enable = true;
       includes = ["config_work"];
+      matchBlocks = {
+        "*" = {
+          identitiesOnly = true;
+        };
+        "github.com" = {
+          identityFile = "~/.ssh/id_rsa.github";
+          user = "git";
+        };
+      };
     };
 
     # Seemingly needed for work machine to find all ZSH aliases, see here for more:
