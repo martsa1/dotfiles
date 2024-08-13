@@ -152,12 +152,13 @@ vim.keymap.set("n", "<Leader>ts", builtin.treesitter, {})
 vim.keymap.set("n", "<Leader>tk", builtin.keymaps, {})
 vim.keymap.set("n", "<Leader>tb", builtin.buffers, {})
 
-vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", {})
-vim.keymap.set("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", {})
-vim.keymap.set("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", {})
-vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist<cr>", {})
-vim.keymap.set("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", {})
-vim.keymap.set("n", "gR", "<cmd>Trouble lsp_references<cr>", {})
+-- Trouble - diagnostics etc.
+vim.keymap.set("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Toggle diagnostics (Trouble)" })
+vim.keymap.set("n", "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Toggle bugger diagnostics (Trouble)" })
+vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist toggle<cr>", { desc = "Loclist (Trouble) " })
+vim.keymap.set("n", "<leader>xq", "<cmd>Trouble quickfix toggle<cr>", { desc = "Quickfix list (Trouble) " })
+vim.keymap.set("n", "gS", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols (Trouble)" })
+vim.keymap.set("n", "gR", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { desc = "LSP Definitions / references / ... (Trouble)" })
 
 -- ##################################################################################################
 -- ###### Neoformat Settings ########################################################################
