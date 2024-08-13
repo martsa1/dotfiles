@@ -337,3 +337,6 @@ lspconfig.eslint.setup {capabilities = capabilities}
 local vscode_snippet_loader = require("luasnip.loaders.from_vscode")
 vscode_snippet_loader.lazy_load()
 vscode_snippet_loader.lazy_load({paths = {"./snippets"}}) -- Personal snippets.
+
+-- lua formatted snippets:
+require("luasnip.loaders.from_lua").load({paths = "./snippets"})
