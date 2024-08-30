@@ -6,7 +6,7 @@ local t = ls.text_node
 return {
     s("impath", {
         t({
-            "from pathlib import path",
+            "from pathlib import Path",
         })
     })
 }
