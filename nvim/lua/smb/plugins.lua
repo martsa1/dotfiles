@@ -115,9 +115,6 @@ require("packer").startup(
         use "L3MON4D3/LuaSnip"
         use "saadparwaiz1/cmp_luasnip"
 
-        -- Support for typescript language syntax
-        use {"leafgarland/typescript-vim", ft = "javascript,javascriptreact,jsx,typescript,typescriptreact"}
-
         -- Support for the Jinja Templating language
         use {"lepture/vim-jinja", ft = "jinja,jinja2"}
 
@@ -179,11 +176,15 @@ require("packer").startup(
             end,
         }
         use {"nvim-treesitter/playground", run = ":TSInstall query"}
-        -- Javascript language support
-        use {"pangloss/vim-javascript", ft = "javascript,typescript"}
 
         -- Ansible File support in vim
         use {"pearofducks/ansible-vim", ft = "ansible"}
+
+        -- Typescript integrations
+        use {
+          "pmizio/typescript-tools.nvim",
+          requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        }
 
         -- Add support for i3 config files
         use "PotatoesMaster/i3-vim-syntax"
@@ -246,6 +247,7 @@ require("packer").startup(
         end
     end
 )
+
 
 -- TODO: All of the plugin config here should probably be lazy-loaded wherever possible (see move to Lazy.nvim!)
 

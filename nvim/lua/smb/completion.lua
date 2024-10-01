@@ -313,7 +313,23 @@ lspconfig.lua_ls.setup(
     }
 )
 
-lspconfig.tsserver.setup {capabilities = capabilities}
+require("typescript-tools").setup {
+    capabilities = capabilities,
+    settings = {
+        expose_as_code_actions = "all",
+
+        tsserver_file_preferences = {
+            includeInlayParameterNameHints = 'all',
+            includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayVariableTypeHints = true,
+            includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayEnumMemberValueHints = true,
+        },
+    },
+}
 lspconfig.eslint.setup {capabilities = capabilities}
 
 -- Snippets setup
