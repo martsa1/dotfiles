@@ -28,62 +28,46 @@ cmp.setup(
                 ["<C-Space>"] = cmp.mapping.complete(),
                 ["<C-e>"] = cmp.mapping.abort(),
                 ["<CR>"] = cmp.mapping.confirm({select = false}), -- select = false only accepts manually selected options.
-                -- Lusnip keybinds
-                ["<Tab>"] = cmp.mapping(
-                    function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        elseif luasnip.expand_or_jumpable() then
-                            luasnip.expand_or_jump()
-                        elseif has_words_before() then
-                            cmp.complete()
-                        else
-                            fallback()
-                        end
-                    end,
-                    {"i", "s"}
-                ),
-                ["<S-Tab>"] = cmp.mapping(
-                    function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end,
-                    {"i", "s"}
-                ),
+                -- ["<CR>"] = cmp.mapping({
+                --     i = function(fallback)
+                --         if cmp.visible() and cmp.get_active_entry() then
+                --             cmp.confirm({ behaviour = cmp.ConfirmBehaviour.Replace, select = false })
+                --         else
+                --             fallback()
+                --         end
+                --     end,
+                --     s = cmp.mapping.confirm({ select = true }),
+                --     c = cmp.mapping.confirm({ behaviour = cmp.ConfirmBehaviour.Replace, select = true }),
+                -- }),
             }
         ),
+        preselect = cmp.PreselectMode.None,
         sources = cmp.config.sources(
             {
-                {name = "nvim_lsp"},
-                {name = "cmp-nvim-lsp-signature-help"},
+                {name = "nvim_lsp", label="LSP"},
+                {name = "cmp-nvim-lsp-signature-help", label="LSP-SigHelp"},
                 {name = "nvim_lua"},
-                {name = "luasnip"}
-            },
-            {
-                {name = "buffer"}
+                {name = "buffer", label="Buffer"},
+                {name = "luasnip", label="snippet"},
             }
         ),
-        sorting = {
-            comparators = {
-                cmp.config.compare.offset,
-                cmp.config.compare.exact,
-                cmp.config.compare.recently_used,
-                require("clangd_extensions.cmp_scores"),
-                cmp.config.compare.kind,
-                cmp.config.compare.sort_text,
-                cmp.config.compare.length,
-                cmp.config.compare.order,
-            },
-        },
+        -- sorting = {
+        --     comparators = {
+        --         cmp.config.compare.offset,
+        --         cmp.config.compare.exact,
+        --         cmp.config.compare.recently_used,
+        --         require("clangd_extensions.cmp_scores"),
+        --         cmp.config.compare.kind,
+        --         cmp.config.compare.sort_text,
+        --         cmp.config.compare.length,
+        --         cmp.config.compare.order,
+        --     },
+        -- },
     }
 )
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+--
 cmp.setup.cmdline(
     "/",
     {
