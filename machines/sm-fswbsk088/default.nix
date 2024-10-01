@@ -9,36 +9,43 @@
 
   home.packages = with pkgs; [
     #evolutionWithPlugins  # Can't use this outside of actual nixos it seems...
+    #nodejs_latest # no getting away from node...
+    #postman
+    #xq  - Bundled with yq??
     arandr
     awscli2
     clang-tools_16 # C++ stuff for work...
     cmake-language-server
     deja-dup
     duplicity
+    evolution
     ffmpeg
     font-manager
     gitg
-    nixgl.nixGLIntel
-    globalprotect-openconnect
+    gittyup
+    # globalprotect-openconnect
+    go-task
     google-chrome
     gp-saml-gui
     i3lock
     imv
     iputils
+    jfrog-cli
     kdiff3
     less
     miller
     neovide
     ninja
     nix-output-monitor
+    nixgl.nixGLIntel
     nodePackages.typescript-language-server
-    #nodejs_latest # no getting away from node...
     nodejs_18 # no getting away from node...
+    nomacs
     obsidian
     openconnect
+    pinentry-qt
     podman
     poetry
-    #postman
     remmina
     remmina
     rsync
@@ -50,10 +57,11 @@
     virt-manager
     vlc
     vscode
-    yq
+    vscode-langservers-extracted
+    uv
     xdg-utils
     xdotool
-    #xq  - Bundled with yq??
+    yq
   ];
 
   # Set a state version (determines various stateful bits and pieces. Should
@@ -88,9 +96,9 @@
     permittedInsecurePackages = pkgs.lib.optional (pkgs.obsidian.version == "1.5.3") "electron-25.9.0";
   };
 
-  home.shellAliases = {
-    docker = "podman";
-  };
+  # home.shellAliases = {
+  #   docker = "podman";
+  # };
 
   programs = {
     # Setup autorandr profiles
