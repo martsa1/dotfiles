@@ -9,7 +9,7 @@ export LC_ALL=en_GB.UTF-8
 
 # If we're not on NixOS, we should set NIX_PATH, see https://github.com/NixOS/nix/issues/2033
 if [ ! -z NIX_PATH ]; then
-  export NIX_PATH="$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels${NIX_PATH:+:$NIX_PATH}"
+  export NIX_PATH="${NIX_PATH:+:$NIX_PATH}:$HOME/.nix-defexpr/channels:/nix/var/nix/profiles/per-user/root/channels"
 fi
 
 # Setup home-manager session variables, if they exist.

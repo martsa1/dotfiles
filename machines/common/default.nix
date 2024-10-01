@@ -64,6 +64,7 @@ in {
 
       # Ensure ZSH setup pulls in my dotfiles stuff...
       initExtra = ''
+        export NIX_PATH=nixpkgs=${pkgs.path}:$NIX_PATH
         if [ -f "$HOME/.config/home-manager/dotfiles/zsh/zshrc" ]; then
           source "$HOME/.config/home-manager/dotfiles/zsh/zshrc"
         fi
