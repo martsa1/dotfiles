@@ -13,7 +13,11 @@ require("smb.statusline")
 -- If we are in a TrueColour terminal, use true colours
 if vim.fn.has("termguicolors") then
     vim.opt.termguicolors = true
+    require("colorizer").setup()
+else
+    print("cannot enable colorizer, termguicolors not available")
 end
+
 
 -- ################################################
 -- ########## General Appearance settings #########

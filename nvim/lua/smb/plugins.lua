@@ -62,9 +62,6 @@ require("packer").startup(
         -- Nice bufferline
         use {'akinsho/bufferline.nvim', requires = 'nvim-tree/nvim-web-devicons'}
 
-        -- Add colour highlighting for colours in NVim
-        use "ap/vim-css-color"
-
         -- Vim TOML Syntax Highlighting
         use {"cespare/vim-toml", ft = "toml"}
 
@@ -150,6 +147,9 @@ require("packer").startup(
         -- LSP configurations
         use "neovim/nvim-lspconfig"
         use "b0o/schemastore.nvim" -- Adds access to schemastore catalog
+
+        -- Add colour highlighting for colours in NVim
+        use "norcalli/nvim-colorizer.lua"
 
         -- Fancy, lua-based ctrl-p replacement
         use "nvim-lua/popup.nvim"
