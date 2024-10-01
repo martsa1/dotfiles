@@ -193,6 +193,9 @@ require("packer").startup(
         -- Snippets collection
         use "rafamadriz/friendly-snippets"
 
+        -- LSP based function signature help
+        use "ray-x/lsp_signature.nvim"
+
         -- Quickfix helpers
         use "romainl/vim-qf"
 
@@ -284,3 +287,15 @@ end
 
 -- Configure intentline stuff
 require("ibl").setup()
+
+-- Configure LSP signature help
+-- Options are here: https://github.com/ray-x/lsp_signature.nvim?tab=readme-ov-file#full-configuration-with-default-values
+require("lsp_signature").setup({
+    floating_window = false,
+    toggle_key = "<M-h>",
+    hint_prefix = {
+        above = "↙ ",  -- when the hint is on the line above the current line
+        current = "← ",  -- when the hint is on the same line
+        below = "↖ "  -- when the hint is on the line below the current line
+    }
+})
