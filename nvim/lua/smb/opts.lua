@@ -82,6 +82,10 @@ vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
 -- uncomment to default to all folds open:
 --vim.wo.foldenable = false
 
+-- Setup autoformatting options
+vim.opt.formatoptions = 'croqwnlj'
+
+
 -- Configure LSP Diagnostics
 -- Built-in nvim diagostics config.
 -- TODO: vim.diagnostic.open_float looks really handy, lets see if we can get that auto-showing..?
@@ -124,7 +128,8 @@ vim.cmd("let g:NERDTreeSortOrder=['*', '\\.swp$',  '\\.bak$', '\\~$', '\\/$']")
 -- ####### LSP Settings ############################################################################
 -- #################################################################################################
 -- Set completeopt to have a better completion experience
-vim.opt.completeopt = "menu,menuone,noinsert,noselect"
+-- vim.opt.completeopt = "menu,menuone,noinsert,noselect"
+-- completeopt now managed via nvim-cmp - see completion.lua
 
 -- TODO: I wonder if there's a nicer, lua-native successor to neoformat..
 vim.cmd(
