@@ -85,13 +85,18 @@ require("packer").startup(
         use {"hashivim/vim-terraform", ft = "terraform"}
 
         -- Completion stuff...
-        use "hrsh7th/cmp-buffer"
-        use "hrsh7th/cmp-cmdline"
-        use "hrsh7th/cmp-nvim-lsp"
-        use "hrsh7th/cmp-nvim-lsp-signature-help"
-        use "hrsh7th/cmp-nvim-lua"
-        use "hrsh7th/cmp-path"
-        use "hrsh7th/nvim-cmp"
+        use {
+            "hrsh7th/nvim-cmp",
+
+            requires = {
+                {"hrsh7th/cmp-buffer"},
+                {"hrsh7th/cmp-cmdline"},
+                {"hrsh7th/cmp-nvim-lsp"},
+                {"hrsh7th/cmp-nvim-lsp-signature-help"},
+                {"hrsh7th/cmp-nvim-lua"},
+                {"hrsh7th/cmp-path"},
+            }
+        }
 
         -- Icons set used by folke/trouble.
         use "kyazdani42/nvim-web-devicons"
