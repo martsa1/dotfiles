@@ -18,7 +18,7 @@
     dracula-theme # Not in common!
     feh
     firefox-devedition-bin
-    gnome.zenity
+    zenity
     gthumb
     i3
     killall
