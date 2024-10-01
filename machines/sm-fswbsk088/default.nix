@@ -183,6 +183,29 @@
     "i3/scripts".source = ../../dotfiles/i3/scripts;
   };
 
+  # Enable GPGAgent
+  programs.gpg.enable = true;
+  services.gpg-agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry;
+    grabKeyboardAndMouse = true;
+  };
+
+  # Enable XDG portal
+  xdg.portal = {
+    enable = true;
+    # config = {
+    #   common = {
+    #     default = [
+    #       "gtk"
+    #     ];
+    #   };
+    # };
+    configPackages = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    xdgOpenUsePortal = true;
+  };
+
   # File setup for various RC/Config files etc.
   home.file = {
     #".tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
