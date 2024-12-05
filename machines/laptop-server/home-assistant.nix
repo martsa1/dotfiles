@@ -15,7 +15,7 @@
       "--network=host"
       "--device=/dev/ttyACM0"
 
-      "--label=traefik.http.routers.home-assistant.rule=Host(`ha.home`, `ha.abitmoredepth.com`)"
+      "--label=traefik.http.routers.home-assistant.rule=Host(`ha.home`) || Host(`ha.abitmoredepth.com`)"
       "--label=traefik.http.routers.home-assistant.tls=true"
       "--label=traefik.http.routers.home-assistant.tls.certresolver=internal"
       "--label=traefik.http.services.home-assistant.loadbalancer.server.port=8123"

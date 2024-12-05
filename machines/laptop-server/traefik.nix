@@ -22,7 +22,7 @@ in {
     ];
 
     extraOptions = [
-      "--label=traefik.http.routers.traefik.rule=Host(`traefik.laptop-server.home`, `laptop-server.home`)"
+      "--label=traefik.http.routers.traefik.rule=Host(`traefik.laptop-server.home`) || Host(`laptop-server.home`)"
       "--label=traefik.http.routers.traefik.tls=true"
       "--label=traefik.http.routers.traefik.tls.certresolver=internal"
       "--label=traefik.http.services.traefik.loadbalancer.server.port=8080"
