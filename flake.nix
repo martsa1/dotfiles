@@ -88,5 +88,9 @@
         extraSpecialArgs = {inherit inputs outputs;};
       };
     };
+
+    # packages = {
+    #   ${curSystem} = nixpkgs.legacyPackages.${curSystem};
+    # };
   };
 }
