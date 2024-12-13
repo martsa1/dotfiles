@@ -59,6 +59,7 @@
     vlc
     vscode
     vscode-langservers-extracted
+    inputs.wezterm.packages.${pkgs.system}.default
     uv
     xdg-utils
     xdotool

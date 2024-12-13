@@ -27,6 +27,11 @@
       url = "github:martsa1/pulseaudio-source-listener";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    wezterm = {
+      url = "github:wez/wezterm/main?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -36,6 +41,7 @@
     flake-utils,
     nixgl,
     pulseaudio-listener,
+    wezterm,
     ...
   } @ inputs: let
     inherit (self) outputs;
