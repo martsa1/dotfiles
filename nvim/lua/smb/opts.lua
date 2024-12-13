@@ -134,8 +134,7 @@ vim.cmd("let g:NERDTreeSortOrder=['*', '\\.swp$',  '\\.bak$', '\\~$', '\\/$']")
 -- TODO: I wonder if there's a nicer, lua-native successor to neoformat..
 vim.cmd(
     [[
-let g:neoformat_enabled_python = ['yapf', 'isort']
-"let g:neoformat_enabled_python = ['black']
+let g:neoformat_enabled_python = ['ruff']
 
 let g:neoformat_json_pyjson = {
     \ 'exe': 'python',
