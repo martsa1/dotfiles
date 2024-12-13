@@ -268,6 +268,8 @@ require("nvim-treesitter.configs").setup {
         }
     }
 }
+-- Associate Jenkinsfile filetype with the groovy parser
+vim.treesitter.language.register('groovy', 'Jenkinsfile')
 
 require("trouble").setup({})
 
