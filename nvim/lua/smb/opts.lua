@@ -39,11 +39,11 @@ vim.opt.wildignore =
 
 -- default tab stuff - some file types are overriden in `ftplugin` section.
 vim.opt.autoindent = true
-vim.opt.expandtab = true
+-- vim.opt.expandtab = true
 vim.opt.shiftwidth = 0 -- match tabstop
-vim.opt.smartindent = true
-vim.opt.smarttab = true
-vim.opt.softtabstop = 2
+-- vim.opt.smartindent = true
+-- vim.opt.smarttab = true
+-- vim.opt.softtabstop = 2
 vim.opt.tabstop = 4
 
 -- Allow 100ms between keys in a key-sequence.  Defaults to 1000ms
