@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   pkgs,
   ...
 }: rec {
@@ -80,7 +81,24 @@
   };
 
   # Support fontconfig
-  fonts.fontconfig.enable = true;
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      emoji = [
+        "OpenMoji Color"
+      ];
+      monospace = [
+        "Fira Mono"
+        "Font Awesome 5 Free"
+        "Font Awesome 5 Brands"
+        "Noto Mono"
+      ];
+      sansSerif = [
+        "Fira Sans"
+        "Liberation Sans"
+      ];
+    };
+  };
 
   # Set keyboard layout to gb, disable pesky capslock.
   home.keyboard = {

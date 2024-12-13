@@ -34,7 +34,7 @@
     enable = true;
     font = {
       name = "Fira Mono Nerd Font";
-      package = pkgs.nerdfonts;
+      package = pkgs.nerd-fonts.fira-mono;
       size = 9;
     };
     settings = {

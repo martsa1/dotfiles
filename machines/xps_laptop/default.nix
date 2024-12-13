@@ -45,8 +45,9 @@
     kitty = {
       enable = true;
       font = {
-        name = "Fira Mono Nerd Font";
-        package = pkgs.nerdfonts;
+        # name = "Fira Mono Nerd Font";
+        # package = pkgs.nerd-fonts.fira-mono;
+        name = "monospace";
         size = 9;
       };
       settings = {

@@ -22,18 +22,22 @@ in {
     fd
     feh
     file
-    font-awesome
+    font-awesome_5
+    fira
     imagemagick
     jq
     libnotify
     lsd
     luaformatter
     meld
-    (nerdfonts.override {fonts = ["FiraCode" "FiraMono" "Noto"];})
+    nerd-fonts.fira-code
+    nerd-fonts.fira-mono
+    nerd-fonts.noto
     nil
     nixd
     nodePackages.lua-fmt # TODO: Only nvim should really need this...
     nodePackages.bash-language-server # TODO: Only nvim should really need this...
+    openmoji-color
     pass
     pstree
     python3

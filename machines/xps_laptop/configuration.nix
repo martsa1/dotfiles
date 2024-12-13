@@ -158,11 +158,11 @@
   fonts = {
     fontDir.enable = true;
     fonts = with pkgs; [
-      (nerdfonts.override {fonts = ["FiraCode" "FiraMono" "Noto"];})
-      fira-mono
-      fira-code
+      # (nerdfonts.override {fonts = ["FiraCode" "FiraMono" "Noto"];})
+      nerd-fonts.fira-mono
+      nerd-fonts.fira-code
       fira
-      noto-fonts
+      nerd-fonts.noto
     ];
   };
 
