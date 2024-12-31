@@ -42,7 +42,6 @@ in {
     pstree
     python3
     python3Packages.ipython
-    python3Packages.powerline
     ripgrep
     roboto
     roboto-mono

@@ -28,7 +28,7 @@
     pavucontrol
     peek
     playerctl
-    #prusa-slicer
+    prusa-slicer
     rofimoji
     scrot
     shellcheck
