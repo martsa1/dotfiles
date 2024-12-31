@@ -43,7 +43,7 @@ highlight = ${self.color3}
 [bar/secondary]
 monitor = ${env:MONITOR:}
 width = 100%
-height = 27
+height = 2.5%
 ;offset-x = 1%
 ;offset-y = 1%
 ;radius = 6.0
@@ -69,6 +69,9 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 =  "Fira Mono Nerd Font:size=9"
+# Get polybar to calculate effective scaling based on screen size
+# dpi-x=331
+# dpi-y=331
 
 modules-left = i3
 modules-center = spotify
