@@ -2,7 +2,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    ansible
     appimage-run
     arandr
     arc-icon-theme
@@ -32,8 +31,6 @@
     playerctl
     polkit
     python3
-    #python37Packages.powerline
-    powerline
     ripgrep
     tmux
     udiskie

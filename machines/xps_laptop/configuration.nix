@@ -61,31 +61,22 @@
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    layout = "gb";
-    xkbOptions = "ctrl:nocaps";
+    xkb = {
+      options = "ctrl:nocaps";
+      layout = "gb";
+    };
 
     # Enable Intel Proprietary Drivers.
     # videoDrivers = [ "intel" ];
 
     # Enable touchpad support.
     synaptics.enable = false;
-    libinput = {
-      enable = true;
-      touchpad = {
-        clickMethod = "clickfinger";
-        middleEmulation = true;
-        naturalScrolling = false;
-        scrollMethod = "twofinger";
-        tapping = true;
-      };
-    };
 
     # Enable i3
     windowManager.i3.enable = true;
 
     # Try disabling Desktop management
     displayManager = {
-      defaultSession = "none+i3";
       lightdm = {
         enable = true;
         greeters.enso.enable = true;
@@ -101,8 +92,22 @@
     };
     desktopManager.wallpaper.mode = "scale";
   };
+  services.displayManager.defaultSession = "none+i3";
+
 
   security.sudo.extraConfig = "Defaults pwfeedback";
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  services.libinput = {
+    enable = true;
+    touchpad = {
+      clickMethod = "clickfinger";
+      middleEmulation = true;
+      naturalScrolling = false;
+      scrollMethod = "twofinger";
+      tapping = true;
+    };
+  };
 
   # Enable CUPS to print documents.
   services.printing = {
@@ -110,8 +115,6 @@
     drivers = [pkgs.gutenprint pkgs.gutenprintBin];
   };
 
-  # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -126,9 +129,6 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sam = {

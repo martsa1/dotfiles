@@ -12,21 +12,29 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "uas" "sd_mod" "rtsx_pci_sdmmc"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/c38eae79-c1ec-429e-a761-5c179c378e4c";
-    fsType = "ext4";
+  boot = {
+    initrd.availableKernelModules = ["xhci_pci" "ahci" "nvme" "uas" "sd_mod" "rtsx_pci_sdmmc"];
+    initrd.kernelModules = [];
+    kernelModules = ["kvm-intel"];
+    extraModulePackages = [];
+    initrd.luks.devices = {
+      "luks-9533fdf2-e77d-4d86-862a-749b62529b09".device = "/dev/disk/by-uuid/9533fdf2-e77d-4d86-862a-749b62529b09";
+    };
+    loader.grub = {
+      gfxmodeEfi = "1920x1080";
+    };
   };
 
-  boot.initrd.luks.devices."luks-9533fdf2-e77d-4d86-862a-749b62529b09".device = "/dev/disk/by-uuid/9533fdf2-e77d-4d86-862a-749b62529b09";
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/c38eae79-c1ec-429e-a761-5c179c378e4c";
+      fsType = "ext4";
+    };
 
-  fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/A23B-0812";
-    fsType = "vfat";
+    "/boot/efi" = {
+      device = "/dev/disk/by-uuid/A23B-0812";
+      fsType = "vfat";
+    };
   };
 
   swapDevices = [

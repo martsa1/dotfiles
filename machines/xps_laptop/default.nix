@@ -19,9 +19,8 @@
     ffmpeg
     prusa-slicer
     steam
-    tartube
+    # tartube
     vlc
-    youtube-dl
     yubioath-flutter
   ];
 
@@ -73,7 +72,8 @@
       enable = true;
       # Prefer to set this based off the runtime pinentry...?
       # I'd really prefer a GUI pop-up when local, but a curses one when remote?
-      pinentryFlavor = "qt";
+      # pinentryFlavor = "qt";
+      pinentryPackage = pkgs.pinentry-all;
     };
   };
 }
