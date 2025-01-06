@@ -60,7 +60,7 @@ require("packer").startup(
         use "airblade/vim-gitgutter"
 
         -- Nice bufferline
-        use {'akinsho/bufferline.nvim', requires = 'nvim-tree/nvim-web-devicons'}
+        use {"akinsho/bufferline.nvim", requires = "nvim-tree/nvim-web-devicons"}
 
         -- Vim TOML Syntax Highlighting
         use {"cespare/vim-toml", ft = "toml"}
@@ -87,7 +87,6 @@ require("packer").startup(
         -- Completion stuff...
         use {
             "hrsh7th/nvim-cmp",
-
             requires = {
                 {"hrsh7th/cmp-buffer"},
                 {"hrsh7th/cmp-cmdline"},
@@ -96,7 +95,7 @@ require("packer").startup(
                 {"hrsh7th/cmp-nvim-lua"},
                 {"hrsh7th/cmp-path"},
                 {"L3MON4D3/LuaSnip"},
-                {"saadparwaiz1/cmp_luasnip"},
+                {"saadparwaiz1/cmp_luasnip"}
             }
         }
 
@@ -169,9 +168,9 @@ require("packer").startup(
         use {
             "nvim-treesitter/nvim-treesitter",
             run = function()
-                local ts_update = require('nvim-treesitter.install').update({ with_sync = false })
+                local ts_update = require("nvim-treesitter.install").update({with_sync = false})
                 ts_update()
-            end,
+            end
         }
         use {"nvim-treesitter/playground", run = ":TSInstall query"}
 
@@ -180,8 +179,8 @@ require("packer").startup(
 
         -- Typescript integrations
         use {
-          "pmizio/typescript-tools.nvim",
-          requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+            "pmizio/typescript-tools.nvim",
+            requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}
         }
 
         -- Add support for i3 config files
@@ -207,9 +206,9 @@ require("packer").startup(
 
         -- Epic Comment management
         use {
-            'numToStr/Comment.nvim',
+            "numToStr/Comment.nvim",
             config = function()
-                require('Comment').setup()
+                require("Comment").setup()
             end
         }
 
@@ -249,7 +248,6 @@ require("packer").startup(
     end
 )
 
-
 -- TODO: All of the plugin config here should probably be lazy-loaded wherever possible (see move to Lazy.nvim!)
 
 -- Tresitter configuration for more awesome highlighting.
@@ -269,7 +267,7 @@ require("nvim-treesitter.configs").setup {
     }
 }
 -- Associate Jenkinsfile filetype with the groovy parser
-vim.treesitter.language.register('groovy', 'Jenkinsfile')
+vim.treesitter.language.register("groovy", "Jenkinsfile")
 
 require("trouble").setup({})
 
