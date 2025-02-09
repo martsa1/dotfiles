@@ -44,6 +44,9 @@ cmp.setup(
         preselect = cmp.PreselectMode.None,
         sources = cmp.config.sources(
             {
+				-- Copilot Source
+				{ name = "copilot", label="Copilot" },
+				-- Everything else...
                 {name = "nvim_lsp", label="LSP"},
                 {name = "cmp-nvim-lsp-signature-help", label="LSP-SigHelp"},
                 {name = "nvim_lua"},
@@ -332,6 +335,15 @@ require("typescript-tools").setup {
 }
 lspconfig.eslint.setup {capabilities = capabilities}
 
+
+-- Attempt to integrate Copilot integration with cmp completion window
+cmp.event:on("menu_opened", function()
+	vim.b.copilot_suggestion_hidden = true
+end)
+
+cmp.event:on("menu_closed", function()
+	vim.b.copilot_suggestion_hidden = false
+end)
 -- Snippets setup
 -- Imports VSCode style snippets (friendly-snippets plugin)
 local vscode_snippet_loader = require("luasnip.loaders.from_vscode")
