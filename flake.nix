@@ -96,6 +96,21 @@
       };
     };
 
+    # NixOS configs.
+    nixosConfigurations = {
+      laptop-server = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./machines/laptop-server/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+          }
+        ];
+      };
+    };
+
     # packages = {
     #   ${curSystem} = nixpkgs.legacyPackages.${curSystem};
     # };
