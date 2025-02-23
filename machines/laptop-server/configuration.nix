@@ -14,6 +14,7 @@
     ./baby-buddy.nix
     ./gitea.nix
     ./home-assistant.nix
+    ./jellyfin.nix
     ./step-ca.nix
     ./traefik.nix
   ];
@@ -22,6 +23,21 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
+  # Mounted file-systems  (Uses NFSv4)
+  fileSystems."/media/Multimedia" = {
+    device = "nas.home:Multimedia";
+    fsType = "nfs4";
+    options = [
+      "rsize=1048576"
+      "wsize=1048576"
+      "x-systemd.automount"
+      "noauto"
+      "x-systemd.idle-timeout=600"
+      "users"
+    ];
+    noCheck = true;
+  };
 
   # Use modern kernel
   #boot.kernelPackages = pkgs.linuxKernel.packages.<some_version>
