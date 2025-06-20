@@ -3,8 +3,10 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
+    # nixpkgs.url = "github:nixos/nixpkgs/master";
     # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/44b4123568a045a955db48c4965f0dcf4764e9c2";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
     flake-utils = {

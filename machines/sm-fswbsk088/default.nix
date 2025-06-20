@@ -40,7 +40,7 @@
     nix-output-monitor
     nixgl.nixGLIntel
     nodePackages.typescript-language-server
-    nodejs_18 # no getting away from node...
+    inputs.nixpkgs_old.legacyPackages.x86_64-linux.nodejs_18 # no getting away from node...
     nomacs
     obsidian
     openconnect
