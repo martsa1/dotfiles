@@ -12,19 +12,19 @@
 
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
-    btop # Not in common because its broken on mac.
+    #yubioath-desktop
     brightnessctl
+    btop # Not in common because its broken on mac.
     discord
     dracula-theme # Not in common!
     feh
     firefox-devedition-bin
-    zenity
     gthumb
     i3
+    kdePackages.okular
     killall
     lua-language-server
     mupdf
-    okular
     pavucontrol
     peek
     playerctl
@@ -33,9 +33,7 @@
     scrot
     shellcheck
     signal-desktop
-    #slack
     spotify
-    # teams
     xclip
     xfce.thunar
     xfce.thunar-archive-plugin
@@ -45,8 +43,8 @@
     xorg.xkill
     xorg.xprop
     xorg.xrandr
-    #yubioath-desktop
     yubikey-manager
+    zenity
 
     # My packages:
     dunst-dracula-theme

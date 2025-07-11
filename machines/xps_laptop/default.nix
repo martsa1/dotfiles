@@ -73,7 +73,7 @@
       # Prefer to set this based off the runtime pinentry...?
       # I'd really prefer a GUI pop-up when local, but a curses one when remote?
       # pinentryFlavor = "qt";
-      pinentryPackage = pkgs.pinentry-all;
+      pinentry.package = pkgs.pinentry-all;
     };
   };
 }
