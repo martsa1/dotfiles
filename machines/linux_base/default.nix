@@ -18,7 +18,7 @@
     discord
     dracula-theme # Not in common!
     feh
-    firefox-devedition-bin
+    firefox-devedition
     gthumb
     i3
     kdePackages.okular
