@@ -59,7 +59,7 @@
 
       (final: prev: {
         dunst-dracula-theme = prev.callPackage ./pkgs/dunst-dracula-theme {};
-        gtk-dracula-icons = prev.callPackage ./pkgs/gtk-dracula-icons {};
+        # gtk-dracula-icons = prev.callPackage ./pkgs/gtk-dracula-icons {};
         i3-config = prev.callPackage ./pkgs/i3-config {};
         polybar-launcher = prev.callPackage ./pkgs/polybar-launcher {};
         polybar-mute = prev.callPackage ./pkgs/polybar-mute {};

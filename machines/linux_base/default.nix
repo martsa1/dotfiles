@@ -231,9 +231,12 @@
     #".tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
     ".background-image".source = ../../backgrounds/pexels-pixabay-220072.jpg;
 
-    ".themes/Dracula".source = "${pkgs.dracula-theme.outPath}/share/themes/Dracula";
-    ".icons/Dracula-cursors".source = "${pkgs.dracula-theme.outPath}/share/icons/Dracula-cursors";
-    ".icons/Dracula".source = "${pkgs.gtk-dracula-icons}/Dracula";
+    # Seems unecessary nowadays..?
+    # ".themes/Dracula".source = "${pkgs.dracula-theme.outPath}/share/themes/Dracula";
+    # ".icons/Dracula-cursors".source = "${pkgs.dracula-theme.outPath}/share/icons/Dracula-cursors";
+    # ".icons/Dracula-cursors".source = "${pkgs.dracula-icon-theme.outPath}/share/icons/Dracula-cursors";
+    # ".icons/Dracula".source = "${pkgs.gtk-dracula-icons}/Dracula";
+    # ".icons/Dracula".source = "${pkgs.dracula-icon-theme}/Dracula";
   };
 
   # Ensure home-manager honours nixpkgs config
