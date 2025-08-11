@@ -37,7 +37,7 @@ help_color="#4872FF"
 clip=clipboard
 
 # Options for generating new password entries
-default_user=martsa@f-secure.com
+default_user=sam
 default_user2=martsa
 
 password_length=30
@@ -70,4 +70,4 @@ insert_pass="Alt+n"
 wait=0.2
 
 # Delay between key-presses
-xdotool_delay=36
+type_delay=36
