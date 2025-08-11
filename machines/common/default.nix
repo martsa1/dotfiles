@@ -17,7 +17,6 @@ in {
   home.packages = with pkgs; [
     rofi-dracula-theme
     curl
-    direnv
     docker-compose
     fd
     feh
@@ -177,6 +176,8 @@ in {
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
   };
 
   # Enable bat and theme it with dracula
