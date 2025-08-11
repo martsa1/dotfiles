@@ -1,4 +1,27 @@
-#  vim: set ts=2 sw=2 tw=0 filetype=zsh et :
+#!/usr/bin/env bash
+
+# function layout_poetry() {
+#     PYPROJECT_TOML="${PYPROJECT_TOML:-pyproject.toml}"
+#     if [[ ! -f "$PYPROJECT_TOML" ]]; then
+#         log_status "No pyproject.toml found. Execute \`poetry init\` to create a \`$PYPROJECT_TOML\` first."
+#     fi
+#
+#     if [[ -d ".venv" ]]; then
+#         VIRTUAL_ENV="$(pwd)/.venv"
+#     else
+#         VIRTUAL_ENV=$(poetry env info --path 2>/dev/null ; true)
+#     fi
+#
+#     if [[ -z $VIRTUAL_ENV || ! -d $VIRTUAL_ENV ]]; then
+#         log_status "No virtual environment exists. Executing \`poetry install\` to create one."
+#         poetry install
+#         VIRTUAL_ENV=$(poetry env info --path)
+#     fi
+#
+#     PATH_add "$VIRTUAL_ENV/bin"
+#     export POETRY_ACTIVE=1
+#     export VIRTUAL_ENV
+# }
 
 layout_poetry() {
   if [[ ! -f pyproject.toml ]]; then
@@ -6,10 +29,35 @@ layout_poetry() {
     exit 2
   fi
 
-  # create venv if it doesn't exist
-  poetry run true
+  LOCK="$PWD/poetry.lock"
+  watch_file "$LOCK"
 
-  export VIRTUAL_ENV=$(poetry env info --path)
+  local VENV=$(poetry env info --path)
+  if [[ -z $VENV || ! -d $VENV/bin ]]; then
+    log_status 'No poetry virtual environment found. Running `poetry install` to create one.'
+    poetry install
+    VENV=$(poetry env info --path)
+  else
+    HASH="$PWD/.poetry.lock.sha512"
+    if ! sha512sum -c $HASH --quiet >&/dev/null ; then
+        log_status 'poetry.lock has been updated. Running `poetry install`'
+        poetry install
+        sha512sum "$LOCK" > "$HASH"
+    fi
+  fi
+
+  export VIRTUAL_ENV=$VENV
   export POETRY_ACTIVE=1
-  PATH_add "$VIRTUAL_ENV/bin"
+  PATH_add "$VENV/bin"
+}
+
+function use_uv-project() {
+    source_up_if_exists
+
+    dotenv_if_exists
+
+    source_env_if_exists .envrc.local
+
+    uv sync
+	source .venv/bin/activate
 }
