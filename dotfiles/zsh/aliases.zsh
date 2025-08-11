@@ -34,7 +34,7 @@ alias ipython="ipython --TerminalInteractiveShell.editing_mode=vi"
 alias python_tags=$'ctags -R --fields=+l --languages=python --python-kinds=-iv -f ./tags $(python -c "import os, sys; print(\' \'.join(\'{}\'.format(d) for d in sys.path if os.path.isdir(d)))")'
 
 # Add an alias to use when checking battery info
-alias batinfo='upower -i /org/freedesktop/UPower/devices/battery_BAT1'
+alias batinfo='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 if [ -f ~/.config/bash_work.sh ]; then
     . ~/.config/bash_work.sh
 fi

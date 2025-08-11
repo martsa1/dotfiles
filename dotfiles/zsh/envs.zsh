@@ -22,6 +22,7 @@ fi
 export SUDO_ASKPASS="${HOME}/.config/home-manager/dotfiles/i3/scripts/password_prompt.sh"
 # Editor Settings
 export EDITOR=$(which nvim)
+export BROWSER=$(which firefox-developer-edition)
 export SHELL=$(which zsh)
 #Sets nvim's default colourscheme to Dracula
 export VAMPIRE=1
