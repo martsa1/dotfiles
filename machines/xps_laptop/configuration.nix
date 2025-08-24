@@ -94,6 +94,7 @@
   };
   services.displayManager.defaultSession = "none+i3";
 
+  services.earlyoom.enable = true;
 
   security.sudo.extraConfig = "Defaults pwfeedback";
 
