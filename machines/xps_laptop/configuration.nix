@@ -142,6 +142,7 @@
     ];
     shell = pkgs.zsh;
   };
+  nix.settings.trusted-users = [ "sam" ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
