@@ -81,6 +81,9 @@ require("packer").startup(
         -- Neovim LSP config
         use {"folke/neodev.nvim"}
 
+        -- key-shortcuts highlihgting/config
+        use "folke/which-key.nvim"
+
         -- Base Terraform support.
         use {"hashivim/vim-terraform", ft = "terraform"}
 
@@ -164,9 +167,13 @@ require("packer").startup(
             }
         }
 
+        -- None-ls to intgegrate various things into nvim-LSP.
+        use "nvimtools/none-ls.nvim"
+
         -- Context-aware syntax highlighting
         use {
             "nvim-treesitter/nvim-treesitter",
+            branch = "master",
             run = function()
                 local ts_update = require("nvim-treesitter.install").update({with_sync = false})
                 ts_update()
