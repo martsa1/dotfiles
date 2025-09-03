@@ -17,6 +17,7 @@ in {
   home.packages = with pkgs; [
     rofi-dracula-theme
     curl
+    # direnv
     docker-compose
     fd
     feh

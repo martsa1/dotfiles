@@ -13,6 +13,7 @@
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
     #yubioath-desktop
+    bitwarden-cli
     brightnessctl
     btop # Not in common because its broken on mac.
     discord
@@ -29,6 +30,7 @@
     peek
     playerctl
     prusa-slicer
+    rofi-rbw
     rofimoji
     scrot
     shellcheck
@@ -44,6 +46,7 @@
     xorg.xprop
     xorg.xrandr
     yubikey-manager
+    yubioath-flutter
     zenity
 
     # My packages:
@@ -144,6 +147,11 @@
     };
     plugins = [pkgs.rofi-calc];
     # Emoji support handled via rofimoji
+  };
+
+  # RBW - bitwarden CLI client
+  programs.rbw = {
+    enable = true;
   };
 
   # Playerctl support

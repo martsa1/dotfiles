@@ -9,38 +9,40 @@
   ];
 
   home.packages = with pkgs; [
-    #evolutionWithPlugins  # Can't use this outside of actual nixos it seems...
     #nodejs_latest # no getting away from node...
     #postman
     #xq  - Bundled with yq??
     arandr
     awscli2
     clang-tools_16 # C++ stuff for work...
+    claude-code
     cmake-language-server
-    deja-dup
-    duplicity
-    evolution
+    cpio
+    # deja-dup
+    # # duplicity
     ffmpeg
     font-manager
     gitg
-    gittyup
+    gimp
+    # gittyup
     # globalprotect-openconnect
     go-task
     google-chrome
     gp-saml-gui
     i3lock
     imv
+    inputs.nixpkgs_old.legacyPackages.x86_64-linux.nodejs_18 # no getting away from node...
     iputils
     jfrog-cli
     kdiff3
     less
     miller
+    mtr
     neovide
     ninja
     nix-output-monitor
     nixgl.nixGLIntel
     nodePackages.typescript-language-server
-    inputs.nixpkgs_old.legacyPackages.x86_64-linux.nodejs_18 # no getting away from node...
     nomacs
     obsidian
     openconnect
@@ -51,19 +53,23 @@
     remmina
     rsync
     ruff
-    ruff-lsp
     rustup
+    strace
+    teams-for-linux
+    tidal-hifi
     tree
     vagrant
     virt-manager
     vlc
     vscode
     vscode-langservers-extracted
-    inputs.wezterm.packages.${pkgs.system}.default
+    # inputs.wezterm.packages.${pkgs.system}.default
     uv
     xdg-utils
     xdotool
     yq
+    # xar # Seems broken possibly permanently on Linux...
+    zls
   ];
 
   # Set a state version (determines various stateful bits and pieces. Should
