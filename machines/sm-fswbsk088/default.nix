@@ -165,6 +165,10 @@
           identityFile = "~/.ssh/id_rsa.github";
           user = "git";
         };
+        "git.home" = {
+          identityFile = "~/.ssh/id_rsa.github";
+          user = "gitea";
+        };
       };
     };
 
@@ -208,28 +212,40 @@
     "i3/scripts".source = ../../dotfiles/i3/scripts;
   };
 
+  xdg.mimeApps.defaultApplications = {
+    "image/jpeg"=["org.nomacs.ImageLounge.desktop"];
+    "inode/directory"=["thunar.desktop"];
+    "text/html"=["firefox-developer-edition.desktop"];
+    "x-scheme-handler/about"=["firefox-developer-edition.desktop"];
+    "x-scheme-handler/http"=["firefox-developer-edition.desktop"];
+    "x-scheme-handler/https"=["firefox-developer-edition.desktop"];
+    "x-scheme-handler/prusaslicer"=["PrusaSlicerURLProtocol.desktop"];
+    "x-scheme-handler/unknown"=["firefox-developer-edition.desktop"];
+    "x-scheme-handler/vscode"=["code.desktop"];
+  };
+
   # Enable GPGAgent
   programs.gpg.enable = true;
   services.gpg-agent = {
     enable = true;
-    pinentryPackage = pkgs.pinentry;
+    pinentry.package = pkgs.pinentry;
     grabKeyboardAndMouse = true;
   };
 
-  # Enable XDG portal
-  xdg.portal = {
-    enable = true;
-    # config = {
-    #   common = {
-    #     default = [
-    #       "gtk"
-    #     ];
-    #   };
-    # };
-    configPackages = [ pkgs.xdg-desktop-portal-gtk ];
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    xdgOpenUsePortal = true;
-  };
+  # # Enable XDG portal
+  # xdg.portal = {
+  #   enable = true;
+  #   # config = {
+  #   #   common = {
+  #   #     default = [
+  #   #       "gtk"
+  #   #     ];
+  #   #   };
+  #   # };
+  #   configPackages = [ pkgs.xdg-desktop-portal-gtk ];
+  #   extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  #   xdgOpenUsePortal = true;
+  # };
 
   # File setup for various RC/Config files etc.
   home.file = {
