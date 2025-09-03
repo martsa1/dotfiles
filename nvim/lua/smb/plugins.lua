@@ -260,7 +260,7 @@ require("packer").startup(
 				})
 			end,
 		}
-		-- Integrate co-pilot into nvim-cmp
+		-- TODO: Integrate co-pilot into nvim-cmp
 		use {
 			"zbirenbaum/copilot-cmp",
 			after = { "copilot.lua" },

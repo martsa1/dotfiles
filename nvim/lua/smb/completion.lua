@@ -116,8 +116,8 @@ require("neodev").setup(
             if library.enabled == false then
                 vim.print("Not enabling neodev")
             end
-        end
-    }
+		end
+	}
 )
 
 local lspconfig = require("lspconfig")
@@ -147,12 +147,18 @@ lspconfig.pylsp.setup {
                     enabled = true,
                     live_mode = true
                 },
-                --rope_autoimport = {
-                --    enabled = false,
-                --},
-                --rope_completion = {
+                -- rope_autoimport = {
+                --    enabled = true,
+                --    completions = {
+                --        enabled = true
+                --    },
+                --    code_actions = {
+                --        enabled = true
+                --    },
+                -- },
+                -- rope_completion = {
                 --    enabled = true
-                --},
+                -- },
             }
         }
     }
@@ -163,7 +169,7 @@ lspconfig.ruff.setup{
     init_options = {
         settings = {
             -- Any extra CLI arguments for `ruff` go here.
-            args = {},
+            args = { "--preview" },
         }
     }
 }
@@ -187,9 +193,9 @@ lspconfig.clangd.setup {
         "--header-insertion-decorators",
     },
     on_attach = function(_client, bufnr)
-        local clang_inlay_hints  = require("clangd_extensions.inlay_hints");
-        clang_inlay_hints.setup_autocmd()
-        clang_inlay_hints.set_inlay_hints()
+        -- local clang_inlay_hints  = require("clangd_extensions.inlay_hints");
+        -- clang_inlay_hints.setup_autocmd()
+        -- clang_inlay_hints.set_inlay_hints()
 
         -- for clangd enabled buffers only, add a keybind to swap header/impl.
         vim.keymap.set("n", "gh", "<cmd>ClangdSwitchSourceHeader<CR>",
@@ -321,6 +327,8 @@ require("typescript-tools").setup {
     settings = {
         expose_as_code_actions = "all",
 
+		complete_function_calls = true,
+
         tsserver_file_preferences = {
             includeInlayParameterNameHints = 'all',
             includeInlayParameterNameHintsWhenArgumentMatchesName = false,
@@ -344,6 +352,35 @@ end)
 cmp.event:on("menu_closed", function()
 	vim.b.copilot_suggestion_hidden = false
 end)
+
+-- -- Lusnip keybinds
+-- ["<Tab>"] = cmp.mapping(
+--     function(fallback)
+--         if cmp.visible() then
+--             cmp.select_next_item()
+--         elseif luasnip.expand_or_jumpable() then
+--             luasnip.expand_or_jump()
+--         elseif has_words_before() then
+--             cmp.complete()
+--         else
+--             fallback()
+--         end
+--     end,
+--     {"i", "s"}
+-- ),
+-- ["<S-Tab>"] = cmp.mapping(
+--     function(fallback)
+--         if cmp.visible() then
+--             cmp.select_prev_item()
+--         elseif luasnip.jumpable(-1) then
+--             luasnip.jump(-1)
+--         else
+--             fallback()
+--         end
+--     end,
+--     {"i", "s"}
+-- ),
+
 -- Snippets setup
 -- Imports VSCode style snippets (friendly-snippets plugin)
 local vscode_snippet_loader = require("luasnip.loaders.from_vscode")
@@ -352,3 +389,23 @@ vscode_snippet_loader.lazy_load({paths = {"./snippets"}}) -- Personal snippets.
 
 -- lua formatted snippets:
 require("luasnip.loaders.from_lua").load({paths = "./snippets"})
+
+
+-- Setup inlay hints for any LSP that supports them
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("LspAttach_inlayhints", {}),
+	-- TODO: Check this before trying to enable: inlayHintProvider
+    callback = function(args)
+        -- local client = vim.lsp.get_client_by_id(args.data.client_id)
+        vim.lsp.inlay_hint.enable(true)
+    end,
+})
+
+-- None-ls for cfn-lint integration etc.
+local null_ls = require("null-ls")
+
+null_ls.setup({
+  sources = {
+    null_ls.builtins.diagnostics.cfn_lint
+  },
+})

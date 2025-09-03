@@ -51,7 +51,8 @@ vim.opt.ttimeout = true
 vim.opt.ttimeoutlen = 100
 
 -- Unix as standard file type
-vim.opt.ffs = {"unix", "dos", "mac"}
+-- vim.opt.ffs = {"unix", "dos"}
+vim.opt.ffs = {"unix"}
 
 -- Always utf8
 vim.opt.fileencoding = "utf-8"
@@ -146,6 +147,9 @@ let g:neoformat_enabled_json = ['jq']
 let g:neoformat_enabled_clangformat = ['clang-format']
 
 let g:neoformat_enabled_cmakeformat = ['cmake-format']
+
+let g:neoformat_enabled_typescript = ['prettier']
+let g:neoformat_enabled_javascript = ['prettier']
 ]]
 )
 
