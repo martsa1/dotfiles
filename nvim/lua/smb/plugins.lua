@@ -306,35 +306,37 @@ require("packer").startup(
 			end
 		}
 
-        use {
+    use { "MunifTanjim/nui.nvim" }
+
+    use {
 			'yetone/avante.nvim',
-            requires = {
+      requires = {
 				{"MeanderingProgrammer/render-markdown.nvim"},
 				{"MunifTanjim/nui.nvim"},
 				{"nvim-lua/plenary.nvim"},
 				{"stevearc/dressing.nvim"},
-			},
-			branch = 'main',
-			run = 'make',
-			opts = {
-				provider = "copilot",
-				-- Some warnings about potential token creation rates... (hope to disable auto-providing in any case though)
-				auto_suggestsions_provider = "copilot",
-				chat = "copilot"
-			},
-			config = function()
-			  require('avante_lib').load()
-			  require('avante').setup()
-			end
-        }
+      },
+      branch = 'main',
+      run = 'make',
+      opts = {
+        provider = "copilot",
+        -- Some warnings about potential token creation rates... (hope to disable auto-providing in any case though)
+        auto_suggestsions_provider = "copilot",
+        chat = "copilot"
+      },
+      config = function()
+        require('avante_lib').load()
+        require('avante').setup()
+      end
+    }
 
 
-        -- Automatically set up configuration after cloning packer.nvim
-        -- Keep this at the end of plugin setup.
-        if packer_bootstrap then
-            require("packer").sync()
-        end
+    -- Automatically set up configuration after cloning packer.nvim
+    -- Keep this at the end of plugin setup.
+    if packer_bootstrap then
+        require("packer").sync()
     end
+  end
 )
 
 -- TODO: All of the plugin config here should probably be lazy-loaded wherever possible (see move to Lazy.nvim!)
