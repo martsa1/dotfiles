@@ -48,7 +48,7 @@
     openconnect
     pinentry-qt
     podman
-    poetry
+    (poetry.withPlugins (ps: [ ps.poetry-plugin-export ]))
     remmina
     remmina
     rsync
