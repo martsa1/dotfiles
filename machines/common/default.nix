@@ -4,8 +4,8 @@
   pkgs,
   outputs,
   ...
-}: let
-in {
+}:
+{
   imports = [
     # Enable and manage tmux via home-manager
     ../../dotfiles/tmux

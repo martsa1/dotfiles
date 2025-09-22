@@ -1,8 +1,12 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
-{pkgs, ...}: {
+{outputs, pkgs, ...}: {
+
   imports = [
     ../mac_base
+   outputs.homeModules.sm-aerospace
   ];
+
+  sm-aerospace.enable = true;
 
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
@@ -32,4 +36,5 @@
       '';
     };
   };
+
 }

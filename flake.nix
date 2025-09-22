@@ -102,6 +102,9 @@
       };
     };
 
+    # Custom home-manager modules
+    homeModules = import ./modules;
+
     # NixOS configs.
     nixosConfigurations = {
       laptop-server = nixpkgs.lib.nixosSystem {
