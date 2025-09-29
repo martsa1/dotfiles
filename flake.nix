@@ -133,6 +133,12 @@
         modules = [./machines/xps_laptop/default.nix];
         extraSpecialArgs = {inherit inputs outputs;};
       };
+
+      "sam@k1" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [./machines/k1/default.nix];
+        extraSpecialArgs = {inherit inputs outputs;};
+      };
     };
 
     # Custom home-manager modules
@@ -163,7 +169,6 @@
           # }
         ];
       };
-
 
       k1 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
