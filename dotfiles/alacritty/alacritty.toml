@@ -42,7 +42,7 @@ blinking = "On"
 shape = "Block"
 
 [font]
-size = 9.0
+size = 12.0
 
 [font.bold]
 family = "FiraMono Nerd Font"
