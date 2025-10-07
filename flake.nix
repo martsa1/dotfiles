@@ -89,7 +89,7 @@
         extraSpecialArgs = {inherit inputs outputs;};
       };
 
-      "sam.martin@WSAC02G100AQ72X" = home-manager.lib.homeManagerConfiguration {
+      "samuel@samuel-martin-brown" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         modules = [./machines/mac_dev/default.nix];
         extraSpecialArgs = {inherit inputs outputs;};

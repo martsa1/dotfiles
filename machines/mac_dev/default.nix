@@ -13,19 +13,22 @@
     # TODO - setup Firefox via NUR or flakes using: https://github.com/toonn/nix-config/blob/master/darwin/apps/firefox/default.nix
     # NOTE: Instructions related to NUR: https://github.com/nix-community/NUR#how-to-use
     btop
-    ccache
-    clang-tools
-    poetry
-    universal-ctags
+    git
+    # poetry
+    # niversal-ctags
     #ncdu
-    ninja
-    pkg-config
+    # pkg-config
     uv
   ];
 
+  programs = {
+    alacritty = {
+      enable = true;
+    };
+  };
   # Setup core details for home-manager
-  home.username = "sam.martin";
-  home.homeDirectory = "/Users/sam.martin";
+  home.username = "samuel";
+  home.homeDirectory = "/Users/samuel";
 
   home.file = {
     # Attempt to configure the GPG agent...
