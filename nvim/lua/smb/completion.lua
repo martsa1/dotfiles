@@ -120,8 +120,7 @@ require("neodev").setup(
 	}
 )
 
-local lspconfig = require("lspconfig")
-lspconfig.pylsp.setup {
+vim.lsp.config('pylsp', {
     capabilities = capabilities,
     settings = {
         pylsp = {
@@ -163,8 +162,10 @@ lspconfig.pylsp.setup {
         }
     }
 }
+)
+vim.lsp.enable('pylsp')
 
-lspconfig.ruff.setup{
+vim.lsp.config('ruff', {
     capabilities = capabilities,
     init_options = {
         settings = {
@@ -173,6 +174,8 @@ lspconfig.ruff.setup{
         }
     }
 }
+)
+vim.lsp.enable('ruff')
 
 -- Commented lspconfig for clangd as its called internally by clangd-extensions.
 require("clangd_extensions").setup {
@@ -183,7 +186,7 @@ require("clangd_extensions").setup {
     }
 }
 
-lspconfig.clangd.setup {
+vim.lsp.config('clangd', {
     capabilities = capabilities,
     cmd = {
         "clangd",
@@ -203,6 +206,8 @@ lspconfig.clangd.setup {
         )
     end
 }
+)
+vim.lsp.enable('clangd')
 
 -- Setup rust-tools, which provides some extensions beyond the base lsp-config for rust-analyzer
 local rt = require("rust-tools")
@@ -212,20 +217,25 @@ rt.setup(
         capabilities = capabilities
     }
 )
--- Hopefully not needed when using rust-tools above
--- lspconfig.rust_analyzer.setup{capabilities = capabilities}
 
-lspconfig.cmake.setup {capabilities = capabilities}
-lspconfig.bashls.setup {capabilities = capabilities}
-lspconfig.nil_ls.setup {capabilities = capabilities}
-lspconfig.terraformls.setup {capabilities = capabilities}
-lspconfig.cucumber_language_server.setup {capabilities = capabilities}
-lspconfig.graphql.setup {capabilities = capabilities}
-lspconfig.zls.setup {capabilities = capabilities}
+vim.lsp.config('cmake', {capabilities = capabilities})
+vim.lsp.enable('cmake')
+vim.lsp.config('bashls', {capabilities = capabilities})
+vim.lsp.enable('bashls')
+vim.lsp.config('nil_ls', {capabilities = capabilities})
+vim.lsp.enable('nil_ls')
+vim.lsp.config('terraformls', {capabilities = capabilities})
+vim.lsp.enable('terraformls')
+vim.lsp.config('cucumber_language_server', {capabilities = capabilities})
+vim.lsp.enable('cucumber_language_server')
+vim.lsp.config('graphql', {capabilities = capabilities})
+vim.lsp.enable('graphql')
+vim.lsp.config('zls', {capabilities = capabilities})
+vim.lsp.enable('zls')
 
 -- JSON and Yaml LSP setup to use SchemaStore
 local schemastore = require("schemastore")
-lspconfig.jsonls.setup {
+vim.lsp.config('jsonls', {
     capabilities = capabilities,
     settings  = {
         json = {
@@ -234,10 +244,12 @@ lspconfig.jsonls.setup {
         }
     }
 }
+)
+vim.lsp.enable('jsonls')
 
 -- TODO: How to get this to load per-project settings I wonder?
 -- https://github.com/neovim/nvim-lspconfig/wiki/Project-local-settings#configure-in-your-personal-settings-initlua
-lspconfig.yamlls.setup {
+vim.lsp.config('yamlls', {
     capabilities = capabilities,
     settings = {
         yaml = {
@@ -307,10 +319,11 @@ lspconfig.yamlls.setup {
         }
     }
 }
+)
+vim.lsp.enable('yamlls')
 
 -- Setup lua_ls and enable call snippets for neovim config
-lspconfig.lua_ls.setup(
-    {
+vim.lsp.config('lua_ls', {
         -- settings = {
         --   Lua = {
         --     completion = {
@@ -321,6 +334,7 @@ lspconfig.lua_ls.setup(
         capabilities = capabilities
     }
 )
+vim.lsp.enable('lua_ls')
 
 require("typescript-tools").setup {
     capabilities = capabilities,
@@ -341,7 +355,8 @@ require("typescript-tools").setup {
         },
     },
 }
-lspconfig.eslint.setup {capabilities = capabilities}
+vim.lsp.config('eslint', {capabilities = capabilities})
+vim.lsp.enable('eslint')
 
 
 -- Attempt to integrate Copilot integration with cmp completion window
