@@ -25,6 +25,24 @@
     alacritty = {
       enable = true;
     };
+
+    ssh = {
+      enable = true;
+      includes = ["config_work"];
+      matchBlocks = {
+        "*" = {
+          identitiesOnly = true;
+        };
+        "github.com" = {
+          identityFile = "~/.ssh/id_ed25519.watchtowr";
+          user = "git";
+        };
+        "git.home" = {
+          identityFile = "~/.ssh/id_rsa.github";
+          user = "gitea";
+        };
+      };
+    };
   };
   # Setup core details for home-manager
   home.username = "samuel";
@@ -39,5 +57,6 @@
       '';
     };
   };
+
 
 }
