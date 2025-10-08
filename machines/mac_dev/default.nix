@@ -1,5 +1,5 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
-{outputs, pkgs, ...}: {
+{outputs, pkgs, lib, ...}: {
 
   imports = [
     ../mac_base
@@ -26,6 +26,23 @@
       enable = true;
     };
 
+    git = {
+      userName = "Sam Martin-Brown";
+      userEmail = lib.mkForce "samuel.martin-brown@watchtowr.com";
+
+      signing.signByDefault = true;
+
+      includes = [
+        { path = "~/.config/git/work"; }
+      ];
+
+      extraConfig = {
+        merge = {
+          tool = "meld";
+        };
+    };
+    };
+
     ssh = {
       enable = true;
       includes = ["config_work"];
@@ -33,10 +50,10 @@
         "*" = {
           identitiesOnly = true;
         };
-        "github.com" = {
-          identityFile = "~/.ssh/id_ed25519.watchtowr";
-          user = "git";
-        };
+        # "github.com" = {
+        #   identityFile = "~/.ssh/id_rsa.github";
+        #   user = "git";
+        # };
         "git.home" = {
           identityFile = "~/.ssh/id_rsa.github";
           user = "gitea";
