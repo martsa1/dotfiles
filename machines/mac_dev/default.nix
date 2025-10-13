@@ -13,12 +13,18 @@
     # TODO - setup Firefox via NUR or flakes using: https://github.com/toonn/nix-config/blob/master/darwin/apps/firefox/default.nix
     # NOTE: Instructions related to NUR: https://github.com/nix-community/NUR#how-to-use
     btop
+    flameshot
     git
-    # poetry
-    # niversal-ctags
-    #ncdu
-    # pkg-config
+    iproute2mac
     uv
+
+
+    postgresql
+    pre-commit
+    # python311
+
+    spotify
+
   ];
 
   programs = {
@@ -36,16 +42,22 @@
         { path = "~/.config/git/work"; }
       ];
 
+      ignores = [
+        "tags"
+        "shell.nix"
+        "flake.nix"
+      ];
+
+
       extraConfig = {
         merge = {
           tool = "meld";
         };
-    };
+      };
     };
 
     ssh = {
       enable = true;
-      includes = ["config_work"];
       matchBlocks = {
         "*" = {
           identitiesOnly = true;
@@ -59,8 +71,21 @@
           user = "gitea";
         };
       };
+      includes = ["config_work"];
     };
   };
+
+  services = {
+    # TODO: Can I add support for mac flameshot service similar to Linux?
+    # flameshot = {
+    #   enable = true;
+    # };
+  };
+
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
+
   # Setup core details for home-manager
   home.username = "samuel";
   home.homeDirectory = "/Users/samuel";
