@@ -190,3 +190,10 @@ function fpm() {
 
 # gpg-agent wants this set:
 export GPG_TTY=$(tty)
+
+# Homebrew
+if [ -f "/opt/homebrew/bin/brew" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  export PATH="${PATH}:/opt/homebrew/bin"
+fi
+
