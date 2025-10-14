@@ -12,6 +12,10 @@
     nixpkgs_old.url = "github:nixos/nixpkgs/44b4123568a045a955db48c4965f0dcf4764e9c2";
 
 
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+    };
+
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
@@ -22,21 +26,19 @@
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
     };
 
     nixgl = {
       url = "github:guibou/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
 
     pulseaudio-listener = {
       url = "github:martsa1/pulseaudio-source-listener";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    wezterm = {
-      url = "github:wez/wezterm/main?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
     };
   };
 
@@ -48,7 +50,6 @@
     flake-utils,
     nixgl,
     pulseaudio-listener,
-    wezterm,
     ...
   } @ inputs: let
     inherit (self) outputs;
