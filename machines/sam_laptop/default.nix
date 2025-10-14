@@ -1,6 +1,7 @@
 {pkgs, ...}: rec {
   imports = [
     ../linux_base
+    ../../modules/home-manager
   ];
 
   home.username = "sam";
@@ -48,4 +49,10 @@
       foreground = "#f8f8f2";
     };
   };
+
+  personal = {
+    tmux.enable = true;
+    # rofi.enable = true; # Uncomment as you add more modules
+  };
 }
+

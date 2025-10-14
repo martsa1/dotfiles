@@ -14,7 +14,7 @@
     #xq  - Bundled with yq??
     arandr
     awscli2
-    clang-tools_16 # C++ stuff for work...
+    clang-tools # C++ stuff for work...
     claude-code
     cmake-language-server
     cpio
