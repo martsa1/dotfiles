@@ -1,0 +1,101 @@
+# PyTest Options
+[tool.pytest.ini_options]
+addopts = "--strict-markers"
+markers = [
+    "integration: Used for tests which may take some time, and may test larger parts of RE at once.",
+    "needs_linux: Mark that a test requires a linux OS to run",
+    "needs_darwin: Mark that a test requires MacOS to run",
+    "needs_win32: Mark that a test requires Windows to run",
+    "needs_unix: Mark that a test requires a Unix OS to run",
+]
+log_level = "DEBUG"
+log_format = "%(asctime)s.%(msecs)03d %(levelname)s %(message)s [%(module)s:%(lineno)d]"
+log_cli = false
+log_cli_level = "DEBUG"
+log_cli_format = "%(asctime)s.%(msecs)03d %(levelname)s %(message)s"
+log_file_level = "DEBUG"
+log_file_format = "%(asctime)s.%(msecs)03d %(levelname)s %(message)s"
+junit_log_passing_tests = true
+junit_logging = "log"
+junit_duration_report = "call"
+
+[tool.ruff]
+# Don't try to lint explcicitly weird python code...
+line-length = 79
+preview = true
+respect-gitignore = true
+target-version = "py311"
+
+[tool.ruff.lint]
+unfixable = [
+    "ERA001"  # Commented code, removed by default but can have false-positives...
+]
+
+select = [
+    "ALL"
+]
+
+ignore = [
+    "CPY",  # https://docs.astral.sh/ruff/rules/#flake8-copyright-cpy
+    "D105",  # https://docs.astral.sh/ruff/rules/undocumented-magic-method/
+    "D107", # https://docs.astral.sh/ruff/rules/undocumented-public-init/
+    "D203",  # https://docs.astral.sh/ruff/rules/incorrect-blank-line-before-class/
+    "D203",  # https://docs.astral.sh/ruff/rules/one-blank-line-before-class/
+    "D401", # https://docs.astral.sh/ruff/rules/non-imperative-mood/
+    "DOC201",  # https://docs.astral.sh/ruff/rules/docstring-missing-returns/
+    "DOC501",  # https://docs.astral.sh/ruff/rules/docstring-missing-exception/
+    "ERA001",  # https://docs.astral.sh/ruff/rules/#flake8-copyright-cpy
+    "G004",  # https://docs.astral.sh/ruff/rules/logging-f-string/
+    "S404",  # https://docs.astral.sh/ruff/rules/suspicious-subprocess-import/
+    "S603",  # https://docs.astral.sh/ruff/rules/subprocess-without-shell-equals-true/
+    "T201",  # https://docs.astral.sh/ruff/rules/print/
+]
+
+[tool.ruff.lint.extend-per-file-ignores]
+# Allow assertions in test cases
+# Allow test cases to ignore privacy conventions
+"tests/*" = ["S101", "SLF001"]
+
+[tool.ruff.lint.isort]
+force-wrap-aliases = true
+combine-as-imports = true
+lines-between-types = 1
+
+[tool.ruff.lint.mccabe]
+max-complexity = 8
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.isort]
+atomic = true
+include_trailing_comma = true
+line_length = 79
+lines_between_types = 1
+# vertical hanging indent style wrapping, details: https://pycqa.github.io/isort/docs/configuration/multi_line_output_modes.html
+multi_line_output = 3
+use_parentheses = true
+
+
+[tool.mypy]
+strict=true
+
+# The following are not encompassed by strict
+allow_redefinition = true
+disallow_any_unimported = true
+ignore_errors = false
+ignore_missing_imports = true
+implicit_reexport = false
+local_partial_types = true
+mypy_path = "type_stubs"
+no_implicit_optional = true
+strict_optional = true
+warn_no_return = true
+warn_unreachable = true
+
+# Try to type everything...
+follow_untyped_imports = true
+follow_imports_for_stubs = true
+
+files = ["."]
+exclude_gitignore = true
