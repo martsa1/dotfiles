@@ -5,6 +5,14 @@
   outputs,
   ...
 }:
+
+let
+  nvimPythonEnv = pkgs.python3.withPackages (ps: with ps; [
+    mypy
+    pylsp-mypy
+    python-lsp-server
+  ]);
+in
 {
   imports = [
     # Enable and manage tmux via home-manager
@@ -93,7 +101,20 @@
     neovim = {
       enable = true;
       package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
-      extraPackages = [pkgs.gcc];
+      extraPackages = with pkgs; [
+        clang-tools
+        cmake-language-server
+        gcc
+        nixd
+        nodePackages.bash-language-server
+        nodePackages.lua-fmt
+        nodePackages.typescript-language-server
+        nvimPythonEnv
+        ruff
+        vscode-langservers-extracted
+        yaml-language-server
+        zls
+      ];
       viAlias = false;
       #extraConfig = builtins.readFile ../../nvim/init.vim;
       extraLuaConfig = builtins.readFile ../../nvim/init.lua;
