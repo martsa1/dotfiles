@@ -59,6 +59,12 @@
       inputs.nixgl.overlay
 
       (final: prev: {
+        antlr4_9 = prev.antlr4_9.overrideAttrs ( old: {
+          cmakeFlags = old.cmakeFlags ++ [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.10" ];
+        });
+      })
+
+      (final: prev: {
         dunst-dracula-theme = prev.callPackage ./pkgs/dunst-dracula-theme {};
         # gtk-dracula-icons = prev.callPackage ./pkgs/gtk-dracula-icons {};
         i3-config = prev.callPackage ./pkgs/i3-config {};
@@ -92,7 +98,13 @@
 
       "samuel@samuel-martin-brown" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        modules = [./machines/mac_dev/default.nix];
+        modules = [
+          ({
+            nixpkgs.overlays = outputs.overlays;
+          })
+
+          ./machines/mac_dev/default.nix
+        ];
         extraSpecialArgs = {inherit inputs outputs;};
       };
 
