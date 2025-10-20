@@ -123,38 +123,43 @@ in
     git = {
       enable = true;
 
-      userName = "Sam Martin-Brown";
-      userEmail = "Nivekkas@gmail.com";
+      settings = {
+        user.name = "Sam Martin-Brown";
+        user.email = "Nivekkas@gmail.com";
 
-      delta.enable = true;
-      delta.options = {
-        line-numbers = true;
-        syntax-theme = "Dracula";
-        tabs = 4;
-      };
-
-      signing.signByDefault = true;
-      # Setting this option might override default signing key selection...?
-      #signing.key = "61CB737879759A958B6B886626E45D5144EF59EA";
-      signing.key = null;
-
-      aliases = {
-        d = "diff";
-      };
-
-      ignores = [
-        "tags"
-      ];
-
-      extraConfig = {
-        init = {
-          defaultBranch = "main";
+        delta.enable = true;
+        delta.options = {
+          line-numbers = true;
+          syntax-theme = "Dracula";
+          tabs = 4;
         };
 
-        "mergetool \"nvim\"" = {
-          cmd = "nvim -f \"$BASE\"\"$LOCAL\"\"$REMOTE\"\"$MERGED\" ";
+        signing.signByDefault = true;
+        # Setting this option might override default signing key selection...?
+        #signing.key = "61CB737879759A958B6B886626E45D5144EF59EA";
+        # signing.key = null;
+
+        aliases = {
+          d = "diff";
+        };
+
+        # ignores = [
+        #   "tags"
+        # ];
+
+        extraConfig = {
+          init = {
+            defaultBranch = "main";
+          };
+
+          "mergetool \"nvim\"" = {
+            cmd = "nvim -f \"$BASE\"\"$LOCAL\"\"$REMOTE\"\"$MERGED\" ";
+          };
         };
       };
+    };
+    delta = {
+      enableGitIntegration = true;
     };
 
     # Enable FZF

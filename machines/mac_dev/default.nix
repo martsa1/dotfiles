@@ -33,34 +33,42 @@
     };
 
     git = {
-      userName = "Sam Martin-Brown";
-      userEmail = lib.mkForce "samuel.martin-brown@watchtowr.com";
+      settings = {
+        user.name = lib.mkForce "Sam Martin-Brown";
+        user.email = lib.mkForce "samuel.martin-brown@watchtowr.com";
 
-      signing.signByDefault = true;
+        signing.signByDefault = true;
 
-      includes = [
-        { path = "~/.config/git/work"; }
-      ];
+        # includes = [
+        #   { path = "~/.config/git/work"; }
+        # ];
 
-      ignores = [
-        "tags"
-        "shell.nix"
-        "flake.nix"
-      ];
+        # ignores = [
+        #   "tags"
+        #   "shell.nix"
+        #   "flake.nix"
+        # ];
 
 
-      extraConfig = {
-        merge = {
-          tool = "meld";
+        extraConfig = {
+          merge = {
+            tool = "meld";
+          };
         };
       };
     };
 
     ssh = {
       enable = true;
+      enableDefaultConfig = false;
       matchBlocks = {
         "*" = {
           identitiesOnly = true;
+          forwardAgent = false;
+          hashKnownHosts = false;
+          userKnownHostsFile = "~/.ssh/known_hosts";
+          controlMaster = "no";
+          controlPersist = "no";
         };
         # "github.com" = {
         #   identityFile = "~/.ssh/id_rsa.github";
