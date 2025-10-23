@@ -44,8 +44,6 @@ cmp.setup(
         preselect = cmp.PreselectMode.None,
         sources = cmp.config.sources(
             {
-				-- Copilot Source
-				{ name = "copilot", label="Copilot" },
 				-- Everything else...
                 {name = "nvim_lsp", label="LSP"},
                 {name = "cmp-nvim-lsp-signature-help", label="LSP-SigHelp"},
@@ -144,7 +142,10 @@ vim.lsp.config('pylsp', {
                 },
                 pylsp_mypy = {
                     enabled = true,
-                    live_mode = true
+                    dmypy = true,
+                    report_progress = true,
+
+                    -- live_mode = true
                 },
                 -- rope_autoimport = {
                 --    enabled = true,
@@ -163,7 +164,6 @@ vim.lsp.config('pylsp', {
     }
 }
 )
-vim.lsp.enable('pylsp')
 
 vim.lsp.config('ruff', {
     capabilities = capabilities,
@@ -232,6 +232,7 @@ vim.lsp.config('graphql', {capabilities = capabilities})
 vim.lsp.enable('graphql')
 vim.lsp.config('zls', {capabilities = capabilities})
 vim.lsp.enable('zls')
+vim.lsp.enable('zuban')
 
 -- JSON and Yaml LSP setup to use SchemaStore
 local schemastore = require("schemastore")

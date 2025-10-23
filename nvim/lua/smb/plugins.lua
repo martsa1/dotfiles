@@ -285,49 +285,9 @@ require("packer").startup(
         use "Xuyuanp/nerdtree-git-plugin"
 
 		-- LLM integrations
-		use {
-			"zbirenbaum/copilot.lua",
-			cmd = "Copilot",
-			event = "InsertEnter",
-			config = function()
-				require("copilot").setup({
-					-- Defer to nvim-cmp/avante
-					suggestion = { enabled = false },
-					panel = { enabled = false },
-				})
-			end,
-		}
-		-- TODO: Integrate co-pilot into nvim-cmp
-		use {
-			"zbirenbaum/copilot-cmp",
-			after = { "copilot.lua" },
-			config = function ()
-				require("copilot_cmp").setup()
-			end
-		}
-
-    use { "MunifTanjim/nui.nvim" }
 
     use {
-			'yetone/avante.nvim',
-      requires = {
-				{"MeanderingProgrammer/render-markdown.nvim"},
-				{"MunifTanjim/nui.nvim"},
-				{"nvim-lua/plenary.nvim"},
-				{"stevearc/dressing.nvim"},
-      },
-      branch = 'main',
-      run = 'make',
-      opts = {
-        provider = "copilot",
-        -- Some warnings about potential token creation rates... (hope to disable auto-providing in any case though)
-        auto_suggestsions_provider = "copilot",
-        chat = "copilot"
-      },
-      config = function()
-        require('avante_lib').load()
-        require('avante').setup()
-      end
+        "folke/snacks.nvim",
     }
 
 
@@ -379,6 +339,19 @@ end
 
 -- Configure intentline stuff
 require("ibl").setup()
+
+---@type snacks.Config
+require("snacks").setup({
+	picker = { enabled = true },
+	scroll = { enabled = true },
+	words = { enabled = true },
+	input = { enabled = true },
+	bigfile = {
+		enabled = true,
+		notify = true,
+		size = 10 * 1024 * 1024,
+	},
+})
 
 -- Configure LSP signature help
 -- Options are here: https://github.com/ray-x/lsp_signature.nvim?tab=readme-ov-file#full-configuration-with-default-values
