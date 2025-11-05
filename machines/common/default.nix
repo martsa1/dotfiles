@@ -114,6 +114,7 @@ in
         vscode-langservers-extracted
         yaml-language-server
         zls
+        zuban
       ];
       viAlias = false;
       #extraConfig = builtins.readFile ../../nvim/init.vim;

@@ -118,52 +118,54 @@ require("neodev").setup(
 	}
 )
 
-vim.lsp.config('pylsp', {
-    capabilities = capabilities,
-    settings = {
-        pylsp = {
-            plugins = {
-                configurationSources = {"flake8"},
-                flake8 = {
-                    enabled = true
-                },
-                jedi_completion = {
-                    eager = true, -- Attempts to eagerly resolve documentation and detail.
-                    --rename = false
-                },
-                pycodestyle = {
-                    enabled = false
-                },
-                pyflakes = {
-                    enabled = true
-                },
-                pylint = {
-                    enabled = false
-                },
-                pylsp_mypy = {
-                    enabled = true,
-                    dmypy = true,
-                    report_progress = true,
-
-                    -- live_mode = true
-                },
-                -- rope_autoimport = {
-                --    enabled = true,
-                --    completions = {
-                --        enabled = true
-                --    },
-                --    code_actions = {
-                --        enabled = true
-                --    },
-                -- },
-                -- rope_completion = {
-                --    enabled = true
-                -- },
-            }
-        }
-    }
-}
-)
+-- vim.lsp.config('pylsp', {
+--     capabilities = capabilities,
+--     settings = {
+--         pylsp = {
+--             plugins = {
+--                 configurationSources = {"flake8"},
+--                 flake8 = {
+--                     enabled = true
+--                 },
+--                 jedi_completion = {
+--                     eager = true, -- Attempts to eagerly resolve documentation and detail.
+--                     --rename = false
+--                 },
+--                 pycodestyle = {
+--                     enabled = false
+--                 },
+--                 pyflakes = {
+--                     enabled = true
+--                 },
+--                 pylint = {
+--                     enabled = false
+--                 },
+--                 pylsp_mypy = {
+--                     enabled = true,
+--                     dmypy = true,
+--                     report_progress = true,
+--
+--                     -- live_mode = true
+--                 },
+--                 -- rope_autoimport = {
+--                 --    enabled = true,
+--                 --    completions = {
+--                 --        enabled = true
+--                 --    },
+--                 --    code_actions = {
+--                 --        enabled = true
+--                 --    },
+--                 -- },
+--                 -- rope_completion = {
+--                 --    enabled = true
+--                 -- },
+--             }
+--         }
+--     }
+-- }
+-- )
+-- vim.lsp.config('zuban')
+vim.lsp.enable('zuban')
 
 vim.lsp.config('ruff', {
     capabilities = capabilities,
