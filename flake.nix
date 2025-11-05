@@ -96,7 +96,7 @@
         extraSpecialArgs = {inherit inputs outputs;};
       };
 
-      "samuel@samuel-martin-brown" = home-manager.lib.homeManagerConfiguration {
+      "samuel@samuel-mac" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         modules = [
           ({

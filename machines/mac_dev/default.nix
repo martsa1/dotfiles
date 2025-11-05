@@ -10,22 +10,21 @@
 
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
-    # TODO - setup Firefox via NUR or flakes using: https://github.com/toonn/nix-config/blob/master/darwin/apps/firefox/default.nix
-    # NOTE: Instructions related to NUR: https://github.com/nix-community/NUR#how-to-use
+    # _1password-gui  -- Fails detecting it's not installed in the right place...
     btop
-    discrete-scroll
+    code-cursor
     flameshot
     git
+    google-chrome
     iproute2mac
-    uv
-
-
+    notion-app
     postgresql
     pre-commit
-    # python311
-
+    slack
     spotify
-
+    # teams -- Fails to store login data for unknown reasons...
+    uv
+    # python311
   ];
 
   programs = {

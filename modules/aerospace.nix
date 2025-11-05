@@ -25,7 +25,11 @@ in {
       userSettings = {
         # You can use it to add commands that run after AeroSpace startup.
         # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-        after-startup-command = [];
+        after-startup-command = [
+          "exec-and-forget ${pkgs.discrete-scroll}/bin.discretescroll"
+          "exec-and-forget ${pkgs.autoraise}/bin/autoraise"
+          "exec-and-forget ${pkgs.jankyborders}/bin/borders"
+        ];
 
         # Start AeroSpace at login
         start-at-login = true;
