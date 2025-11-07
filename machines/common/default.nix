@@ -136,11 +136,12 @@ in
         };
 
         signing.signByDefault = true;
+        commit.gpgSign = true;
         # Setting this option might override default signing key selection...?
         #signing.key = "61CB737879759A958B6B886626E45D5144EF59EA";
         # signing.key = null;
 
-        aliases = {
+        alias = {
           d = "diff";
         };
 

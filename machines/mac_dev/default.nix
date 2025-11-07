@@ -13,6 +13,8 @@
     # _1password-gui  -- Fails detecting it's not installed in the right place...
     btop
     code-cursor
+    colima
+    docker
     flameshot
     git
     google-chrome
@@ -22,9 +24,10 @@
     pre-commit
     slack
     spotify
+    tree
     # teams -- Fails to store login data for unknown reasons...
     uv
-    # python311
+    yq
   ];
 
   programs = {
@@ -36,11 +39,16 @@
       settings = {
         user.name = lib.mkForce "Sam Martin-Brown";
         user.email = lib.mkForce "samuel.martin-brown@watchtowr.com";
+        user.signingKey = lib.mkForce "39910AEC07E0F211";
 
-        signing.signByDefault = true;
+        # signing.signByDefault = true;
 
         # includes = [
-        #   { path = "~/.config/git/work"; }
+        #   {
+        #     path = "/Users/samuel/.config/git/config_work";
+        #     condition = null;
+        #   }
+        #   # "~/.config/git/config_work"
         # ];
 
         # ignores = [
@@ -50,11 +58,11 @@
         # ];
 
 
-        extraConfig = {
-          merge = {
-            tool = "meld";
-          };
-        };
+        # extraConfig = {
+        #   merge = {
+        #     tool = "meld";
+        #   };
+        # };
       };
     };
 
