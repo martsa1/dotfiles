@@ -169,6 +169,16 @@
           identityFile = "~/.ssh/id_rsa.github";
           user = "gitea";
         };
+
+        "laptop-server.home" = {
+            identityFile = "~/.ssh/id_rsa.abitmoredepth";
+            user = "sam";
+        };
+
+        "k1.home" = {
+          identityFile = "~/.ssh/id_rsa.abitmoredepth";
+          user = "sam";
+        };
       };
     };
 

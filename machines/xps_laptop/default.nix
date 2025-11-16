@@ -22,6 +22,7 @@
     ffmpeg
     prusa-slicer
     steam
+    teams-for-linux
     # tartube
     vlc
     yubioath-flutter
@@ -78,5 +79,7 @@
       # pinentryFlavor = "qt";
       pinentry.package = pkgs.pinentry-all;
     };
+
+    trayscale.enable = true;
   };
 }
