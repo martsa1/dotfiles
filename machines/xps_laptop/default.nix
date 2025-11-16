@@ -1,10 +1,13 @@
-{pkgs, lib, ...}: rec {
+{pkgs, lib, outputs, ...}: rec {
   imports = [
     ../linux_base
+    outputs.homeModules.sm-ssh
   ];
 
   home.username = "sam";
   home.homeDirectory = "/home/sam";
+
+  sm-ssh.enable = true;
 
   smi3config = {
     enable = true;
