@@ -32,6 +32,7 @@ in {
 
     services.podman = {
       enable = true;
+
       containers.jellyfin = {
         autoStart = true;
         description = "Jellyfin server";
@@ -45,7 +46,7 @@ in {
         devices = [
           # VAAPI Devices
           "/dev/dri/renderD128:/dev/dri/renderD128"
-          "/dev/dri/card0:/dev/dri/card0"
+          "/dev/dri/card1:/dev/dri/card1"
         ];
 
         volumes = [

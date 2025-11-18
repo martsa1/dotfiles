@@ -15,6 +15,7 @@
     ./gitea.nix
     ./home-assistant.nix
     ./jellyfin.nix
+    ./metube.nix
     ./step-ca.nix
     ./traefik.nix
   ];
@@ -147,15 +148,17 @@
 
   # Enable Tailscale
   services.tailscale = {
-    enable = true;
+    # Fucks with DNS... irritating!
+    enable = false;
   };
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
     8123
+    8096 # temp...
+    8097 # temp...
   ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
   networking.firewall = {
     enable = true;
     checkReversePath = "loose"; # Needed by tailscale
