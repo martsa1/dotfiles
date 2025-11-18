@@ -51,10 +51,10 @@
   };
 
   # Configure not to suspend when the lid is closed
-  services.logind = {
-    lidSwitch = "ignore";
-    lidSwitchDocked = "ignore";
-    lidSwitchExternalPower = "ignore";
+  services.logind.settings.Login = {
+    HandleLidSwitch = "ignore";
+    HandleLidSwitchDocked = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
   };
 
   networking.hostName = "laptop-server"; # Define your hostname.
@@ -75,7 +75,10 @@
   time.timeZone = "Europe/London";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.utf8";
+  i18n.defaultLocale = "en_GB.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ALL = "en_GB.UTF-8"; # This overrides all other LC_* settings.
+  };
 
   # Configure keymap in X11
   services.xserver = {
