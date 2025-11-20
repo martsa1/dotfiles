@@ -11,6 +11,7 @@
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
     # _1password-gui  -- Fails detecting it's not installed in the right place...
+    awscli2
     btop
     code-cursor
     colima
@@ -22,6 +23,7 @@
     notion-app
     postgresql
     pre-commit
+    signal-desktop-bin
     slack
     spotify
     tree
