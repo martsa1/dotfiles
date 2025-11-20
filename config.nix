@@ -1,1 +1,7 @@
-{allowUnfree = true;}
+{
+  allowUnfree = true;
+  trusted-users = [
+    "sam"
+    "samuel"
+  ];
+}
