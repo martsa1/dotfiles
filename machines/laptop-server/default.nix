@@ -35,7 +35,7 @@
   programs.gpg.enable = true;
   services.gpg-agent = {
     enable = true;
-    pinentryPackage = pkgs.pinentry;
+    pinentry.package = pkgs.pinentry-curses;
     grabKeyboardAndMouse = true;
   };
 
