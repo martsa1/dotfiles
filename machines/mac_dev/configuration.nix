@@ -5,14 +5,13 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs;
     [
-      alacritty
       git
       home-manager # I want to be able to manage my user without needing to elevate to root all the time...
-      lorri
     ];
 
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
+  users.users.samuel = {
+    home = "/Users/samuel";
+  };
 
   # Nix settings
   nix = {
@@ -24,6 +23,11 @@
       experimental-features = "nix-command flakes";
       # auto-optimise-store = true;
       # optimise.automatic = true;
+
+      trusted-users = [
+        "root"
+        "samuel"
+      ];
     };
     # Already set using symlink to nix.conf from dotfiles.
 
@@ -47,7 +51,7 @@
   };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true; # default shell on catalina
+  programs.zsh.enable = true;
 
   system = {
     #checks.verifyNixPath = true;
@@ -57,13 +61,14 @@
 
     # Used for backwards compatibility, please read the changelog before changing.
     # $ darwin-rebuild changelog
-    stateVersion = 4;
-  };
+    stateVersion = 6;
 
-  # Setup Lorri daemon
-  services.lorri = {
-    enable = true;
-    logFile = "/var/tmp/lorri.log";
+
+    # defaults = {
+    #   dock = {
+    #     autohide = true;
+    #   };
+    # };
   };
 
   # The platform the configuration will be used on.

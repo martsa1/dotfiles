@@ -19,10 +19,17 @@
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-darwin = {
+      url = "github:lnl7/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,6 +57,7 @@
     flake-utils,
     nixgl,
     pulseaudio-listener,
+    nix-darwin,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -141,6 +149,17 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
           }
+        ];
+      };
+    };
+
+    darwinConfigurations =  {
+      "samuel-mac" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { inherit inputs; };
+
+        modules = [
+          ./machines/mac_dev/configuration.nix
         ];
       };
     };
