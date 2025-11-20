@@ -149,7 +149,6 @@ in
         user.name = "Sam Martin-Brown";
         user.email = "Nivekkas@gmail.com";
 
-
         signing.signByDefault = true;
         commit.gpgsign = true;
         signing.format = "openpgp";
@@ -177,6 +176,9 @@ in
           cmd = "nvim -f \"$BASE\"\"$LOCAL\"\"$REMOTE\"\"$MERGED\" ";
         };
       };
+    };
+    delta = {
+      enableGitIntegration = true;
     };
 
     # Enable FZF
@@ -234,4 +236,3 @@ in
     };
   };
 }
-
