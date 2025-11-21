@@ -190,6 +190,7 @@
   # Enable Tailscale
   services.tailscale = {
     enable = true;
+    useRoutingFeatures = "client";
   };
 
   # Setup access to yubikey
