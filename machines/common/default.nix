@@ -121,6 +121,16 @@ in
       extraLuaConfig = builtins.readFile ../../nvim/init.lua;
     };
 
+    delta = {
+      enable = true;
+      enableGitIntegration = true;
+      options = {
+        line-numbers = true;
+        syntax-theme = "Dracula";
+        tabs = 4;
+      };
+    };
+
     git = {
       enable = true;
 
@@ -128,12 +138,6 @@ in
         user.name = "Sam Martin-Brown";
         user.email = "Nivekkas@gmail.com";
 
-        delta.enable = true;
-        delta.options = {
-          line-numbers = true;
-          syntax-theme = "Dracula";
-          tabs = 4;
-        };
 
         signing.signByDefault = true;
         commit.gpgSign = true;
@@ -159,9 +163,6 @@ in
           };
         };
       };
-    };
-    delta = {
-      enableGitIntegration = true;
     };
 
     # Enable FZF
