@@ -43,7 +43,7 @@ in
     nerd-fonts.noto
     nil
     nixd
-    nodePackages.lua-fmt # TODO: Only nvim should really need this...
+    # nodePackages.lua-fmt # TODO: Only nvim should really need this...
     nodePackages.bash-language-server # TODO: Only nvim should really need this...
     openmoji-color
     pass
@@ -107,7 +107,7 @@ in
         gcc
         nixd
         nodePackages.bash-language-server
-        nodePackages.lua-fmt
+        # nodePackages.lua-fmt
         nodePackages.typescript-language-server
         nvimPythonEnv
         ruff
