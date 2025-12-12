@@ -153,14 +153,16 @@ in
         #   "tags"
         # ];
 
-        extraConfig = {
-          init = {
-            defaultBranch = "main";
-          };
+        init = {
+          defaultBranch = "main";
+        };
 
-          "mergetool \"nvim\"" = {
-            cmd = "nvim -f \"$BASE\"\"$LOCAL\"\"$REMOTE\"\"$MERGED\" ";
-          };
+        merge = {
+          tool = "${pkgs.meld}/bin/meld";
+        };
+
+        "mergetool \"nvim\"" = {
+          cmd = "nvim -f \"$BASE\"\"$LOCAL\"\"$REMOTE\"\"$MERGED\" ";
         };
       };
     };
