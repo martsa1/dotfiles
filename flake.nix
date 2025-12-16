@@ -20,9 +20,23 @@
       url = "github:numtide/flake-utils";
     };
 
+    # Declarative homebrew setup
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-homebrew = {
+      url = "github:zhaofengli/nix-homebrew";
     };
 
     nix-darwin = {
@@ -51,13 +65,16 @@
 
   outputs = {
     self,
+    flake-utils,
+    home-manager,
+    homebrew-cask,
+    homebrew-core,
+    nix-darwin,
+    nix-homebrew,
+    nixgl,
     nixpkgs,
     nixpkgs_old,
-    home-manager,
-    flake-utils,
-    nixgl,
     pulseaudio-listener,
-    nix-darwin,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -166,9 +183,11 @@
     darwinConfigurations =  {
       "samuel-mac" = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs outputs; };
 
         modules = [
+          nix-homebrew.darwinModules.nix-homebrew
+          ./machines/mac_dev/homebrew.nix
           ./machines/mac_dev/configuration.nix
         ];
       };

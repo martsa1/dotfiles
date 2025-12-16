@@ -55,6 +55,7 @@
 
   system = {
     #checks.verifyNixPath = true;
+    primaryUser = "samuel";
 
     # Set Git commit hash for darwin-version.
     configurationRevision = config.rev or config.dirtyRev or null;
