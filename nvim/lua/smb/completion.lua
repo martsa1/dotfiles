@@ -118,54 +118,71 @@ require("neodev").setup(
 	}
 )
 
--- vim.lsp.config('pylsp', {
---     capabilities = capabilities,
+-- vim.lsp.enable('zuban')
+vim.lsp.config(
+    'pylsp',
+    {
+        capabilities = capabilities,
+        settings = {
+            pylsp = {
+                plugins = {
+                    configurationSources = {"flake8"},
+                    flake8 = {
+                        enabled = true
+                    },
+                    jedi_completion = {
+                        eager = true, -- Attempts to eagerly resolve documentation and detail.
+                        --rename = false
+                    },
+                    pycodestyle = {
+                        enabled = false
+                    },
+                    pyflakes = {
+                        enabled = false
+                    },
+                    pylint = {
+                        enabled = false
+                    },
+                    pylsp_mypy = {
+                        enabled = true,
+                        dmypy = false,  -- try to change this?
+                        report_progress = true,
+
+                        -- live_mode = true
+                    },
+                    -- rope_autoimport = {
+                    --    enabled = true,
+                    --    completions = {
+                    --        enabled = true
+                    --    },
+                    --    code_actions = {
+                    --        enabled = true
+                    --    },
+                    -- },
+                    -- rope_completion = {
+                    --    enabled = true
+                    -- },
+                }
+            }
+        }
+    }
+)
+-- vim.lsp.enable('pylsp')
+-- vim.lsp.config(
+--   'ty',
+--   {
 --     settings = {
---         pylsp = {
---             plugins = {
---                 configurationSources = {"flake8"},
---                 flake8 = {
---                     enabled = true
---                 },
---                 jedi_completion = {
---                     eager = true, -- Attempts to eagerly resolve documentation and detail.
---                     --rename = false
---                 },
---                 pycodestyle = {
---                     enabled = false
---                 },
---                 pyflakes = {
---                     enabled = true
---                 },
---                 pylint = {
---                     enabled = false
---                 },
---                 pylsp_mypy = {
---                     enabled = true,
---                     dmypy = true,
---                     report_progress = true,
---
---                     -- live_mode = true
---                 },
---                 -- rope_autoimport = {
---                 --    enabled = true,
---                 --    completions = {
---                 --        enabled = true
---                 --    },
---                 --    code_actions = {
---                 --        enabled = true
---                 --    },
---                 -- },
---                 -- rope_completion = {
---                 --    enabled = true
---                 -- },
---             }
---         }
---     }
--- }
+--       ty = {
+--         diagnosticMode = "openFilesOnly",
+--         inlayHints = {
+--           variableTypes = true,
+--           callArgumentNames = true,
+--         },
+--       },
+--     },
+--   },
 -- )
--- vim.lsp.config('zuban')
-vim.lsp.enable('zuban')
+vim.lsp.enable('ty')
 
 vim.lsp.config('ruff', {
     capabilities = capabilities,
@@ -234,7 +251,7 @@ vim.lsp.config('graphql', {capabilities = capabilities})
 vim.lsp.enable('graphql')
 vim.lsp.config('zls', {capabilities = capabilities})
 vim.lsp.enable('zls')
-vim.lsp.enable('zuban')
+
 
 -- JSON and Yaml LSP setup to use SchemaStore
 local schemastore = require("schemastore")

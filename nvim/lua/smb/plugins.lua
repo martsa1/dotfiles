@@ -197,6 +197,7 @@ require("packer").startup(
         -- Context-aware syntax highlighting
         use {
             "nvim-treesitter/nvim-treesitter",
+			-- TODO: Migrate to `main` - will need to re-write configs.
             branch = "master",
             run = function()
                 local ts_update = require("nvim-treesitter.install").update({with_sync = false})
@@ -308,6 +309,9 @@ require("nvim-treesitter.configs").setup {
     highlight = {
         enable = true -- false will disable the whole extension
     },
+	indent = {
+		enable = true
+	},
     incremental_selection = {
         enable = true,
         keymaps = {
