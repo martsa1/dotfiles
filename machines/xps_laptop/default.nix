@@ -36,8 +36,12 @@
 
   programs = {
     git = {
-      userName = "Sam Martin-Brown";
-      userEmail = lib.mkForce "Nivekkas@gmail.com";
+      settings = {
+        user = {
+          name = "Sam Martin-Brown";
+          email = lib.mkForce "Nivekkas@gmail.com";
+          };
+      };
 
       signing.signByDefault = true;
       # Setting this option might override default signing key selection...?

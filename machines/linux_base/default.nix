@@ -37,10 +37,10 @@
     signal-desktop
     spotify
     xclip
-    xfce.thunar
-    xfce.thunar-archive-plugin
-    xfce.thunar-volman
-    xfce.xfconf
+    thunar
+    thunar-archive-plugin
+    thunar-volman
+    xfconf
     xorg.xev
     xorg.xkill
     xorg.xprop
@@ -226,13 +226,6 @@
   services.flameshot.enable = true;
 
   # On linux systems, I tend to like to use meld for merge conflicts.
-  programs.git = {
-    extraConfig = {
-      merge = {
-        tool = "meld";
-      };
-    };
-  };
 
   # File setup for various RC/Config files etc.
   home.file = {
