@@ -25,6 +25,8 @@
 
     casks = [
       "1password"  # Requires install into /Applications - impossible with nix
+      "tunnelblick"  # not packaged for nix
+      # "docker-desktop"  # not packaged for nix
     ];
 
     taps = builtins.attrNames config.nix-homebrew.taps;

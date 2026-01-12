@@ -20,11 +20,15 @@
     git
     google-chrome
     iproute2mac
+    k9s
+    kubectl
+    nmap
     notion-app
     postgresql
     pre-commit
     signal-desktop-bin
     slack
+    ssm-session-manager-plugin
     spotify
     tree
     # teams -- Fails to store login data for unknown reasons...
