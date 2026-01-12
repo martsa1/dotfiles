@@ -3,13 +3,13 @@ set tabstop=4
 set expandtab
 set shiftwidth=4
 set softtabstop=4
+set encoding=utf-8
+set fileencoding=utf-8
 
 "find occurrences
 "nnoremap <leader>f :"zyiw !rgrep -n <C-R>z --exclude=*.pyc
 
 " original font monospace regular
-set encoding=utf-8
-set fileencoding=utf-8
 
 " Disable docstring window popup on code completion
 "augroup filetype_python
