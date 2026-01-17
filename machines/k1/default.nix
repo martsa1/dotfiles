@@ -48,7 +48,7 @@
   services = {
     gpg-agent = {
       enable = true;
-      pinentry.package = pkgs.pinentry;
+      pinentry.package = pkgs.pinentry-curses;
       grabKeyboardAndMouse = true;
     };
   };
