@@ -84,22 +84,6 @@
       inputs.nixgl.overlay
 
       (final: prev: {
-        # antlr4_9 = prev.antlr4_9.overrideAttrs ( old: {
-        #   cmakeFlags = old.cmakeFlags ++ [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.10" ];
-        # });
-        spotify = prev.spotify.overrideAttrs (oldAttrs: {
-          src =
-            if (prev.stdenv.isDarwin && prev.stdenv.isAarch64) then
-              prev.fetchurl {
-                url = "https://web.archive.org/web/20251029235406/https://download.scdn.co/SpotifyARM64.dmg";
-                hash = "sha256-0gwoptqLBJBM0qJQ+dGAZdCD6WXzDJEs0BfOxz7f2nQ=";
-              }
-            else
-              oldAttrs.src;
-        });
-      })
-
-      (final: prev: {
         dunst-dracula-theme = prev.callPackage ./pkgs/dunst-dracula-theme {};
         # gtk-dracula-icons = prev.callPackage ./pkgs/gtk-dracula-icons {};
         i3-config = prev.callPackage ./pkgs/i3-config {};
