@@ -139,6 +139,7 @@
       "libvirtd"
       "wheel"
       "networkmanager"
+      "adbusers"
     ];
     shell = pkgs.zsh;
   };
@@ -197,6 +198,8 @@
   services.udev.packages = [
     pkgs.yubikey-personalization
     pkgs.libu2f-host
+
+    # pkgs.android-udev-rules
   ];
   services.pcscd.enable = true;
 

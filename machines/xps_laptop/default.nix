@@ -19,6 +19,8 @@
   home.stateVersion = "22.05";
 
   home.packages = with pkgs; [
+    android-tools
+
     ffmpeg
     prusa-slicer
     steam
