@@ -92,6 +92,8 @@ require("packer").startup(
         -- Jenkinsfile linter integration
         use {"ckipp01/nvim-jenkinsfile-linter"}
 
+        use "chrisgrieser/nvim-lsp-endhints"
+
         -- Dracular theme is a nice Dark Theme
         use "dracula/vim"
 
@@ -161,6 +163,9 @@ require("packer").startup(
         -- Basic Jenkinsfile syntax highlighting etc.
         use {"martinda/Jenkinsfile-vim-syntax", ft = "Jenkinsfile"}
 
+        -- Rust specific LSP extensions
+        use "mrcjkb/rustaceanvim"
+
         -- Groovy syntax support
         use {"modille/groovy.vim", ft = "groovy"}
 
@@ -171,8 +176,12 @@ require("packer").startup(
         use "nelstrom/vim-visual-star-search"
 
         -- LSP configurations
-        use "neovim/nvim-lspconfig"
-        use "b0o/schemastore.nvim" -- Adds access to schemastore catalog
+        use {
+            "neovim/nvim-lspconfig",
+            requires = {
+                {"b0o/schemastore.nvim"}, -- Adds access to schemastore catalog
+            }
+        }
 
         -- Add colour highlighting for colours in NVim
         use "norcalli/nvim-colorizer.lua"
@@ -261,11 +270,6 @@ require("packer").startup(
         -- TODO: Possibly replace with nvim-tree/nvim-tree.lua
         use "scrooloose/nerdtree"
 
-        -- Rust specific LSP extensions
-        -- DEPRECATED: should switch to: https://github.com/mrcjkb/rustaceanvim
-        -- alternative looks more faff to integrate though...
-        use "simrat39/rust-tools.nvim"
-
         -- Source code folding pluggin
         -- TODO: Should be redundant in the treesitter era.
         --use "tmhedberg/SimpylFold"
@@ -340,6 +344,16 @@ if os.getenv("JENKINS_USER_ID") then
         }
     )
 end
+
+-- configure rustaceanvim
+require("lsp-endhints").setup({
+  label = {
+    truncateAtChars = 60,
+    -- padding = 1,
+    -- marginLeft = 0,
+    -- sameKindSeparator = ", ",
+  },
+})
 
 -- Configure intentline stuff
 require("ibl").setup()

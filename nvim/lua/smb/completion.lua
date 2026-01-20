@@ -118,55 +118,52 @@ require("neodev").setup(
 	}
 )
 
--- vim.lsp.enable('zuban')
-vim.lsp.config(
-    'pylsp',
-    {
-        capabilities = capabilities,
-        settings = {
-            pylsp = {
-                plugins = {
-                    configurationSources = {"flake8"},
-                    flake8 = {
-                        enabled = true
-                    },
-                    jedi_completion = {
-                        eager = true, -- Attempts to eagerly resolve documentation and detail.
-                        --rename = false
-                    },
-                    pycodestyle = {
-                        enabled = false
-                    },
-                    pyflakes = {
-                        enabled = false
-                    },
-                    pylint = {
-                        enabled = false
-                    },
-                    pylsp_mypy = {
-                        enabled = true,
-                        dmypy = false,  -- try to change this?
-                        report_progress = true,
-
-                        -- live_mode = true
-                    },
-                    -- rope_autoimport = {
-                    --    enabled = true,
-                    --    completions = {
-                    --        enabled = true
-                    --    },
-                    --    code_actions = {
-                    --        enabled = true
-                    --    },
-                    -- },
-                    -- rope_completion = {
-                    --    enabled = true
-                    -- },
-                }
-            }
-        }
-    }
-)
+-- vim.lsp.config('pylsp', {
+--     capabilities = capabilities,
+--     settings = {
+--         pylsp = {
+--             plugins = {
+--                 configurationSources = {"flake8"},
+--                 flake8 = {
+--                     enabled = true
+--                 },
+--                 jedi_completion = {
+--                     eager = true, -- Attempts to eagerly resolve documentation and detail.
+--                     --rename = false
+--                 },
+--                 pycodestyle = {
+--                     enabled = false
+--                 },
+--                 pyflakes = {
+--                     enabled = false
+--                 },
+--                 pylint = {
+--                     enabled = false
+--                 },
+--                 pylsp_mypy = {
+--                     enabled = true,
+--                     dmypy = false,
+--                     report_progress = true,
+--
+--                     -- live_mode = true
+--                 },
+--                 -- rope_autoimport = {
+--                 --    enabled = true,
+--                 --    completions = {
+--                 --        enabled = true
+--                 --    },
+--                 --    code_actions = {
+--                 --        enabled = true
+--                 --    },
+--                 -- },
+--                 -- rope_completion = {
+--                 --    enabled = true
+--                 -- },
+--             }
+--         }
+--     }
+-- }
+-- )
 -- vim.lsp.enable('pylsp')
 -- vim.lsp.config(
 --   'ty',
@@ -228,27 +225,25 @@ vim.lsp.config('clangd', {
 )
 vim.lsp.enable('clangd')
 
--- Setup rust-tools, which provides some extensions beyond the base lsp-config for rust-analyzer
-local rt = require("rust-tools")
-rt.setup(
-    {
-        server = {},
-        capabilities = capabilities
-    }
-)
 
 vim.lsp.config('cmake', {capabilities = capabilities})
 vim.lsp.enable('cmake')
+
 vim.lsp.config('bashls', {capabilities = capabilities})
 vim.lsp.enable('bashls')
+
 vim.lsp.config('nil_ls', {capabilities = capabilities})
 vim.lsp.enable('nil_ls')
+
 vim.lsp.config('terraformls', {capabilities = capabilities})
 vim.lsp.enable('terraformls')
+
 vim.lsp.config('cucumber_language_server', {capabilities = capabilities})
 vim.lsp.enable('cucumber_language_server')
+
 vim.lsp.config('graphql', {capabilities = capabilities})
 vim.lsp.enable('graphql')
+
 vim.lsp.config('zls', {capabilities = capabilities})
 vim.lsp.enable('zls')
 
