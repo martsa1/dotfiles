@@ -111,6 +111,7 @@ in
         nodePackages.typescript-language-server
         nvimPythonEnv
         ruff
+        rust-analyzer
         vscode-langservers-extracted
         yaml-language-server
         zls
