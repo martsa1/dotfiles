@@ -8,6 +8,7 @@
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
+    # nixpkgs.url = "github:nixos/nixpkgs/b8ba3ddc2d61a5197bfcd9e7f3476768be1bb07d";
     # Preserved as the last commit to grab nodeJS v18 from - needed for work stuff.
     nixpkgs_old.url = "github:nixos/nixpkgs/44b4123568a045a955db48c4965f0dcf4764e9c2";
 
