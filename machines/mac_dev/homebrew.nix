@@ -27,6 +27,11 @@
       "1password"  # Requires install into /Applications - impossible with nix
       "tunnelblick"  # not packaged for nix
       # "docker-desktop"  # not packaged for nix
+      "meld"  # nixpkgs version seems messed up on mac.
+    ];
+
+    brews = [
+      "falco"  # not packaged for nix yet
     ];
 
     taps = builtins.attrNames config.nix-homebrew.taps;
