@@ -116,7 +116,7 @@
     drivers = [pkgs.gutenprint pkgs.gutenprintBin];
   };
 
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -151,6 +151,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   # environment.systemPackages = [] # See packages.nix imported at top;
+
+  programs.steam = {
+    enable = true;
+    # remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    # dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    # localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
 
   # Enable ZSH.
   programs.zsh = {
