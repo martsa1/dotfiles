@@ -157,6 +157,10 @@
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
+    53
+    443
+    8443
+    22
     8123
     8096 # temp...
     8097 # temp...
