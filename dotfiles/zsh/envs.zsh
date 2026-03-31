@@ -93,6 +93,9 @@ else
   local PYTHON_VERSION=$($(which python) --version 2>/dev/null | sed -n 's/.*\(3\..\).*/\1/p')
 fi
 
+# Have UV default to `--locked` commands
+export UV_LOCKED=true
+
 
 #pyenv () {
 #  unset -f pyenv
