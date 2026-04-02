@@ -102,24 +102,28 @@ in
       enable = true;
       package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
       extraPackages = with pkgs; [
+        biome
         clang-tools
         cmake-language-server
         gcc
         nixd
         nodePackages.bash-language-server
-        # nodePackages.lua-fmt
         nodePackages.typescript-language-server
         nvimPythonEnv
         ruff
         rust-analyzer
+        tailwindcss-language-server
         vscode-langservers-extracted
+        vtsls
+        vue-language-server
         yaml-language-server
-        zls
-        zuban
+        # nodePackages.lua-fmt
+        # zuban
+        # zls
       ];
       viAlias = false;
       #extraConfig = builtins.readFile ../../nvim/init.vim;
-      extraLuaConfig = builtins.readFile ../../nvim/init.lua;
+      #initLua = builtins.readFile ../../nvim/init.lua;
     };
 
     delta = {
@@ -185,15 +189,10 @@ in
     "nixpkgs/config.nix".source = ../../config.nix;
     "alacritty/alacritty.toml".source = ../../dotfiles/alacritty/alacritty.toml;
 
-    #"nvim/init.vim".source = ../../nvim/config/standalone.vim;
-    "nvim/after".source = ../../nvim/after;
-    "nvim/after".recursive = true;
-    "nvim/lua".source = ../../nvim/lua;
-    "nvim/lua".recursive = true;
-    "nvim/snippets".source = ../../nvim/snippets;
-    "nvim/snippets".recursive = true;
+    # Direct symlink to repo nvim dir so edits apply without rebuild (no store copy).
+    "nvim".source = config.lib.file.mkOutOfStoreSymlink
+      "${config.home.homeDirectory}/.config/home-manager/nvim";
 
-    #"powerline".source = ../../dotfiles/powerline;
     "starship.toml".source = ../../dotfiles/starship/starship.toml;
   };
 
