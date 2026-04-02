@@ -244,6 +244,12 @@ vim.lsp.enable('cucumber_language_server')
 vim.lsp.config('graphql', {capabilities = capabilities})
 vim.lsp.enable('graphql')
 
+-- UI stuff with Vue
+vim.lsp.enable('biome')
+vim.lsp.enable('vue_ls')
+vim.lsp.enable('vtsls')
+vim.lsp.enable('tailwindcss')
+
 vim.lsp.config('zls', {capabilities = capabilities})
 vim.lsp.enable('zls')
 
