@@ -215,16 +215,25 @@ require("packer").startup(
         }
         use {"nvim-treesitter/playground", run = ":TSInstall query"}
 
-        -- AI integration
+        -- AI integration. Cursor ACP adapter; config runs on plugin load (like lazy.nvim).
         use {
           "olimorris/codecompanion.nvim",
-          config = function()
-            require("codecompanion").setup()
-          end,
           requires = {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
-          }
+          },
+          config = function()
+            require("codecompanion").setup({
+              interactions = {
+                  chat = {
+                    adapter = {
+                      name = "cursor_cli"
+                    },
+                  },
+              },
+              opts = { log_level = "DEBUG" },
+            })
+          end,
         }
 
 
