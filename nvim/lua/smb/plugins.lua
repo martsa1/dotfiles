@@ -119,18 +119,13 @@ require("lazy").setup({
     -- Base Terraform support
     { "hashivim/vim-terraform", ft = "terraform" },
 
-    -- Completion engine + sources (keep nvim-cmp for now; blink migration is Stage 2)
+    -- Completion engine (blink.cmp — replaces nvim-cmp and all cmp-* source plugins)
     {
-        "hrsh7th/nvim-cmp",
+        "saghen/blink.cmp",
+        version = "v0.*",
         dependencies = {
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-cmdline",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-nvim-lsp-signature-help",
-            "hrsh7th/cmp-nvim-lua",
-            "hrsh7th/cmp-path",
             "L3MON4D3/LuaSnip",
-            "saadparwaiz1/cmp_luasnip",
+            "rafamadriz/friendly-snippets",
         },
     },
 
@@ -235,7 +230,7 @@ require("lazy").setup({
             vim.treesitter.language.register("groovy", "Jenkinsfile")
         end,
     },
-    { "nvim-treesitter/playground", build = ":TSInstall query" },
+    -- nvim-treesitter/playground removed: define_modules API was dropped; use :InspectTree / :EditQuery instead
 
     -- AI integration
     {
@@ -272,9 +267,6 @@ require("lazy").setup({
 
     -- Clangd LSP extensions support
     { "p00f/clangd_extensions.nvim" },
-
-    -- Snippets collection
-    { "rafamadriz/friendly-snippets" },
 
     -- LSP based function signature help
     {

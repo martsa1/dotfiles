@@ -4,99 +4,35 @@
 -- :lua vim.cmd('e'..vim.lsp.get_log_path())
 
 -- Enable several LSP's & Completion settings
-local has_words_before = function()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
--- Setup nvim-cmp.
-local cmp = require("cmp")
-local luasnip = require("luasnip")
 
-cmp.setup(
-    {
-        snippet = {
-            -- REQUIRED - you must specify a snippet engine
-            expand = function(args)
-                require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-            end
-        },
-        mapping = cmp.mapping.preset.insert(
-            {
-                -- Completion keybinds
-                ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-                ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                ["<C-Space>"] = cmp.mapping.complete(),
-                ["<C-e>"] = cmp.mapping.abort(),
-                ["<CR>"] = cmp.mapping.confirm({select = false}), -- select = false only accepts manually selected options.
-                -- ["<CR>"] = cmp.mapping({
-                --     i = function(fallback)
-                --         if cmp.visible() and cmp.get_active_entry() then
-                --             cmp.confirm({ behaviour = cmp.ConfirmBehaviour.Replace, select = false })
-                --         else
-                --             fallback()
-                --         end
-                --     end,
-                --     s = cmp.mapping.confirm({ select = true }),
-                --     c = cmp.mapping.confirm({ behaviour = cmp.ConfirmBehaviour.Replace, select = true }),
-                -- }),
-            }
-        ),
-        preselect = cmp.PreselectMode.None,
-        sources = cmp.config.sources(
-            {
-				-- Everything else...
-                {name = "nvim_lsp", label="LSP"},
-                {name = "cmp-nvim-lsp-signature-help", label="LSP-SigHelp"},
-                {name = "nvim_lua"},
-                {name = "buffer", label="Buffer"},
-                {name = "luasnip", label="snippet"},
-            }
-        ),
-        -- sorting = {
-        --     comparators = {
-        --         cmp.config.compare.offset,
-        --         cmp.config.compare.exact,
-        --         cmp.config.compare.recently_used,
-        --         require("clangd_extensions.cmp_scores"),
-        --         cmp.config.compare.kind,
-        --         cmp.config.compare.sort_text,
-        --         cmp.config.compare.length,
-        --         cmp.config.compare.order,
-        --     },
-        -- },
-    }
-)
-
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
---
-cmp.setup.cmdline(
-    "/",
-    {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-            {name = "buffer"}
-        }
-    }
-)
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(
-    ":",
-    {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources(
-            {
-                {name = "path"}
+-- Setup blink.cmp
+require("blink.cmp").setup({
+    keymap = {
+        preset = "default",
+        ["<CR>"]  = { "select_and_accept", "fallback" },
+        ["<Esc>"] = { "cancel", "fallback" },
+    },
+    completion = {
+        list = {
+            selection = {
+                preselect  = false, -- matches cmp's PreselectMode.None
+                auto_insert = false,
             },
-            {
-                {name = "cmdline"}
-            }
-        )
-    }
-)
+        },
+        documentation = {
+            auto_show           = true,
+            auto_show_delay_ms  = 200,
+        },
+    },
+    sources = {
+        default = { "lsp", "path", "snippets", "buffer" },
+    },
+    snippets = { preset = "luasnip" },
+    signature = { enabled = true }, -- replaces cmp-nvim-lsp-signature-help
+})
 
 -- Setup lspconfig.
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 -- IMPORTANT: neodev Lua-LSP setup must be called before lspconfig.
 require("neodev").setup(
@@ -378,44 +314,6 @@ require("typescript-tools").setup {
 }
 vim.lsp.config('eslint', {capabilities = capabilities})
 vim.lsp.enable('eslint')
-
-
--- Attempt to integrate Copilot integration with cmp completion window
-cmp.event:on("menu_opened", function()
-	vim.b.copilot_suggestion_hidden = true
-end)
-
-cmp.event:on("menu_closed", function()
-	vim.b.copilot_suggestion_hidden = false
-end)
-
--- -- Lusnip keybinds
--- ["<Tab>"] = cmp.mapping(
---     function(fallback)
---         if cmp.visible() then
---             cmp.select_next_item()
---         elseif luasnip.expand_or_jumpable() then
---             luasnip.expand_or_jump()
---         elseif has_words_before() then
---             cmp.complete()
---         else
---             fallback()
---         end
---     end,
---     {"i", "s"}
--- ),
--- ["<S-Tab>"] = cmp.mapping(
---     function(fallback)
---         if cmp.visible() then
---             cmp.select_prev_item()
---         elseif luasnip.jumpable(-1) then
---             luasnip.jump(-1)
---         else
---             fallback()
---         end
---     end,
---     {"i", "s"}
--- ),
 
 -- Snippets setup
 -- Imports VSCode style snippets (friendly-snippets plugin)
