@@ -299,8 +299,21 @@ require("lazy").setup({
     -- Dev Icons in NERDTree
     { "ryanoasis/vim-devicons" },
 
-    -- Vim NeoFormat — code formatting plugin
-    { "sbdchd/neoformat" },
+    -- conform.nvim — lua-native code formatting
+    {
+        "stevearc/conform.nvim",
+        opts = {
+            formatters_by_ft = {
+                python     = { "ruff_format" },
+                json       = { "jq" },
+                c          = { "clang_format" },
+                cpp        = { "clang_format" },
+                cmake      = { "cmake_format" },
+                typescript = { "prettier" },
+                javascript = { "prettier" },
+            },
+        },
+    },
 
     -- Epic comment management
     {

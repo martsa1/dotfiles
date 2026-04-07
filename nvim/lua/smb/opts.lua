@@ -132,26 +132,6 @@ vim.cmd("let g:NERDTreeSortOrder=['*', '\\.swp$',  '\\.bak$', '\\~$', '\\/$']")
 -- vim.opt.completeopt = "menu,menuone,noinsert,noselect"
 -- completeopt now managed via nvim-cmp - see completion.lua
 
--- TODO: I wonder if there's a nicer, lua-native successor to neoformat..
-vim.cmd(
-    [[
-let g:neoformat_enabled_python = ['ruff']
-
-let g:neoformat_json_pyjson = {
-    \ 'exe': 'python',
-    \ 'args': ['-m', 'json.tool'],
-    \ 'stdin': 1,
-    \ }
-let g:neoformat_enabled_json = ['jq']
-
-let g:neoformat_enabled_clangformat = ['clang-format']
-
-let g:neoformat_enabled_cmakeformat = ['cmake-format']
-
-let g:neoformat_enabled_typescript = ['prettier']
-let g:neoformat_enabled_javascript = ['prettier']
-]]
-)
 
 -- Remap markdown preview as we want Ctrl+p for other things...
 vim.cmd([[

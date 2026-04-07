@@ -161,13 +161,15 @@ vim.keymap.set("n", "gS", "<cmd>Trouble symbols toggle focus=false<cr>", { desc 
 vim.keymap.set("n", "gR", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", { desc = "LSP Definitions / references / ... (Trouble)" })
 
 -- ##################################################################################################
--- ###### Neoformat Settings ########################################################################
+-- ###### conform.nvim Settings #####################################################################
 -- ##################################################################################################
--- Setup leader n f keybind to trigger beautification of the current buffer
-vim.keymap.set("n", "<leader>nf", ":Neoformat<CR>")
+vim.keymap.set("n", "<leader>nf", function()
+    require("conform").format({ async = true })
+end, { desc = "Format buffer" })
 
--- Setup leader n f keybind on visual mode to format the selection
-vim.keymap.set("v", "<leader>nf", ":Neoformat<CR>")
+vim.keymap.set("v", "<leader>nf", function()
+    require("conform").format({ async = true })
+end, { desc = "Format selection" })
 
 
 -- Dabble with treesitter stuff...
