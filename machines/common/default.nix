@@ -1,5 +1,6 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
 {
+  config,
   inputs,
   pkgs,
   outputs,
@@ -43,8 +44,6 @@ in
     nerd-fonts.noto
     nil
     nixd
-    # nodePackages.lua-fmt # TODO: Only nvim should really need this...
-    nodePackages.bash-language-server # TODO: Only nvim should really need this...
     openmoji-color
     pass
     pstree
@@ -57,7 +56,6 @@ in
     tldr
     universal-ctags
     vifm
-    yaml-language-server
     zplug
   ];
 
@@ -102,26 +100,32 @@ in
       enable = true;
       package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
       extraPackages = with pkgs; [
+        bash-language-server
         biome
         clang-tools
+        claude-agent-acp
         cmake-language-server
         gcc
         nixd
-        nodePackages.bash-language-server
-        nodePackages.typescript-language-server
         nvimPythonEnv
         ruff
         rust-analyzer
         tailwindcss-language-server
+        ty
+        typescript-language-server
         vscode-langservers-extracted
         vtsls
         vue-language-server
         yaml-language-server
-        # nodePackages.lua-fmt
+        # lua-fmt
         # zuban
         # zls
       ];
       viAlias = false;
+      withRuby = false;
+      withPython3 = false;
+      withNodeJs = false;
+      sideloadInitLua = true; # Prevent writing init.lua so I can manage it myself
       #extraConfig = builtins.readFile ../../nvim/init.vim;
       #initLua = builtins.readFile ../../nvim/init.lua;
     };
@@ -188,13 +192,19 @@ in
     "nix/nix.conf".source = ../../nix.conf;
     "nixpkgs/config.nix".source = ../../config.nix;
     "alacritty/alacritty.toml".source = ../../dotfiles/alacritty/alacritty.toml;
-
-    # Direct symlink to repo nvim dir so edits apply without rebuild (no store copy).
-    "nvim".source = config.lib.file.mkOutOfStoreSymlink
-      "${config.home.homeDirectory}/.config/home-manager/nvim";
-
     "starship.toml".source = ../../dotfiles/starship/starship.toml;
   };
+
+  # Direct symlink to repo nvim dir so edits apply without rebuild (no store copy).
+  home.activation.linkNvimConfig = config.lib.dag.entryAfter ["writeBoundary"] ''
+    ln -sfn "${config.home.homeDirectory}/.config/home-manager/nvim" "${config.home.homeDirectory}/.config/nvim"
+  '';
+
+  # Symlink nix-compiled treesitter parsers into nvim's data dir so they're on
+  # runtimepath without home-manager owning ~/.config/nvim (which would break
+  # the mkOutOfStoreSymlink live-edit setup).
+  xdg.dataFile."nvim/site/parser".source =
+    "${pkgs.vimPlugins.nvim-treesitter.withPlugins (p: builtins.attrValues p)}/parser";
 
   home.file = {
     # Direnv rc for extra layouts
@@ -221,3 +231,4 @@ in
     };
   };
 }
+

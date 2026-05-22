@@ -12,33 +12,118 @@
   home.packages = with pkgs; [
     # _1password-gui  -- Fails detecting it's not installed in the right place...
     awscli2
+    bitwarden-cli
     btop
+    claude-code
+    # claude-agent-acp
+    # cloudflare-warp  # This is the front-end only, needs the server component. Try with homebrew
     code-cursor
     colima
+    cursor-cli
+    dbeaver-bin
+    devcontainer
     docker
+    dust
     flameshot
     git
-    google-chrome
+    gh
     iproute2mac
     k9s
     kubectl
+    mongodb-compass
     nmap
     notion-app
     postgresql
     pre-commit
-    signal-desktop-bin
+    prek
+    signal-desktop
     slack
-    ssm-session-manager-plugin
     spotify
+    ssm-session-manager-plugin
+    terraform
     tree
     # teams -- Fails to store login data for unknown reasons...
     uv
     yq
+    zstd
   ];
 
   programs = {
     alacritty = {
       enable = true;
+    };
+
+    firefox = {
+      enable = true;
+      package = pkgs.firefox-bin;
+
+      policies = {
+        AppAutoUpdate = false;
+        BackgroundAppUpdate = false;
+
+        DisablePocket = true;
+        DisableTelemetry = true;
+
+        GenerativeAI = {
+          Enabled = false;
+        };
+
+
+        # Don't seem to work - but also don't really want to use arbitrary extra flake input
+        # # see: https://wiki.nixos.org/wiki/Firefox/en
+        # # and: https://mozilla.github.io/policy-templates/#extensionsettings
+        # # keys in `ExtensionSettings` are the Extension "GUID", look that up like this:
+        # # curl https://addons.mozilla.org/api/v5/addons/addon/{slug}/ | jq '.guid'
+        # # where 'slug' is the name from the addons web-page (e.g. ublock-origin or vimium-ff etc.)
+        # ExtensionSettings = let
+        #   moz = short: "https://addons.mozilla.org/firefox/downloads/latest/${short}/latest.xpi";
+        # in {
+        #   "{7c4c19b9-2441-4942-873e-cb9eeee18a97}" = {
+        #     install_url = moz "push-security";
+        #     installation_mode = "force_installed";
+        #   };
+        #
+        #   "uBlock0@raymondhill.net" = {
+        #     install_url = moz "ublock-origin";
+        #     installation_mode = "force_installed";
+        #   };
+        #
+        #   "{b743f56d-1cc1-4048-8ba6-f9c2ab7aa54d}" = {
+        #     install_url = moz "dracula-dark-colorscheme";
+        #     installation_mode = "force_installed";
+        #   };
+        #
+        #   "@testpiolot-containers" = {
+        #     install_url = moz "multi-account-containers";
+        #     installation_mode = "force_installed";
+        #   };
+        #
+        #   "addon@darkreader.org" = {
+        #     install_url = moz "darkreader";
+        #     installation_mode = "force_installed";
+        #   };
+        #
+        #   "treestyletab@piro.sakura.ne.jp" = {
+        #     install_url = moz "tree-style-tab";
+        #     installation_mode = "force_installed";
+        #   };
+        #
+        #   "{d7742d87-e61d-4b78-b8a1-b469842139fa}" = {
+        #     install_url = moz "vimium-ff";
+        #     installation_mode = "force_installed";
+        #   };
+        # };
+      };
+
+      profiles.default = {
+        search = {
+          force = true;
+          default = "ddg";
+          privateDefault = "ddg";
+        };
+
+        # extensions.autoDisableScopes = 0;  # enable extensions by default
+      };
     };
 
     git = {
@@ -75,7 +160,7 @@
     ssh = {
       enable = true;
       enableDefaultConfig = false;
-      matchBlocks = {
+      settings = {
         "*" = {
           identitiesOnly = true;
           forwardAgent = false;
