@@ -241,11 +241,23 @@ require("lazy").setup({
             require("codecompanion").setup({
                 interactions = {
                     chat = {
-                        adapter = {
-                            name = "cursor_cli"
-                        },
+                        adapter = "claude_code",
                     },
                 },
+				adapters = {
+					acp = {
+						claude_code = function()
+							return require("codecompanion.adapters").extend("claude_code", {
+								commands = {
+									default = { "claude-code-acp" },
+								},
+								env = {
+									CLAUDE_CODE_OAUTH_TOKEN = "cmd:op read op://employee/claude-oauth/credential"
+								}
+							})
+						end,
+					},
+				},
                 opts = { log_level = "DEBUG" },
             })
         end,
