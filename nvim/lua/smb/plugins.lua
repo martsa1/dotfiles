@@ -133,7 +133,7 @@ require("lazy").setup({
     { "kyazdani42/nvim-web-devicons" },
 
     -- Markdown Previewer
-    { "JamshedVesuna/vim-markdown-preview" },
+    -- { "JamshedVesuna/vim-markdown-preview" },
 
     -- Vim RG integration
     { "jremmen/vim-ripgrep" },
@@ -203,12 +203,10 @@ require("lazy").setup({
     {
         "nvim-treesitter/nvim-treesitter",
         branch = "master",
-        build = function()
-            require("nvim-treesitter.install").update({ with_sync = false })()
-        end,
+        build = false, -- parsers are pre-compiled by nix (programs.neovim.plugins); no runtime compilation needed
         config = function()
             require("nvim-treesitter.configs").setup({
-                ensure_installed = "all",
+                ensure_installed = 'all',
                 ignore_install = { "ipkg", "norg" },
                 highlight = {
                     enable = true,

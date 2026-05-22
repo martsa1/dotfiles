@@ -135,6 +135,7 @@ vim.cmd("let g:NERDTreeSortOrder=['*', '\\.swp$',  '\\.bak$', '\\~$', '\\/$']")
 
 -- Remap markdown preview as we want Ctrl+p for other things...
 vim.cmd([[
+let vim_markdown_preview_toggle = 0
 let vim_markdown_preview_hotkey = "<C-S-p>"
 ]])
 
