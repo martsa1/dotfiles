@@ -67,6 +67,7 @@ in
 
       # Try to avoid relying on random system-wide settings...
       initExtraFirst = ''
+        zmodload zsh/zle 2>/dev/null || true
         setopt NO_GLOBAL_RCS
         setopt ZLE
       '';
@@ -150,6 +151,7 @@ in
 
         signing.signByDefault = true;
         commit.gpgSign = true;
+        signing.format = "openpgp";
         # Setting this option might override default signing key selection...?
         #signing.key = "61CB737879759A958B6B886626E45D5144EF59EA";
         # signing.key = null;
