@@ -3,6 +3,7 @@
 Simple module which will spawn polybar instances for primary and any secondary
 monitors.
 """
+
 import argparse
 import logging
 import os
@@ -18,6 +19,8 @@ from typing import Optional
 logging.basicConfig(level=logging.DEBUG)
 LOG = logging.getLogger("polybar-launcher")
 
+from concurrent.futures import ThreadPoolExecutor as TPE
+
 
 def kill_polybar():
     """
@@ -26,10 +29,15 @@ def kill_polybar():
     try:
         LOG.info("Killing any existing polybar processes")
         polybar_instances = [
-            int(pid) for pid in subprocess.check_output([
-                "pgrep",
-                "polybar",
-            ]).decode().splitlines()
+            int(pid)
+            for pid in subprocess.check_output(
+                [
+                    "pgrep",
+                    "polybar",
+                ]
+            )
+            .decode()
+            .splitlines()
         ]
 
         polybar_instances = [pid for pid in polybar_instances if pid != os.getpid()]
@@ -54,10 +62,12 @@ def get_monitor_info():
     for xrandr_binary in xrandr_locations:
         try:
             LOG.debug("Retrieving monitor information using '%s'.", xrandr_binary)
-            monitor_info = subprocess.check_output([
-                f"{xrandr_binary}",
-                "--listactivemonitors",
-            ])
+            monitor_info = subprocess.check_output(
+                [
+                    f"{xrandr_binary}",
+                    "--listactivemonitors",
+                ]
+            )
             monitor_info = monitor_info.decode("utf-8")
             LOG.debug("Found monitors:\n%s", monitor_info)
             break
@@ -88,7 +98,7 @@ def get_monitor_info():
                 "is_primary": bool(monitor_info_match.group("primary")),
                 "monitor_name": monitor_info_match.group("monitor_name"),
                 "horizontal_offset": (monitor_info_match.group("horizontal_offset")),
-                "vertical_offset": monitor_info_match.group("vertical_offset")
+                "vertical_offset": monitor_info_match.group("vertical_offset"),
             }
             LOG.debug("Match details:\n%s", match_details)
 
@@ -99,7 +109,7 @@ def get_monitor_info():
     return sorted(monitors, key=lambda x: x["monitor_number"])
 
 
-def launch_polybars(list_of_monitors, echo_only=False):
+def launch_polybars(list_of_monitors, echo_only: bool = False):
     """
     Launches one or more instances of polybar.
 
@@ -112,17 +122,20 @@ def launch_polybars(list_of_monitors, echo_only=False):
         for monitor in list_of_monitors:
             polybar_env["MONITOR"] = monitor["monitor_name"]
 
-            bar_config = ("primary" if monitor["is_primary"] else "secondary")
+            bar_config = "primary" if monitor["is_primary"] else "secondary"
 
-            LOG.debug("Launching Polybar instance '%s', primary: '%s'", monitor, bar_config)
+            LOG.debug(
+                "Launching Polybar instance '%s', primary: '%s'", monitor, bar_config
+            )
             if not echo_only:
-                cmd = f"polybar --config={polybar_config_location} --reload {bar_config}"
+                cmd = (
+                    f"polybar --config={polybar_config_location} --reload {bar_config}"
+                )
 
                 LOG.debug("polybar command: '%s'", cmd)
                 subprocess.Popen(
                     shlex.split(cmd),
                     env=polybar_env,
-
                     # So that we don't get shite pumped to the terminal, send
                     # everything to /dev/null
                     stdout=subprocess.DEVNULL,
@@ -132,7 +145,9 @@ def launch_polybars(list_of_monitors, echo_only=False):
                 LOG.debug("Polybar instance launched")
 
             else:
-                env_str = " ".join(f"{key}={value}" for key, value in polybar_env.items())
+                env_str = " ".join(
+                    f"{key}={value}" for key, value in polybar_env.items()
+                )
                 polybar_cmd = f"polybar --config={polybar_config_location} --reload {bar_config} &"
 
                 # Using print here to return output to stdout, where logs print to stderr.
@@ -141,9 +156,13 @@ def launch_polybars(list_of_monitors, echo_only=False):
         try:
             polybar_processes = [
                 os.readlink(Path("/proc", pid, "exe"))
-                for pid in subprocess.check_output(["pgrep", "polybar"]).decode().splitlines()
+                for pid in subprocess.check_output(["pgrep", "polybar"])
+                .decode()
+                .splitlines()
             ]
-            LOG.info("Polybar processes post-launch: '%s'", "\n\t - ".join(polybar_processes))
+            LOG.info(
+                "Polybar processes post-launch: '%s'", "\n\t - ".join(polybar_processes)
+            )
         except (FileNotFoundError, subprocess.CalledProcessError):
             LOG.error("Couldn't run post-launch summary.")
 
