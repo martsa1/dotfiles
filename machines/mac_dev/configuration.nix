@@ -1,5 +1,13 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, lib, ... }:
+let
+  homeDir = "/Users/samuel/";
+  localConfig = "${homeDir}/.config/home-manager/machines/mac_dev/local.nix";
+in {
   # Note that home-manager stuff is mentioned in the overall system flake.
+
+  # Provide work-only configs
+  imports = lib.optional (builtins.pathExists localConfig) localConfig;
+  # imports = [ localConfig ];
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -10,7 +18,7 @@
     ];
 
   users.users.samuel = {
-    home = "/Users/samuel";
+    home = homeDir;
   };
 
   # Nix settings
