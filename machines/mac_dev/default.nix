@@ -11,12 +11,14 @@
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
     # _1password-gui  -- Fails detecting it's not installed in the right place...
+    # teams -- Fails to store login data for unknown reasons...
+    # claude-agent-acp
+    # cloudflare-warp  # This is the front-end only, needs the server component. Try with homebrew
+    ast-grep
     awscli2
     bitwarden-cli
     btop
     claude-code
-    # claude-agent-acp
-    # cloudflare-warp  # This is the front-end only, needs the server component. Try with homebrew
     code-cursor
     colima
     cursor-cli
@@ -25,11 +27,12 @@
     docker
     dust
     flameshot
-    git
     gh
+    git
     iproute2mac
     k9s
     kubectl
+    kubernetes-helm
     mongodb-compass
     nmap
     notion-app
@@ -42,8 +45,8 @@
     ssm-session-manager-plugin
     terraform
     tree
-    # teams -- Fails to store login data for unknown reasons...
     uv
+    worktrunk
     yq
     zstd
   ];
