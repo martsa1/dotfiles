@@ -200,3 +200,6 @@ if [ -f "/opt/homebrew/bin/brew" ]; then
   export PATH="${PATH}:/opt/homebrew/bin"
 fi
 
+
+# Worktrunk integration
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
