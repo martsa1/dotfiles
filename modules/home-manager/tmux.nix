@@ -83,8 +83,10 @@ in
         # mouse control (clickable windows, resizable panes)
         set -g mouse on
 
-        # Open new panes in current path by default
+        # Open new panes/splits in current path by default
         bind-key "c" new-window -c "#{pane_current_path}"
+        bind '"' split-window -v -c "#{pane_current_path}"
+        bind '%' split-window -h -c "#{pane_current_path}"
 
         # reload config file
         bind r source-file ~/.config/tmux/tmux.conf
