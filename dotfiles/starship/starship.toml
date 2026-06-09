@@ -79,9 +79,11 @@ disabled = true # Disabled by default
 #style = "bg:#DA627D"
 style = "bg:#44475a"
 format = "[[](fg:current_line bg:current_line)$path]($style)"
+repo_root_style = "bg:#44475a fg:bold cyan"
+repo_root_format = "[[](fg:current_line bg:current_line)$before_root_path[$repo_root]($repo_root_style)$path]($style)"
 truncation_length = 4
 truncation_symbol = "…/"
-truncate_to_repo = true
+truncate_to_repo = false
 
 # Here is how you can shorten some long paths by text replacement
 # similar to mapped_locations in Oh My Posh:
