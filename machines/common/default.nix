@@ -164,6 +164,14 @@ in
         #   "tags"
         # ];
 
+        # git mergetool uses the [mergetool "nvim"] section
+        "mergetool \"nvim\"" = {
+          cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\"";
+        };
+        # "mergetool \"nvim\"" = {
+        #   cmd = "nvim -f \"$BASE\"\"$LOCAL\"\"$REMOTE\"\"$MERGED\" ";
+        # };
+
         init = {
           defaultBranch = "main";
         };
@@ -171,14 +179,7 @@ in
         merge = {
           tool = "${pkgs.meld}/bin/meld";
         };
-
-        "mergetool \"nvim\"" = {
-          cmd = "nvim -f \"$BASE\"\"$LOCAL\"\"$REMOTE\"\"$MERGED\" ";
-        };
       };
-    };
-    delta = {
-      enableGitIntegration = true;
     };
 
     # Enable FZF
