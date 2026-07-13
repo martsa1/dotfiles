@@ -278,6 +278,14 @@ require("lazy").setup({
     -- Clangd LSP extensions support
     { "p00f/clangd_extensions.nvim" },
 
+    {  -- Helm chart LSP.
+        "qvalentin/helm-ls.nvim",
+        ft = "helm",
+        opts = {
+            -- leave empty or see below
+        },
+    },
+
     -- LSP based function signature help
     {
         "ray-x/lsp_signature.nvim",

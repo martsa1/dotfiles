@@ -107,6 +107,7 @@ in
         claude-agent-acp
         cmake-language-server
         gcc
+        helm-ls
         nixd
         nvimPythonEnv
         ruff
