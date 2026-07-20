@@ -32,7 +32,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
+-- nvim-treesitter is lazy-managed only when parsers are self-managed; otherwise
+-- nix provides the plugin + parsers via programs.neovim.plugins.
+local ts_self = os.getenv("NVIM_TS_PARSERS") == "self"
+
+local plugins = {
 
     -- Give git hints on current buffer line: Add, Modify, Remove
     { "airblade/vim-gitgutter" },
@@ -199,43 +203,17 @@ require("lazy").setup({
     { "nvimtools/none-ls.nvim" },
 
     -- Context-aware syntax highlighting
+    -- nvim-treesitter spec is appended below only when ts_self is true.
     -- TODO: Migrate to `main` branch - will need to re-write configs.
-    {
-        "nvim-treesitter/nvim-treesitter",
-        branch = "master",
-        build = false, -- parsers are pre-compiled by nix (programs.neovim.plugins); no runtime compilation needed
-        config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = 'all',
-                ignore_install = { "ipkg", "norg" },
-                highlight = {
-                    enable = true,
-                },
-                indent = {
-                    enable = true,
-                },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection    = "gnn",
-                        node_incremental  = "grn",
-                        scope_incremental = "grc",
-                        node_decremental  = "grm",
-                    },
-                },
-            })
-            -- Associate Jenkinsfile filetype with the groovy parser
-            vim.treesitter.language.register("groovy", "Jenkinsfile")
-        end,
-    },
-    -- nvim-treesitter/playground removed: define_modules API was dropped; use :InspectTree / :EditQuery instead
 
     -- AI integration
     {
         "olimorris/codecompanion.nvim",
-        dependencies = {
+        dependencies = ts_self and {
             "nvim-lua/plenary.nvim",
             "nvim-treesitter/nvim-treesitter",
+        } or {
+            "nvim-lua/plenary.nvim",
         },
         config = function()
             require("codecompanion").setup({
@@ -360,6 +338,21 @@ require("lazy").setup({
     -- Give git hints on files/dirs in NerdTree
     { "Xuyuanp/nerdtree-git-plugin" },
 
-}, {
+}
+
+if ts_self then
+    table.insert(plugins, {
+        "nvim-treesitter/nvim-treesitter",
+        branch = "master",
+        build = ":TSUpdate",
+    })
+end
+
+require("lazy").setup(plugins, {
     install = { colorscheme = { "dracula" } },
+    performance = {
+        -- Keep the default packpath so home-manager's pack/hm plugins load
+        -- (e.g. nix-provided nvim-treesitter + grammars in "nix" parser mode).
+        reset_packpath = false,
+    },
 })

@@ -1,5 +1,6 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
 {
+  config,
   pkgs,
   inputs,
   ...

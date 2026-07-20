@@ -2,6 +2,7 @@
 vim.g.mapleader = " "
 
 require("smb.plugins")
+require("smb.treesitter")
 require("smb.opts")
 
 require("smb.autocommands")
