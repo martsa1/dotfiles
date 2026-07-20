@@ -10,7 +10,7 @@ pkgs.stdenv.mkDerivation {
 
   propagatedBuildInputs = [
     python3
-    pkgs.xorg.xrandr
+    pkgs.xrandr
     pkgs.polybar-mute
   ];
 

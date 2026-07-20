@@ -66,23 +66,25 @@ in
   programs = {
     zsh = {
       enable = true;
+      dotDir = config.home.homeDirectory; # Lock in legacy ~/.zshrc location
       oh-my-zsh.enable = false;
       zplug.enable = true;
 
-      # Try to avoid relying on random system-wide settings...
-      initExtraFirst = ''
-        zmodload zsh/zle 2>/dev/null || true
-        setopt NO_GLOBAL_RCS
-        setopt ZLE
-      '';
-
-      # Ensure ZSH setup pulls in my dotfiles stuff...
-      initExtra = ''
-        export NIX_PATH=nixpkgs=${pkgs.path}:$NIX_PATH
-        if [ -f "$HOME/.config/home-manager/dotfiles/zsh/zshrc" ]; then
-          source "$HOME/.config/home-manager/dotfiles/zsh/zshrc"
-        fi
-      '';
+      initContent = lib.mkMerge [
+        # Try to avoid relying on random system-wide settings...
+        (lib.mkBefore ''
+          zmodload zsh/zle 2>/dev/null || true
+          setopt NO_GLOBAL_RCS
+          setopt ZLE
+        '')
+        # Ensure ZSH setup pulls in my dotfiles stuff...
+        ''
+          export NIX_PATH=nixpkgs=${pkgs.path}:$NIX_PATH
+          if [ -f "$HOME/.config/home-manager/dotfiles/zsh/zshrc" ]; then
+            source "$HOME/.config/home-manager/dotfiles/zsh/zshrc"
+          fi
+        ''
+      ];
 
       envExtra = ''
         if [[ -o login ]]; then
@@ -103,7 +105,7 @@ in
 
     neovim = {
       enable = true;
-      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+      package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.default;
       extraPackages = with pkgs; [
         bash-language-server
         biome

@@ -38,7 +38,7 @@
     vim
     virt-manager
     wget
-    xorg.xkill
+    xkill
     # zenity
     zip
     zlib

@@ -14,8 +14,21 @@ in {
   config = lib.mkIf cfg.enable {
     programs.ssh = {
       enable = true;
-      matchBlocks = {
+      # Default Host * values are being removed from home-manager; inline the
+      # former defaults here so the generated ~/.ssh/config is unchanged.
+      enableDefaultConfig = false;
+      settings = {
         "*" = {
+          forwardAgent = false;
+          addKeysToAgent = "no";
+          compression = false;
+          serverAliveInterval = 0;
+          serverAliveCountMax = 3;
+          hashKnownHosts = false;
+          userKnownHostsFile = "~/.ssh/known_hosts";
+          controlMaster = "no";
+          controlPath = "~/.ssh/master-%r@%n:%p";
+          controlPersist = "no";
           identitiesOnly = true;
         };
 
@@ -30,8 +43,8 @@ in {
         };
 
         "laptop-server.home" = {
-            identityFile = "~/.ssh/id_rsa.abitmoredepth";
-            user = "sam";
+          identityFile = "~/.ssh/id_rsa.abitmoredepth";
+          user = "sam";
         };
 
         "k1.home" = {

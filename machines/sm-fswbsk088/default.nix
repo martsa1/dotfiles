@@ -157,7 +157,7 @@
     ssh = {
       enable = true;
       includes = ["config_work"];
-      matchBlocks = {
+      settings = {
         "*" = {
           identitiesOnly = true;
         };
@@ -188,7 +188,7 @@
       initExtraBeforeCompInit = ''
         fpath+=("${config.home.profileDirectory}"/share/zsh/site-functions "${config.home.profileDirectory}"/share/zsh/$ZSH_VERSION/functions "${config.home.profileDirectory}"/share/zsh/vendor-completions)
       '';
-      initExtra = "setopt monitor";
+      initContent = "setopt monitor";
     };
   };
 

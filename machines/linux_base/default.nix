@@ -42,10 +42,10 @@
     thunar-archive-plugin
     thunar-volman
     xfconf
-    xorg.xev
-    xorg.xkill
-    xorg.xprop
-    xorg.xrandr
+    xev
+    xkill
+    xprop
+    xrandr
     yubikey-manager
     yubioath-flutter
     zenity
@@ -56,7 +56,7 @@
     polybar-launcher
     polybar-mute
     polybar-spotify
-    inputs.pulseaudio-listener.packages.${pkgs.system}.default
+    inputs.pulseaudio-listener.packages.${pkgs.stdenv.hostPlatform.system}.default
     rofi-dracula-theme
   ];
 
@@ -79,6 +79,9 @@
       package = pkgs.dracula-theme;
       name = "Dracula";
     };
+
+    # Keep GTK4 using the same Dracula theme as GTK3 (locks in legacy default).
+    gtk4.theme = config.gtk.theme;
 
     gtk2.extraConfig = ''
       gtk-cursor-theme-name="Dracula-cursors"
@@ -106,6 +109,7 @@
     };
   };
   home.pointerCursor = {
+    enable = true;
     package = pkgs.dracula-theme;
     name = "Dracula-cursors";
     x11.enable = true;
@@ -114,7 +118,7 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "gtk";
+    platformTheme.name = "gtk3";
   };
 
   # Setup notifications
@@ -174,7 +178,7 @@
 
       . /home/sam/.nix-profile/etc/profile.d/hm-session-vars.sh
       export PATH="${pkgs.ripgrep.outPath}/bin:$PATH"
-      export PATH="${pkgs.xorg.xrandr.outPath}/bin:$PATH"
+      export PATH="${pkgs.xrandr.outPath}/bin:$PATH"
       export PATH="${pkgs.coreutils.outPath}/bin:$PATH"
 
       echo $PATH

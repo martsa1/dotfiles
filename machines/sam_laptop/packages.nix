@@ -39,7 +39,7 @@
     vim
     virt-manager
     wget
-    xorg.xkill
+    xkill
     zip
     zlib
     zsh
