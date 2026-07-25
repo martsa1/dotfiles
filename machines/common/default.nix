@@ -14,9 +14,6 @@ let
     pylsp-mypy
     python-lsp-server
   ]);
-  # Tree-sitter parser source: "nix" (plugin + parsers via programs.neovim.plugins)
-  # or "self" (lazy clones the plugin; nvim-treesitter compiles parsers itself).
-  tsParsers = "nix";
 in
 {
   imports = [
@@ -134,11 +131,11 @@ in
       withPython3 = false;
       withNodeJs = false;
       sideloadInitLua = true; # Prevent writing init.lua so I can manage it myself
-      # Tree-sitter plugin + parsers via nix in "nix" mode (one store path, so no
-      # plugin/parser version or ABI skew). In "self" mode lazy manages the plugin.
-      plugins = lib.optional (tsParsers == "nix") {
-        plugin = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: builtins.attrValues p);
-      };
+      # Tree-sitter plugin + parsers via nix (one store path, so no plugin/parser
+      # version or ABI skew). Setup lives in nvim/lua/smb/treesitter.lua.
+      plugins = [
+        { plugin = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: builtins.attrValues p); }
+      ];
       #extraConfig = builtins.readFile ../../nvim/init.vim;
       #initLua = builtins.readFile ../../nvim/init.lua;
     };
@@ -216,17 +213,6 @@ in
   home.activation.linkNvimConfig = config.lib.dag.entryAfter ["writeBoundary"] ''
     ln -sfn "${config.home.homeDirectory}/.config/home-manager/nvim" "${config.home.homeDirectory}/.config/nvim"
   '';
-
-  # In "nix" mode, clear any self-compiled parsers left in the data dir so the
-  # nix-provided plugin parsers are authoritative (no-op in "self" mode).
-  home.activation.cleanTsParserDir =
-    config.lib.dag.entryBefore ["writeBoundary"] (
-      lib.optionalString (tsParsers == "nix")
-        ''rm -rf "${config.home.homeDirectory}/.local/share/nvim/site/parser"''
-    );
-
-  # Bridge the parser mode to the lua config (lua defaults to "nix" if unset).
-  home.sessionVariables.NVIM_TS_PARSERS = tsParsers;
 
   home.file = {
     # Direnv rc for extra layouts

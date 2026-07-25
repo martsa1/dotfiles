@@ -32,10 +32,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- nvim-treesitter is lazy-managed only when parsers are self-managed; otherwise
--- nix provides the plugin + parsers via programs.neovim.plugins.
-local ts_self = os.getenv("NVIM_TS_PARSERS") == "self"
-
+-- nvim-treesitter is provided by nix (programs.neovim.plugins); its setup lives
+-- in lua/smb/treesitter.lua, required from init.lua.
 local plugins = {
 
     -- Give git hints on current buffer line: Add, Modify, Remove
@@ -202,17 +200,14 @@ local plugins = {
     -- None-ls to integrate various linters/formatters into nvim-LSP
     { "nvimtools/none-ls.nvim" },
 
-    -- Context-aware syntax highlighting
-    -- nvim-treesitter spec is appended below only when ts_self is true.
+    -- Context-aware syntax highlighting: nvim-treesitter is nix-managed (setup
+    -- is in lua/smb/treesitter.lua); no lazy spec here.
     -- TODO: Migrate to `main` branch - will need to re-write configs.
 
     -- AI integration
     {
         "olimorris/codecompanion.nvim",
-        dependencies = ts_self and {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-        } or {
+        dependencies = {
             "nvim-lua/plenary.nvim",
         },
         config = function()
@@ -340,19 +335,11 @@ local plugins = {
 
 }
 
-if ts_self then
-    table.insert(plugins, {
-        "nvim-treesitter/nvim-treesitter",
-        branch = "master",
-        build = ":TSUpdate",
-    })
-end
-
 require("lazy").setup(plugins, {
     install = { colorscheme = { "dracula" } },
     performance = {
         -- Keep the default packpath so home-manager's pack/hm plugins load
-        -- (e.g. nix-provided nvim-treesitter + grammars in "nix" parser mode).
+        -- (nix-provided nvim-treesitter + grammars ship there).
         reset_packpath = false,
     },
 })

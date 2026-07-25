@@ -1,16 +1,13 @@
--- Tree-sitter setup. Runs in both parser modes:
---   nix  -> plugin + parsers provided by nix (programs.neovim.plugins); no self-install.
---   self -> plugin via lazy; nvim-treesitter compiles parsers into a writable dir.
+-- Tree-sitter setup. The plugin + parsers are provided by nix via
+-- programs.neovim.plugins, so we don't self-install anything.
 local ok, configs = pcall(require, "nvim-treesitter.configs")
 if not ok then
     return
 end
 
-local nix_parsers = (os.getenv("NVIM_TS_PARSERS") or "nix") == "nix"
-
 configs.setup({
-    ensure_installed = nix_parsers and {} or "all",
-    auto_install = not nix_parsers,
+    ensure_installed = {},
+    auto_install = false,
     ignore_install = { "ipkg", "norg" },
     highlight = {
         enable = true,
