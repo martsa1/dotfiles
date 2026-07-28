@@ -31,7 +31,6 @@
     gp-saml-gui
     i3lock
     imv
-    inputs.nixpkgs_old.legacyPackages.x86_64-linux.nodejs_18 # no getting away from node...
     iputils
     jfrog-cli
     kdiff3

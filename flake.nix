@@ -8,10 +8,12 @@
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
-    # nixpkgs.url = "github:nixos/nixpkgs/b8ba3ddc2d61a5197bfcd9e7f3476768be1bb07d";
-    # Preserved as the last commit to grab nodeJS v18 from - needed for work stuff.
-    nixpkgs_old.url = "github:nixos/nixpkgs/44b4123568a045a955db48c4965f0dcf4764e9c2";
-
+    # GitOps pull-based deployment (runs on each host)
+    comin = {
+      url = "github:nlewo/comin";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+    };
 
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -19,6 +21,17 @@
 
     flake-utils = {
       url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
+
+    # Shared utility inputs — pinned once here and followed by everything that
+    # uses them, so the lock keeps a single node for each instead of spawning
+    # nixpkgs_2 / systems_2 / treefmt-nix_2 duplicates.
+    systems.url = "github:nix-systems/default";
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Declarative homebrew setup
@@ -61,11 +74,14 @@
       url = "github:martsa1/pulseaudio-source-listener";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-parts.follows = "flake-parts";
+      inputs.systems.follows = "systems";
+      inputs.treefmt-nix.follows = "treefmt-nix";
     };
   };
 
   outputs = {
     self,
+    comin,
     flake-utils,
     home-manager,
     homebrew-cask,
@@ -74,7 +90,6 @@
     nix-homebrew,
     nixgl,
     nixpkgs,
-    nixpkgs_old,
     pulseaudio-listener,
     ...
   } @ inputs: let
@@ -178,6 +193,24 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+          }
+          # GitOps: comin runs on this host, polls the dotfiles repo and
+          # rebuilds nixosConfigurations.k1 when main changes. k1 only for now.
+          # Public HTTPS remote — the comin service needs no credentials as
+          # long as martsa1/dotfiles stays public. (If it goes private, comin
+          # will need a read token configured.)
+          comin.nixosModules.comin
+          {
+            services.comin = {
+              enable = true;
+              remotes = [
+                {
+                  name = "github";
+                  url = "https://github.com/martsa1/dotfiles.git";
+                  branches.main.name = "main";
+                }
+              ];
+            };
           }
         ];
       };
