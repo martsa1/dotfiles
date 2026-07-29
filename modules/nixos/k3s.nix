@@ -44,6 +44,16 @@ in {
         laptop-server's existing :80/:443 Traefik.
       '';
     };
+
+    tlsSan = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = ''
+        Extra subjectAltNames added to the k3s API serving certificate. List any
+        hostname/IP clients will use to reach the API (e.g. "k1.home") so remote
+        kubectl doesn't hit an x509 hostname mismatch. Only meaningful for servers.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -51,7 +61,7 @@ in {
       enable = true;
       role = cfg.role;
       tokenFile = cfg.tokenFile;
-      extraFlags = cfg.extraFlags;
+      extraFlags = cfg.extraFlags ++ map (s: "--tls-san=${s}") cfg.tlsSan;
     } // lib.optionalAttrs (cfg.role == "agent") {
       # Only agents join an existing server. A standalone server must leave
       # serverAddr empty, otherwise k3s starts with `--server <addr>` and tries

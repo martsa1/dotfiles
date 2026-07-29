@@ -175,6 +175,8 @@
     enable = true;
     role = "server";
     tokenFile = config.sops.secrets.k3s_token.path;
+    # Lets kubectl from other LAN hosts reach the API via the hostname.
+    tlsSan = ["k1.home"];
   };
 
 
