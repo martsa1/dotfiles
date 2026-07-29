@@ -49,7 +49,14 @@ in {
   config = lib.mkIf cfg.enable {
     services.k3s = {
       enable = true;
-      inherit (cfg) role serverAddr tokenFile extraFlags;
+      role = cfg.role;
+      tokenFile = cfg.tokenFile;
+      extraFlags = cfg.extraFlags;
+    } // lib.optionalAttrs (cfg.role == "agent") {
+      # Only agents join an existing server. A standalone server must leave
+      # serverAddr empty, otherwise k3s starts with `--server <addr>` and tries
+      # to bootstrap by joining itself — fatal "connection refused" on first boot.
+      serverAddr = cfg.serverAddr;
     };
 
     # k3s ships its own containerd, so this coexists with podman on laptop-server.
