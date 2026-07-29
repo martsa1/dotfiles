@@ -188,6 +188,21 @@
     };
   };
 
+  # --- k3s cluster (laptop-server joins k1 as an agent) ---------------------
+  # Join token is decrypted at activation by sops-nix from secrets/secrets.yaml.
+  # The sm.k3s module lives in modules/nixos and is auto-injected by mkNixos.
+  sops.age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+  sops.secrets.k3s_token = {
+    sopsFile = ../../secrets/secrets.yaml;
+    restartUnits = ["k3s.service"];
+  };
+
+  sm.k3s = {
+    enable = true;
+    role = "agent";
+    tokenFile = config.sops.secrets.k3s_token.path;
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leavecatenate(variables, "bootdev", bootdev)

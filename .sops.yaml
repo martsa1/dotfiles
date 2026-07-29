@@ -1,0 +1,15 @@
+# sops creation rules. Each host's age public key is derived from its SSH host
+# key — generate it on the host with:
+#   nix-shell -p ssh-to-age --run 'ssh-to-age < /etc/ssh/ssh_host_ed25519_key.pub'
+# then paste the `age1...` string below. Both hosts can decrypt secrets.yaml so
+# the k3s join token (shared) lives in one file. The encrypted file is safe to
+# commit publicly: only a holder of one of these hosts' private keys can read it.
+keys:
+  - &k1            age18yu5ffgruvpq8nyua3k095v4e7475epgvxalrwph7znaxdqz34cqff5y8n
+  - &laptop-server age1ctt04xgnrh8r6gweapthh9ar95g9qu3alan7pzzzze978rjzzufqsenyp4
+creation_rules:
+  - path_regex: secrets/secrets\.yaml$
+    key_groups:
+      - age:
+          - *k1
+          - *laptop-server

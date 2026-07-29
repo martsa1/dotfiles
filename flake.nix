@@ -49,6 +49,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Encrypted secrets (age) committed to the repo; hosts decrypt from their
+    # SSH host keys. Used for the k3s join token and future secrets.
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-homebrew = {
       url = "github:zhaofengli/nix-homebrew";
     };
@@ -94,6 +101,18 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
+
+    # Build a NixOS system, auto-injecting every module in `nixosModules` plus
+    # sops-nix, so hosts opt in via `sm.<name>.enable = true` with no per-host
+    # import line. `modules` here carries host-specific extras (home-manager, comin).
+    mkNixos = modules:
+      nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules =
+          modules
+          ++ builtins.attrValues self.nixosModules
+          ++ [inputs.sops-nix.nixosModules.sops];
+      };
   in {
     overlays = [
       # inputs.neovim-nightly-overlay.overlays.default
@@ -159,61 +178,56 @@
     # Custom home-manager modules
     homeModules = import ./modules;
 
-    # NixOS configs.
+    # Custom NixOS modules (auto-injected into every host via mkNixos)
+    nixosModules = import ./modules/nixos;
+
+    # NixOS configs. mkNixos auto-injects all `nixosModules` + sops-nix; the
+    # list passed here is host-specific extras only.
     nixosConfigurations = {
-      laptop-server = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./machines/laptop-server/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-          }
-        ];
-      };
+      laptop-server = mkNixos [
+        ./machines/laptop-server/configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
+      ];
 
-      xps-laptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./machines/xps_laptop/configuration.nix
-          # home-manager.nixosModules.home-manager
-          # {
-          #   home-manager.useGlobalPkgs = true;
-          #   home-manager.useUserPackages = true;
-          # }
-        ];
-      };
+      xps-laptop = mkNixos [
+        ./machines/xps_laptop/configuration.nix
+        # home-manager.nixosModules.home-manager
+        # {
+        #   home-manager.useGlobalPkgs = true;
+        #   home-manager.useUserPackages = true;
+        # }
+      ];
 
-      k1 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./machines/k1/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-          }
-          # GitOps: comin runs on this host, polls the dotfiles repo and
-          # rebuilds nixosConfigurations.k1 when main changes. k1 only for now.
-          # Public HTTPS remote — the comin service needs no credentials as
-          # long as martsa1/dotfiles stays public. (If it goes private, comin
-          # will need a read token configured.)
-          comin.nixosModules.comin
-          {
-            services.comin = {
-              enable = true;
-              remotes = [
-                {
-                  name = "github";
-                  url = "https://github.com/martsa1/dotfiles.git";
-                  branches.main.name = "main";
-                }
-              ];
-            };
-          }
-        ];
-      };
+      k1 = mkNixos [
+        ./machines/k1/configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
+        # GitOps: comin runs on this host, polls the dotfiles repo and
+        # rebuilds nixosConfigurations.k1 when main changes. k1 only for now.
+        # Public HTTPS remote — the comin service needs no credentials as
+        # long as martsa1/dotfiles stays public. (If it goes private, comin
+        # will need a read token configured.)
+        comin.nixosModules.comin
+        {
+          services.comin = {
+            enable = true;
+            remotes = [
+              {
+                name = "github";
+                url = "https://github.com/martsa1/dotfiles.git";
+                branches.main.name = "main";
+              }
+            ];
+          };
+        }
+      ];
     };
 
     darwinConfigurations =  {
