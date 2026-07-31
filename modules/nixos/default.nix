@@ -5,4 +5,5 @@
 # per-host import line. Modules MUST be inert when disabled (mkIf cfg.enable).
 {
   k3s = import ./k3s.nix;
+  comin = import ./comin.nix;
 }

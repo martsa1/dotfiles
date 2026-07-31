@@ -203,6 +203,10 @@
     tokenFile = config.sops.secrets.k3s_token.path;
   };
 
+  # Pull-based deploy: comin rebuilds nixosConfigurations.laptop-server when main
+  # changes (brings laptop-server under the same GitOps flow as k1).
+  sm.comin.enable = true;
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leavecatenate(variables, "bootdev", bootdev)

@@ -179,6 +179,9 @@
     tlsSan = ["k1.home"];
   };
 
+  # Pull-based deploy: comin rebuilds nixosConfigurations.k1 when main changes.
+  sm.comin.enable = true;
+
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -111,7 +111,10 @@
         modules =
           modules
           ++ builtins.attrValues self.nixosModules
-          ++ [inputs.sops-nix.nixosModules.sops];
+          ++ [
+            inputs.sops-nix.nixosModules.sops
+            inputs.comin.nixosModules.comin
+          ];
       };
   in {
     overlays = [
@@ -208,24 +211,6 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-        }
-        # GitOps: comin runs on this host, polls the dotfiles repo and
-        # rebuilds nixosConfigurations.k1 when main changes. k1 only for now.
-        # Public HTTPS remote — the comin service needs no credentials as
-        # long as martsa1/dotfiles stays public. (If it goes private, comin
-        # will need a read token configured.)
-        comin.nixosModules.comin
-        {
-          services.comin = {
-            enable = true;
-            remotes = [
-              {
-                name = "github";
-                url = "https://github.com/martsa1/dotfiles.git";
-                branches.main.name = "main";
-              }
-            ];
-          };
         }
       ];
     };
