@@ -93,7 +93,7 @@
     displayManager = {
       lightdm = {
         enable = true;
-        greeters.enso.enable = true;
+        greeters.slick.enable = true;
         greeters.gtk.enable = false;
         greeters.pantheon.enable = false;
         greeters.mini.enable = false;
