@@ -18,6 +18,12 @@
   # Setup core details for home-manager
   home.stateVersion = "22.05";
 
+  # Wallpaper for the X session. NixOS' desktopManager.wallpaper module runs
+  # `feh --bg-scale $HOME/.background-image` automatically for the none+i3
+  # session, so we only need the image present at this fixed path. linux_base
+  # sets a default image; mkForce overrides it for this machine.
+  home.file.".background-image".source = lib.mkForce ../../backgrounds/pexels-kelly-lacy-2538504.jpg;
+
   home.packages = with pkgs; [
     android-tools
 

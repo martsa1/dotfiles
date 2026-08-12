@@ -20,9 +20,6 @@
     initrd.luks.devices = {
       "luks-9533fdf2-e77d-4d86-862a-749b62529b09".device = "/dev/disk/by-uuid/9533fdf2-e77d-4d86-862a-749b62529b09";
     };
-    loader.grub = {
-      gfxmodeEfi = "1920x1080";
-    };
   };
 
   fileSystems = {

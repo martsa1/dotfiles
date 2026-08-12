@@ -202,6 +202,27 @@
     enable = true;
   };
 
+  # HM's xsession module auto-generates an xplugd service (to re-run setxkbmap on
+  # keyboard hotplug) with a hardcoded callback script. Override only its
+  # ExecStart to also re-apply the autorandr profile when a display changes
+  # (dock/undock). xplugd runs in the user session where DISPLAY is set, so
+  # autorandr can actually apply the profile — unlike the NixOS udev path, which
+  # starts a root service with no display.
+  systemd.user.services.xplugd.Service.ExecStart =
+    pkgs.lib.mkForce
+    (let
+      xplugrc = pkgs.writeShellScript "xplugrc" ''
+        case "$1,$3" in
+          keyboard,connected)
+            systemctl --user restart setxkbmap.service
+            ;;
+          display,*)
+            ${pkgs.autorandr}/bin/autorandr --change --default default
+            ;;
+        esac
+      '';
+    in "${pkgs.xplugd}/bin/xplugd ${xplugrc}");
+
   # Enable GPGAgent
   programs.gpg.enable = true;
   services.gpg-agent = {

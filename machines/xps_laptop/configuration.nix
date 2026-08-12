@@ -19,6 +19,11 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
+  # systemd-boot renders a text console (no font file), so this is the lever for
+  # menu size on the high-DPI panel. "0" = 80x25 (largest glyphs). Flip to "1" or
+  # "max" if you'd prefer smaller text once you see it.
+  boot.loader.systemd-boot.consoleMode = "0";
+
   # Add home lan rootCA
   security.pki = {
     certificateFiles = [
@@ -103,6 +108,15 @@
       };
       startx.enable = false;
       # ly.enable = true;
+
+      # Force the built-in panel to 1920x1080 once, right after X starts. Runs
+      # before the lightdm greeter, and since lightdm shares one X server between
+      # greeter and session, the mode carries into i3 too. If 1920x1080 isn't a
+      # mode your panel exposes (common on 16:10 panels), run `xrandr` and swap
+      # the value below for one it lists (e.g. 1920x1200).
+      setupCommands = ''
+        ${pkgs.xrandr}/bin/xrandr --output "$(${pkgs.xrandr}/bin/xrandr --current | ${pkgs.gawk}/bin/awk '/ connected/ {print $1; exit}')" --mode 1920x1080 || true
+      '';
     };
     desktopManager.wallpaper.mode = "scale";
   };
