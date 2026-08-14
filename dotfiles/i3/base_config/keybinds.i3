@@ -28,8 +28,8 @@ bindsym --release $mod+Shift+d exec "zsh -c 'rofi -show ssh'"
 #bindsym $mod+Ctrl+d exec rofi -show emoji -modi emoji
 bindsym --release $mod+Ctrl+d exec "zsh -c rofimoji"
 
-# Rofipass (Pass with Rofi)
-bindsym --release $mod+shift+p exec "zsh -c rofi-pass"
+# Bitwarden creds via Rofi (rbw frontend)
+bindsym --release $mod+shift+p exec "zsh -c rofi-rbw"
 
 # Rofi Window switcher
 bindsym --release $mod+shift+w exec "zsh -c 'rofi -show window'"

@@ -38,6 +38,7 @@
     signal-desktop
     spotify
     xclip
+    xdotool # rofi-rbw typer on X11
     thunar
     thunar-archive-plugin
     thunar-volman
@@ -133,8 +134,6 @@
   # Setup rofi
   programs.rofi = {
     enable = true;
-    pass.enable = true;
-    pass.extraConfig = builtins.readFile ../../dotfiles/rofi/rofi-pass-config;
 
     #font = "";
     location = "center";
@@ -154,7 +153,10 @@
     # Emoji support handled via rofimoji
   };
 
-  # RBW - bitwarden CLI client
+  # RBW - bitwarden CLI client. Config (incl. account email) is deliberately
+  # not managed here — it lives in ~/.config/rbw/config.json, set per-machine
+  # via `rbw config set email <address>` (and optionally `pinentry`), so no
+  # personal data lands in this repo.
   programs.rbw = {
     enable = true;
   };

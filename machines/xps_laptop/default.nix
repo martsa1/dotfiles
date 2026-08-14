@@ -26,6 +26,7 @@
 
   home.packages = with pkgs; [
     android-tools
+    bitwarden-desktop
 
     ffmpeg
     prusa-slicer
