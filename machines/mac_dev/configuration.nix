@@ -6,8 +6,8 @@ in {
   # Note that home-manager stuff is mentioned in the overall system flake.
 
   # Provide work-only configs
-  imports = lib.optional (builtins.pathExists localConfig) localConfig;
-  # imports = [ localConfig ];
+  # imports = lib.optional (builtins.pathExists localConfig) localConfig;
+  imports = [ localConfig ];
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -82,7 +82,7 @@ in {
 
   # Tailscale to access home LAN
   services.tailscale = {
-    enable = true;
+    enable = false;
   };
 
   # The platform the configuration will be used on.

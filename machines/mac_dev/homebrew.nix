@@ -26,11 +26,12 @@
     casks = [
       "1password"  # Requires install into /Applications - impossible with nix
       "1password-cli"  # Requires install into /Applications - impossible with nix
-      "tunnelblick"  # not packaged for nix
+      "claude"  # not packaged for nix in nixpkgs (there are unofficial ones...)
       "cloudflare-warp"  # nix package only includes CLI tools etc. not the server
-      # "docker-desktop"  # not packaged for nix
       "meld"  # nixpkgs version seems messed up on mac.
       "teleport-connect"  # Not available via nix
+      "tunnelblick"  # not packaged for nix
+      # "docker-desktop"  # not packaged for nix
     ];
 
     brews = [

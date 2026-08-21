@@ -30,6 +30,7 @@
     gh
     git
     iproute2mac
+    jira-cli-go
     k9s
     kubectl
     kubernetes-helm
