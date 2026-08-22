@@ -6,10 +6,12 @@
 # commit publicly: only a holder of one of these hosts' private keys can read it.
 keys:
   - &k1            age18yu5ffgruvpq8nyua3k095v4e7475epgvxalrwph7znaxdqz34cqff5y8n
-  - &laptop-server age1ctt04xgnrh8r6gweapthh9ar95g9qu3alan7pzzzze978rjzzufqsenyp4
+  - &laptop-server age1pklsdljxj98dp8ke4dp0dc98eknurp3vpkv3q5avazsuckvrcffqx6t0jz
+  - &xps-laptop    age1ctt04xgnrh8r6gweapthh9ar95g9qu3alan7pzzzze978rjzzufqsenyp4
 creation_rules:
   - path_regex: secrets/secrets\.yaml$
     key_groups:
       - age:
           - *k1
           - *laptop-server
+          - *xps-laptop
