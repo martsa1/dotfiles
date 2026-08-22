@@ -37,7 +37,7 @@ in {
 
     extraFlags = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = ["--disable=traefik"];
+      default = [];
       description = ''
         Extra k3s CLI flags. Traefik is disabled by default because we run our
         own ingress (Phase 2) and the bundled chart would also fight
@@ -61,7 +61,7 @@ in {
       enable = true;
       role = cfg.role;
       tokenFile = cfg.tokenFile;
-      extraFlags = cfg.extraFlags ++ map (s: "--tls-san=${s}") cfg.tlsSan;
+      extraFlags = lib.optional (cfg.role == "server") "--disable=traefik" ++ cfg.extraFlags ++ map (s: "--tls-san=${s}") cfg.tlsSan;
     } // lib.optionalAttrs (cfg.role == "agent") {
       # Only agents join an existing server. A standalone server must leave
       # serverAddr empty, otherwise k3s starts with `--server <addr>` and tries
