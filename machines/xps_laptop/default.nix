@@ -1,4 +1,4 @@
-{pkgs, lib, outputs, ...}: rec {
+{pkgs, lib, outputs, inputs, ...}: rec {
   imports = [
     ../linux_base
     outputs.homeModules.sm-ssh
@@ -28,13 +28,16 @@
     android-tools
     bitwarden-desktop
 
+    # tartube
     ffmpeg
+    kubectl
+    openspec
     prusa-slicer
     steam
     teams-for-linux
-    # tartube
     vlc
     yubioath-flutter
+    inputs.omp-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   # Set keyboard layout to gb, disable pesky capslock.

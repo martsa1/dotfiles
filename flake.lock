@@ -280,6 +280,26 @@
         "type": "github"
       }
     },
+    "omp-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787274056,
+        "narHash": "sha256-TzMiAFbT/FKoni+cxlGLC3rwwJZjk3xJMgU3URaIiZ8=",
+        "owner": "yuxqiu",
+        "repo": "omp-nix",
+        "rev": "8534bd5382fdf061f77bfe27ee07f5e7d4566507",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yuxqiu",
+        "repo": "omp-nix",
+        "type": "github"
+      }
+    },
     "pulseaudio-listener": {
       "inputs": {
         "flake-parts": [
@@ -322,6 +342,7 @@
         "nix-homebrew": "nix-homebrew",
         "nixgl": "nixgl",
         "nixpkgs": "nixpkgs",
+        "omp-nix": "omp-nix",
         "pulseaudio-listener": "pulseaudio-listener",
         "sops-nix": "sops-nix",
         "systems": "systems",

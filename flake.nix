@@ -84,6 +84,11 @@
       inputs.systems.follows = "systems";
       inputs.treefmt-nix.follows = "treefmt-nix";
     };
+
+    omp-nix = {
+      url = "github:yuxqiu/omp-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -98,6 +103,7 @@
     nixgl,
     nixpkgs,
     pulseaudio-listener,
+    omp-nix,
     ...
   } @ inputs: let
     inherit (self) outputs;
