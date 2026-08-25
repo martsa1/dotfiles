@@ -201,6 +201,7 @@
     enable = true;
     role = "agent";
     tokenFile = config.sops.secrets.k3s_token.path;
+    extraFlags = ["--node-ip=172.16.1.3"];
   };
 
   # Pull-based deploy: comin rebuilds nixosConfigurations.laptop-server when main
