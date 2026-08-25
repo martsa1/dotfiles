@@ -76,9 +76,9 @@ in {
     ];
 
     networking.firewall = {
-      # 10250 kubelet (both roles); 6443 API (server only); 8472/udp flannel VXLAN.
-      allowedTCPPorts = [10250] ++ lib.optional (cfg.role == "server") 6443;
-      allowedUDPPorts = [8472];
+      # 10250 kubelet (both roles); 6443 API (server only); 8472/udp flannel VXLAN; 7946 MetalLB memberlist.
+      allowedTCPPorts = [10250 7946] ++ lib.optional (cfg.role == "server") 6443;
+      allowedUDPPorts = [8472 7946];
     };
   };
 }
