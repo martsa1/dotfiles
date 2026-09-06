@@ -78,6 +78,18 @@ local plugins = {
         end,
     },
 
+	{
+		"Dilski/standup.nvim",
+		cmd = "Standup",
+		-- opts is required: :Standup is created by require("standup").setup().
+		opts = {
+			-- Optional. Define teams inline instead of using text files.
+			-- templates = {
+			-- 	team = { "Ada", "Grace", "Alan" },
+			-- },
+		},
+	},
+
     -- Dracula dark theme
     { "dracula/vim", name = "dracula" },
 

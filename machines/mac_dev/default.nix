@@ -31,6 +31,7 @@
     git
     iproute2mac
     jira-cli-go
+    openspec
     k9s
     kubectl
     kubernetes-helm
