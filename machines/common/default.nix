@@ -16,11 +16,9 @@ let
   ]);
 in
 {
-  imports = [
-    # tmux is managed by home-manager on every machine. The module defaults to
-    # enabled, so a machine opts out with `sm.tmux.enable = false;`.
-    outputs.homeModules.tmux
-  ];
+  # No imports for the `sm.*` modules: mkHome injects every `homeModules` entry
+  # into each config. tmux defaults to enabled, so a machine opts out with
+  # `sm.tmux.enable = false;`.
 
   nixpkgs.overlays = outputs.overlays ;
 

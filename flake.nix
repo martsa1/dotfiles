@@ -128,6 +128,21 @@
             inputs.comin.nixosModules.comin
           ];
       };
+
+    # Build a home-manager configuration, auto-injecting every module in
+    # `homeModules`, so machines opt in via `sm.<name>.enable = true` with no
+    # per-machine import line (the mirror of `mkNixos` above). `modules` here
+    # carries machine-specific extras only. Note that an injected module must
+    # NOT also be imported by a machine: `homeModules` values are functions
+    # rather than paths, so the module system cannot dedupe them and a second
+    # reference fails with "The option `sm.<name>.enable' ... is already
+    # declared".
+    mkHome = system: modules:
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
+        modules = modules ++ builtins.attrValues self.homeModules;
+        extraSpecialArgs = {inherit inputs outputs;};
+      };
   in {
     overlays = [
       # inputs.neovim-nightly-overlay.overlays.default
@@ -144,50 +159,24 @@
       })
     ];
 
-    # inside a home-manager.lib.homeManagerConfiguration:
-    #  # Specify your home configuration modules here, for example,
-    #  # the path to your home.nix.
-    #
-    #  modules = [./machines/xps_laptop/default.nix];
-    #
-    #  # Optionally use extraSpecialArgs
-    #  # to pass through arguments to home.nix
+    # Home-manager configs. mkHome auto-injects all `homeModules` and supplies
+    # `extraSpecialArgs`; the list passed here is machine-specific extras only.
     homeConfigurations = {
-      "sam@fswbsk088" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [./machines/sm-fswbsk088/default.nix];
-        extraSpecialArgs = {inherit inputs outputs;};
-      };
+      "sam@fswbsk088" = mkHome "x86_64-linux" [./machines/sm-fswbsk088/default.nix];
 
-      "sam@laptop-server" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [./machines/laptop-server/default.nix];
-        extraSpecialArgs = {inherit inputs outputs;};
-      };
+      "sam@laptop-server" = mkHome "x86_64-linux" [./machines/laptop-server/default.nix];
 
-      "samuel@samuel-mac" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        modules = [
-          ({
-            nixpkgs.overlays = outputs.overlays;
-          })
+      "samuel@samuel-mac" = mkHome "aarch64-darwin" [
+        ({
+          nixpkgs.overlays = outputs.overlays;
+        })
 
-          ./machines/mac_dev/default.nix
-        ];
-        extraSpecialArgs = {inherit inputs outputs;};
-      };
+        ./machines/mac_dev/default.nix
+      ];
 
-      "sam@xps-laptop" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [./machines/xps_laptop/default.nix];
-        extraSpecialArgs = {inherit inputs outputs;};
-      };
+      "sam@xps-laptop" = mkHome "x86_64-linux" [./machines/xps_laptop/default.nix];
 
-      "sam@k1" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [./machines/k1/default.nix];
-        extraSpecialArgs = {inherit inputs outputs;};
-      };
+      "sam@k1" = mkHome "x86_64-linux" [./machines/k1/default.nix];
     };
 
     # Custom home-manager modules

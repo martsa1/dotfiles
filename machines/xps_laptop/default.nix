@@ -1,7 +1,6 @@
-{pkgs, lib, outputs, inputs, ...}: rec {
+{pkgs, lib, inputs, ...}: rec {
   imports = [
     ../linux_base
-    outputs.homeModules.ssh
   ];
 
   home.username = "sam";

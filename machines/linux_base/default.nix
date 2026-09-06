@@ -3,13 +3,11 @@
   config,
   pkgs,
   inputs,
-  outputs,
   ...
 }: {
   imports = [
     # Pull in common setup.
     ../common
-    outputs.homeModules.i3-config
   ];
 
   # Various packages I want my user to have access to

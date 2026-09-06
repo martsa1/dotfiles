@@ -1,9 +1,8 @@
 # vim: set filetype=nix ts=2 sw=2 tw=0 et :
-{outputs, pkgs, lib, ...}: {
+{pkgs, lib, ...}: {
 
   imports = [
     ../mac_base
-   outputs.homeModules.aerospace
   ];
 
   sm.aerospace.enable = true;

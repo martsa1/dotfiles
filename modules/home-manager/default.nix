@@ -1,8 +1,13 @@
 # Reusable home-manager modules, exposed as the flake's `homeModules` output
-# (parallel to `nixosModules`, which holds NixOS modules). Machines pull one in
-# with `imports = [ outputs.homeModules.<name> ];` and then toggle it via
-# `sm.<name>.enable`, matching the NixOS side. Modules MUST be inert when
-# disabled (mkIf cfg.enable).
+# (parallel to `nixosModules`, which holds NixOS modules). Every module here is
+# auto-injected into all homeConfigurations via the `mkHome` helper in
+# flake.nix, so machines opt in with `sm.<name>.enable = true` and never need a
+# per-machine import line. Modules MUST be inert when disabled (mkIf cfg.enable).
+#
+# A machine must NOT import these directly as well: the values here are
+# functions rather than paths, so the module system cannot dedupe them and a
+# second reference fails with "The option `sm.<name>.enable' ... is already
+# declared".
 #
 # Most modules default to off and are opted into per machine. `tmux` is the
 # exception: it defaults to on, so machines opt *out* with
