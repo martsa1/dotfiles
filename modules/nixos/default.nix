@@ -6,4 +6,5 @@
 {
   k3s = import ./k3s.nix;
   comin = import ./comin.nix;
+  nfs = import ./nfs.nix;
 }

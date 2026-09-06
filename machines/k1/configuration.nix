@@ -179,6 +179,9 @@
     tlsSan = ["k1.home"];
   };
 
+  # NFS client for the csi-driver-nfs storage class (nas.home volumes).
+  sm.nfs.enable = true;
+
   # Pull-based deploy: comin rebuilds nixosConfigurations.k1 when main changes.
   sm.comin.enable = true;
 

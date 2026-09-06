@@ -204,6 +204,9 @@
     extraFlags = ["--node-ip=172.16.1.3"];
   };
 
+  # NFS client for the csi-driver-nfs storage class (nas.home volumes).
+  sm.nfs.enable = true;
+
   # Pull-based deploy: comin rebuilds nixosConfigurations.laptop-server when main
   # changes (brings laptop-server under the same GitOps flow as k1).
   sm.comin.enable = true;
