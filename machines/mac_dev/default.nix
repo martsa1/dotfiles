@@ -3,10 +3,10 @@
 
   imports = [
     ../mac_base
-   outputs.homeModules.sm-aerospace
+   outputs.homeModules.aerospace
   ];
 
-  sm-aerospace.enable = true;
+  sm.aerospace.enable = true;
 
   # Various packages I want my user to have access to
   home.packages = with pkgs; [

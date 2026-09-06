@@ -17,8 +17,9 @@ let
 in
 {
   imports = [
-    # Enable and manage tmux via home-manager
-    ../../dotfiles/tmux
+    # tmux is managed by home-manager on every machine. The module defaults to
+    # enabled, so a machine opts out with `sm.tmux.enable = false;`.
+    outputs.homeModules.tmux
   ];
 
   nixpkgs.overlays = outputs.overlays ;

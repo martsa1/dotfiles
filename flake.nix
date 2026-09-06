@@ -34,7 +34,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # tmux plugin not in nixpkgs; packaged inline in dotfiles/tmux
+    # tmux plugin not in nixpkgs; packaged inline in modules/home-manager/tmux.nix
     tmux-claude-session-manager = {
       url = "github:craftzdog/tmux-claude-session-manager";
       flake = false;
@@ -191,7 +191,7 @@
     };
 
     # Custom home-manager modules
-    homeModules = import ./modules;
+    homeModules = import ./modules/home-manager;
 
     # Custom NixOS modules (auto-injected into every host via mkNixos)
     nixosModules = import ./modules/nixos;

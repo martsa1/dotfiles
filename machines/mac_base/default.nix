@@ -21,7 +21,6 @@
 
   # File setup for various RC/Config files etc.
   home.file = {
-    #".tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
     ".terminfo/61".source = pkgs.alacritty.terminfo.outPath + "/share/terminfo/61";
     ".terminfo/a".source = pkgs.alacritty.terminfo.outPath + "/share/terminfo/a";
   };

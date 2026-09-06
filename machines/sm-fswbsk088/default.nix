@@ -80,7 +80,7 @@
   home.username = "sam";
   home.homeDirectory = "/home/sam";
 
-  smi3config = {
+  sm.i3-config = {
     enable = true;
     hostname = "fswbsk088";
     username = home.username;

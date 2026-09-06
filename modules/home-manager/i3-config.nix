@@ -5,13 +5,13 @@
   pkgs,
   ...
 }: let
-  cfg = config.smi3config;
+  cfg = config.sm.i3-config;
 
   baseTemplate = ../../dotfiles/i3/base_config/config.j2;
   pactl = "${pkgs.pulseaudio.outPath}/bin/pactl";
 
 in {
-  options.smi3config = {
+  options.sm.i3-config = {
     enable = lib.mkEnableOption "Sams i3 config setup";
 
     hostname = lib.mkOption {
@@ -34,7 +34,7 @@ in {
         pname = "sm-i3-configuration";
         version = "1.0.0";
 
-        src = self/../../dotfiles/i3;
+        src = ../../dotfiles/i3;
 
         # Disable all other steps.
         phases = "installPhase";

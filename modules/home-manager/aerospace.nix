@@ -5,12 +5,12 @@
   pkgs,
   ...
 }: let
-  cfg = config.sm-aerospace;
+  cfg = config.sm.aerospace;
 
   alacritty = "${pkgs.alacritty.outPath}/bin/alacritty";
 
 in {
-  options.sm-aerospace = {
+  options.sm.aerospace = {
     enable = lib.mkEnableOption "Sams Aersopace config";
   };
 

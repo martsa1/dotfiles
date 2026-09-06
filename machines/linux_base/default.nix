@@ -3,12 +3,13 @@
   config,
   pkgs,
   inputs,
+  outputs,
   ...
 }: {
   imports = [
     # Pull in common setup.
     ../common
-    ../../modules/i3-config.nix
+    outputs.homeModules.i3-config
   ];
 
   # Various packages I want my user to have access to
@@ -257,7 +258,6 @@
 
   # File setup for various RC/Config files etc.
   home.file = {
-    #".tmux.conf".source = ../../dotfiles/tmux/tmux.conf;
     ".background-image".source = ../../backgrounds/pexels-pixabay-220072.jpg;
 
     # Seems unecessary nowadays..?

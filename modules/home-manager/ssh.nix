@@ -5,9 +5,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.sm-ssh;
+  cfg = config.sm.ssh;
 in {
-  options.sm-ssh = {
+  options.sm.ssh = {
     enable = lib.mkEnableOption "Sams SSH client config";
   };
 

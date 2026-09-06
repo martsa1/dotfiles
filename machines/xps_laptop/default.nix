@@ -1,15 +1,15 @@
 {pkgs, lib, outputs, inputs, ...}: rec {
   imports = [
     ../linux_base
-    outputs.homeModules.sm-ssh
+    outputs.homeModules.ssh
   ];
 
   home.username = "sam";
   home.homeDirectory = "/home/sam";
 
-  sm-ssh.enable = true;
+  sm.ssh.enable = true;
 
-  smi3config = {
+  sm.i3-config = {
     enable = true;
     hostname = "xps-laptop";
     username = home.username;

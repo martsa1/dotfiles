@@ -1,13 +1,12 @@
 {pkgs, ...}: rec {
   imports = [
     ../linux_base
-    ../../modules/home-manager
   ];
 
   home.username = "sam";
   home.homeDirectory = "/home/sam";
 
-  smi3config = {
+  sm.i3-config = {
     enable = true;
     hostname = "xps-laptop";
     username = home.username;
@@ -48,11 +47,6 @@
       background = "#282a36";
       foreground = "#f8f8f2";
     };
-  };
-
-  personal = {
-    tmux.enable = true;
-    # rofi.enable = true; # Uncomment as you add more modules
   };
 }
 
