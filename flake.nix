@@ -34,6 +34,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # tmux plugin not in nixpkgs; packaged inline in dotfiles/tmux
+    tmux-claude-session-manager = {
+      url = "github:craftzdog/tmux-claude-session-manager";
+      flake = false;
+    };
+
     # Declarative homebrew setup
     homebrew-core = {
       url = "github:homebrew/homebrew-core";

@@ -4,8 +4,31 @@ vim: set filetype=nix ts=2 sw=2 tw=0 et :
 {
   pkgs,
   lib,
+  inputs,
   ...
 }: let
+  claude-session-manager = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "claude-session-manager";
+    version = inputs.tmux-claude-session-manager.shortRev;
+    src = inputs.tmux-claude-session-manager;
+
+    # The scripts call fzf/jq bare *and* preflight them with `command -v`, so
+    # the store paths have to be on PATH rather than substituted at the call
+    # sites. Every script sources helpers.sh first, so exporting there covers
+    # all of them. `claude` itself stays on PATH from home.packages.
+    postInstall = ''
+      echo 'export PATH="${lib.makeBinPath [pkgs.fzf pkgs.jq]}:$PATH"' \
+        >> $target/scripts/helpers.sh
+    '';
+
+    meta = with lib; {
+      homepage = "https://github.com/craftzdog/tmux-claude-session-manager";
+      description = "List, monitor and jump across nested Claude Code sessions";
+      license = licenses.mit;
+      platforms = platforms.unix;
+    };
+  };
+
   dracula_head = pkgs.tmuxPlugins.mkTmuxPlugin rec {
     pluginName = "dracula";
     version = "e8598158df58415e9413dddd34c9f818335443d0";
@@ -37,6 +60,17 @@ in {
       # Force Tmux to use 24bit colour
       set-option -sa terminal-overrides ",alacritty*:Tc"
       set -as terminal-features ",gnome*:RGB"
+
+      # Claude Code inside tmux: allow-passthrough lets desktop notifications
+      # and the progress bar reach the outer terminal; extended-keys lets tmux
+      # tell Shift+Enter apart from Enter. terminal-features is matched against
+      # the *outer* terminal's TERM, so xterm* alone would miss alacritty.
+      # https://code.claude.com/docs/en/terminal-config#configure-tmux
+      set -g allow-passthrough on
+      set -s extended-keys on
+      set -as terminal-features ",xterm*:extkeys"
+      set -as terminal-features ",alacritty*:extkeys"
+      set -as terminal-features ",kitty*:extkeys"
 
       # Allow contents of pane to be preserved when interactive tool is used.
       set-option alternate-screen on
@@ -95,6 +129,13 @@ in {
       copycat
       resurrect
       #onedark-theme
+      {
+        plugin = claude-session-manager;
+        extraConfig = ''
+          set -g @claude_launch_key 'a'
+          set -g @claude_list_key 'A'
+        '';
+      }
       {
         plugin = dracula_head;
         extraConfig = ''

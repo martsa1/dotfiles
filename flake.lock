@@ -346,6 +346,7 @@
         "pulseaudio-listener": "pulseaudio-listener",
         "sops-nix": "sops-nix",
         "systems": "systems",
+        "tmux-claude-session-manager": "tmux-claude-session-manager",
         "treefmt-nix": "treefmt-nix"
       }
     },
@@ -381,6 +382,22 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tmux-claude-session-manager": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1787883771,
+        "narHash": "sha256-T0MKsgzWd+TADZvBXr9hja0bhqZ3/qdXKqcS/lh5ip8=",
+        "owner": "craftzdog",
+        "repo": "tmux-claude-session-manager",
+        "rev": "be1c3882fb0c675914fb74a39366febee8033ac3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "craftzdog",
+        "repo": "tmux-claude-session-manager",
         "type": "github"
       }
     },
