@@ -66,7 +66,15 @@ in {
     programs.tmux = {
       enable = true;
       terminal = "\${TERM}";
-      aggressiveResize = true;
+      # Deliberately off. With aggressive-resize on, tmux only resizes a window
+      # for clients where it is the *current* window (resize.c
+      # recalculate_size_skip_client), so any window that wasn't focused when a
+      # differently-sized client was attached stays frozen at the old geometry
+      # until you next switch to it. Running a second client at another size --
+      # e.g. a nested Claude Code session -- scatters windows across two sizes.
+      # Off means every window in an attached session tracks the latest client,
+      # which is what `window-size latest` (the tmux default) implies.
+      aggressiveResize = false;
       baseIndex = 1;
       clock24 = true;
       escapeTime = 10;
