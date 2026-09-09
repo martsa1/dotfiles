@@ -18,6 +18,14 @@ vim: set filetype=nix ts=2 sw=2 tw=0 et :
     version = inputs.tmux-claude-session-manager.shortRev;
     src = inputs.tmux-claude-session-manager;
 
+    # Adds a name column to the picker, read from Claude's own per-session state
+    # files, so a row is identifiable by the name `/rename` gave it rather than
+    # by cwd alone. mkTmuxPlugin forwards unknown attrs straight to
+    # stdenv.mkDerivation, and its `unpackPhase = ""` reads as *unset* to the
+    # phase dispatcher (`${!curPhase:-$curPhase}`), so the source is unpacked
+    # normally and the stock patchPhase applies this at -p1.
+    patches = [./patches/claude-picker-session-names.patch];
+
     # The scripts call fzf/jq bare *and* preflight them with `command -v`, so
     # the store paths have to be on PATH rather than substituted at the call
     # sites. Every script sources helpers.sh first, so exporting there covers
@@ -134,6 +142,17 @@ in {
         # Add key-binding to re-number windows in a tmux session
         bind-key "W" move-window -r
 
+        # Un-wedge a Claude Code pane after a swallowed ctrl+z. Claude handles
+        # ctrl+z as a keypress (raw mode means no real SIGTSTP), restores the
+        # tty, prints "has been suspended", then calls kill(0, SIGTSTP) -- but
+        # when Claude is the pane's own process its parent is the tmux server,
+        # in another session, so its process group is orphaned and the kernel
+        # discards the stop signal. Claude then sits in the foreground eating
+        # the `fg` you type, with ctrl+c the only other way out. SIGCONT fires
+        # the resume handler it registered anyway, which re-enables raw mode and
+        # repaints, so the session survives. prefix+C-z stays suspend-client.
+        bind-key "Z" run-shell 'kill -CONT #{pane_pid}'
+
         # mouse control (clickable windows, resizable panes)
         set -g mouse on
 
@@ -160,6 +179,11 @@ in {
           extraConfig = ''
             set -g @claude_launch_key 'a'
             set -g @claude_list_key 'A'
+
+            # Width of the session-name column added by our patch (not an
+            # upstream option, so it is documented here rather than in the
+            # plugin's README). 0 leaves the column its natural width.
+            # set -g @claude_name_width 36
           '';
         }
         {
