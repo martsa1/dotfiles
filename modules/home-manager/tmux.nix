@@ -86,6 +86,14 @@ in {
       baseIndex = 1;
       clock24 = true;
       escapeTime = 10;
+      # Off by default in home-manager (and in tmux itself). On means tmux
+      # requests DEC mode 1004 from the outer terminal and forwards focus
+      # in/out to panes -- including on pane *switches*, not just window
+      # manager focus. Neovim needs this for FocusGained/FocusLost, so
+      # `checktime`-driven autoread actually fires after a git checkout in
+      # another pane; Claude Code uses it to tell whether you're watching
+      # before it notifies. Requires a detach/attach to take effect.
+      focusEvents = true;
       keyMode = "vi";
       historyLimit = 50000;
       extraConfig = ''
