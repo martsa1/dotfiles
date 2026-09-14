@@ -63,29 +63,12 @@
       signing.key = lib.mkForce "61CB737879759A958B6B886626E45D5144EF59EA";
     };
 
-    # Fiddle with kitty...
-    kitty = {
-      enable = true;
-      font = {
-        # name = "Fira Mono Nerd Font";
-        # package = pkgs.nerd-fonts.fira-mono;
-        name = "monospace";
-        size = 9;
-      };
-      settings = {
-        # https://sw.kovidgoyal.net/kitty/conf/
-        scrollback_lines = 10000;
-
-        enable_audio_bell = false;
-        visual_bell_duration = "0.2";
-
-        background_opacity = "0.8";
-        background = "#282a36";
-        foreground = "#f8f8f2";
-      };
-    };
 
     gpg = {
+      enable = true;
+    };
+
+    uv = {
       enable = true;
     };
   };
@@ -100,5 +83,6 @@
     };
 
     trayscale.enable = true;
+
   };
 }

@@ -40,6 +40,11 @@
   boot.initrd.luks.devices."luks-44387a08-414f-4699-9086-b8a4a3972a7f".device = "/dev/disk/by-uuid/44387a08-414f-4699-9086-b8a4a3972a7f";
   boot.initrd.luks.devices."luks-44387a08-414f-4699-9086-b8a4a3972a7f".keyFile = "/crypto_keyfile.bin";
 
+  # Resume from hibernation using the (decrypted) swap partition. The UUID is
+  # that of the LUKS-mapped device, not the container (see swapDevices in
+  # hardware-configuration.nix).
+  boot.resumeDevice = "/dev/disk/by-uuid/4d9e46f0-ca8c-40b8-96d5-f2a93aed6ff9";
+
   # Enable TRIM for SSD maintenance
   services.fstrim.enable = true;
 
@@ -168,6 +173,7 @@
       "wheel"
       "networkmanager"
       "adbusers"
+      "docker"
     ];
     shell = pkgs.zsh;
   };
@@ -234,7 +240,7 @@
     pkgs.yubikey-personalization
     pkgs.libu2f-host
 
-    # pkgs.android-udev-rules
+    pkgs.android-udev-rules
   ];
   services.pcscd.enable = true;
 
@@ -274,7 +280,7 @@
   services.tumbler.enable = true;
 
   # Enable docker daemon
-  #virtualisation.docker.enable = true;
+  virtualisation.docker.enable = true;
 
   # Setup virtualisation via KVM + Libvirt.
   virtualisation.libvirtd.enable = true;
