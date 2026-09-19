@@ -177,6 +177,12 @@
     tokenFile = config.sops.secrets.k3s_token.path;
     # Lets kubectl from other LAN hosts reach the API via the hostname.
     tlsSan = ["k1.home"];
+    # Pin the API to the wired interface. Without this k3s advertised the API
+    # on wlo1's address (172.16.1.103) at some boot; wifi went away and the
+    # `kubernetes` service kept the dead endpoint forever, so kube-proxy
+    # 50/50'd hostNetwork clients between a live and a dead endpoint - which
+    # is what crash-looped the MetalLB speaker for its whole life.
+    extraFlags = ["--node-ip=172.16.1.4" "--advertise-address=172.16.1.4"];
   };
 
   # NFS client for the csi-driver-nfs storage class (nas.home volumes).
