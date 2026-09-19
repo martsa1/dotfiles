@@ -39,6 +39,10 @@ in {
           # GID = "${builtins.toString config.users.groups.podman.gid}";
           # TODO: Fix this config lookup...
           GID = 996; # Manually looked up!
+          # Prefer 8-bit SDR H.264 at <=1080p: YouTube's avc1 streams never
+          # come in HDR/4K, so every client - including the Roku TV, whose
+          # VP9 decode is 8-bit-only - can direct-play the result.
+          YTDL_OPTIONS = ''{"format": "bv*[vcodec^=avc1][height<=1080]+ba/b"}'';
         };
 
         # DLNA requires host-networking, consider using that instead?
