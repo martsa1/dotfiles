@@ -133,12 +133,11 @@
   # Setup rofi
   programs.rofi = {
     enable = true;
-
-    #font = "";
-    location = "center";
-    terminal = "${pkgs.alacritty}/bin/alacritty";
     theme = ../../dotfiles/rofi/dracula.rasi;
-    extraConfig = {
+    settings = {
+      # Numeric window position: center (top=2, right=4, bottom=6, left=8)
+      location = 0;
+      terminal = "${pkgs.alacritty}/bin/alacritty";
       combi-modes = "drun,run";
       matching = "fuzzy";
       max-history-size = 100;
