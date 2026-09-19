@@ -14,7 +14,6 @@
     ./baby-buddy.nix
     ./gitea.nix
     ./home-assistant.nix
-    ./jellyfin.nix
     ./metube.nix
     ./step-ca.nix
     ./traefik.nix
@@ -162,7 +161,6 @@
     8443
     22
     8123
-    8096 # temp...
     8097 # temp...
   ];
   # networking.firewall.allowedUDPPorts = [ ... ];
