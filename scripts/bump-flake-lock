@@ -1,0 +1,132 @@
+#!/usr/bin/env bash
+# Re-pin the nixpkgs input in flake.nix to a named ref, an exact commit, or a
+# commit N days behind the head of nixpkgs-unstable, then refresh flake.lock.
+#
+# Why the offset matters: pinning a few days behind unstable gives
+# cache.nixos.org time to catch up after big bump waves (e.g. a new nodejs
+# point release), so builds substitute instead of compiling from source.
+#
+# Usage:
+#   bump-flake-lock            # nixpkgs-unstable head (plain update)
+#   bump-flake-lock 5          # nixpkgs-unstable, 5 days behind its head
+#   bump-flake-lock <ref>      # e.g. master, nixos-unstable, nixos-26.05
+#   bump-flake-lock <sha>      # pin an exact nixpkgs commit
+set -euo pipefail
+
+readonly REPO="NixOS/nixpkgs"
+readonly OFFSET_REF="nixpkgs-unstable"  # ref that day offsets resolve against
+readonly INPUT="nixpkgs"                # the flake input being re-pinned
+
+usage() {
+  cat <<'EOF'
+usage: bump-flake-lock [ref | days | sha]
+
+  (none)        pin to the head of nixpkgs-unstable
+  <days>        pin to nixpkgs-unstable as it stood <days> days ago, e.g. 5
+  <ref>         pin to a nixpkgs ref: master, nixos-unstable, nixos-26.05, ...
+  <sha>         pin to an exact commit
+
+Edits the active `nixpkgs.url` line in flake.nix (commented-out refs are left
+alone), then runs `nix flake update nixpkgs` at the repo root. Nothing is
+committed; review with `git diff flake.nix flake.lock`.
+EOF
+}
+
+die() {
+  printf 'bump-flake-lock: %s\n' "$*" >&2
+  exit 1
+}
+
+need() {
+  command -v "$1" >/dev/null 2>&1 || die "missing dependency: $1"
+}
+
+iso_from_epoch() {
+  # GNU date takes -d @epoch, BSD date takes -r epoch; this repo targets both.
+  date -u -d "@$1" +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -r "$1" +%Y-%m-%dT%H:%M:%SZ
+}
+
+# Echo the github flake URL to pin for the given argument. Progress/summary
+# goes to stderr so stdout stays capturable.
+target_url() {
+  local arg=$1 epoch until info re
+  case $arg in
+    unstable) arg=$OFFSET_REF ;;
+  esac
+  if [[ $arg =~ ^[0-9]+$ ]]; then
+    epoch=$(( $(date -u +%s) - arg * 86400 ))
+    until=$(iso_from_epoch "$epoch")
+    info=$(curl -fsSL "https://api.github.com/repos/${REPO}/commits?sha=${OFFSET_REF}&until=${until}&per_page=1") ||
+      die "could not query the github api for ${OFFSET_REF} before ${until} (network? rate limit?)"
+    local rev meta
+    rev=$(jq -r '.[0].sha // empty' <<<"$info")
+    [[ -n $rev ]] || die "no commit on ${OFFSET_REF} before ${until}"
+    meta=$(jq -r '.[0] | .commit.committer.date + " " + (.commit.message | split("\n")[0])' <<<"$info")
+    printf 'resolved %s before %s:\n  %s %s\n' "$OFFSET_REF" "$until" "${rev:0:12}" "$meta" >&2
+    printf 'github:nixos/nixpkgs/%s' "$rev"
+  elif [[ $arg =~ ^[0-9a-f]{7,40}$ ]]; then
+    printf 'github:nixos/nixpkgs/%s' "$arg"
+  else
+    re='^[A-Za-z0-9._-]+$'
+    [[ $arg =~ $re ]] || die "not a plausible nixpkgs ref: $arg"
+    printf 'github:nixos/nixpkgs/%s' "$arg"
+  fi
+}
+
+# Rewrite the single active `nixpkgs.url` line in flake.nix, leaving commented
+# refs alone. Pure bash so it works unchanged on Linux and darwin.
+pin_input_url() {
+  local flake=$1 url=$2 tmp replaced=0 line
+  local re='^([[:space:]]*)nixpkgs\.url[[:space:]]*=[[:space:]]*"github:nixos/nixpkgs/[^"]*";'
+  tmp=$(mktemp "${flake}.bump.XXXXXX") || die "cannot create a temp file next to $flake"
+  while IFS= read -r line || [[ -n $line ]]; do
+    if [[ $line =~ $re ]]; then
+      line="${BASH_REMATCH[1]}nixpkgs.url = \"${url}\";"
+      replaced=$((replaced + 1))
+    fi
+    printf '%s\n' "$line" >>"$tmp"
+  done <"$flake"
+  if [[ $replaced -ne 1 ]]; then
+    rm -f "$tmp"
+    die "expected exactly one active 'nixpkgs.url = \"github:nixos/nixpkgs/...\"' line in $flake, found $replaced"
+  fi
+  mv "$tmp" "$flake"
+}
+
+main() {
+  local dep
+  for dep in git curl jq nix; do
+    need "$dep"
+  done
+
+  local arg=${1:-$OFFSET_REF}
+  [[ $arg != -h && $arg != --help && $arg != help ]] || {
+    usage
+    exit 0
+  }
+
+  local root
+  root=$(git rev-parse --show-toplevel 2>/dev/null) ||
+    die "not inside a git repo (run this from the home-manager checkout)"
+  local flake="$root/flake.nix"
+  [[ -f $flake ]] || die "no flake.nix found at $root"
+
+  local url
+  url=$(target_url "$arg")
+
+  local old
+  old=$(jq -r '.nodes.nixpkgs.locked.rev // "none"' "$root/flake.lock")
+
+  pin_input_url "$flake" "$url"
+  printf 'pinned %s.url -> %s\n' "$INPUT" "$url"
+
+  printf 'updating flake.lock ...\n'
+  (cd "$root" && nix flake update "$INPUT")
+
+  local new
+  new=$(jq -r '.nodes.nixpkgs.locked.rev // "none"' "$root/flake.lock")
+  printf 'flake.lock: %.12s -> %.12s\n' "$old" "$new"
+  printf 'review with: git -C %s diff flake.nix flake.lock\n' "$root"
+}
+
+main "$@"
