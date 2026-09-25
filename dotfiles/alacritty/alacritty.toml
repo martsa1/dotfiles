@@ -56,6 +56,16 @@ style = "Italic"
 family = "FiraMono Nerd Font"
 style = "Regular"
 
+# Shift+Enter as a newline in Claude Code. Alacritty only distinguishes it from
+# Enter via the kitty keyboard protocol, which tmux does not speak -- tmux's
+# `extkeys` feature negotiates xterm modifyOtherKeys, which Alacritty has never
+# implemented -- so inside tmux Shift+Enter arrives as a bare CR. Sending ESC+CR
+# (Alt+Enter) instead passes through tmux and Claude reads it as a newline.
+[[keyboard.bindings]]
+chars = "\u001B\r"
+key = "Enter"
+mods = "Shift"
+
 [scrolling]
 history = 40000
 

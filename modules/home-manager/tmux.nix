@@ -103,8 +103,12 @@ in {
 
         # Claude Code inside tmux: allow-passthrough lets desktop notifications
         # and the progress bar reach the outer terminal; extended-keys lets tmux
-        # tell Shift+Enter apart from Enter. terminal-features is matched against
+        # report modified keys to the pane. terminal-features is matched against
         # the *outer* terminal's TERM, so xterm* alone would miss alacritty.
+        # extkeys only buys anything from terminals that speak xterm
+        # modifyOtherKeys -- Alacritty speaks only the kitty keyboard protocol,
+        # which tmux does not, so Shift+Enter there is bound terminal-side in
+        # dotfiles/alacritty/alacritty.toml instead.
         # https://code.claude.com/docs/en/terminal-config#configure-tmux
         set -g allow-passthrough on
         set -s extended-keys on
