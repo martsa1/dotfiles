@@ -4,7 +4,7 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     # nixpkgs.url = "github:nixos/nixpkgs/master";
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/d06c27a7249ff9b75abd5f45e2251b5b626b06b0";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
@@ -35,8 +35,8 @@
     };
 
     # tmux plugin not in nixpkgs; packaged inline in modules/home-manager/tmux.nix
-    tmux-claude-session-manager = {
-      url = "github:craftzdog/tmux-claude-session-manager";
+    tmux-claude-hatch = {
+      url = "github:craftzdog/tmux-claude-hatch";
       flake = false;
     };
 

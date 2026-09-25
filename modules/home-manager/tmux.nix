@@ -13,10 +13,10 @@ vim: set filetype=nix ts=2 sw=2 tw=0 et :
 }: let
   cfg = config.sm.tmux;
 
-  claude-session-manager = pkgs.tmuxPlugins.mkTmuxPlugin {
-    pluginName = "claude-session-manager";
-    version = inputs.tmux-claude-session-manager.shortRev;
-    src = inputs.tmux-claude-session-manager;
+  claude-hatch = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "claude-hatch";
+    version = inputs.tmux-claude-hatch.shortRev;
+    src = inputs.tmux-claude-hatch;
 
     # Adds a name column to the picker, read from Claude's own per-session state
     # files, so a row is identifiable by the name `/rename` gave it rather than
@@ -36,7 +36,7 @@ vim: set filetype=nix ts=2 sw=2 tw=0 et :
     '';
 
     meta = with lib; {
-      homepage = "https://github.com/craftzdog/tmux-claude-session-manager";
+      homepage = "https://github.com/craftzdog/tmux-claude-hatch";
       description = "List, monitor and jump across nested Claude Code sessions";
       license = licenses.mit;
       platforms = platforms.unix;
@@ -183,7 +183,7 @@ in {
         resurrect
         #onedark-theme
         {
-          plugin = claude-session-manager;
+          plugin = claude-hatch;
           extraConfig = ''
             set -g @claude_launch_key 'a'
             set -g @claude_list_key 'A'

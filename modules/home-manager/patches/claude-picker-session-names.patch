@@ -14,13 +14,13 @@ is usually just a restatement of the path in the next column. The column is
 fitted to @claude_name_width (default 36, 0 to leave it unpadded) so it adds
 no raggedness to `path` beyond the variable-width `loc` already ahead of it.
 
-Carried locally against craftzdog/tmux-claude-session-manager@be1c388;
+Carried locally against craftzdog/tmux-claude-hatch@2386ab9;
 candidate for upstreaming.
 --- a/scripts/helpers.sh
 +++ b/scripts/helpers.sh
-@@ -56,3 +56,31 @@
-     }
+@@ -72,3 +72,31 @@
    done
+   tmux set-buffer -w -- "$1" 2>/dev/null
  }
 +
 +# claude_session_names
@@ -118,12 +118,12 @@ candidate for upstreaming.
  # rank asc (what needs you floats up), then age asc so whatever just went idle
 --- a/scripts/picker.sh
 +++ b/scripts/picker.sh
-@@ -55,7 +55,7 @@
- # ctrl-x kills the Claude process itself: a dedicated session dies with its last
- # window, while a loose pane keeps the shell that hosted it. The reload waits a
+@@ -65,7 +65,7 @@
  # beat so the supervisor has dropped the agent from `claude agents --json`.
+ # ctrl-y copies the agent's location (session:window.pane, e.g. claude-88074b0e:0.0)
+ # and closes the picker.
 -sel=$("${list_cmd[@]}" | fzf --ansi --delimiter='\t' --with-nth=5,6,7,8 \
 +sel=$("${list_cmd[@]}" | fzf --ansi --delimiter='\t' --with-nth=5,6,7,8,9 \
-   --reverse --cycle --header='Claude agents · enter: jump · ctrl-x: kill' \
+   --reverse --cycle --header='Claude agents · enter: jump · ctrl-x: kill · ctrl-y: copy' \
    --preview='tmux capture-pane -ept {2}' --preview-window='up,70%,follow' \
    --bind="ctrl-x:execute-silent(kill {3})+reload(sleep 0.3; $self --list)" \
