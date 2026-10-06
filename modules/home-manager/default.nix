@@ -15,6 +15,7 @@
 {
   aerospace = import ./aerospace.nix;
   i3-config = import ./i3-config.nix;
+  rofi = import ./rofi.nix;
   ssh = import ./ssh.nix;
   tmux = import ./tmux.nix;
 }

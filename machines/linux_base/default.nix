@@ -30,14 +30,11 @@
     peek
     playerctl
     prusa-slicer
-    rofi-rbw
-    rofimoji
     scrot
     shellcheck
     signal-desktop
     spotify
     xclip
-    xdotool # rofi-rbw typer on X11
     thunar
     thunar-archive-plugin
     thunar-volman
@@ -57,7 +54,6 @@
     polybar-mute
     polybar-spotify
     inputs.pulseaudio-listener.packages.${pkgs.stdenv.hostPlatform.system}.default
-    rofi-dracula-theme
   ];
 
   # Support fontconfig
@@ -130,26 +126,8 @@
     };
   };
 
-  # Setup rofi
-  programs.rofi = {
-    enable = true;
-    theme = ../../dotfiles/rofi/dracula.rasi;
-    settings = {
-      # Numeric window position: center (top=2, right=4, bottom=6, left=8)
-      location = 0;
-      terminal = "${pkgs.alacritty}/bin/alacritty";
-      combi-modes = "drun,run";
-      matching = "fuzzy";
-      max-history-size = 100;
-      modi = "window,run,drun,ssh,keys";
-      show-icons = true;
-      sidebar-mode = true;
-      sort = true;
-      sorting-method = "fzf";
-    };
-    plugins = [pkgs.rofi-calc];
-    # Emoji support handled via rofimoji
-  };
+  # Rofi and its adjacent tooling live in the sm.rofi home-manager module.
+  sm.rofi.enable = true;
 
   # RBW - bitwarden CLI client. Config (incl. account email) is deliberately
   # not managed here — it lives in ~/.config/rbw/config.json, set per-machine
@@ -276,8 +254,6 @@
     # "i3/config".onChange = "${pkgs.i3}/bin/i3-msg -s /run/user/1000/i3/ipc-socket.* restart && systemctl --user restart polybar";
 
     "dunst/dunstrc".source = "${pkgs.dunst-dracula-theme}/dunstrc";
-
-    "rofimoji.rc".text = "files = [emojis, latin-1_supplement]";
   };
 
   # Attempt to sort out x Session.

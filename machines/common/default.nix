@@ -24,7 +24,6 @@ in
 
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
-    rofi-dracula-theme
     curl
     # direnv
     docker-compose
