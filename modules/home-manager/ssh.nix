@@ -1,4 +1,5 @@
-# Config for mac Aerospace window manager tooling
+# Sams SSH client config (Host aliases and their keys). Off by default;
+# machines opt in with `sm.ssh.enable = true;`.
 {
   config,
   lib,
