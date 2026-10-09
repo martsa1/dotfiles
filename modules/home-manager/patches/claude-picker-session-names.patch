@@ -14,11 +14,84 @@ is usually just a restatement of the path in the next column. The column is
 fitted to @claude_name_width (default 36, 0 to leave it unpadded) so it adds
 no raggedness to `path` beyond the variable-width `loc` already ahead of it.
 
-Carried locally against craftzdog/tmux-claude-hatch@2386ab9;
+Carried locally against craftzdog/tmux-claude-hatch@e0bcfd1;
 candidate for upstreaming.
+diff --git a/scripts/agents.sh b/scripts/agents.sh
+index 16410ea..17245af 100755
+--- a/scripts/agents.sh
++++ b/scripts/agents.sh
+@@ -10,7 +10,7 @@
+ # is what lets several Claudes in one project (same cwd, same session, different
+ # windows) each get a row of their own.
+ #
+-#   Row: rank \t pane_id \t pid \t kind \t icon \t age \t loc \t path
++#   Row: rank \t pane_id \t pid \t kind \t icon \t age \t loc \t name \t path
+ #   rank/pane_id/pid/kind are hidden from the display via fzf's --with-nth.
+ set -uo pipefail
+ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+@@ -58,8 +58,9 @@ proc_starts() {
+ }
+ 
+ # render <recs> <verify>
+-# Tagged streams into one awk: pid->tty+start, tty->pane, and the agents. One `ps`
+-# serves both joins, which matters on macOS where each call costs over 100ms.
++# Tagged streams into one awk: pid->tty+start, tty->pane, pid->name, and the
++# agents. One `ps` serves both joins, which matters on macOS where each call
++# costs over 100ms.
+ #
+ # With <verify> set, the recs came from the session files and liveness is on us —
+ # ctrl-x kills the pid on the row. A crashed Claude leaves its file behind and the
+@@ -75,12 +76,18 @@ render() {
+       awk '{ print "P\t" $1 "\t" $2 "\t" $3 " " $4 " " $5 " " $6 " " $7 }'
+     [ -r /proc/self/stat ] && proc_starts "$1"
+     tmux list-panes -a -F $'T\t#{pane_tty}\t#{pane_id}\t#{session_name}\t#{session_name}:#{window_index}.#{pane_index}' 2>/dev/null
++    claude_session_names
+     printf '%s\n' "$1" | sed $'s/^/A\t/'
+   } | awk -F'\t' -v verify="$2" -v now="$(date +%s)" -v home="$HOME" \
++    -v namew="$(get_tmux_option @claude_name_width 36)" \
+     -v prefix="$(get_tmux_option @claude_session_prefix 'claude-')" '
++    # int() so a garbled @claude_name_width degrades to 0 (an unpadded column)
++    # rather than being spliced into a printf format as a bare string.
++    BEGIN { namew = int(namew) }
+     $1 == "P" { tty_of[$2] = $3; start[$2] = $4; next }
+     $1 == "S" { start[$2] = $3; next }
+     $1 == "T" { sub(/^\/dev\//, "", $2); pane[$2] = $3; sess[$2] = $4; loc[$2] = $5; next }
++    $1 == "N" { name[$2] = $3; name_src[$2] = $4; next }
+     $1 == "A" && $2 != "" {
+       if (verify) {
+         if ($3 == "" || $4 == "" || $5 == "" || $7 == "") { bad = 1; exit }
+@@ -108,8 +115,24 @@ render() {
+       path = $5
+       if (index(path, home) == 1) path = "~" substr(path, length(home) + 1)
+ 
+-      printf "%d\t%s\t%s\t%s\t%s\t%s\t%5s\t%s\t%s\n",
+-        secs, rank, pane[tty], $2, kind, icon, age, loc[tty], path
++      # A name you set with /rename shows plain, so it stands out; one Claude
++      # picked for itself is dimmed, because a derived name is usually just a
++      # restatement of the path already in the last column. Sessions from older
++      # Claude versions report no source and are dimmed with the rest.
++      label = ($2 in name) ? name[$2] : "-"
++      # Fitted to a constant width *before* the escapes go on, so colour never
++      # counts toward the field width and this column adds no raggedness to `path`
++      # beyond the variable-width `loc` already ahead of it. ASCII ".." rather than
++      # an ellipsis keeps the count right where length() measures bytes.
++      # @claude_name_width 0 leaves the column its natural width.
++      if (namew > 2) {
++        if (length(label) > namew) label = substr(label, 1, namew - 2) ".."
++        label = sprintf("%-" namew "s", label)
++      }
++      if (name_src[$2] != "user") label = "\033[90m" label "\033[0m"
++
++      printf "%d\t%s\t%s\t%s\t%s\t%s\t%5s\t%s\t%s\t%s\n",
++        secs, rank, pane[tty], $2, kind, icon, age, loc[tty], label, path
+     }
+     END { exit (bad || !live) }
+   ' | sort -t$'\t' $sort_keys | cut -f2-
+diff --git a/scripts/helpers.sh b/scripts/helpers.sh
+index e1a3fe6..604e1e5 100755
 --- a/scripts/helpers.sh
 +++ b/scripts/helpers.sh
-@@ -72,3 +72,31 @@
+@@ -73,3 +73,31 @@ copy_to_clipboard() {
    done
    tmux set-buffer -w -- "$1" 2>/dev/null
  }
@@ -50,80 +123,16 @@ candidate for upstreaming.
 +    | "N\t\(.pid)\t\(.name)\t\(.nameSource // "unknown")"
 +  ' "$base"/sessions/*.json 2>/dev/null
 +}
---- a/scripts/agents.sh
-+++ b/scripts/agents.sh
-@@ -10,7 +10,7 @@
- # is what lets several Claudes in one project (same cwd, same session, different
- # windows) each get a row of their own.
- #
--#   Row: rank \t pane_id \t pid \t kind \t icon \t age \t loc \t path
-+#   Row: rank \t pane_id \t pid \t kind \t icon \t age \t loc \t name \t path
- #   rank/pane_id/pid/kind are hidden from the display via fzf's --with-nth.
- set -uo pipefail
- DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-@@ -27,18 +27,25 @@
-   printf 'M\t%s\t%s\n' "$sid" "$(claude_transcript_mtime "$sid")"
- done)"
- 
--# Three tagged streams into one awk: pid->tty, tty->pane, session->last-activity.
--# Total cost is 3 subprocesses regardless of how many sessions or panes exist.
-+# Four tagged streams into one awk: pid->tty, tty->pane, session->last-activity,
-+# pid->name. Total cost is 4 subprocesses regardless of how many sessions or
-+# panes exist.
- {
-   ps -Ao pid=,tty= 2>/dev/null | awk '{ print "P\t" $1 "\t" $2 }'
-   tmux list-panes -a -F $'T\t#{pane_tty}\t#{pane_id}\t#{session_name}\t#{session_name}:#{window_index}.#{pane_index}' 2>/dev/null
-   printf '%s\n' "$mtimes"
-+  claude_session_names
-   printf '%s\n' "$rows" | sed $'s/^/A\t/'
- } | awk -F'\t' -v now="$(date +%s)" -v home="$HOME" \
-+  -v namew="$(get_tmux_option @claude_name_width 36)" \
-   -v prefix="$(get_tmux_option @claude_session_prefix 'claude-')" '
-+  # int() so a garbled @claude_name_width degrades to 0 (an unpadded column)
-+  # rather than being spliced into a printf format as a bare string.
-+  BEGIN { namew = int(namew) }
-   $1 == "P" { tty_of[$2] = $3; next }
-   $1 == "T" { sub(/^\/dev\//, "", $2); pane[$2] = $3; sess[$2] = $4; loc[$2] = $5; next }
-   $1 == "M" { seen_at[$2] = $3; next }
-+  $1 == "N" { name[$2] = $3; name_src[$2] = $4; next }
-   $1 == "A" {
-     tty = tty_of[$2]
-     if (tty == "" || !(tty in pane)) next   # this Claude is not running inside tmux
-@@ -54,8 +61,24 @@
-     path = $5
-     if (index(path, home) == 1) path = "~" substr(path, length(home) + 1)
- 
--    printf "%s\t%s\t%s\t%s\t%s\t%5s\t%s\t%s\n",
--      rank, pane[tty], $2, kind, icon, age, loc[tty], path
-+    # A name you set with /rename shows plain, so it stands out; one Claude
-+    # picked for itself is dimmed, because a derived name is usually just a
-+    # restatement of the path already in the last column. Sessions from older
-+    # Claude versions report no source and are dimmed with the rest.
-+    label = ($2 in name) ? name[$2] : "-"
-+    # Fitted to a constant width *before* the escapes go on, so colour never
-+    # counts toward the field width and this column adds no raggedness to `path`
-+    # beyond the variable-width `loc` already ahead of it. ASCII ".." rather than
-+    # an ellipsis keeps the count right where length() measures bytes.
-+    # @claude_name_width 0 leaves the column its natural width.
-+    if (namew > 2) {
-+      if (length(label) > namew) label = substr(label, 1, namew - 2) ".."
-+      label = sprintf("%-" namew "s", label)
-+    }
-+    if (name_src[$2] != "user") label = "\033[90m" label "\033[0m"
-+
-+    printf "%s\t%s\t%s\t%s\t%s\t%5s\t%s\t%s\t%s\n",
-+      rank, pane[tty], $2, kind, icon, age, loc[tty], label, path
-   }
- ' | sort -t$'\t' -k1,1n -k6,6n
- # rank asc (what needs you floats up), then age asc so whatever just went idle
+diff --git a/scripts/picker.sh b/scripts/picker.sh
+index ad8152b..f5610b0 100755
 --- a/scripts/picker.sh
 +++ b/scripts/picker.sh
-@@ -65,7 +65,7 @@
- # beat so the supervisor has dropped the agent from `claude agents --json`.
+@@ -81,7 +81,7 @@ fi
+ # beat so the process is gone by the time agents.sh looks for it.
  # ctrl-y copies the agent's location (session:window.pane, e.g. claude-88074b0e:0.0)
  # and closes the picker.
 -sel=$("${list_cmd[@]}" | fzf --ansi --delimiter='\t' --with-nth=5,6,7,8 \
 +sel=$("${list_cmd[@]}" | fzf --ansi --delimiter='\t' --with-nth=5,6,7,8,9 \
    --reverse --cycle --header='Claude agents · enter: jump · ctrl-x: kill · ctrl-y: copy' \
-   --preview='tmux capture-pane -ept {2}' --preview-window='up,70%,follow' \
+   --preview="$self --preview {2}" --preview-window='up,70%,follow' \
    --bind="ctrl-x:execute-silent(kill {3})+reload(sleep 0.3; $self --list)" \
