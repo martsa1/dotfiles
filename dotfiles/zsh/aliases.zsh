@@ -84,3 +84,6 @@ alias pshell='python -m poetry shell'
 
 # convenience for using the clipboard from terminal...
 alias to_clip='xclip -sel clipboard'
+
+# Claude Code with permission prompts skipped
+alias dclaude='claude --dangerously-skip-permissions'
