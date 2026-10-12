@@ -4,7 +4,7 @@
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
     # nixpkgs.url = "github:nixos/nixpkgs/master";
-    nixpkgs.url = "github:nixos/nixpkgs/285e72dcee5174f5fd47a21bff4fde676678327a";
+    nixpkgs.url = "github:nixos/nixpkgs/7efd738966c6479f93d66b6363638382df60c18d";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
