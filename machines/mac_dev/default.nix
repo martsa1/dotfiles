@@ -18,6 +18,7 @@
     bitwarden-cli
     btop
     claude-code
+    cloudflared
     code-cursor
     colima
     cursor-cli
@@ -40,6 +41,7 @@
     postgresql
     pre-commit
     prek
+    redpanda-client
     signal-desktop
     slack
     spotify
