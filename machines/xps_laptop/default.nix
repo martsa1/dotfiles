@@ -68,6 +68,10 @@
       enable = true;
     };
 
+    mullvad-vpn = {
+      enable = true;
+    };
+
     uv = {
       enable = true;
     };

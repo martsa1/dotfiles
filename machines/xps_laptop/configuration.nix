@@ -220,6 +220,10 @@
 
   # List services that you want to enable:
 
+  services.mullvad-vpn = {
+    enable = true;
+  };
+
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
@@ -240,7 +244,7 @@
     pkgs.yubikey-personalization
     pkgs.libu2f-host
 
-    pkgs.android-udev-rules
+    # pkgs.android-udev-rules
   ];
   services.pcscd.enable = true;
 
