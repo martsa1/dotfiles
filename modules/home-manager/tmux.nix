@@ -1,9 +1,9 @@
 /*
 vim: set filetype=nix ts=2 sw=2 tw=0 et :
 */
-# Sams tmux config. Unlike the other home-manager modules this one defaults to
-# *on*: every machine has wanted tmux so far, so new machines opt out with
-# `sm.tmux.enable = false;` rather than opting in.
+# Sams tmux config. Like direnv this module defaults to *on*: every machine
+# has wanted tmux so far, so new machines opt out with `sm.tmux.enable = false;`
+# rather than opting in.
 {
   config,
   pkgs,

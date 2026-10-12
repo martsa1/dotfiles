@@ -25,7 +25,6 @@ in
   # Various packages I want my user to have access to
   home.packages = with pkgs; [
     curl
-    # direnv
     docker-compose
     fd
     feh
@@ -212,21 +211,11 @@ in
     ln -sfn "${config.home.homeDirectory}/.config/home-manager/nvim" "${config.home.homeDirectory}/.config/nvim"
   '';
 
-  home.file = {
-    # Direnv rc for extra layouts
-    ".direnvrc".source = ../../dotfiles/direnvrc;
-  };
+  # Direnv config (nix-direnv + inline direnvrc stdlib) lives in the sm.direnv
+  # home-manager module, on by default for every machine.
 
   home.language = {
     base = "en-gb";
-  };
-
-  # Enable direnv
-  programs.direnv = {
-    enable = true;
-    enableZshIntegration = true;
-    enableBashIntegration = true;
-    nix-direnv.enable = true;
   };
 
   # Enable bat and theme it with dracula

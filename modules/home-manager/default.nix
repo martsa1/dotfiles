@@ -9,11 +9,12 @@
 # second reference fails with "The option `sm.<name>.enable' ... is already
 # declared".
 #
-# Most modules default to off and are opted into per machine. `tmux` is the
-# exception: it defaults to on, so machines opt *out* with
-# `sm.tmux.enable = false;`.
+# Most modules default to off and are opted into per machine. `direnv` and
+# `tmux` default to on, so machines opt *out* of those with
+# `sm.<name>.enable = false;`.
 {
   aerospace = import ./aerospace.nix;
+  direnv = import ./direnv.nix;
   i3-config = import ./i3-config.nix;
   rofi = import ./rofi.nix;
   ssh = import ./ssh.nix;
