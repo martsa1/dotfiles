@@ -142,6 +142,7 @@ export UV_LOCKED=true
 
 # Use Starship for ZSH prompt
 eval $(starship init zsh)
+source "$HOME/.config/home-manager/dotfiles/zsh/starship-width.zsh"
 
 # Enable Better Exceptions in python code
 export BETTER_EXCEPTIONS=1

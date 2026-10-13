@@ -204,6 +204,7 @@ in
     "nixpkgs/config.nix".source = ../../config.nix;
     "alacritty/alacritty.toml".source = ../../dotfiles/alacritty/alacritty.toml;
     "starship.toml".source = ../../dotfiles/starship/starship.toml;
+    "starship-narrow.toml".source = (pkgs.formats.toml {}).generate "starship-narrow.toml" (import ../../dotfiles/starship/narrow.nix {inherit lib;});
   };
 
   # Direct symlink to repo nvim dir so edits apply without rebuild (no store copy).

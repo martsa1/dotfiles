@@ -1,0 +1,22 @@
+# Overrides for narrow panes, merged over starship.toml by narrow.nix.
+
+[username]
+show_always = false
+
+[directory]
+truncate_to_repo = true
+
+[python]
+format = '[ ${symbol}]($style)'
+
+[golang]
+format = '[ $symbol]($style)'
+
+[rust]
+format = '[ $symbol]($style)'
+
+[docker_context]
+disabled = true
+
+[aws]
+format = '[ $symbol$profile ]($style)'
