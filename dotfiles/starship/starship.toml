@@ -24,6 +24,7 @@ $python\
 $rust\
 $scala\
 $docker_context\
+$aws\
 $time\
 $line_break\
 $status$character """
@@ -97,6 +98,17 @@ truncate_to_repo = false
 # will not be replaced, because "Documents" was already substituted before.
 # So either put "Important Documents" before "Documents" or use the substituted version:
 # "Important  " = "  "
+
+[aws]
+symbol = " "
+style = "bg:orange fg:background"
+format = '[](fg:current_line bg:orange)[ $symbol($profile )(\($region\) )(\[$duration\] )]($style)[](fg:orange bg:current_line)'
+expiration_symbol = "expired"
+
+[aws.region_aliases]
+eu-west-1 = "eu"
+us-east-2 = "us"
+ap-southeast-1 = "sg"
 
 [c]
 symbol = " "

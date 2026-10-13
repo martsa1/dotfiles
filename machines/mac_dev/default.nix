@@ -47,6 +47,7 @@
     spotify
     ssm-session-manager-plugin
     terraform
+    terraform-docs
     tree
     uv
     worktrunk
