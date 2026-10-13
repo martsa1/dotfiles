@@ -163,6 +163,11 @@
       };
     };
 
+    granted = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     ssh = {
       enable = true;
       enableDefaultConfig = false;
