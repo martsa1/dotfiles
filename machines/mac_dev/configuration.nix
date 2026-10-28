@@ -29,8 +29,6 @@ in {
     # Necessary for using flakes on this system.
     settings = {
       experimental-features = "nix-command flakes";
-      # auto-optimise-store = true;
-      # optimise.automatic = true;
 
       trusted-users = [
         "root"
@@ -43,6 +41,8 @@ in {
     gc = {
       automatic = true;
     };
+
+    optimise.automatic = true;
 
 
     # Configure Nix Path so that home-manager can be used outside of nix-darwin stuff...
